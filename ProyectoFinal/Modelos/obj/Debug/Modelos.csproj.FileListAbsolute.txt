@@ -1,0 +1,6 @@
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\Debug\Modelos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\Debug\Modelos.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\Debug\Modelos.csproj.AssemblyReference.cache
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\Debug\Modelos.csproj.CoreCompileInputs.cache
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\Debug\Modelos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\Debug\Modelos.pdb

@@ -1,0 +1,11 @@
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\bin\Debug\Negocio.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\bin\Debug\Negocio.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\bin\Debug\Datos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\bin\Debug\Modelos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\bin\Debug\Datos.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\bin\Debug\Modelos.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\Debug\Negocio.csproj.Up2Date
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\Debug\Negocio.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\Debug\Negocio.pdb

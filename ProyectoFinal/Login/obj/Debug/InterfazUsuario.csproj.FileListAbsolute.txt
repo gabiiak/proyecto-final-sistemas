@@ -10,3 +10,9 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\InterfazUsuario.csproj.
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\InterfazUsuario.csproj.CoreCompileInputs.cache
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.exe
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\Debug\Modelos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\Debug\Negocio.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\Debug\Modelos.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\Debug\Negocio.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.UIProductManagement.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Interfaz.A1F4FAE4.Up2Date

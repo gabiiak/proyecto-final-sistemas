@@ -1,0 +1,9 @@
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Datos\bin\Debug\Datos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Datos\bin\Debug\Datos.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Datos\bin\Debug\Modelos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Datos\bin\Debug\Modelos.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Datos\obj\Debug\Datos.csproj.AssemblyReference.cache
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Datos\obj\Debug\Datos.csproj.CoreCompileInputs.cache
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Datos\obj\Debug\Datos.csproj.Up2Date
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Datos\obj\Debug\Datos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Datos\obj\Debug\Datos.pdb
