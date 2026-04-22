@@ -1,0 +1,72 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|c:\\codigo\\c#\\proyectofinal\\proyectofinal\\login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|c:\\codigo\\c#\\proyectofinal\\proyectofinal\\login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\Login.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\Login.csproj|solutionrelative:login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 199,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Login.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs",
+              "RelativeDocumentMoniker": "Login\\Login.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Login\\Login.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-22T05:38:47.271Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs",
+              "RelativeDocumentMoniker": "Login\\Login.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs",
+              "RelativeToolTip": "Login\\Login.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowAoAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T04:25:18.147Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs",
+              "RelativeDocumentMoniker": "Login\\Login.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Login\\Login.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T04:24:15.244Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

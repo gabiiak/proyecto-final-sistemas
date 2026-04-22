@@ -1,0 +1,12 @@
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\Debug\Login.exe.config
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\Debug\Login.exe
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\Debug\Login.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.csproj.AssemblyReference.cache
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.Login.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.Properties.Resources.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.csproj.GenerateResource.cache
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.csproj.CoreCompileInputs.cache
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.exe
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.exe.config
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.UIClientManagement.resources
