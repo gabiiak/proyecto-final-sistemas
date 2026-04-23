@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.IO;
+using SQLitePCL;
 
 namespace Datos
 {
     public class Db
     {
-        public static SQLiteConnection GetConnection()
+        public static SqliteConnection GetConnection()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["SQLite"].ConnectionString;
-            return new SQLiteConnection(connectionString);
+            Batteries.Init();
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string dbPath = Path.Combine(basePath, "mvp.db");
+            string connectionString = $"Data Source= {dbPath}";
+            return new SqliteConnection(connectionString);
         }
     }
 }

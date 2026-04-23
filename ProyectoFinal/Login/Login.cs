@@ -13,7 +13,7 @@ namespace Login
     public partial class Login : Form
     {
         private string usuario = "admin";
-        private string contraseña = "gatogordo11";
+        private string contraseña = "admin";
         public Login()
         {
             InitializeComponent();
@@ -37,14 +37,15 @@ namespace Login
                 MessageBox.Show("Hay campos vacíos", "Alerta", MessageBoxButtons.OK);
                 return;
             }
-            if(ValidateLogin() == true)
+            if (ValidateLogin() == true)
             {
                 UIClientManagement clientManagement = new UIClientManagement();
                 clientManagement.Show();
             }
             else
             {
-                if (txtUser.Text != usuario) {
+                if (txtUser.Text != usuario)
+                {
                     MessageBox.Show("Usuario incorrecto", "Acceso denegado", MessageBoxButtons.OK);
                     return;
                 }
@@ -53,7 +54,7 @@ namespace Login
                     MessageBox.Show("Contraseña incorrecta", "Acceso denegado", MessageBoxButtons.OK);
                     return;
                 }
-                
+
             }
         }
 
