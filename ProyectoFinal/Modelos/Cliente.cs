@@ -13,6 +13,6 @@ namespace Modelos
         public string Empresa { get; set; }
         public string Direccion { get; set; }
         public string Telefono { get; set; }
-        public int Activo { get; set; }
+        public int Activo { get; set; } // <- 1 - activo | 0 - inactivo se usa al Eliminar Clientes
     }
 }

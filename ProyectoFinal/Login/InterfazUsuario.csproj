@@ -115,6 +115,12 @@
     <Compile Include="UIClientManagement.Designer.cs">
       <DependentUpon>UIClientManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIDeletedClients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIDeletedClients.Designer.cs">
+      <DependentUpon>UIDeletedClients.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIProductManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     </Compile>
     <EmbeddedResource Include="UIClientManagement.resx">
       <DependentUpon>UIClientManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIDeletedClients.resx">
+      <DependentUpon>UIDeletedClients.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIProductManagement.resx">
       <DependentUpon>UIProductManagement.cs</DependentUpon>

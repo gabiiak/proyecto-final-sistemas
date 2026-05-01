@@ -36,3 +36,4 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Interfaz.A1F4FAE4.U
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.exe
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.pdb
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.exe.config
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedClients.resources

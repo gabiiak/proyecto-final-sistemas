@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{204309D5-EF81-48EC-988F-97AFB3A83AD7}|Negocio\\Negocio.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\negocio\\nclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{204309D5-EF81-48EC-988F-97AFB3A83AD7}|Negocio\\Negocio.csproj|solutionrelative:negocio\\nclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|c:\\codigo\\c#\\proyectofinal\\proyectofinal\\login\\uideletedclients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uideletedclients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C7FC738-2C63-4FC1-A8A5-C58F121B3F15}|Datos\\Datos.csproj|c:\\codigo\\c#\\proyectofinal\\proyectofinal\\datos\\dataclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|c:\\codigo\\c#\\proyectofinal\\proyectofinal\\login\\uideletedclients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uideletedclients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|c:\\codigo\\c#\\proyectofinal\\proyectofinal\\login\\uiclientmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uiclientmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\uiclientmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uiclientmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C7FC738-2C63-4FC1-A8A5-C58F121B3F15}|Datos\\Datos.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\datos\\dataclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C7FC738-2C63-4FC1-A8A5-C58F121B3F15}|Datos\\Datos.csproj|solutionrelative:datos\\dataclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{204309D5-EF81-48EC-988F-97AFB3A83AD7}|Negocio\\Negocio.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\negocio\\nclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{204309D5-EF81-48EC-988F-97AFB3A83AD7}|Negocio\\Negocio.csproj|solutionrelative:negocio\\nclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3E880017-4E80-447C-9703-ECD0F76FDAC5}|Modelos\\Modelos.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\modelos\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E880017-4E80-447C-9703-ECD0F76FDAC5}|Modelos\\Modelos.csproj|solutionrelative:modelos\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\uiclientmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uiclientmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,28 +42,74 @@
       "DocumentGroups": [
         {
           "DockedWidth": 199,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UIClientManagement.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIClientManagement.cs",
+              "RelativeDocumentMoniker": "Login\\UIClientManagement.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIClientManagement.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Login\\UIClientManagement.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T19:40:48.536Z",
+              "IsPinned": true,
+              "EditorCaption": " [Dise\u00F1o]"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "UIDeletedClients.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedClients.cs",
+              "RelativeDocumentMoniker": "Login\\UIDeletedClients.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedClients.cs*",
+              "RelativeToolTip": "Login\\UIDeletedClients.cs*",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAowBgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:03:51.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UIDeletedClients.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedClients.cs",
+              "RelativeDocumentMoniker": "Login\\UIDeletedClients.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedClients.cs [Dise\u00F1o]*",
+              "RelativeToolTip": "Login\\UIDeletedClients.cs [Dise\u00F1o]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T18:02:59.503Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Cliente.cs",
               "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Modelos\\Cliente.cs",
               "RelativeDocumentMoniker": "Modelos\\Cliente.cs",
               "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Modelos\\Cliente.cs",
               "RelativeToolTip": "Modelos\\Cliente.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-23T05:15:27.59Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Program.cs",
               "RelativeDocumentMoniker": "Login\\Program.cs",
@@ -64,41 +122,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "NClientes.cs",
               "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Negocio\\NClientes.cs",
               "RelativeDocumentMoniker": "Negocio\\NClientes.cs",
               "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Negocio\\NClientes.cs",
               "RelativeToolTip": "Negocio\\NClientes.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACUAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-23T01:13:57.975Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "DataClientes.cs",
               "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Datos\\DataClientes.cs",
               "RelativeDocumentMoniker": "Datos\\DataClientes.cs",
               "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Datos\\DataClientes.cs",
               "RelativeToolTip": "Datos\\DataClientes.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAgwDIAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAgwEQAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-23T01:02:08.216Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "UIClientManagement.cs",
               "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIClientManagement.cs",
               "RelativeDocumentMoniker": "Login\\UIClientManagement.cs",
               "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIClientManagement.cs",
               "RelativeToolTip": "Login\\UIClientManagement.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAADwvx8AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-23T00:58:18.123Z"
+              "WhenOpened": "2026-04-23T00:58:18.123Z",
+              "EditorCaption": ""
             }
           ]
         }

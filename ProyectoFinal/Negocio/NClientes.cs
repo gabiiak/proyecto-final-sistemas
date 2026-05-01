@@ -31,11 +31,44 @@ namespace Negocio
                 throw;
             }
         }
+        public static List<Cliente> GetDeleted()
+        {
+            try
+            {
+                return DataClientes.GetDeleted();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public static void Create(Cliente cliente)
         {
             try
             {
                 DataClientes.Create(cliente);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static void Update(Cliente cliente)
+        {
+            try
+            {
+                DataClientes.Updtade(cliente);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static void Delete(Cliente cliente)
+        {
+            try
+            {
+                DataClientes.Delete(cliente);
             }
             catch (Exception)
             {
