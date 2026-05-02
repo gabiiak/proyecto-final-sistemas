@@ -39,8 +39,8 @@ namespace Login
             }
             if (ValidateLogin() == true)
             {
-                UIClientManagement clientManagement = new UIClientManagement();
-                clientManagement.Show();
+                Menu Menu = new Menu();
+                Menu.Show();
             }
             else
             {
