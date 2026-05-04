@@ -57,7 +57,7 @@ namespace Negocio
         {
             try
             {
-                DataClientes.Updtade(cliente);
+                DataClientes.Update(cliente);
             }
             catch (Exception)
             {

@@ -87,7 +87,7 @@ namespace Datos
             }
         }
 
-        public static void Updtade(Cliente cliente)
+        public static void Update(Cliente cliente)
         {
             string sqlQuery = @"UPDATE Clientes SET nombre = @nombre, empresa = @empresa, direccion = @direccion, telefono = @telefono WHERE id = @id";
             using (SqliteConnection connection = Db.GetConnection())
