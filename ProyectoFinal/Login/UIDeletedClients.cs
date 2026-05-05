@@ -35,5 +35,27 @@ namespace Login
         private void dgvClientesEliminados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
+
+        private void btnDevolverCliente_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(labelId.Text))
+            {
+                MessageBox.Show("Debe seleccionar un cliente eliminado");
+                return;
+            }
+            int id = int.Parse(labelId.Text);
+            Cliente cli = new Cliente
+            {
+                Id = id
+            };
+            NClientes.ShowDeletedClients(cli);
+            UpdateDeletedClientsDataGrid();
+        }
+
+        private void dgvClientesEliminados_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvClientesEliminados.CurrentRow == null) return;
+            labelId.Text = dgvClientesEliminados.CurrentRow.Cells["Id"].Value?.ToString();
+        }
     }
 }

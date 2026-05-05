@@ -61,7 +61,7 @@
             this.dgvClientes.Margin = new System.Windows.Forms.Padding(4);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.RowHeadersWidth = 51;
-            this.dgvClientes.Size = new System.Drawing.Size(615, 201);
+            this.dgvClientes.Size = new System.Drawing.Size(704, 201);
             this.dgvClientes.TabIndex = 0;
             this.dgvClientes.SelectionChanged += new System.EventHandler(this.dgvClientes_SelectionChanged);
             // 
@@ -106,7 +106,7 @@
             this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(12, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(616, 281);
+            this.panel1.Size = new System.Drawing.Size(705, 281);
             this.panel1.TabIndex = 3;
             // 
             // btnListarBorrados
@@ -114,7 +114,7 @@
             this.btnListarBorrados.AutoSize = true;
             this.btnListarBorrados.Location = new System.Drawing.Point(18, 244);
             this.btnListarBorrados.Name = "btnListarBorrados";
-            this.btnListarBorrados.Size = new System.Drawing.Size(196, 35);
+            this.btnListarBorrados.Size = new System.Drawing.Size(299, 32);
             this.btnListarBorrados.TabIndex = 15;
             this.btnListarBorrados.Text = "Clientes Eliminados";
             this.btnListarBorrados.UseVisualStyleBackColor = true;
@@ -142,7 +142,7 @@
             this.btnEliminar.AutoSize = true;
             this.btnEliminar.Location = new System.Drawing.Point(123, 208);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(91, 35);
+            this.btnEliminar.Size = new System.Drawing.Size(91, 30);
             this.btnEliminar.TabIndex = 12;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -153,7 +153,7 @@
             this.btnModificar.AutoSize = true;
             this.btnModificar.Location = new System.Drawing.Point(17, 208);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(101, 35);
+            this.btnModificar.Size = new System.Drawing.Size(101, 30);
             this.btnModificar.TabIndex = 11;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -164,7 +164,7 @@
             this.btnLimpiar.AutoSize = true;
             this.btnLimpiar.Location = new System.Drawing.Point(227, 208);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(90, 35);
+            this.btnLimpiar.Size = new System.Drawing.Size(90, 30);
             this.btnLimpiar.TabIndex = 10;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -241,7 +241,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 542);
+            this.ClientSize = new System.Drawing.Size(729, 542);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvClientes);

@@ -75,5 +75,16 @@ namespace Negocio
                 throw;
             }
         }
+        public static void ShowDeletedClients(Cliente cliente)
+        {
+            try
+            {
+                DataClientes.ShowDeletedClients(cliente);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

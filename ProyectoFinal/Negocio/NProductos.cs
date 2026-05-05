@@ -21,7 +21,18 @@ namespace Negocio
                 throw;
             }
         }
-       
+        public static List<Producto> GetAllDeleted()
+        {
+            try
+            {
+                return DataProductos.GetAllDeletedProductos();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public static void Create(Producto prod)
         {
             try
@@ -49,6 +60,17 @@ namespace Negocio
             try
             {
                 DataProductos.Delete(prod);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static void ShowDeletedProducts(Producto prod)
+        {
+            try
+            {
+                DataProductos.ShowDeletedProducts(prod);
             }
             catch (Exception)
             {

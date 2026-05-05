@@ -33,8 +33,8 @@ namespace Login
             listaProductos = NProductos.GetAll();
             dgvProductos.DataSource = null;
 
-            // ¡Faltaba esta línea! Apaga la generación automática de columnas
-            dgvProductos.AutoGenerateColumns = false;
+            // ¡Faltaba esta línea! Apaga la generación automática de columnas <- gemini
+            //dgvProductos.AutoGenerateColumns = false;
 
             dgvProductos.DataSource = listaProductos;
         }
@@ -77,8 +77,6 @@ namespace Login
 
                 listaProductos.Add(prod);
                 NProductos.Create(prod);
-                MessageBox.Show("Registro completado", "Exito", MessageBoxButtons.OK);
-
                 UpdateDataGrid();
                 Clean();
             }
@@ -106,7 +104,7 @@ namespace Login
                     return;
                 }
 
-                if (!double.TryParse(txtPrecio.Text, out double precioConvertido))
+                if (!double.TryParse(txtPrecio.Text, out double precioConvertido)) // este va a capa de negocio
                 {
                     MessageBox.Show("El precio debe ser un número válido.", "Alerta", MessageBoxButtons.OK);
                     return;
@@ -126,7 +124,7 @@ namespace Login
                     };
 
                     NProductos.Update(prod);
-                    MessageBox.Show("¡Registro modificado con muchísimo éxito!", "Exito", MessageBoxButtons.OK);
+                    MessageBox.Show("Registro modificado.", "Exito", MessageBoxButtons.OK);
 
                     UpdateDataGrid();
                     Clean();
@@ -163,8 +161,7 @@ namespace Login
                 };
 
                 NProductos.Delete(prod);
-                MessageBox.Show("¡Registro eliminado con muchísimo éxito!", "Exito", MessageBoxButtons.OK);
-
+                MessageBox.Show("Registro eliminado.", "Exito", MessageBoxButtons.OK);
                 UpdateDataGrid();
                 Clean();
             }
@@ -181,12 +178,16 @@ namespace Login
             if (dgvProductos.CurrentRow == null) return;
 
             // Usamos los nombres (Name) que le dimos a las columnas en el diseñador
-            labelId.Text = dgvProductos.CurrentRow.Cells["colId"].Value?.ToString();
+            labelId.Text = dgvProductos.CurrentRow.Cells["IdProducto"].Value?.ToString();
             txtNombre.Text = dgvProductos.CurrentRow.Cells["Nombre"].Value?.ToString();
             txtDescripcion.Text = dgvProductos.CurrentRow.Cells["Descripcion"].Value?.ToString();
             txtPrecio.Text = dgvProductos.CurrentRow.Cells["Precio"].Value?.ToString();
         }
 
-
+        private void btnProductosEliminados_Click(object sender, EventArgs e)
+        {
+            UIDeletedProducts elim = new UIDeletedProducts();
+            elim.Show();
+        }
     }
 }

@@ -117,5 +117,19 @@ namespace Datos
                 }
             }
         }
+
+        public static void ShowDeletedClients(Cliente cliente) //devolver clientes eliminados
+        {
+            string sqlQuery = @"UPDATE Clientes SET activo = 1 WHERE id = @id";
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.Add("@id", (SqliteType)System.Data.SqlDbType.Int).Value = cliente.Id;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

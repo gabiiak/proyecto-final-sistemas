@@ -65,7 +65,6 @@ namespace Login
                 };
                 listaClientes.Add(cli);
                 NClientes.Create(cli);
-                MessageBox.Show("Registro completado", "Exito", MessageBoxButtons.OK);
                 UpdateDataGrid();
             }
             catch (Exception)
@@ -102,7 +101,7 @@ namespace Login
                         Telefono = txtTelefono.Text
                     };
                     NClientes.Update(cli);
-                    MessageBox.Show("¡Registro modificado con muchisimo éxito!", "Exito", MessageBoxButtons.OK);
+                    MessageBox.Show("Registro Modificado.", "Exito", MessageBoxButtons.OK);
                     UpdateDataGrid();
                     Clean();
                 }
@@ -134,7 +133,7 @@ namespace Login
                     Telefono = txtTelefono.Text
                 };
                 NClientes.Delete(cli);
-                MessageBox.Show("¡Registro eliminado con muchisimo éxito!", "Exito", MessageBoxButtons.OK);
+                MessageBox.Show("Registro eliminado.", "Exito", MessageBoxButtons.OK);
                 UpdateDataGrid();
                 Clean();
             }

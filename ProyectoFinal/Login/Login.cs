@@ -40,7 +40,10 @@ namespace Login
             if (ValidateLogin() == true)
             {
                 Menu Menu = new Menu();
+                Menu.FormClosed += (s, args) => this.Show(); //<- para escuchar el evento "cerrar"
+                this.Hide();
                 Menu.Show();
+                
             }
             else
             {

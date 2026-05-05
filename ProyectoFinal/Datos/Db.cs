@@ -13,7 +13,8 @@ namespace Datos
 {
     public class Db
     {
-        public static SqliteConnection GetConnection()
+        //aqui va el connection string de SQLServer
+        public static SqliteConnection GetConnection() // <- connection string de SQLite
         {
             Batteries.Init();
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
