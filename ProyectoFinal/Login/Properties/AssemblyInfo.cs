@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("Login")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("T&GSystem")]
+[assembly: AssemblyDescription("Sistema de información para fábrica")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("NOSOTROS")]
 [assembly: AssemblyProduct("Login")]
-[assembly: AssemblyCopyright("Copyright ©  2026")]
+[assembly: AssemblyCopyright("t&g ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

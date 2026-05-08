@@ -70,6 +70,7 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.Login.resourc
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.Properties.Resources.resources
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIClientManagement.resources
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedClients.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedProducts.resources
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIProductManagement.resources
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.GenerateResource.cache
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.CoreCompileInputs.cache
@@ -77,4 +78,3 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Interfaz.A1F4FAE4.U
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.exe
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.pdb
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.exe.config
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedProducts.resources

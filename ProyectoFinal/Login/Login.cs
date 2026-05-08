@@ -13,7 +13,7 @@ namespace Login
     public partial class Login : Form
     {
         private string usuario = "admin";
-        private string contraseña = "admin";
+        private string contraseña = "administrador91218";
         public Login()
         {
             InitializeComponent();
