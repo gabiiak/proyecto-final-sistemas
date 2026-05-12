@@ -1,6 +1,6 @@
 ﻿namespace Login
 {
-    partial class UIProductManagement
+    partial class UIPaymentMethodManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UIProductManagement));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UIPaymentMethodManagement));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnProductosEliminados = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -37,16 +37,12 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnRegistrar = new System.Windows.Forms.Button();
-            this.txtPrecio = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.dgvMetodos = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMetodos)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -60,27 +56,23 @@
             this.panel1.Controls.Add(this.btnModificar);
             this.panel1.Controls.Add(this.btnLimpiar);
             this.panel1.Controls.Add(this.btnRegistrar);
-            this.panel1.Controls.Add(this.txtPrecio);
             this.panel1.Controls.Add(this.txtDescripcion);
-            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.txtNombre);
             this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(15, 52);
+            this.panel1.Location = new System.Drawing.Point(12, 49);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(821, 284);
-            this.panel1.TabIndex = 6;
+            this.panel1.Size = new System.Drawing.Size(821, 200);
+            this.panel1.TabIndex = 9;
             // 
             // btnProductosEliminados
             // 
-            this.btnProductosEliminados.Location = new System.Drawing.Point(437, 225);
+            this.btnProductosEliminados.Location = new System.Drawing.Point(438, 143);
             this.btnProductosEliminados.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnProductosEliminados.Name = "btnProductosEliminados";
             this.btnProductosEliminados.Size = new System.Drawing.Size(377, 37);
             this.btnProductosEliminados.TabIndex = 15;
-            this.btnProductosEliminados.Text = "Productos eliminados";
+            this.btnProductosEliminados.Text = "Eliminados";
             this.btnProductosEliminados.UseVisualStyleBackColor = true;
             this.btnProductosEliminados.Click += new System.EventHandler(this.btnProductosEliminados_Click);
             // 
@@ -104,7 +96,7 @@
             // btnEliminar
             // 
             this.btnEliminar.AutoSize = true;
-            this.btnEliminar.Location = new System.Drawing.Point(157, 225);
+            this.btnEliminar.Location = new System.Drawing.Point(159, 137);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(135, 43);
@@ -116,7 +108,7 @@
             // btnModificar
             // 
             this.btnModificar.AutoSize = true;
-            this.btnModificar.Location = new System.Drawing.Point(17, 225);
+            this.btnModificar.Location = new System.Drawing.Point(18, 137);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(135, 43);
@@ -127,7 +119,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(297, 225);
+            this.btnLimpiar.Location = new System.Drawing.Point(297, 140);
             this.btnLimpiar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(135, 37);
@@ -138,7 +130,7 @@
             // 
             // btnRegistrar
             // 
-            this.btnRegistrar.Location = new System.Drawing.Point(17, 183);
+            this.btnRegistrar.Location = new System.Drawing.Point(17, 97);
             this.btnRegistrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(415, 36);
@@ -147,100 +139,63 @@
             this.btnRegistrar.UseVisualStyleBackColor = true;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
-            // txtPrecio
-            // 
-            this.txtPrecio.Location = new System.Drawing.Point(140, 135);
-            this.txtPrecio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(291, 30);
-            this.txtPrecio.TabIndex = 6;
-            // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(140, 98);
+            this.txtDescripcion.Location = new System.Drawing.Point(144, 51);
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(291, 30);
             this.txtDescripcion.TabIndex = 5;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 139);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 25);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Precio: ";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 102);
+            this.label3.Location = new System.Drawing.Point(13, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(125, 25);
             this.label3.TabIndex = 3;
             this.label3.Text = "Descripcion: ";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 25);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Nombre: ";
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(140, 60);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(291, 30);
-            this.txtNombre.TabIndex = 1;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(27, 14);
+            this.label1.Location = new System.Drawing.Point(24, 11);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(300, 36);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Gestión de productos";
+            this.label1.Size = new System.Drawing.Size(249, 36);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Métodos de Pago";
             // 
-            // dgvProductos
+            // dgvMetodos
             // 
-            this.dgvProductos.AllowUserToAddRows = false;
-            this.dgvProductos.AllowUserToDeleteRows = false;
-            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Location = new System.Drawing.Point(15, 354);
-            this.dgvProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.ReadOnly = true;
-            this.dgvProductos.RowHeadersWidth = 51;
-            this.dgvProductos.Size = new System.Drawing.Size(820, 247);
-            this.dgvProductos.TabIndex = 4;
-            this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
+            this.dgvMetodos.AllowUserToAddRows = false;
+            this.dgvMetodos.AllowUserToDeleteRows = false;
+            this.dgvMetodos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMetodos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMetodos.Location = new System.Drawing.Point(12, 265);
+            this.dgvMetodos.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvMetodos.Name = "dgvMetodos";
+            this.dgvMetodos.ReadOnly = true;
+            this.dgvMetodos.RowHeadersWidth = 51;
+            this.dgvMetodos.Size = new System.Drawing.Size(820, 247);
+            this.dgvMetodos.TabIndex = 7;
+            this.dgvMetodos.SelectionChanged += new System.EventHandler(this.dgvMetodos_SelectionChanged);
             // 
-            // UIProductManagement
+            // UIPaymentMethodManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(845, 609);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgvProductos);
+            this.Controls.Add(this.dgvMetodos);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "UIProductManagement";
-            this.Text = "UIProductManagement";
-            this.Load += new System.EventHandler(this.UIProductManagement_Load);
+            this.Name = "UIPaymentMethodManagement";
+            this.Text = "UIMetodoPagoManagement";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMetodos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,14 +210,10 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnRegistrar;
-        private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.TextBox txtDescripcion;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvProductos;
+        private System.Windows.Forms.DataGridView dgvMetodos;
         private System.Windows.Forms.Button btnProductosEliminados;
     }
 }

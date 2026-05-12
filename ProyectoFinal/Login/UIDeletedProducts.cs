@@ -42,6 +42,10 @@ namespace Login
             listaProductosEliminados = NProductos.GetAllDeleted();
             dgvProductosEliminados.DataSource = null;
             dgvProductosEliminados.DataSource = listaProductosEliminados;
+            if (dgvProductosEliminados.Columns.Contains("Activo"))
+            {
+                dgvProductosEliminados.Columns["Activo"].Visible = false;
+            }
         }
         private void UIDeletedProducts_Load(object sender, EventArgs e)
         {

@@ -32,6 +32,10 @@ namespace Login
             listaClientes = NClientes.GetAll();
             dgvClientes.DataSource = null;
             dgvClientes.DataSource = listaClientes;
+            if (dgvClientes.Columns.Contains("Activo"))
+            {
+                dgvClientes.Columns["Activo"].Visible = false;
+            }
         }
         private void Clean()
         {

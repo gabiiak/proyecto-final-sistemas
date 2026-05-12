@@ -80,7 +80,19 @@ namespace Login
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
-            formularioActivo.Close();
+            if (formularioActivo != null)
+            {
+                formularioActivo.Close();
+
+                // Buena práctica: volver a dejarlo en null para que el sistema 
+                // sepa que ya no hay nada abierto en ese espacio.
+                formularioActivo = null;
+            }
+        }
+
+        private void btnMetodos_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioHijo(new UIPaymentMethodManagement());
         }
     }
 }

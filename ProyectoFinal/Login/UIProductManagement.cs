@@ -37,6 +37,10 @@ namespace Login
             //dgvProductos.AutoGenerateColumns = false;
 
             dgvProductos.DataSource = listaProductos;
+            if (dgvProductos.Columns.Contains("Activo"))
+            {
+                dgvProductos.Columns["Activo"].Visible = false;
+            }
         }
 
         // Método para limpiar los campos
