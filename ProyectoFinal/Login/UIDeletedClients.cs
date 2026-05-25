@@ -23,6 +23,10 @@ namespace Login
         private void UIDeletedClients_Load(object sender, EventArgs e)
         {
             UpdateDeletedClientsDataGrid();
+            if (dgvClientesEliminados.Columns.Contains("Activo"))
+            {
+                dgvClientesEliminados.Columns["Activo"].Visible = false;
+            }
         }
 
         
@@ -36,7 +40,15 @@ namespace Login
         {
         }
 
-        private void btnDevolverCliente_Click(object sender, EventArgs e)
+      
+
+        private void dgvClientesEliminados_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvClientesEliminados.CurrentRow == null) return;
+            labelId.Text = dgvClientesEliminados.CurrentRow.Cells["Id"].Value?.ToString();
+        }
+
+        private void btnDevolverCliente_Click_1(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(labelId.Text))
             {
@@ -50,12 +62,6 @@ namespace Login
             };
             NClientes.ShowDeletedClients(cli);
             UpdateDeletedClientsDataGrid();
-        }
-
-        private void dgvClientesEliminados_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvClientesEliminados.CurrentRow == null) return;
-            labelId.Text = dgvClientesEliminados.CurrentRow.Cells["Id"].Value?.ToString();
         }
     }
 }
