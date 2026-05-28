@@ -3,39 +3,48 @@
   "WorkspaceRootPath": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Datos||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\uiregistersaledetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uiregistersaledetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\uiregistersaledetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uiregistersaledetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|c:\\codigo\\c#\\proyectofinal\\proyectofinal\\login\\uiregistersale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uiregistersale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\uideletedclients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uideletedclients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\uiregistersale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uiregistersale.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\uideletedclients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uideletedclients.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{4C7FC738-2C63-4FC1-A8A5-C58F121B3F15}|Datos\\Datos.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\datos\\dataventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C7FC738-2C63-4FC1-A8A5-C58F121B3F15}|Datos\\Datos.csproj|solutionrelative:datos\\dataventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\uideletedproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uideletedproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{204309D5-EF81-48EC-988F-97AFB3A83AD7}|Negocio\\Negocio.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\negocio\\nventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{204309D5-EF81-48EC-988F-97AFB3A83AD7}|Negocio\\Negocio.csproj|solutionrelative:negocio\\nventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{3E880017-4E80-447C-9703-ECD0F76FDAC5}|Modelos\\Modelos.csproj|c:\\codigo\\c#\\proyectofinal\\proyectofinal\\modelos\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E880017-4E80-447C-9703-ECD0F76FDAC5}|Modelos\\Modelos.csproj|solutionrelative:modelos\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\login\\uideletedproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C076A498-CC4A-48B1-981B-74104BC55DD2}|Login\\InterfazUsuario.csproj|solutionrelative:login\\uideletedproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{204309D5-EF81-48EC-988F-97AFB3A83AD7}|Negocio\\Negocio.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\negocio\\ndetalleventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{204309D5-EF81-48EC-988F-97AFB3A83AD7}|Negocio\\Negocio.csproj|solutionrelative:negocio\\ndetalleventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E880017-4E80-447C-9703-ECD0F76FDAC5}|Modelos\\Modelos.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\modelos\\detalleventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E880017-4E80-447C-9703-ECD0F76FDAC5}|Modelos\\Modelos.csproj|solutionrelative:modelos\\detalleventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C7FC738-2C63-4FC1-A8A5-C58F121B3F15}|Datos\\Datos.csproj|C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\datos\\datadetalleventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C7FC738-2C63-4FC1-A8A5-C58F121B3F15}|Datos\\Datos.csproj|solutionrelative:datos\\datadetalleventas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -44,9 +53,23 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 191,
-          "SelectedChildIndex": 2,
+          "DockedWidth": 276,
+          "SelectedChildIndex": 9,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Program.cs",
+              "RelativeDocumentMoniker": "Login\\Program.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Program.cs",
+              "RelativeToolTip": "Login\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T14:52:28.257Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
@@ -57,107 +80,131 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Datos",
-              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Datos\\Datos.csproj",
-              "RelativeDocumentMoniker": "Datos\\Datos.csproj",
-              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Datos\\Datos.csproj",
-              "RelativeToolTip": "Datos\\Datos.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-05-05T16:50:11.795Z",
+              "DocumentIndex": 6,
+              "Title": "Producto.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Modelos\\Producto.cs",
+              "RelativeDocumentMoniker": "Modelos\\Producto.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Modelos\\Producto.cs",
+              "RelativeToolTip": "Modelos\\Producto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T16:19:56.077Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UIRegisterSale.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIRegisterSale.cs",
+              "RelativeDocumentMoniker": "Login\\UIRegisterSale.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIRegisterSale.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Login\\UIRegisterSale.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-25T21:26:44.352Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UIRegisterSale.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIRegisterSale.cs",
+              "RelativeDocumentMoniker": "Login\\UIRegisterSale.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIRegisterSale.cs",
+              "RelativeToolTip": "Login\\UIRegisterSale.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAA8wFUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T13:59:43.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NVentas.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Negocio\\NVentas.cs",
+              "RelativeDocumentMoniker": "Negocio\\NVentas.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Negocio\\NVentas.cs",
+              "RelativeToolTip": "Negocio\\NVentas.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBgAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T13:44:57.533Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DataVentas.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Datos\\DataVentas.cs",
+              "RelativeDocumentMoniker": "Datos\\DataVentas.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Datos\\DataVentas.cs",
+              "RelativeToolTip": "Datos\\DataVentas.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-26T03:33:44.838Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Login.cs",
-              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs",
-              "RelativeDocumentMoniker": "Login\\Login.cs",
-              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs",
-              "RelativeToolTip": "Login\\Login.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAcwBYAAAAJAAAAAAAAAA==",
+              "Title": "UIRegisterSaleDetail.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIRegisterSaleDetail.cs",
+              "RelativeDocumentMoniker": "Login\\UIRegisterSaleDetail.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIRegisterSaleDetail.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Login\\UIRegisterSaleDetail.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T06:41:33.158Z"
+              "WhenOpened": "2026-05-26T15:11:38.885Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Login.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs",
-              "RelativeDocumentMoniker": "Login\\Login.cs",
-              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Login.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Login\\Login.cs [Dise\u00F1o]",
+              "DocumentIndex": 0,
+              "Title": "UIRegisterSaleDetail.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIRegisterSaleDetail.cs",
+              "RelativeDocumentMoniker": "Login\\UIRegisterSaleDetail.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIRegisterSaleDetail.cs",
+              "RelativeToolTip": "Login\\UIRegisterSaleDetail.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAjwGEAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T06:41:31.287Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UIDeletedClients.cs",
-              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedClients.cs",
-              "RelativeDocumentMoniker": "Login\\UIDeletedClients.cs",
-              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedClients.cs",
-              "RelativeToolTip": "Login\\UIDeletedClients.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAA9wDkAAABaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T06:06:58.43Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UIDeletedClients.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedClients.cs",
-              "RelativeDocumentMoniker": "Login\\UIDeletedClients.cs",
-              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedClients.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Login\\UIDeletedClients.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T06:06:55.878Z"
+              "WhenOpened": "2026-05-26T15:11:41.246Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "UIDeletedProducts.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedProducts.cs",
-              "RelativeDocumentMoniker": "Login\\UIDeletedProducts.cs",
-              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedProducts.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Login\\UIDeletedProducts.cs [Dise\u00F1o]",
+              "Title": "NDetalleVentas.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Negocio\\NDetalleVentas.cs",
+              "RelativeDocumentMoniker": "Negocio\\NDetalleVentas.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Negocio\\NDetalleVentas.cs",
+              "RelativeToolTip": "Negocio\\NDetalleVentas.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAjwCEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T05:53:43.518Z"
+              "WhenOpened": "2026-05-26T13:45:08.525Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Menu.cs",
-              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Menu.cs",
-              "RelativeDocumentMoniker": "Login\\Menu.cs",
-              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Menu.cs",
-              "RelativeToolTip": "Login\\Menu.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAvwCwAAABOAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "DataDetalleVentas.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Datos\\DataDetalleVentas.cs",
+              "RelativeDocumentMoniker": "Datos\\DataDetalleVentas.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Datos\\DataDetalleVentas.cs",
+              "RelativeToolTip": "Datos\\DataDetalleVentas.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAmwBEAAABwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-04T04:28:07.135Z"
+              "WhenOpened": "2026-05-25T16:24:55.862Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Menu.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Menu.cs",
-              "RelativeDocumentMoniker": "Login\\Menu.cs",
-              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\Menu.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Login\\Menu.cs [Dise\u00F1o]",
+              "DocumentIndex": 9,
+              "Title": "DetalleVenta.cs",
+              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Modelos\\DetalleVenta.cs",
+              "RelativeDocumentMoniker": "Modelos\\DetalleVenta.cs",
+              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Modelos\\DetalleVenta.cs",
+              "RelativeToolTip": "Modelos\\DetalleVenta.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-04T04:27:27.426Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UIDeletedProducts.cs",
-              "DocumentMoniker": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedProducts.cs",
-              "RelativeDocumentMoniker": "Login\\UIDeletedProducts.cs",
-              "ToolTip": "C:\\Codigo\\C#\\ProyectoFinal\\ProyectoFinal\\Login\\UIDeletedProducts.cs",
-              "RelativeToolTip": "Login\\UIDeletedProducts.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAABOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T05:54:57.79Z"
+              "WhenOpened": "2026-05-26T03:32:14.946Z",
+              "EditorCaption": ""
             }
           ]
         }

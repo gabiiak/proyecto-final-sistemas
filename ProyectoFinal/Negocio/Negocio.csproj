@@ -62,8 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NClientes.cs" />
+    <Compile Include="NDetalleVentas.cs" />
     <Compile Include="NMetodosPago.cs" />
     <Compile Include="NProductos.cs" />
+    <Compile Include="NVentas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

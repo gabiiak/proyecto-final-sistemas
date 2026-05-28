@@ -93,8 +93,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClientes.cs" />
+    <Compile Include="DataDetalleVentas.cs" />
     <Compile Include="DataMetodosPago.cs" />
     <Compile Include="DataProductos.cs" />
+    <Compile Include="DataVentas.cs" />
     <Compile Include="Db.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

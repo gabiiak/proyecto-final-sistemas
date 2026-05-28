@@ -13,6 +13,10 @@ namespace Modelos
         public string Descripcion { get; set; }
         public double Precio { get; set; }
         public int Activo { get; set; }
-    
+
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Datos
             List<Cliente> lista = new List<Cliente>();
             using (SqliteConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT * FROM Clientes WHERE activo != 0";
+                string sqlQuery = @"SELECT id AS Id, nombre AS Nombre, empresa AS Empresa, direccion AS Direccion, activo as Activo, telefono AS Telefono from Clientes WHERE activo != 0";
                 using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
                 {
                     connection.Open();
