@@ -28,3 +28,8 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\e_sqlite3.dll
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\Datos.dll.config
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\Datos.dll
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\Datos.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\mvp.db
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\e_sqlite3.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\Datos.dll.config
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\Datos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\Datos.pdb

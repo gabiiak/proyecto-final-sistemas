@@ -6,3 +6,7 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\x64\Release\Modelos.dll
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\x64\Release\Modelos.pdb
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\Modelos.dll
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\Modelos.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\Modelos.dll.config
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\Modelos.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\Modelos.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\x64\Release\Modelos.csproj.Up2Date

@@ -21,6 +21,7 @@ namespace Login
         public UIRegisterSale()
         {
             InitializeComponent();
+            dgvVenta_DetalleVenta.AllowUserToAddRows = false;
         }
 
         private void UIRegisterSale_Load(object sender, EventArgs e)

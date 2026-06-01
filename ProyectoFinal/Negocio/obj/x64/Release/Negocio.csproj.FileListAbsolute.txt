@@ -31,3 +31,8 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\e_sqlite3.dll
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\Negocio.dll.config
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\Negocio.dll
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\Negocio.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\mvp.db
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\e_sqlite3.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\Negocio.dll.config
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\Negocio.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\Negocio.pdb

@@ -43,4 +43,17 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\e_sqlite3.dll
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\T&GSystem.exe.config
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\T&GSystem.exe
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publish\T&GSystem.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\mvp.db
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\e_sqlite3.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\T&GSystem.exe.config
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\T&GSystem.exe
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\publishV2\T&GSystem.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIConsultSale.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIDeletedPaymentMethod.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIOrderState.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIPaymentMethodManagement.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIPaymentState.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIRegisterSale.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIRegisterSaleDetail.resources
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UISalesManagement.resources
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\T&GSystem.exe.config

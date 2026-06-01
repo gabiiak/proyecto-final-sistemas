@@ -19,6 +19,7 @@ namespace Login
         public UISalesManagement()
         {
             InitializeComponent();
+            dgvTodasLasVentas.AllowUserToAddRows = false;
         }
 
         private void UISalesManagement_Load(object sender, EventArgs e)
