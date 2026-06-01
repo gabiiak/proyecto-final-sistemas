@@ -20,9 +20,9 @@ namespace Negocio
                 throw e;
             }
          */
-        public List<Venta> GetAllVentas(){return DataVentas.GetAllVentas();}
+        public static List<Venta> GetAllVentas() { return DataVentas.GetAllVentas(); }
         
-        public int CreateVenta(Venta venta) { return DataVentas.CreateVenta(venta); }
+        public static int CreateVenta(Venta venta) { return DataVentas.CreateVenta(venta); }
 
         public static double CalcularTotal(List<DetalleVenta> detalles)
         {
@@ -33,5 +33,15 @@ namespace Negocio
             }
             return total;
         }
+        public static int DeterminarEstadoPago(double total, double recibido)
+        {
+            if (recibido == total) return EstadoPago.Pagado;
+            if (recibido > total) return EstadoPago.Pagado;
+            return EstadoPago.Pendiente;
+        }
+        public static void CambiarEstadoPago(Venta venta) { DataVentas.CambiarEstadoPago(venta); }
+        public static void CambiarEstadoPedido(Venta venta) { DataVentas.CambiarEstadoPedido(venta); }
+        public static Venta GetVentaById(int idVenta) { return DataVentas.GetVentaById(idVenta); }
+        
     }
 }

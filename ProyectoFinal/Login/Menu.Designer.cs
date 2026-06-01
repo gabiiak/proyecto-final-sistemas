@@ -34,6 +34,8 @@
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnGestionarVentas = new System.Windows.Forms.Button();
+            this.btnMetodos = new System.Windows.Forms.Button();
             this.btnInicio = new System.Windows.Forms.Button();
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
@@ -45,7 +47,6 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.btnMetodos = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.contenedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -54,6 +55,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel1.Controls.Add(this.btnGestionarVentas);
             this.panel1.Controls.Add(this.btnMetodos);
             this.panel1.Controls.Add(this.btnInicio);
             this.panel1.Controls.Add(this.btnProductos);
@@ -61,8 +63,40 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 634);
+            this.panel1.Size = new System.Drawing.Size(200, 708);
             this.panel1.TabIndex = 0;
+            // 
+            // btnGestionarVentas
+            // 
+            this.btnGestionarVentas.AutoSize = true;
+            this.btnGestionarVentas.FlatAppearance.BorderSize = 0;
+            this.btnGestionarVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestionarVentas.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionarVentas.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnGestionarVentas.Location = new System.Drawing.Point(12, 200);
+            this.btnGestionarVentas.Name = "btnGestionarVentas";
+            this.btnGestionarVentas.Size = new System.Drawing.Size(182, 33);
+            this.btnGestionarVentas.TabIndex = 5;
+            this.btnGestionarVentas.Text = "Gestión de Ventas";
+            this.btnGestionarVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGestionarVentas.UseVisualStyleBackColor = true;
+            this.btnGestionarVentas.Click += new System.EventHandler(this.btnGestionarVentas_Click);
+            // 
+            // btnMetodos
+            // 
+            this.btnMetodos.AutoSize = true;
+            this.btnMetodos.FlatAppearance.BorderSize = 0;
+            this.btnMetodos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMetodos.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMetodos.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnMetodos.Location = new System.Drawing.Point(12, 153);
+            this.btnMetodos.Name = "btnMetodos";
+            this.btnMetodos.Size = new System.Drawing.Size(182, 33);
+            this.btnMetodos.TabIndex = 4;
+            this.btnMetodos.Text = "Metodos de Pago";
+            this.btnMetodos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMetodos.UseVisualStyleBackColor = true;
+            this.btnMetodos.Click += new System.EventHandler(this.btnMetodos_Click);
             // 
             // btnInicio
             // 
@@ -119,7 +153,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Location = new System.Drawing.Point(17, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(272, 29);
+            this.label1.Size = new System.Drawing.Size(219, 23);
             this.label1.TabIndex = 3;
             this.label1.Text = "Bienvenido, admin!";
             // 
@@ -136,7 +170,7 @@
             this.contenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contenedor.Location = new System.Drawing.Point(200, 0);
             this.contenedor.Name = "contenedor";
-            this.contenedor.Size = new System.Drawing.Size(961, 634);
+            this.contenedor.Size = new System.Drawing.Size(961, 708);
             this.contenedor.TabIndex = 1;
             // 
             // label3
@@ -144,7 +178,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(467, 171);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(385, 20);
+            this.label3.Size = new System.Drawing.Size(295, 16);
             this.label3.TabIndex = 9;
             this.label3.Text = "Cantidad de productos disponibles en stock";
             // 
@@ -153,7 +187,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(467, 92);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(438, 20);
+            this.label2.Size = new System.Drawing.Size(330, 16);
             this.label2.TabIndex = 8;
             this.label2.Text = "Cantidad de insumos disponibles para producción";
             // 
@@ -199,27 +233,11 @@
             this.chart1.TabIndex = 4;
             this.chart1.Text = "estadísticas de ventas";
             // 
-            // btnMetodos
-            // 
-            this.btnMetodos.AutoSize = true;
-            this.btnMetodos.FlatAppearance.BorderSize = 0;
-            this.btnMetodos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMetodos.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMetodos.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnMetodos.Location = new System.Drawing.Point(12, 153);
-            this.btnMetodos.Name = "btnMetodos";
-            this.btnMetodos.Size = new System.Drawing.Size(224, 33);
-            this.btnMetodos.TabIndex = 4;
-            this.btnMetodos.Text = "Metodos de Pago";
-            this.btnMetodos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMetodos.UseVisualStyleBackColor = true;
-            this.btnMetodos.Click += new System.EventHandler(this.btnMetodos_Click);
-            // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1161, 634);
+            this.ClientSize = new System.Drawing.Size(1161, 708);
             this.Controls.Add(this.contenedor);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -251,5 +269,6 @@
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btnMetodos;
+        private System.Windows.Forms.Button btnGestionarVentas;
     }
 }

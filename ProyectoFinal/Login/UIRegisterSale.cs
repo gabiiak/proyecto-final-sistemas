@@ -16,7 +16,8 @@ namespace Login
     public partial class UIRegisterSale : Form
     {
         private List<DetalleVenta> detalleVentas = new List<DetalleVenta>();
-        private double total = 0;
+        public Venta ventaEnMemoria = new Venta();
+        private double total;
         public UIRegisterSale()
         {
             InitializeComponent();
@@ -43,7 +44,11 @@ namespace Login
                 MessageBox.Show(error.ToString());
             }
             ActualizarDataGridView();
-            labelTotal.Text = total.ToString("C2");
+            labelTotal.Text = total.ToString("");
+            txtFecha.ReadOnly = false; //<- true para que no se pueda editar
+            txtFecha.BorderStyle = BorderStyle.FixedSingle;
+            txtFecha.Text = GetFecha();
+            txtPagoRecibido.Text = 0.ToString();
         }
 
         public void ActualizarDataGridView()
@@ -77,7 +82,9 @@ namespace Login
                 }
                 ActualizarDataGridView();
                 total = NVentas.CalcularTotal(detalleVentas);
-                labelTotal.Text = total.ToString("C2"); // convierte un valor numérico a una cadena de texto con formato de moneda
+                labelTotal.Text = total.ToString();
+                //labelTotal.Text = total.ToString("C2"); // convierte un valor numérico a una cadena de texto con formato de moneda
+                //estado actual: tengo que programar la lógica en la capa de negocios. la capa de UI solo crea el objeto y lo manda :P
             }
 
         }
@@ -86,25 +93,140 @@ namespace Login
         {
             if (string.IsNullOrEmpty(txtPagoRecibido.Text))
             {
-                MessageBox.Show("Ingresó un monto nulo, con valor 0 o con un valor menor al total. Está seguro que quiere registrar una venta con estado PENDIENTE?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                return; //aqui va la lógica con estado pendiente
+                MessageBox.Show("No se puede registrar una venta con un valor nulo.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            //double recibido = double.Parse(txtPagoRecibido.Text);
+            double.TryParse(txtPagoRecibido.Text, out double recibido);
+            if (recibido < total)
+            {
+                DialogResult resultado = MessageBox.Show("Ingresó un monto con valor de 0 o con un valor menor al total. " +
+                    "Está seguro que quiere registrar una venta con estado PENDIENTE?", "Alerta", 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (resultado == DialogResult.Yes)
+                {
+                    var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
+                    var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
+                    string fecha = txtFecha.Text;
+                    ventaEnMemoria = new Venta
+                    {
+                        Cliente = clienteSeleccionado,
+                        Fecha = fecha,
+                        Total = total,
+                        Metodo = metodoSeleccionado,
+                        Estado_Pago = NVentas.DeterminarEstadoPago(total, recibido),
+                        Estado_Pedido = EstadoPedido.Preparacion
+                    };
+                    int idVenta = NVentas.CreateVenta(ventaEnMemoria);
+                    ventaEnMemoria.IdVenta = idVenta;
+                    foreach (DetalleVenta detalle in detalleVentas)
+                    {
+                        detalle.Venta = new Venta { IdVenta = idVenta };
+                        NDetalleVentas.CreateDetalleVenta(detalle);
+                    }
+                    this.DialogResult = DialogResult.OK;
+                } 
 
             }
             else
             {
-                double recibido = double.Parse(txtPagoRecibido.Text);
-                if (recibido == total)
-                {
-                    MessageBox.Show("Ingresó un monto igual al total. Registar venta como PAGADO?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    return;
-                }
                 if (recibido > total)
                 {
-                    MessageBox.Show("Ingresó un monto mayor. Si la venta es concretada en efectivo, debe devolver un vuelto de X(cacular)", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    return; //podría implementar una mini lógica de cálculo de vuelto
+                    MetodoPago metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
+                    if (metodoSeleccionado.Descripcion.Equals("Efectivo") || metodoSeleccionado.Descripcion.Equals("EFECTIVO"))
+                    {
+                        double vuelto = CalcularVuelto(total, recibido);
+                        DialogResult result = MessageBox.Show("Ingresó un monto mayor. Debe devolver un vuelto de " + vuelto.ToString("C2"), "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                         if (result == DialogResult.Yes)
+                        {
+                            var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
+                            metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
+                            string fecha = txtFecha.Text;
+                            ventaEnMemoria = new Venta
+                            {
+                                Cliente = clienteSeleccionado,
+                                Fecha = fecha,
+                                Total = total,
+                                Metodo = metodoSeleccionado,
+                                Estado_Pago = NVentas.DeterminarEstadoPago(total, recibido),
+                                Estado_Pedido = EstadoPedido.Preparacion
+                            };
+                            int idVenta = NVentas.CreateVenta(ventaEnMemoria);
+                            ventaEnMemoria.IdVenta = idVenta;
+                            foreach (DetalleVenta detalle in detalleVentas)
+                            {
+                                detalle.Venta = new Venta { IdVenta = idVenta };
+                                NDetalleVentas.CreateDetalleVenta(detalle);
+                            }
+                            this.DialogResult = DialogResult.OK;
+                        }
+                            
+                    }
+                    else
+                    {
+                        MessageBox.Show("Puede ingresar un monto mayor SOLO si el método de pago de la transacción es 'Efectivo'. De otra forma, no se puede registrar más del monto total de la venta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("Se concretará una venta con el monto justo pagado y la venta estará PAGADA.", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
+                        var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
+                        string fecha = txtFecha.Text;
+                        ventaEnMemoria = new Venta
+                        {
+                            Cliente = clienteSeleccionado,
+                            Fecha = fecha,
+                            Total = total,
+                            Metodo = metodoSeleccionado,
+                            Estado_Pago = NVentas.DeterminarEstadoPago(total, recibido),
+                            Estado_Pedido = EstadoPedido.Preparacion
+                        };
+                        int idVenta = NVentas.CreateVenta(ventaEnMemoria);
+                        ventaEnMemoria.IdVenta = idVenta;
+                        foreach (DetalleVenta detalle in detalleVentas)
+                        {
+                            detalle.Venta = new Venta { IdVenta = idVenta };
+                            NDetalleVentas.CreateDetalleVenta(detalle);
+                        }
+                        this.DialogResult = DialogResult.OK;
+                    }
                 }
             }
             
+        }
+        private double CalcularVuelto(double total, double recibido)
+        {
+            return recibido - total;
+        }
+        private void btnPagoJusto_Click(object sender, EventArgs e)
+        {
+            double recibido = total;
+            txtPagoRecibido.Text = recibido.ToString("");
+        }
+        private string GetFecha() //aqui puedo retornar un string como fecha
+        {
+            return DateTime.Now.ToString("dd-MM-yyyy");
+        }
+
+        private void btnQuitarDetalle_Click(object sender, EventArgs e)
+        {
+            if (dgvVenta_DetalleVenta.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione un detalle para quitar.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int indice = dgvVenta_DetalleVenta.SelectedRows[0].Index;
+            detalleVentas.RemoveAt(indice);
+            total = NVentas.CalcularTotal(detalleVentas);
+            labelTotal.Text = total.ToString();
+            ActualizarDataGridView();
         }
     }
 }

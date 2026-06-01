@@ -13,9 +13,9 @@ namespace Modelos
         public MetodoPago Metodo { get; set; }
         //public DateTime Fecha { get; set; } <-- para sql server
         public string Fecha { get; set; }
-        public int NumTransaccion { get; set; }
-        public int Estado_Pedido { get; set; } = EstadoPedido.Preparacion;
-        public int Estado_Pago { get; set; } = EstadoPago.Pendiente;
+        public int Estado_Pedido { get; set; } //= EstadoPedido.Preparacion;
+        public int Estado_Pago { get; set; } //= EstadoPago.Pendiente;
+        public double Total { get; set; }
 
     }
 }

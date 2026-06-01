@@ -90,6 +90,7 @@ namespace Login
             };
             detalleVentas.Add(detalle);
             MessageBox.Show("Se registró el detalle con éxito.", "Éxito", MessageBoxButtons.OK);
+            this.DialogResult = DialogResult.OK;
             Clean();
         }
         private void Clean()
@@ -101,7 +102,6 @@ namespace Login
 
         private void btnSalirDetalle_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
             this.Close();
         }
     }

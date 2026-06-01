@@ -21,8 +21,9 @@ namespace Negocio
             }
          */
         public static List<DetalleVenta> GetAllDetalleVentas() { return DataDetalleVentas.GetAllDetalleVentas(); }
+        public static List<DetalleVenta> GetDetalleByIdVenta(int idVenta) { return DataDetalleVentas.GetDetallesByIdVenta(idVenta); }
 
-        public void CreateDetalleVenta(DetalleVenta detalle) { DataDetalleVentas.CreateDetalleVenta(detalle); }
+        public static void CreateDetalleVenta(DetalleVenta detalle) { DataDetalleVentas.CreateDetalleVenta(detalle); }
 
         public static double CalcularSubTotal(DetalleVenta detalle)
         {

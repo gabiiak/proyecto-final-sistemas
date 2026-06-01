@@ -15,7 +15,7 @@ namespace Login
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UIRegisterSale()); //Login()
+            Application.Run(new Menu()); //Login()
         }
     }
 }

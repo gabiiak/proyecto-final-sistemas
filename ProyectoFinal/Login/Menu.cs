@@ -94,5 +94,10 @@ namespace Login
         {
             AbrirFormularioHijo(new UIPaymentMethodManagement());
         }
+
+        private void btnGestionarVentas_Click(object sender, EventArgs e)
+        {
+            AbrirFormularioHijo(new UISalesManagement());
+        }
     }
 }
