@@ -48,7 +48,7 @@ namespace Login
             labelTotal.Text = total.ToString("");
             txtFecha.ReadOnly = false; //<- true para que no se pueda editar
             txtFecha.BorderStyle = BorderStyle.FixedSingle;
-            txtFecha.Text = GetFecha();
+            txtFecha.Text = GetFecha().ToString("dd-MM-yyyy");
             txtPagoRecibido.Text = 0.ToString();
         }
 
@@ -92,6 +92,21 @@ namespace Login
 
         private void btnRegistrarVenta_Click(object sender, EventArgs e)
         {
+            DateTime fecha;
+            if (!DateTime.TryParseExact(txtFecha.Text, "dd-MM-yyyy", null,
+                System.Globalization.DateTimeStyles.None, out fecha))
+            {
+                MessageBox.Show("Formato de fecha inválido. Use dd-MM-yyyy.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (fecha.Date > DateTime.Now.Date)
+            {
+                MessageBox.Show("No se puede registrar una venta con fecha futura.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (string.IsNullOrEmpty(txtPagoRecibido.Text))
             {
                 MessageBox.Show("No se puede registrar una venta con un valor nulo.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
@@ -108,7 +123,7 @@ namespace Login
                 {
                     var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
                     var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
-                    string fecha = txtFecha.Text;
+                    fecha = DateTime.Parse(txtFecha.Text);
                     ventaEnMemoria = new Venta
                     {
                         Cliente = clienteSeleccionado,
@@ -142,7 +157,7 @@ namespace Login
                         {
                             var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
                             metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
-                            string fecha = txtFecha.Text;
+                            fecha = DateTime.Parse(txtFecha.Text);
                             ventaEnMemoria = new Venta
                             {
                                 Cliente = clienteSeleccionado,
@@ -177,7 +192,7 @@ namespace Login
                     {
                         var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
                         var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
-                        string fecha = txtFecha.Text;
+                        fecha = DateTime.Parse(txtFecha.Text);
                         ventaEnMemoria = new Venta
                         {
                             Cliente = clienteSeleccionado,
@@ -209,9 +224,10 @@ namespace Login
             double recibido = total;
             txtPagoRecibido.Text = recibido.ToString("");
         }
-        private string GetFecha() //aqui puedo retornar un string como fecha
+        
+        private DateTime GetFecha() //aqui puedo retornar un string como fecha
         {
-            return DateTime.Now.ToString("dd-MM-yyyy");
+            return DateTime.Now.Date;
         }
 
         private void btnQuitarDetalle_Click(object sender, EventArgs e)

@@ -56,4 +56,3 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIPaymentSt
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIRegisterSale.resources
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UIRegisterSaleDetail.resources
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\Login.UISalesManagement.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Release\T&GSystem.exe.config

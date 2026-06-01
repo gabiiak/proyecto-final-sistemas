@@ -29,14 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btnFiltrarPorFecha = new System.Windows.Forms.Button();
+            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
+            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvTodasLasVentas = new System.Windows.Forms.DataGridView();
             this.IdVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,6 +48,12 @@
             this.btnEstadoPago = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnRegistrarVenta = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnFiltroCliente = new System.Windows.Forms.Button();
+            this.btnDesfiltrar = new System.Windows.Forms.Button();
+            this.cbClienteFiltro = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTodasLasVentas)).BeginInit();
@@ -60,14 +61,15 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.comboBox2);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.cbClienteFiltro);
+            this.panel1.Controls.Add(this.btnDesfiltrar);
+            this.panel1.Controls.Add(this.btnFiltroCliente);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.dateTimePicker2);
-            this.panel1.Controls.Add(this.dateTimePicker1);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.btnFiltrarPorFecha);
+            this.panel1.Controls.Add(this.dtpHasta);
+            this.panel1.Controls.Add(this.dtpDesde);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.btnConsultarVenta);
             this.panel1.Controls.Add(this.labelId);
@@ -81,77 +83,32 @@
             this.panel1.Size = new System.Drawing.Size(687, 519);
             this.panel1.TabIndex = 0;
             // 
-            // button5
+            // btnFiltrarPorFecha
             // 
-            this.button5.Location = new System.Drawing.Point(309, 195);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(102, 23);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnFiltrarPorFecha.Location = new System.Drawing.Point(420, 123);
+            this.btnFiltrarPorFecha.Name = "btnFiltrarPorFecha";
+            this.btnFiltrarPorFecha.Size = new System.Drawing.Size(148, 23);
+            this.btnFiltrarPorFecha.TabIndex = 15;
+            this.btnFiltrarPorFecha.Text = "Filtrar por fecha";
+            this.btnFiltrarPorFecha.UseVisualStyleBackColor = true;
+            this.btnFiltrarPorFecha.Click += new System.EventHandler(this.btnFiltrarPorFecha_Click);
             // 
-            // comboBox2
+            // dtpHasta
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(182, 195);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 19;
+            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpHasta.Location = new System.Drawing.Point(467, 97);
+            this.dtpHasta.Name = "dtpHasta";
+            this.dtpHasta.Size = new System.Drawing.Size(101, 20);
+            this.dtpHasta.TabIndex = 14;
             // 
-            // comboBox1
+            // dtpDesde
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Cliente",
-            "MetodoPago",
-            "EstadoDePago",
-            "EstadoDePedido"});
-            this.comboBox1.Location = new System.Drawing.Point(72, 195);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(104, 21);
-            this.comboBox1.TabIndex = 18;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(470, 155);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 13);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Filtrar por fecha";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 198);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Filtrar por";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(556, 150);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(117, 23);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(473, 124);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 14;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(473, 98);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 13;
-            this.dateTimePicker1.Value = new System.DateTime(2021, 10, 1, 0, 0, 0, 0);
+            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDesde.Location = new System.Drawing.Point(467, 71);
+            this.dtpDesde.Name = "dtpDesde";
+            this.dtpDesde.Size = new System.Drawing.Size(101, 20);
+            this.dtpDesde.TabIndex = 13;
+            this.dtpDesde.Value = new System.DateTime(2026, 4, 1, 0, 0, 0, 0);
             // 
             // panel2
             // 
@@ -218,9 +175,9 @@
             // 
             // btnConsultarVenta
             // 
-            this.btnConsultarVenta.Location = new System.Drawing.Point(15, 150);
+            this.btnConsultarVenta.Location = new System.Drawing.Point(266, 163);
             this.btnConsultarVenta.Name = "btnConsultarVenta";
-            this.btnConsultarVenta.Size = new System.Drawing.Size(195, 23);
+            this.btnConsultarVenta.Size = new System.Drawing.Size(145, 25);
             this.btnConsultarVenta.TabIndex = 7;
             this.btnConsultarVenta.Text = "Consultar Venta";
             this.btnConsultarVenta.UseVisualStyleBackColor = true;
@@ -230,7 +187,7 @@
             // 
             this.labelId.AutoSize = true;
             this.labelId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelId.Location = new System.Drawing.Point(216, 62);
+            this.labelId.Location = new System.Drawing.Point(216, 167);
             this.labelId.Name = "labelId";
             this.labelId.Size = new System.Drawing.Size(44, 16);
             this.labelId.TabIndex = 6;
@@ -240,7 +197,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 62);
+            this.label2.Location = new System.Drawing.Point(16, 167);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(194, 16);
             this.label2.TabIndex = 5;
@@ -248,9 +205,9 @@
             // 
             // btnEstadoPedido
             // 
-            this.btnEstadoPedido.Location = new System.Drawing.Point(216, 136);
+            this.btnEstadoPedido.Location = new System.Drawing.Point(216, 112);
             this.btnEstadoPedido.Name = "btnEstadoPedido";
-            this.btnEstadoPedido.Size = new System.Drawing.Size(195, 37);
+            this.btnEstadoPedido.Size = new System.Drawing.Size(195, 34);
             this.btnEstadoPedido.TabIndex = 4;
             this.btnEstadoPedido.Text = "Cambiar Estado Pedido";
             this.btnEstadoPedido.UseVisualStyleBackColor = true;
@@ -258,7 +215,7 @@
             // 
             // btnEstadoPago
             // 
-            this.btnEstadoPago.Location = new System.Drawing.Point(216, 95);
+            this.btnEstadoPago.Location = new System.Drawing.Point(216, 71);
             this.btnEstadoPago.Name = "btnEstadoPago";
             this.btnEstadoPago.Size = new System.Drawing.Size(195, 35);
             this.btnEstadoPago.TabIndex = 3;
@@ -278,13 +235,68 @@
             // 
             // btnRegistrarVenta
             // 
-            this.btnRegistrarVenta.Location = new System.Drawing.Point(15, 95);
+            this.btnRegistrarVenta.Location = new System.Drawing.Point(15, 71);
             this.btnRegistrarVenta.Name = "btnRegistrarVenta";
-            this.btnRegistrarVenta.Size = new System.Drawing.Size(195, 49);
+            this.btnRegistrarVenta.Size = new System.Drawing.Size(195, 75);
             this.btnRegistrarVenta.TabIndex = 1;
             this.btnRegistrarVenta.Text = "Registrar Venta";
             this.btnRegistrarVenta.UseVisualStyleBackColor = true;
             this.btnRegistrarVenta.Click += new System.EventHandler(this.btnRegistrarVenta_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(417, 71);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Desde: ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(417, 97);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Hasta:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 203);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Filtrar por cliente:";
+            // 
+            // btnFiltroCliente
+            // 
+            this.btnFiltroCliente.Location = new System.Drawing.Point(263, 203);
+            this.btnFiltroCliente.Name = "btnFiltroCliente";
+            this.btnFiltroCliente.Size = new System.Drawing.Size(148, 23);
+            this.btnFiltroCliente.TabIndex = 25;
+            this.btnFiltroCliente.Text = "Filtrar";
+            this.btnFiltroCliente.UseVisualStyleBackColor = true;
+            this.btnFiltroCliente.Click += new System.EventHandler(this.btnFiltroCliente_Click);
+            // 
+            // btnDesfiltrar
+            // 
+            this.btnDesfiltrar.Location = new System.Drawing.Point(417, 203);
+            this.btnDesfiltrar.Name = "btnDesfiltrar";
+            this.btnDesfiltrar.Size = new System.Drawing.Size(166, 23);
+            this.btnDesfiltrar.TabIndex = 26;
+            this.btnDesfiltrar.Text = "Desfiltrar";
+            this.btnDesfiltrar.UseVisualStyleBackColor = true;
+            this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
+            // 
+            // cbClienteFiltro
+            // 
+            this.cbClienteFiltro.FormattingEnabled = true;
+            this.cbClienteFiltro.Location = new System.Drawing.Point(109, 203);
+            this.cbClienteFiltro.Name = "cbClienteFiltro";
+            this.cbClienteFiltro.Size = new System.Drawing.Size(148, 21);
+            this.cbClienteFiltro.TabIndex = 27;
             // 
             // UISalesManagement
             // 
@@ -322,13 +334,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MetodoPago;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoDePago;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoDePedido;
+        private System.Windows.Forms.Button btnFiltrarPorFecha;
+        private System.Windows.Forms.DateTimePicker dtpHasta;
+        private System.Windows.Forms.DateTimePicker dtpDesde;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnFiltroCliente;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnDesfiltrar;
+        private System.Windows.Forms.ComboBox cbClienteFiltro;
     }
 }

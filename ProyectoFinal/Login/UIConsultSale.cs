@@ -37,7 +37,7 @@ namespace Login
             Venta venta = NVentas.GetVentaById(idVenta);
             labelCliente.Text = venta.Cliente.Nombre;
             labelMetodo.Text = venta.Metodo.Descripcion;
-            labelFecha.Text = venta.Fecha;
+            labelFecha.Text = venta.Fecha.ToString("dd-MM-yyyy");
             labelEstadoPago.Text = GetDescripcionEstadoPago(venta.Estado_Pago);
             labelEstadoPedido.Text = GetEstadoPedido(venta.Estado_Pedido);
             labelTotal.Text = venta.Total.ToString("C2");

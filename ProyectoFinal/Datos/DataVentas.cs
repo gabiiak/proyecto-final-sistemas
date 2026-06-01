@@ -32,7 +32,7 @@ namespace Datos
                             return new Venta
                             {
                                 IdVenta = reader.GetInt32(0),
-                                Fecha = reader.GetString(1),
+                                Fecha = DateTime.Parse( reader.GetString(1)),
                                 Estado_Pago = reader.GetInt32(2),
                                 Estado_Pedido = reader.GetInt32(3),
                                 Total = reader.GetDouble(4),
@@ -58,7 +58,7 @@ namespace Datos
             List<Venta> listaVentas = new List<Venta>();
             using (SqliteConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT v.idVenta, c.nombre, v.fecha, v.totalVenta, v.estadoPago, v.estadoPedido,   mp.descripcion
+                string sqlQuery = @"SELECT v.idVenta,c.id, c.nombre, v.fecha, v.totalVenta, v.estadoPago, v.estadoPedido,   mp.descripcion
                                     FROM Ventas v
                                     INNER JOIN Clientes c ON v.idCliente = c.id
                                     INNER JOIN MetodosPago mp ON v.idMetodoPago = mp.idMetodoPago";
@@ -74,12 +74,13 @@ namespace Datos
                                 IdVenta = reader.GetInt32(0),
                                 Cliente = new Cliente
                                 {
-                                    Nombre = reader.GetString(1)
+                                    Id = reader.GetInt32(1),
+                                    Nombre = reader.GetString(2)
                                 },
-                                Fecha = reader.GetString(2),
-                                Total = reader.GetDouble(3),
-                                Estado_Pago = reader.GetInt32(4),
-                                Estado_Pedido = reader.GetInt32(5),
+                                Fecha = DateTime.Parse(reader.GetString(3)),
+                                Total = reader.GetDouble(4),
+                                Estado_Pago = reader.GetInt32(5),
+                                Estado_Pedido = reader.GetInt32(6),
                                 Metodo = new MetodoPago
                                 {
                                     Descripcion = reader.GetString(6)
@@ -105,7 +106,7 @@ namespace Datos
                     connection.Open();
                     cmd.Parameters.Add("@Id", (SqliteType)System.Data.SqlDbType.Int).Value = venta.Cliente.Id;
                     cmd.Parameters.Add("@IdMetodoPago", (SqliteType)System.Data.SqlDbType.Int).Value = venta.Metodo.IdMetodoPago;
-                    cmd.Parameters.Add("@Fecha", (SqliteType)System.Data.SqlDbType.Text).Value = venta.Fecha; // <- cambiar a datetime para SQLServer
+                    cmd.Parameters.Add("@Fecha", (SqliteType)System.Data.SqlDbType.Text).Value = venta.Fecha.ToString("yyyy-MM-dd"); // <- cambiar a datetime para SQLServer
                     cmd.Parameters.AddWithValue("@EstadoPedido", venta.Estado_Pedido);
                     cmd.Parameters.AddWithValue("@EstadoPago", venta.Estado_Pago);
                     cmd.Parameters.AddWithValue("@Total", venta.Total);
