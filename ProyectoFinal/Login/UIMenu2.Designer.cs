@@ -82,6 +82,7 @@ namespace Login
             pnlSidebar.Controls.Add(lblTituloApp);
 
             // ── HEADER ──────────────────────────────────────────────
+            //AGREGAR ALGO MÁS AQUI
             pnlHeader.BackColor = Color.White;
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Height = 50;
