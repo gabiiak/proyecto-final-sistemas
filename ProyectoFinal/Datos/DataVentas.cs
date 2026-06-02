@@ -32,7 +32,13 @@ namespace Datos
                             return new Venta
                             {
                                 IdVenta = reader.GetInt32(0),
-                                Fecha = DateTime.Parse( reader.GetString(1)),
+                                Fecha = DateTime.ParseExact(
+                                    reader.GetString(1),
+                                    new string[] { "yyyy-MM-dd", "dd-MM-yyyy" }, // prueba ambos formatos
+                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    System.Globalization.DateTimeStyles.None
+                                ),
+                                //Fecha = reader.GetDateTime(1),
                                 Estado_Pago = reader.GetInt32(2),
                                 Estado_Pedido = reader.GetInt32(3),
                                 Total = reader.GetDouble(4),
@@ -77,7 +83,13 @@ namespace Datos
                                     Id = reader.GetInt32(1),
                                     Nombre = reader.GetString(2)
                                 },
-                                Fecha = DateTime.Parse(reader.GetString(3)),
+                                Fecha = DateTime.ParseExact(
+                                    reader.GetString(3),
+                                    new string[] { "yyyy-MM-dd", "dd-MM-yyyy" }, // prueba ambos formatos
+                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    System.Globalization.DateTimeStyles.None
+                                ),
+                                //Fecha = reader.GetDateTime(3),
                                 Total = reader.GetDouble(4),
                                 Estado_Pago = reader.GetInt32(5),
                                 Estado_Pedido = reader.GetInt32(6),
