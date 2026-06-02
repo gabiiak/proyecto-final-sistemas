@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using MaterialSkin;
+using MaterialSkin.Controls;
 namespace Login
 { 
     public partial class Menu : Form
@@ -40,6 +41,17 @@ namespace Login
             progressBar2.Minimum = 0;
             progressBar2.Maximum = 100;
             progressBar2.Value = 60;
+
+        //    var skinManager = MaterialSkinManager.Instance;
+        //    skinManager.AddFormToManage(this);
+        //    skinManager.Theme = MaterialSkinManager.Themes.DARK;
+        //    skinManager.ColorScheme = new ColorScheme(
+        //    Primary.BlueGrey800,
+        //    Primary.BlueGrey900,
+        //    Primary.BlueGrey500,
+        //    Accent.LightBlue200,
+        //    TextShade.WHITE
+        //);
         }
 
         // --- MÉTODO MÁGICO PARA ABRIR FORMULARIOS DENTRO DEL PANEL --- <-???

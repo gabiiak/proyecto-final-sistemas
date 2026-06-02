@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace Login
 {
     public partial class Login : Form
     {
-        private string usuario = "admin";
-        private string contraseña = "administrador91218";
+        public string usuarioLogueado { get; set; }
+        
         public Login()
         {
             InitializeComponent();
@@ -25,36 +27,50 @@ namespace Login
             txtPassword.Clear();
         }
 
-        private bool ValidateLogin()
+        private bool ValidateLogin(string user, string password)
         {
-            if (txtUser.Text == usuario && txtPassword.Text == contraseña) return true;
+            if (txtUser.Text == user && txtPassword.Text == password) return true;
             else return false;
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            lblError.Visible = true;
+            //string usuario = "administrador";
+            //string contraseña = "administrador91218";
+            string usuario = "1";
+            string contraseña = "1";
             if (string.IsNullOrWhiteSpace(txtUser.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                MessageBox.Show("Hay campos vacíos", "Alerta", MessageBoxButtons.OK);
+                
+                lblError.Text = "Hay campos vacíos.";
+                //MessageBox.Show("Hay campos vacíos", "Alerta", MessageBoxButtons.OK);
                 return;
             }
-            if (ValidateLogin() == true)
+            if (ValidateLogin(usuario,contraseña) == true)
             {
-                Menu Menu = new Menu();
-                Menu.FormClosed += (s, args) => this.Show(); //<- para escuchar el evento "cerrar"
+                lblError.Visible = false;
+                usuarioLogueado = usuario;
+                this.DialogResult = DialogResult.OK;
                 this.Hide();
-                Menu.Show();
+                //Menu
+                //UIMenu2 Menu = new UIMenu2();
+                //Menu.FormClosed += (s, args) => this.Show(); //<- para escuchar el evento "cerrar"
+                //this.Hide();
+                //Menu.Show();
                 
             }
             else
             {
                 if (txtUser.Text != usuario)
                 {
-                    MessageBox.Show("Usuario incorrecto", "Acceso denegado", MessageBoxButtons.OK);
+                    lblError.Text = "Usuario incorrecto.";
+                    //MessageBox.Show("Usuario incorrecto", "Acceso denegado", MessageBoxButtons.OK);
                     return;
                 }
                 if (txtPassword.Text != contraseña)
                 {
-                    MessageBox.Show("Contraseña incorrecta", "Acceso denegado", MessageBoxButtons.OK);
+                    lblError.Text = "Contraseña incorrecta.";
+                    //  MessageBox.Show("Contraseña incorrecta", "Acceso denegado", MessageBoxButtons.OK);
                     return;
                 }
 
@@ -65,6 +81,8 @@ namespace Login
         {
             txtUser.Clear();
             txtPassword.Clear();
+            lblError.Visible = false; // También limpia el error
+            txtUser.Focus();
         }
     }
 }

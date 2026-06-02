@@ -185,3 +185,5 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Interfaz.A1F4FAE4.U
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\T&GSystem.exe
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\T&GSystem.pdb
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\T&GSystem.exe.config
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\MaterialSkin.dll
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIMenu2.resources

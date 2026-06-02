@@ -111,3 +111,4 @@ C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\x64\Debug\Negocio.csproj.Co
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\x64\Debug\Negocio.csproj.Up2Date
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\x64\Debug\Negocio.dll
 C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\x64\Debug\Negocio.pdb
+C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\bin\x64\Debug\MaterialSkin.dll

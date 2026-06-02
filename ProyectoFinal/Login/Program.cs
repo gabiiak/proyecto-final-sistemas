@@ -7,7 +7,6 @@ namespace Login
 {
     internal static class Program
     {
-        /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>|
         [STAThread]
@@ -15,7 +14,22 @@ namespace Login
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Menu()); //Login()
+            bool seguirCorriendo = true;
+            while (seguirCorriendo)
+            {
+                using (var login = new Login())
+                {
+                    var menu = new UIMenu2();
+                    if (login.ShowDialog() == DialogResult.OK)
+                    {
+                        menu.SetUsuario(login.usuarioLogueado);
+                        Application.Run(menu); //Login()
+                    }
+                    else seguirCorriendo = false;
+                }
+            }
+            
+                
         }
     }
 }

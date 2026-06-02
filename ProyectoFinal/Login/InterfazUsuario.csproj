@@ -113,6 +113,9 @@
     <Reference Include="itext.svg, Version=9.6.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext.9.6.0\lib\net461\itext.svg.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -202,6 +205,18 @@
     <Compile Include="UIDeletedPaymentMethod.Designer.cs">
       <DependentUpon>UIDeletedPaymentMethod.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIInicio1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIInicio1.Designer.cs">
+      <DependentUpon>UIInicio1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIMenu2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIMenu2.Designer.cs">
+      <DependentUpon>UIMenu2.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIOrderState.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -281,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIDeletedPaymentMethod.resx">
       <DependentUpon>UIDeletedPaymentMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIMenu2.resx">
+      <DependentUpon>UIMenu2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIOrderState.resx">
       <DependentUpon>UIOrderState.cs</DependentUpon>
