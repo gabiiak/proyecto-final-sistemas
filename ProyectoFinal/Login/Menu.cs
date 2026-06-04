@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Login
 { 
@@ -18,30 +20,16 @@ namespace Login
         public Menu()
         {
             InitializeComponent();
-            //prueba de chart/estadísticas de negocio
-            var data = new[] {
-                new { Month = "Enero", Sales = 30 , SalesEstimate = 40},
-                new { Month = "Febrero", Sales = 20 , SalesEstimate = 30},
-                new { Month = "Marzo", Sales = 40 , SalesEstimate = 20},
-                new { Month = "Abril", Sales = 70 , SalesEstimate = 50}
-            };
+            CargarGraficoVentas();
+            CargarGraficoClientes();
 
-            chart1.DataSource = data;
-            chart1.Series["Ventas"].XValueMember = "Month";
-            chart1.Series["Ventas"].YValueMembers = "Sales";
-            chart1.Series["Estimación de Ventas"].XValueMember = "Month";
-            chart1.Series["Estimación de Ventas"].YValueMembers = "SalesEstimate";
-            chart1.DataBind();
-
-            //prueba de progress bar <- esto se puede enlazar a la BD en un futuro
-            progressBar1.Minimum = 0;
-            progressBar1.Maximum = 100;
-            progressBar1.Value = 34;
-            progressBar2.Minimum = 0;
-            progressBar2.Maximum = 100;
-            progressBar2.Value = 60;
         }
+       
+            // ... (Todo el código anterior del gráfico que ya tenías) ...
 
+            // --- ¡ACTUALIZAMOS EL LABEL CON EL CONTEO DE TRANSACCIONES! ---
+            
+        
         // --- MÉTODO MÁGICO PARA ABRIR FORMULARIOS DENTRO DEL PANEL --- <-???
         private void AbrirFormularioHijo(Form formHijo)
         {
@@ -87,6 +75,64 @@ namespace Login
                 // Buena práctica: volver a dejarlo en null para que el sistema 
                 // sepa que ya no hay nada abierto en ese espacio.
                 formularioActivo = null;
+            }
+
+            // --- ¡AQUÍ COLOCAMOS LA ACTUALIZACIÓN! ---
+            // Cada vez que el usuario haga clic en 'Inicio' para regresar al menú principal,
+            // el gráfico se limpiará y volverá a traer los datos frescos de la Capa de Negocio.
+            CargarGraficoVentas();
+            CargarGraficoClientes();
+        }
+        
+
+
+        private void CargarGraficoVentas()
+        {
+            chartVentas.Series[0].Points.Clear();
+            chartVentas.Series[0].ChartType = SeriesChartType.Column;
+            chartVentas.Series[0].BorderWidth = 0;
+            chartVentas.Series[0].Name = "Monto Vendido";
+
+            // --- ¡ESTAS DOS LÍNEAS SON LA MAGIA! ---
+            // 1. Obliga al gráfico a mostrar una etiqueta por cada punto exacto (sin saltarse ninguna)
+            chartVentas.ChartAreas[0].AxisX.Interval = 1;
+
+            // 2. Le dice al gráfico que los datos son categorías estrictas (1, 2, 3, 4) y no números al azar
+            chartVentas.Series[0].IsXValueIndexed = true;
+            // ---------------------------------------
+
+            // Llamamos a tu capa de negocio
+            var ventasUltimoMes = NVentas.GetVentasUltimas4Semanas();
+
+            // Dibujamos las barras en el gráfico
+            foreach (var item in ventasUltimoMes)
+            {
+                chartVentas.Series[0].Points.AddXY(item.Key, item.Value);
+            }
+            // Parte de cantidad de ventas de los ultimos 30 días
+            int totalTransacciones = NVentas.GetCantidadVentasUltimos30Dias();
+            lblCantidadVentasMes.Text = $"{totalTransacciones} ventas registradas";
+        }
+        private void CargarGraficoClientes()
+        {
+            // Limpiamos los puntos anteriores
+            chartClientes.Series[0].Points.Clear();
+
+            // Lo configuramos como gráfico de Torta (puedes cambiarlo a Doughnut si te gusta más)
+            chartClientes.Series[0].ChartType = SeriesChartType.Pie;
+            chartClientes.Series[0].Name = "Compras";
+
+            // Habilitamos que se muestren los valores o etiquetas arriba del gráfico
+            chartClientes.Series[0].IsValueShownAsLabel = true;
+
+            // Pedimos el diccionario con el Top 5 a la Capa de Negocio
+            var clientesFrecuentes = NVentas.GetClientesMasFrecuentes();
+
+            // Cargamos los datos en el gráfico de torta
+            foreach (var cliente in clientesFrecuentes)
+            {
+                // Key = Nombre del Cliente, Value = Cantidad de compras
+                chartClientes.Series[0].Points.AddXY(cliente.Key, cliente.Value);
             }
         }
 

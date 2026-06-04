@@ -245,5 +245,6 @@ namespace Login
             labelTotal.Text = total.ToString();
             ActualizarDataGridView();
         }
+
     }
 }

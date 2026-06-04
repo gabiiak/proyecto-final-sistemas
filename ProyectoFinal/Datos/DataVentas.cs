@@ -155,6 +155,38 @@ namespace Datos
                 }
             }
         }
+        public static Dictionary<string, double> GetVentasSemanales(int dias)
+        {
+            Dictionary<string, double> datosGrafico = new Dictionary<string, double>();
+
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+              
+                string sqlQuery = @"SELECT fecha, SUM(totalVenta) as TotalVendido
+                            FROM Ventas
+                            GROUP BY fecha
+                            ORDER BY fecha ASC
+                            LIMIT @Dias";
+
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@Dias", dias);
+
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string fecha = reader.GetString(0);
+                            double total = reader.GetDouble(1);
+
+                            datosGrafico.Add(fecha, total);
+                        }
+                    }
+                }
+            }
+            return datosGrafico;
+        }
 
         /*using (SqliteConnection connection = Db.GetConnection())
                 {
