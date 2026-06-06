@@ -89,23 +89,18 @@ namespace Login
             idVenta = int.Parse(labelId.Text);
         }
 
-        private void btnEstadoPago_Click(object sender, EventArgs e)
+        private void btnEstadoPago_Click(object sender, EventArgs e) //me la mandé // solucionado
         {
             if (string.IsNullOrEmpty(labelId.Text))
             {
                 MessageBox.Show("Debe seleccionar una venta.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
             }
-            UIPaymentState estado = new UIPaymentState();
+            int idVenta = int.Parse(labelId.Text);
+            UIPaymentState estado = new UIPaymentState(idVenta);
             if (estado.ShowDialog() == DialogResult.OK)
             {
-                Venta venta = new Venta
-                {
-                    IdVenta = int.Parse(labelId.Text),
-                    Estado_Pago = estado.estado
-                };
-                NVentas.CambiarEstadoPago(venta);
-                ActualizarDataGridView();
+                NVentas.CambiarEstadoPago(idVenta, estado.estado);
             }
             ActualizarDataGridView();
         }
@@ -120,13 +115,7 @@ namespace Login
             UIOrderState pedido = new UIOrderState();
             if (pedido.ShowDialog() == DialogResult.OK)
             {
-                Venta venta = new Venta
-                {
-                    IdVenta = int.Parse(labelId.Text),
-                    Estado_Pago = pedido.estado
-                };
-                NVentas.CambiarEstadoPedido(venta);
-                ActualizarDataGridView();
+                NVentas.CambiarEstadoPedido(idVenta, pedido.estado);
             }
             ActualizarDataGridView();
         }

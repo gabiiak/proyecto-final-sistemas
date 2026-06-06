@@ -15,6 +15,7 @@ namespace Login
     public partial class Login : Form
     {
         public string usuarioLogueado { get; set; }
+        private bool isChecked = false;
         
         public Login()
         {
@@ -35,10 +36,10 @@ namespace Login
         private void btnLogin_Click(object sender, EventArgs e)
         {
             lblError.Visible = true;
-            //string usuario = "administrador";
-            //string contraseña = "administrador91218";
-            string usuario = "1";
-            string contraseña = "1";
+            string usuario = "administrador";
+            string contraseña = "administrador91218";
+            //string usuario = "1";
+            //string contraseña = "1";
             if (string.IsNullOrWhiteSpace(txtUser.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 
@@ -83,6 +84,12 @@ namespace Login
             txtPassword.Clear();
             lblError.Visible = false; // También limpia el error
             txtUser.Focus();
+        }
+
+        private void btnMostrarConstraseña_Click(object sender, EventArgs e)
+        {
+            isChecked = !isChecked; // de false a tru y viceversa
+            txtPassword.PasswordChar = isChecked ? '\0' : '*'; //operador ternario
         }
     }
 }

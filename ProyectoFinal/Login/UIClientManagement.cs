@@ -18,7 +18,6 @@ namespace Login
         public UIClientManagement()
         {
             InitializeComponent();
-            
         }
 
         private void UIClientManagement_Load(object sender, EventArgs e)

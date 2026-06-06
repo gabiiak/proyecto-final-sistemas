@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Login
@@ -15,6 +16,9 @@ namespace Login
         // Header
         private Label lblTituloApp;
         private Label lblUsuario;
+        private Label lblModuloActivo;
+        private Label lblFecha;
+        private Panel pnlSeparador;
 
         // Botones del sidebar
         private Button btnInicio;
@@ -43,14 +47,18 @@ namespace Login
             btnMetodosPago = new Button();
             btnVentas = new Button();
             btnCerrarSesion = new Button();
+            lblModuloActivo = new Label();
+            lblFecha = new Label();
+            pnlSeparador = new Panel();
 
-            SuspendLayout();
+        SuspendLayout();
 
             // ── FORM ────────────────────────────────────────────────
-            ClientSize = new Size(1100, 650);
+            ClientSize = new Size(1250, 850);
             Text = "Sistema de Gestión";
             MinimumSize = new Size(900, 550);
             BackColor = Color.FromArgb(244, 247, 251); // Fondo app
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             // ── SIDEBAR ─────────────────────────────────────────────
             pnlSidebar.BackColor = Color.FromArgb(28, 58, 94);
@@ -88,14 +96,68 @@ namespace Login
             pnlHeader.Height = 50;
             pnlHeader.Padding = new Padding(20, 0, 20, 0);
 
-            lblUsuario.Text = "Usuario";
+            //lblUsuario.Text = "Sesión activa: ";
             lblUsuario.ForeColor = Color.FromArgb(136, 135, 128);
             lblUsuario.Font = new Font("Segoe UI", 9F);
-            lblUsuario.TextAlign = ContentAlignment.MiddleRight;
-            lblUsuario.Dock = DockStyle.Right;
-            lblUsuario.Width = 200;
+            lblUsuario.TextAlign = ContentAlignment.MiddleLeft;
+            lblUsuario.Dock = DockStyle.Left;
+            lblUsuario.Width = 220;
 
             pnlHeader.Controls.Add(lblUsuario);
+
+            pnlHeader.BackColor = Color.White;
+            pnlHeader.Dock = DockStyle.Top;
+            pnlHeader.Height = 50;
+            pnlHeader.Padding = new Padding(20, 0, 20, 0);
+
+            // Separador inferior del header
+            //pnlHeader.Paint += (s, e) =>
+            //{
+            //    e.Graphics.DrawLine(
+            //        new Pen(Color.FromArgb(211, 209, 199)),
+            //        0, pnlHeader.Height - 1,
+            //        pnlHeader.Width, pnlHeader.Height - 1
+            //    );
+            //};
+
+            // Label módulo activo (dereita)
+            lblModuloActivo = new Label();
+            lblModuloActivo.Text = ""; //le saque esto xq quedaba feo
+            lblModuloActivo.ForeColor = Color.FromArgb(28, 58, 94);
+            lblModuloActivo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblModuloActivo.TextAlign = ContentAlignment.MiddleLeft;
+            lblModuloActivo.Dock = DockStyle.Right;
+            lblModuloActivo.Width = 200;
+
+            // Separador vertical
+            pnlSeparador = new Panel();
+            pnlSeparador.BackColor = Color.FromArgb(211, 209, 199);
+            pnlSeparador.Dock = DockStyle.Right;
+            pnlSeparador.Width = 1;
+
+            // Label fecha (derecha)
+            lblFecha = new Label();
+            lblFecha.Text = DateTime.Now.ToString("dddd, d 'de' MMMM 'de' yyyy",
+                new System.Globalization.CultureInfo("es-AR"));
+            lblFecha.ForeColor = Color.FromArgb(136, 135, 128);
+            lblFecha.Font = new Font("Segoe UI", 9F);
+            lblFecha.TextAlign = ContentAlignment.MiddleRight;
+            lblFecha.Dock = DockStyle.Right;
+            lblFecha.Width = 260;
+
+            // Label usuario (left) en vez de usar un label heredado de lblusuario, hago todo en un mismo label
+            //lblUsuario = new Label();
+            //lblUsuario.Text = "Usuario";
+            //lblUsuario.ForeColor = Color.FromArgb(136, 135, 128);
+            //lblUsuario.Font = new Font("Segoe UI", 9F);
+            //lblUsuario.TextAlign = ContentAlignment.MiddleLeft;
+            //lblUsuario.Dock = DockStyle.Left;
+            //lblUsuario.Width = 120;
+
+            pnlHeader.Controls.Add(lblModuloActivo);
+            pnlHeader.Controls.Add(lblUsuario);
+            pnlHeader.Controls.Add(pnlSeparador);
+            pnlHeader.Controls.Add(lblFecha);
 
             // ── CONTENEDOR ──────────────────────────────────────────
             pnlContenedor.BackColor = Color.FromArgb(244, 247, 251);
@@ -123,7 +185,7 @@ namespace Login
             btn.Padding = new Padding(16, 0, 0, 0);
             btn.Dock = DockStyle.Top;
             btn.Height = 48;
-            btn.Cursor = Cursors.Hand;
+            //btn.Cursor = Cursors.Hand;
             btn.Tag = indice; // Guardamos el índice para saber cuál está activo
         }
         #region Windows Form Designer generated code

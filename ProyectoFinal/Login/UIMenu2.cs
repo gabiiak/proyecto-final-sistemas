@@ -24,7 +24,7 @@ namespace Login
         public UIMenu2()
         {
             InitializeComponent();
-
+            AbrirFormularioHijo(new UIInicio1(), btnInicio);
             // Conectamos cada botón a su handler
             btnInicio.Click += (s, e) => AbrirFormularioHijo(new UIInicio1(), btnInicio);
             btnClientes.Click += (s, e) => AbrirFormularioHijo(new UIClientManagement(), btnClientes);
@@ -34,12 +34,12 @@ namespace Login
             btnCerrarSesion.Click += BtnCerrarSesion_Click;
 
             // Abrimos Inicio por defecto
-            btnInicio.PerformClick();
+            //btnInicio.PerformClick();
         }
 
         public void SetUsuario(string nombreUsuario)
         {
-            lblUsuario.Text = $"👤  {nombreUsuario}";
+            lblUsuario.Text = $"Sesión activa:   👤  {nombreUsuario}";
         }
 
         private void AbrirFormularioHijo(Form formHijo, Button botonOrigen)
@@ -50,6 +50,9 @@ namespace Login
                 formHijo.Dispose(); // Descartamos la instancia nueva que creamos
                 return;
             }
+
+            //lblModuloActivo.Text = nombreModulo;
+            MarcarBotonActivo(botonOrigen);
 
             // Cerramos el form anterior
             formularioActivo?.Close();
@@ -68,6 +71,7 @@ namespace Login
             pnlContenedor.Controls.Add(formHijo);
             formHijo.BringToFront();
             formHijo.Show();
+
         }
 
         private void MarcarBotonActivo(Button boton)

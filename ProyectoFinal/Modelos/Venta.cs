@@ -16,5 +16,7 @@ namespace Modelos
         public int Estado_Pago { get; set; } //= EstadoPago.Pendiente;
         public double Total { get; set; }
 
+        public double MontoRecibido { get; set; } //atributo soporte. acordarse de meterlo en UML
+
     }
 }

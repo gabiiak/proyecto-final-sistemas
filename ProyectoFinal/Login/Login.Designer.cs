@@ -37,6 +37,7 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnClean = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
+            this.btnMostrarContraseña = new System.Windows.Forms.Button();
 
             this.pnlIzquierdo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -174,10 +175,24 @@
             this.btnClean.BackColor = System.Drawing.Color.White;
             this.btnClean.ForeColor = System.Drawing.Color.FromArgb(24, 95, 165);
             this.btnClean.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnClean.Cursor = System.Windows.Forms.Cursors.Hand;
+            //this.btnClean.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClean.Name = "btnClean";
             this.btnClean.TabIndex = 3;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
+
+            //Botón mostrar contraseña
+            this.btnMostrarContraseña.Text = "👁";
+            this.btnMostrarContraseña.Location = new System.Drawing.Point(365, 193);
+            this.btnMostrarContraseña.Size = new System.Drawing.Size(40, 40);
+            this.btnMostrarContraseña.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarContraseña.FlatAppearance.BorderSize = 1;
+            this.btnMostrarContraseña.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnMostrarContraseña.BackColor = System.Drawing.Color.White;
+            this.btnMostrarContraseña.ForeColor = System.Drawing.Color.FromArgb(24,95,165);
+            this.btnMostrarContraseña.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnMostrarContraseña.Name = "btnMostrarContraseña";
+            this.btnMostrarContraseña.TabIndex = 3;
+            this.btnMostrarContraseña.Click += new System.EventHandler(this.btnMostrarConstraseña_Click);
 
             this.pnlDerecho.Controls.Add(this.lblTitulo);
             this.pnlDerecho.Controls.Add(this.lblUsuario);
@@ -187,6 +202,7 @@
             this.pnlDerecho.Controls.Add(this.lblError);
             this.pnlDerecho.Controls.Add(this.btnLogin);
             this.pnlDerecho.Controls.Add(this.btnClean);
+            this.pnlDerecho.Controls.Add(this.btnMostrarContraseña);
 
             // Orden de agregado al form
             this.Controls.Add(this.pnlDerecho);
@@ -320,6 +336,7 @@
         //}
 
         #endregion
+        private System.Windows.Forms.Button btnMostrarContraseña;
         private System.Windows.Forms.Panel pnlIzquierdo;
         private System.Windows.Forms.Panel pnlDerecho;
         private System.Windows.Forms.PictureBox pictureBox1;

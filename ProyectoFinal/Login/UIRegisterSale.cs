@@ -18,6 +18,7 @@ namespace Login
         private List<DetalleVenta> detalleVentas = new List<DetalleVenta>();
         public Venta ventaEnMemoria = new Venta();
         private double total;
+        public double deuda = 0.00;
         public UIRegisterSale()
         {
             InitializeComponent();
@@ -114,10 +115,11 @@ namespace Login
             }
             //double recibido = double.Parse(txtPagoRecibido.Text);
             double.TryParse(txtPagoRecibido.Text, out double recibido);
+            int estado = NVentas.DeterminarEstadoPago(total, recibido);
             if (recibido < total)
             {
                 DialogResult resultado = MessageBox.Show("Ingresó un monto con valor de 0 o con un valor menor al total. " +
-                    "Está seguro que quiere registrar una venta con estado PENDIENTE?", "Alerta", 
+                    "Se registrará una venta con estado PENDIENTE y tendrá que cobrar " + deuda, "Alerta", 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (resultado == DialogResult.Yes)
                 {
@@ -130,8 +132,9 @@ namespace Login
                         Fecha = fecha,
                         Total = total,
                         Metodo = metodoSeleccionado,
-                        Estado_Pago = NVentas.DeterminarEstadoPago(total, recibido),
-                        Estado_Pedido = EstadoPedido.Preparacion
+                        Estado_Pago = estado,
+                        Estado_Pedido = EstadoPedido.Preparacion,
+                        MontoRecibido = recibido
                     };
                     int idVenta = NVentas.CreateVenta(ventaEnMemoria);
                     ventaEnMemoria.IdVenta = idVenta;
@@ -149,9 +152,11 @@ namespace Login
                 if (recibido > total)
                 {
                     MetodoPago metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
-                    if (metodoSeleccionado.Descripcion.Equals("Efectivo") || metodoSeleccionado.Descripcion.Equals("EFECTIVO"))
+                    if (metodoSeleccionado.Descripcion.Equals("Efectivo", StringComparison.OrdinalIgnoreCase))
                     {
-                        double vuelto = CalcularVuelto(total, recibido);
+                        string descripcionMetodo = metodoSeleccionado.Descripcion;
+                        double descuento = NVentas.DescuentoPorEfectivo(total, descripcionMetodo);
+                        double vuelto = NVentas.CalcularVuelto(total,recibido,metodoSeleccionado.Descripcion);
                         DialogResult result = MessageBox.Show("Ingresó un monto mayor. Debe devolver un vuelto de " + vuelto.ToString("C2"), "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                          if (result == DialogResult.Yes)
                         {
@@ -162,10 +167,11 @@ namespace Login
                             {
                                 Cliente = clienteSeleccionado,
                                 Fecha = fecha,
-                                Total = total,
+                                Total = total * descuento,
                                 Metodo = metodoSeleccionado,
-                                Estado_Pago = NVentas.DeterminarEstadoPago(total, recibido),
-                                Estado_Pedido = EstadoPedido.Preparacion
+                                Estado_Pago = estado,
+                                Estado_Pedido = EstadoPedido.Preparacion,
+                                MontoRecibido = recibido
                             };
                             int idVenta = NVentas.CreateVenta(ventaEnMemoria);
                             ventaEnMemoria.IdVenta = idVenta;
@@ -199,8 +205,9 @@ namespace Login
                             Fecha = fecha,
                             Total = total,
                             Metodo = metodoSeleccionado,
-                            Estado_Pago = NVentas.DeterminarEstadoPago(total, recibido),
-                            Estado_Pedido = EstadoPedido.Preparacion
+                            Estado_Pago = estado,
+                            Estado_Pedido = EstadoPedido.Preparacion,
+                            MontoRecibido = recibido
                         };
                         int idVenta = NVentas.CreateVenta(ventaEnMemoria);
                         ventaEnMemoria.IdVenta = idVenta;
@@ -214,10 +221,6 @@ namespace Login
                 }
             }
             
-        }
-        private double CalcularVuelto(double total, double recibido)
-        {
-            return recibido - total;
         }
         private void btnPagoJusto_Click(object sender, EventArgs e)
         {

@@ -53,12 +53,51 @@ namespace Datos
                 }
             }
         }
+        
+        public static Venta GetMontoRecibido(int idVenta)
+        {
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT totalVenta, montoRecibido FROM Ventas WHERE idVenta = @IdVenta";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@IdVenta", idVenta);
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Venta
+                            {
+                                Total = reader.GetDouble(0),
+                                MontoRecibido = reader.GetDouble(1)
+                            };
+                        }
+                    }
+                    return null;
+                }
+            }
+        }
+        public static void CambiarMontoRecibido(int idVenta, double total)
+        {
+            string sqlQuery = @"UPDATE Ventas SET montoRecibido = @MontoRecibido WHERE idVenta = @IdVenta";
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@IdVenta", idVenta);
+                    cmd.Parameters.AddWithValue("@MontoRecibido", total);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public static List<Venta> GetAllVentas()
         {
             List<Venta> listaVentas = new List<Venta>();
             using (SqliteConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT v.idVenta,c.id, c.nombre, v.fecha, v.totalVenta, v.estadoPago, v.estadoPedido,   mp.descripcion
+                string sqlQuery = @"SELECT v.idVenta, c.nombre, v.fecha, v.totalVenta, mp.descripcion, v.estadoPago, v.estadoPedido
                                     FROM Ventas v
                                     INNER JOIN Clientes c ON v.idCliente = c.id
                                     INNER JOIN MetodosPago mp ON v.idMetodoPago = mp.idMetodoPago";
@@ -74,17 +113,17 @@ namespace Datos
                                 IdVenta = reader.GetInt32(0),
                                 Cliente = new Cliente
                                 {
-                                    Id = reader.GetInt32(1),
-                                    Nombre = reader.GetString(2)
+                                    //Id = reader.GetInt32(1),
+                                    Nombre = reader.GetString(1)
                                 },
-                                Fecha = DateTime.Parse(reader.GetString(3)),
-                                Total = reader.GetDouble(4),
-                                Estado_Pago = reader.GetInt32(5),
-                                Estado_Pedido = reader.GetInt32(6),
+                                Fecha = DateTime.Parse(reader.GetString(2)),
+                                Total = reader.GetDouble(3),
                                 Metodo = new MetodoPago
                                 {
-                                    Descripcion = reader.GetString(6)
-                                }
+                                    Descripcion = reader.GetString(4)
+                                },
+                                Estado_Pago = reader.GetInt32(5),
+                                Estado_Pedido = reader.GetInt32(6)
                             };
                             listaVentas.Add(venta);
                         }
@@ -95,8 +134,8 @@ namespace Datos
         }
         public static int CreateVenta(Venta venta) // int para devolver el id venta
         {
-            string sqlQuery = @"INSERT INTO Ventas(idCliente, idMetodoPago, fecha, estadoPedido, estadoPago, totalVenta) 
-                                VALUES (@Id, @IdMetodoPago, @Fecha, @EstadoPedido, @EstadoPago, @Total);
+            string sqlQuery = @"INSERT INTO Ventas(idCliente, idMetodoPago, fecha, estadoPedido, estadoPago, totalVenta, montoRecibido) 
+                                VALUES (@Id, @IdMetodoPago, @Fecha, @EstadoPedido, @EstadoPago, @Total, @MontoRecibido);
                                 SELECT last_insert_rowid();";
 
             using (SqliteConnection connection = Db.GetConnection())
@@ -110,12 +149,13 @@ namespace Datos
                     cmd.Parameters.AddWithValue("@EstadoPedido", venta.Estado_Pedido);
                     cmd.Parameters.AddWithValue("@EstadoPago", venta.Estado_Pago);
                     cmd.Parameters.AddWithValue("@Total", venta.Total);
+                    cmd.Parameters.AddWithValue("@MontoRecibido", venta.MontoRecibido);
                     //cmd.ExecuteNonQuery(); <- esto llama ejecutar 2 veces. mejor usar execute scalar
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
         }
-        public static void CambiarEstadoPago(Venta venta)
+        public static void CambiarEstadoPago(int idVenta, int estadoPago)
         {
             string sqlQuery = @"UPDATE Ventas SET estadoPago = @EstadoPago WHERE idVenta = @IdVenta";
             using (SqliteConnection connection = Db.GetConnection())
@@ -123,13 +163,13 @@ namespace Datos
                 using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@IdVenta", venta.IdVenta);
-                    cmd.Parameters.AddWithValue("@EstadoPago", venta.Estado_Pago);
+                    cmd.Parameters.AddWithValue("@IdVenta", idVenta);
+                    cmd.Parameters.AddWithValue("@EstadoPago", estadoPago);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
-        public static void CambiarEstadoPedido(Venta venta)
+        public static void CambiarEstadoPedido(int idVenta, int estadoPedido)
         {
             string sqlQuery = @"UPDATE Ventas SET estadoPedido = @EstadoPedido WHERE idVenta = @IdVenta";
             using (SqliteConnection connection = Db.GetConnection())
@@ -137,8 +177,8 @@ namespace Datos
                 using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@IdVenta", venta.IdVenta);
-                    cmd.Parameters.AddWithValue("@EstadoPedido", venta.Estado_Pago);
+                    cmd.Parameters.AddWithValue("@IdVenta", idVenta);
+                    cmd.Parameters.AddWithValue("@EstadoPedido", estadoPedido);
                     cmd.ExecuteNonQuery();
                 }
             }
