@@ -368,7 +368,7 @@ namespace Login
             this.pnlFormulario.Location = new System.Drawing.Point(20, 56);
             this.pnlFormulario.Size = new System.Drawing.Size(480, 148);
             this.pnlFormulario.Name = "pnlFormulario";
-            this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
+            //this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             // Fila 1: Cliente + Método de pago
             ConfigurarLabel(this.lblCliente, "Cliente", new System.Drawing.Point(16, 16));
@@ -449,7 +449,7 @@ namespace Login
             this.pnlTotal.Location = new System.Drawing.Point(20, 512);
             this.pnlTotal.Size = new System.Drawing.Size(480, 80);
             this.pnlTotal.Name = "pnlTotal";
-            this.pnlTotal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
+            //this.pnlTotal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             this.lblTotalLabel.Text = "TOTAL";
             this.lblTotalLabel.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);

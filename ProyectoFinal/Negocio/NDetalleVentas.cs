@@ -20,6 +20,10 @@ namespace Negocio
                 throw e;
             }
          */
+        public static List<(string Nombre, int Cantidad)> GetProductosMasVendidos()
+        {
+            return DataDetalleVentas.GetProductosMasVendidos();
+        }
         public static List<DetalleVenta> GetAllDetalleVentas() { return DataDetalleVentas.GetAllDetalleVentas(); }
         public static List<DetalleVenta> GetDetalleByIdVenta(int idVenta) { return DataDetalleVentas.GetDetallesByIdVenta(idVenta); }
 

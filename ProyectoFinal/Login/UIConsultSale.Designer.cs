@@ -347,7 +347,7 @@ namespace Login
             this.pnlInfo.Location = new System.Drawing.Point(20, 56);
             this.pnlInfo.Size = new System.Drawing.Size(440, 148);
             this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
+            //this.pnlInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             // Fila de datos: label clave (gris) + label valor (azul oscuro)
             // Columna izquierda
@@ -423,7 +423,7 @@ namespace Login
             this.pnlTotal.Location = new System.Drawing.Point(20, 456);
             this.pnlTotal.Size = new System.Drawing.Size(440, 56);
             this.pnlTotal.Name = "pnlTotal";
-            this.pnlTotal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
+            //this.pnlTotal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             this.lblTotalKey.Text = "TOTAL";
             this.lblTotalKey.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);

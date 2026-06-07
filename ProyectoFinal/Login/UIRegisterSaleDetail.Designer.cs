@@ -267,7 +267,7 @@ namespace Login
             this.pnlFormulario.Location = new System.Drawing.Point(20, 52);
             this.pnlFormulario.Size = new System.Drawing.Size(380, 212);
             this.pnlFormulario.Name = "pnlFormulario";
-            this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
+            //this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             // Producto
             ConfigurarLabel(this.lblProducto, "Producto",
@@ -318,7 +318,7 @@ namespace Login
             this.pnlSubtotal.Location = new System.Drawing.Point(20, 276);
             this.pnlSubtotal.Size = new System.Drawing.Size(380, 56);
             this.pnlSubtotal.Name = "pnlSubtotal";
-            this.pnlSubtotal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
+            //this.pnlSubtotal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             this.lblSubtotalLabel.Text = "SUBTOTAL";
             this.lblSubtotalLabel.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);

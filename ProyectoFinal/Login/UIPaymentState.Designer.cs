@@ -184,7 +184,7 @@ namespace Login
             this.pnlFormulario.Location = new System.Drawing.Point(20, 52);
             this.pnlFormulario.Size = new System.Drawing.Size(340, 160);
             this.pnlFormulario.Name = "pnlFormulario";
-            this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
+            //this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             // Deuda total (label key + label valor)
             this.lblDeudaKey.Text = "Deuda total";

@@ -10,6 +10,73 @@ namespace Datos
 {
     public class DataVentas
     {
+        public static List<(string Nombre, double Total)> GetTopClientesPorMonto(int top = 5)// gráfico de barras
+        {
+            var resultado = new List<(string, double)>();
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT c.nombre, SUM(v.totalVenta) as totalFacturado
+                            FROM Ventas v
+                            INNER JOIN Clientes c ON v.idCliente = c.id
+                            WHERE v.estadoPago != @Anulado
+                            GROUP BY c.id, c.nombre
+                            ORDER BY totalFacturado DESC
+                            LIMIT @Top";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
+                    cmd.Parameters.AddWithValue("@Top", top);
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            resultado.Add((reader.GetString(0), reader.GetDouble(1)));
+                        }
+                    }
+                }
+            }
+            return resultado;
+        }
+        public static Dictionary<int, double> GetVentasPorMesSemestre(int anio, int semestre)// grafico de linea
+        {
+            // semestre 1 = meses 1-6, semestre 2 = meses 7-12
+            int mesInicio = semestre == 1 ? 1 : 7;
+            int mesFin = semestre == 1 ? 6 : 12;
+
+            var resultado = new Dictionary<int, double>();
+            // inicializar todos los meses en 0
+            for (int m = mesInicio; m <= mesFin; m++)
+                resultado[m] = 0;
+
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT strftime('%m', fecha) as mes, SUM(totalVenta) as total
+                            FROM Ventas
+                            WHERE strftime('%Y', fecha) = @Anio
+                              AND CAST(strftime('%m', fecha) AS INTEGER) BETWEEN @MesInicio AND @MesFin
+                              AND estadoPago != @Anulado
+                            GROUP BY mes";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@Anio", anio.ToString());
+                    cmd.Parameters.AddWithValue("@MesInicio", mesInicio);
+                    cmd.Parameters.AddWithValue("@MesFin", mesFin);
+                    cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int mes = int.Parse(reader.GetString(0));
+                            double total = reader.GetDouble(1);
+                            resultado[mes] = total;
+                        }
+                    }
+                }
+            }
+            return resultado;
+        }
         public static Venta GetVentaById(int idVenta)
         {
             using (SqliteConnection connection = Db.GetConnection())
@@ -97,7 +164,7 @@ namespace Datos
             List<Venta> listaVentas = new List<Venta>();
             using (SqliteConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT v.idVenta, c.nombre, v.fecha, v.totalVenta, mp.descripcion, v.estadoPago, v.estadoPedido
+                string sqlQuery = @"SELECT v.idVenta, c.id, c.nombre, v.fecha, v.totalVenta, mp.descripcion, v.estadoPago, v.estadoPedido
                                     FROM Ventas v
                                     INNER JOIN Clientes c ON v.idCliente = c.id
                                     INNER JOIN MetodosPago mp ON v.idMetodoPago = mp.idMetodoPago";
@@ -113,17 +180,17 @@ namespace Datos
                                 IdVenta = reader.GetInt32(0),
                                 Cliente = new Cliente
                                 {
-                                    //Id = reader.GetInt32(1),
-                                    Nombre = reader.GetString(1)
+                                    Id = reader.GetInt32(1),
+                                    Nombre = reader.GetString(2)
                                 },
-                                Fecha = DateTime.Parse(reader.GetString(2)),
-                                Total = reader.GetDouble(3),
+                                Fecha = DateTime.Parse(reader.GetString(3)),
+                                Total = reader.GetDouble(4),
                                 Metodo = new MetodoPago
                                 {
-                                    Descripcion = reader.GetString(4)
+                                    Descripcion = reader.GetString(5)
                                 },
-                                Estado_Pago = reader.GetInt32(5),
-                                Estado_Pedido = reader.GetInt32(6)
+                                Estado_Pago = reader.GetInt32(6),
+                                Estado_Pedido = reader.GetInt32(7)
                             };
                             listaVentas.Add(venta);
                         }

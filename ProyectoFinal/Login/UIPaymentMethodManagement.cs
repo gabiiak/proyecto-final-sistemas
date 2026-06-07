@@ -25,12 +25,17 @@ namespace Login
             listaMetodos = NMetodosPago.GetAll();
             dgvMetodos.DataSource = null;
 
-            // ¡Faltaba esta línea! Apaga la generación automática de columnas <- gemini
+            // ¡Faltaba esta línea! Apaga la generación automática de columnas <- gemini botón
             //dgvMetodos.AutoGenerateColumns = false;
             dgvMetodos.DataSource = listaMetodos;
             if (dgvMetodos.Columns.Contains("Activo"))
             {
                 dgvMetodos.Columns["Activo"].Visible = false;
+            }
+            if (dgvMetodos.Rows.Count > 0)
+            {
+                dgvMetodos.ClearSelection();
+                dgvMetodos.Rows[0].Selected = true;
             }
         }
 
@@ -65,8 +70,9 @@ namespace Login
 
                 listaMetodos.Add(mp);
                 NMetodosPago.Create(mp);
-                UpdateDataGrid();
                 Clean();
+                UpdateDataGrid();
+                
             }
             catch (Exception err)
             {
@@ -106,9 +112,9 @@ namespace Login
 
                     NMetodosPago.Update(mp);
                     MessageBox.Show("Registro modificado.", "Exito", MessageBoxButtons.OK);
-
-                    UpdateDataGrid();
                     Clean();
+                    UpdateDataGrid();
+                    
                 }
             }
             catch (Exception err)
@@ -140,8 +146,9 @@ namespace Login
 
                 NMetodosPago.Delete(mp);
                 MessageBox.Show("Registro eliminado.", "Exito", MessageBoxButtons.OK);
-                UpdateDataGrid();
                 Clean();
+                UpdateDataGrid();
+                
             }
         }
 

@@ -61,18 +61,24 @@ namespace Login
                 MessageBox.Show("Ingrese un monto válido.");
                 return;
             }
-            if (ingresado >= deuda)
+            double aux = deuda - ingresado;
+            if (ingresado >= deuda || aux < 0.1)
             {
                 double vuelto = ingresado - deuda;
                 NVentas.CambiarMontoRecibido(idVenta, deuda); // acumula solo lo que faltaba
                 estado = EstadoPago.Pagado;
                 if (vuelto > 0)
-                    MessageBox.Show($"Vuelto: ${vuelto:F2}");
+                    MessageBox.Show($"Vuelto: {vuelto:C2}");
             }
             else
             {
-                NVentas.CambiarMontoRecibido(idVenta, ingresado); // pago parcial
-                estado = EstadoPago.Pendiente;
+                DialogResult resultado = MessageBox.Show($"Con el monto está cancelando parte de la deuda. El monto final a pagar será {aux.ToString("C2")}", "Alerta",MessageBoxButtons.YesNo);
+                if (resultado == DialogResult.Yes)
+                {
+                    NVentas.CambiarMontoRecibido(idVenta, ingresado); // pago parcial
+                    estado = EstadoPago.Pendiente;
+                } else { return; }
+                
             }
             this.DialogResult = DialogResult.OK;
         }

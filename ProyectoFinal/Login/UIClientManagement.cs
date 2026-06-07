@@ -35,6 +35,11 @@ namespace Login
             {
                 dgvClientes.Columns["Activo"].Visible = false;
             }
+            if (dgvClientes.Rows.Count > 0)
+            {
+                dgvClientes.ClearSelection();
+                dgvClientes.Rows[0].Selected = true;
+            }
         }
         private void Clean()
         {
@@ -68,6 +73,7 @@ namespace Login
                 };
                 listaClientes.Add(cli);
                 NClientes.Create(cli);
+                Clean();
                 UpdateDataGrid();
             }
             catch (Exception)
@@ -105,8 +111,8 @@ namespace Login
                     };
                     NClientes.Update(cli);
                     MessageBox.Show("Registro Modificado.", "Exito", MessageBoxButtons.OK);
-                    UpdateDataGrid();
                     Clean();
+                    UpdateDataGrid();                   
                 }
                 else return;
             }
@@ -137,8 +143,8 @@ namespace Login
                 };
                 NClientes.Delete(cli);
                 MessageBox.Show("Registro eliminado.", "Exito", MessageBoxButtons.OK);
-                UpdateDataGrid();
                 Clean();
+                UpdateDataGrid();
             }
             else return;
         }

@@ -1,4 +1,10 @@
-﻿using System;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.WinForms;
+using Negocio;
+using SkiaSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,11 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.WinForms;
-using LiveChartsCore.SkiaSharpView.Painting;
-using SkiaSharp;
 
 namespace Login
 {
@@ -62,9 +63,9 @@ namespace Login
             layoutInferior.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
 
             // ── CARDS ────────────────────────────────────────
-            var cardCartesiano = CrearCard("Ventas por mes");
+            var cardCartesiano = CrearCard("Ventas por semestre");
             var cardTorta = CrearCard("Productos más vendidos");
-            var cardBarras = CrearCard("Estado de pedidos");
+            var cardBarras = CrearCard("Ventas por cliente");
 
             // ── GRÁFICOS ─────────────────────────────────────
             AgregarGraficoACard(cardCartesiano, CrearCartesiano());
@@ -93,20 +94,20 @@ namespace Login
             };
 
             // Borde redondeado simulado con Paint
-            card.Paint += (s, e) =>
-            {
-                var g = e.Graphics;
-                var pen = new Pen(ColorBorde, 1f);
-                var rect = new Rectangle(0, 0, card.Width - 1, card.Height - 1);
-                int r = 8;
-                var path = new System.Drawing.Drawing2D.GraphicsPath();
-                path.AddArc(rect.X, rect.Y, r * 2, r * 2, 180, 90);
-                path.AddArc(rect.Right - r * 2, rect.Y, r * 2, r * 2, 270, 90);
-                path.AddArc(rect.Right - r * 2, rect.Bottom - r * 2, r * 2, r * 2, 0, 90);
-                path.AddArc(rect.X, rect.Bottom - r * 2, r * 2, r * 2, 90, 90);
-                path.CloseFigure();
-                g.DrawPath(pen, path);
-            };
+            //card.Paint += (s, e) =>
+            //{
+            //    var g = e.Graphics;
+            //    var pen = new Pen(ColorBorde, 1f);
+            //    var rect = new Rectangle(0, 0, card.Width - 1, card.Height - 1);
+            //    int r = 8;
+            //    var path = new System.Drawing.Drawing2D.GraphicsPath();
+            //    path.AddArc(rect.X, rect.Y, r * 2, r * 2, 180, 90);
+            //    path.AddArc(rect.Right - r * 2, rect.Y, r * 2, r * 2, 270, 90);
+            //    path.AddArc(rect.Right - r * 2, rect.Bottom - r * 2, r * 2, r * 2, 0, 90);
+            //    path.AddArc(rect.X, rect.Bottom - r * 2, r * 2, r * 2, 90, 90);
+            //    path.CloseFigure();
+            //    g.DrawPath(pen, path);
+            //};
 
             var lblTitulo = new Label
             {
@@ -142,7 +143,13 @@ namespace Login
         // ── GRÁFICO DE LÍNEA — Ventas por mes ───────────────
         private CartesianChart CrearCartesiano()
         {
-            var meses = new[] { "Ene", "Feb", "Mar", "Abr", "May", "Jun" };
+            var datos = NVentas.GetVentasPorMesSemestre();
+
+            string[] nombresMeses = { "", "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                                   "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
+
+            var meses = datos.Keys.OrderBy(m => m).Select(m => nombresMeses[m]).ToArray();
+            var valores = datos.Keys.OrderBy(m => m).Select(m => datos[m]).ToArray();
 
             var chart = new CartesianChart
             {
@@ -150,36 +157,37 @@ namespace Login
                 BackColor = ColorCard,
                 Series = new ISeries[]
                 {
-                new LineSeries<double>
-                {
-                    Values        = new double[] { 12500, 18200, 15800, 22400, 19600, 27300 },
-                    Name          = "Ventas",
-                    Stroke        = new SolidColorPaint(new SKColor(55, 138, 221), 3),
-                    Fill          = new SolidColorPaint(new SKColor(55, 138, 221, 40)),
-                    GeometrySize  = 8,
-                    GeometryStroke = new SolidColorPaint(new SKColor(55, 138, 221), 2),
-                    GeometryFill  = new SolidColorPaint(SKColors.White),
-                }
+            new LineSeries<double>
+            {
+                Values         = valores,
+                Name           = "Ventas",
+                Stroke         = new SolidColorPaint(new SKColor(55, 138, 221), 3),
+                Fill           = new SolidColorPaint(new SKColor(55, 138, 221, 40)),
+                GeometrySize   = 8,
+                GeometryStroke = new SolidColorPaint(new SKColor(55, 138, 221), 2),
+                GeometryFill   = new SolidColorPaint(SKColors.White),
+            }
                 },
                 XAxes = new[]
                 {
-                new Axis
-                {
-                    Labels     = meses,
-                    LabelsPaint = new SolidColorPaint(new SKColor(136, 135, 128)),
-                    TicksPaint  = new SolidColorPaint(new SKColor(211, 209, 199)),
-                }
-            },
+            new Axis
+            {
+                Labels      = meses,
+                LabelsPaint = new SolidColorPaint(new SKColor(136, 135, 128)),
+                TicksPaint  = new SolidColorPaint(new SKColor(211, 209, 199)),
+            }
+        },
                 YAxes = new[]
                 {
-                new Axis
-                {
-                    LabelsPaint = new SolidColorPaint(new SKColor(136, 135, 128)),
-                    Labeler     = val => $"${val:N0}", //aprender esto
-                    TicksPaint  = new SolidColorPaint(new SKColor(211, 209, 199)),
-                }
+            new Axis
+            {
+                LabelsPaint = new SolidColorPaint(new SKColor(136, 135, 128)),
+                Labeler     = val => $"${val:N0}",
+                TicksPaint  = new SolidColorPaint(new SKColor(211, 209, 199)),
             }
+        }
             };
+
 
             return chart;
         }
@@ -187,37 +195,44 @@ namespace Login
         // ── GRÁFICO DE TORTA — Productos más vendidos ───────
         private PieChart CrearTorta()
         {
+            var datos = NDetalleVentas.GetProductosMasVendidos();
+
+            // paleta azul consistente con el resto del dashboard
+            var colores = new[]
+            {
+        new SKColor(55, 138, 221),
+        new SKColor(24, 95, 165),
+        new SKColor(181, 212, 244),
+        new SKColor(211, 209, 199)
+    };
+
+            var series = new List<ISeries>();
+            for (int i = 0; i < datos.Count; i++)
+            {
+                series.Add(new PieSeries<double>
+                {
+                    Values = new double[] { datos[i].Cantidad },
+                    Name = datos[i].Nombre,
+                    Fill = new SolidColorPaint(colores[i % colores.Length])
+                });
+            }
+
+            // si no hay datos, mostrar un placeholder
+            if (series.Count == 0)
+            {
+                series.Add(new PieSeries<double>
+                {
+                    Values = new double[] { 1 },
+                    Name = "Sin datos",
+                    Fill = new SolidColorPaint(new SKColor(211, 209, 199))
+                });
+            }
+
             var chart = new PieChart
             {
                 Dock = DockStyle.Fill,
                 BackColor = ColorCard,
-                Series = new ISeries[]
-                {
-                new PieSeries<double>
-                {
-                    Values = new double[] { 40 },
-                    Name   = "Insertar",
-                    Fill   = new SolidColorPaint(new SKColor(55, 138, 221)),
-                },
-                new PieSeries<double>
-                {
-                    Values = new double[] { 30 },
-                    Name   = "Insertar",
-                    Fill   = new SolidColorPaint(new SKColor(24, 95, 165)),
-                },
-                new PieSeries<double>
-                {
-                    Values = new double[] { 20 },
-                    Name   = "Insertar",
-                    Fill   = new SolidColorPaint(new SKColor(181, 212, 244)),
-                },
-                new PieSeries<double>
-                {
-                    Values = new double[] { 10 },
-                    Name   = "Insertar",
-                    Fill   = new SolidColorPaint(new SKColor(211, 209, 199)),
-                },
-                }
+                Series = series
             };
 
             return chart;
@@ -226,41 +241,47 @@ namespace Login
         // ── GRÁFICO DE BARRAS — Estado de pedidos ───────────
         private CartesianChart CrearBarras()
         {
+            var datos = NVentas.GetTopClientesPorMonto();
+
+            string[] nombres = datos.Select(d => d.Nombre).ToArray();
+            double[] montos = datos.Select(d => d.Total).ToArray();
+
             var chart = new CartesianChart
             {
                 Dock = DockStyle.Fill,
                 BackColor = ColorCard,
                 Series = new ISeries[]
                 {
-                new ColumnSeries<double>
-                {
-                    Values = new double[] { 14, 8, 23 },
-                    Name   = "Pedidos",
-                    Fill   = new SolidColorPaint(new SKColor(55, 138, 221)),
-                    Rx     = 4,
-                    Ry     = 4,
-                }
+            new ColumnSeries<double>
+            {
+                Values = montos.Length > 0 ? montos : new double[] { 0 },
+                Name   = "Facturado",
+                Fill   = new SolidColorPaint(new SKColor(55, 138, 221)),
+                Rx     = 4,
+                Ry     = 4,
+            }
                 },
                 XAxes = new[]
                 {
-                new Axis
-                {
-                    Labels      = new[] { "Pendiente", "En proceso", "Completado" },
-                    LabelsPaint = new SolidColorPaint(new SKColor(136, 135, 128)),
-                    TicksPaint  = new SolidColorPaint(new SKColor(211, 209, 199)),
-                }
-            },
+            new Axis
+            {
+                Labels      = nombres.Length > 0 ? nombres : new[] { "Sin datos" },
+                LabelsPaint = new SolidColorPaint(new SKColor(136, 135, 128)),
+                TicksPaint  = new SolidColorPaint(new SKColor(211, 209, 199)),
+            }
+        },
                 YAxes = new[]
                 {
-                new Axis
-                {
-                    LabelsPaint = new SolidColorPaint(new SKColor(136, 135, 128)),
-                    TicksPaint  = new SolidColorPaint(new SKColor(211, 209, 199)),
-                }
+            new Axis
+            {
+                LabelsPaint = new SolidColorPaint(new SKColor(136, 135, 128)),
+                Labeler     = val => $"${val:N0}",
+                TicksPaint  = new SolidColorPaint(new SKColor(211, 209, 199)),
             }
+        }
             };
 
-            return chart;
+            return chart; 
         }
         private void UIInicio1_Load(object sender, EventArgs e)
         {

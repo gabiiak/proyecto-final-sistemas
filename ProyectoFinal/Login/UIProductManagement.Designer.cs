@@ -327,7 +327,7 @@ namespace Login
             this.pnlFormulario.Margin = new System.Windows.Forms.Padding(0,4,0,0);
             this.pnlFormulario.Name = "pnlFormulario";
             this.pnlFormulario.Padding = new System.Windows.Forms.Padding(16);
-            this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlFormulario_Paint);
+            //this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlFormulario_Paint);
 
             // ID
             this.lblId.Text = "ID:";

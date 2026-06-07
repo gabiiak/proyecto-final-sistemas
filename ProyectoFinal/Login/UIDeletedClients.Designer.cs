@@ -39,11 +39,11 @@
             // dgvClientesEliminados
             // 
             this.dgvClientesEliminados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientesEliminados.Location = new System.Drawing.Point(503, 13);
+            this.dgvClientesEliminados.Location = new System.Drawing.Point(13, 77);
             this.dgvClientesEliminados.Margin = new System.Windows.Forms.Padding(4);
             this.dgvClientesEliminados.Name = "dgvClientesEliminados";
             this.dgvClientesEliminados.RowHeadersWidth = 51;
-            this.dgvClientesEliminados.Size = new System.Drawing.Size(551, 524);
+            this.dgvClientesEliminados.Size = new System.Drawing.Size(350, 298);
             this.dgvClientesEliminados.TabIndex = 0;
             this.dgvClientesEliminados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientesEliminados_CellContentClick);
             this.dgvClientesEliminados.SelectionChanged += new System.EventHandler(this.dgvClientesEliminados_SelectionChanged);
@@ -51,7 +51,7 @@
             // btnDevolverCliente
             // 
             this.btnDevolverCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
-            this.btnDevolverCliente.Location = new System.Drawing.Point(25, 82);
+            this.btnDevolverCliente.Location = new System.Drawing.Point(17, 41);
             this.btnDevolverCliente.Margin = new System.Windows.Forms.Padding(4);
             this.btnDevolverCliente.Name = "btnDevolverCliente";
             this.btnDevolverCliente.Size = new System.Drawing.Size(277, 28);
@@ -63,28 +63,28 @@
             // labelId
             // 
             this.labelId.AutoSize = true;
-            this.labelId.Location = new System.Drawing.Point(105, 50);
+            this.labelId.Location = new System.Drawing.Point(97, 9);
             this.labelId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelId.Name = "labelId";
-            this.labelId.Size = new System.Drawing.Size(0, 25);
+            this.labelId.Size = new System.Drawing.Size(0, 20);
             this.labelId.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
-            this.label1.Location = new System.Drawing.Point(21, 50);
+            this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 16);
+            this.label1.Size = new System.Drawing.Size(24, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "ID: ";
             // 
             // UIDeletedClients
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(375, 406);
             this.Controls.Add(this.btnDevolverCliente);
             this.Controls.Add(this.labelId);
             this.Controls.Add(this.label1);

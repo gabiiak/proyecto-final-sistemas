@@ -10,6 +10,35 @@ namespace Datos
 {
     public class DataDetalleVentas
     {
+        public static List<(string Nombre, int Cantidad)> GetProductosMasVendidos(int top = 4) //torta
+        {
+            var resultado = new List<(string, int)>();
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT p.Nombre, SUM(dv.cantidad) as totalCantidad
+                            FROM DetalleVentas dv
+                            INNER JOIN Productos p ON dv.idProducto = p.idProducto
+                            INNER JOIN Ventas v ON dv.idVenta = v.idVenta
+                            WHERE v.estadoPago != @Anulado
+                            GROUP BY p.idProducto, p.Nombre
+                            ORDER BY totalCantidad DESC
+                            LIMIT @Top";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
+                    cmd.Parameters.AddWithValue("@Top", top);
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            resultado.Add((reader.GetString(0), reader.GetInt32(1)));
+                        }
+                    }
+                }
+            }
+            return resultado;
+        }
         public static List<DetalleVenta> GetDetallesByIdVenta(int idVenta)
         {
             List<DetalleVenta> lista = new List<DetalleVenta>();

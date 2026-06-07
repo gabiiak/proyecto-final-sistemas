@@ -41,6 +41,11 @@ namespace Login
             {
                 dgvProductos.Columns["Activo"].Visible = false;
             }
+            if (dgvProductos.Rows.Count > 0)
+            {
+                dgvProductos.ClearSelection();
+                dgvProductos.Rows[0].Selected = true;
+            }
         }
 
         // Método para limpiar los campos
@@ -81,8 +86,8 @@ namespace Login
 
                 listaProductos.Add(prod);
                 NProductos.Create(prod);
-                UpdateDataGrid();
                 Clean();
+                UpdateDataGrid();
             }
             catch (Exception err)
             {
@@ -129,9 +134,9 @@ namespace Login
 
                     NProductos.Update(prod);
                     MessageBox.Show("Registro modificado.", "Exito", MessageBoxButtons.OK);
-
-                    UpdateDataGrid();
                     Clean();
+                    UpdateDataGrid();
+                    
                 }
             }
             catch (Exception err)
@@ -166,8 +171,9 @@ namespace Login
 
                 NProductos.Delete(prod);
                 MessageBox.Show("Registro eliminado.", "Exito", MessageBoxButtons.OK);
-                UpdateDataGrid();
                 Clean();
+                UpdateDataGrid();
+                
             }
         }
 

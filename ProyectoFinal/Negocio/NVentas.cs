@@ -23,6 +23,16 @@ namespace Negocio
 
 
         //HACER DTO Y HACER CALCULOS AQUI
+        public static List<(string Nombre, double Total)> GetTopClientesPorMonto()
+        {
+            return DataVentas.GetTopClientesPorMonto();
+        }
+        public static Dictionary<int, double> GetVentasPorMesSemestre()
+        {
+            int anio = DateTime.Now.Year;
+            int semestre = DateTime.Now.Month <= 6 ? 1 : 2;
+            return DataVentas.GetVentasPorMesSemestre(anio, semestre);
+        }
         public static List<Venta> GetAllVentas() { return DataVentas.GetAllVentas(); }
         
         public static int CreateVenta(Venta venta) { return DataVentas.CreateVenta(venta); }

@@ -344,7 +344,7 @@ namespace Login
             this.pnlFormulario.Size = new System.Drawing.Size(860, 180);
             this.pnlFormulario.Name = "pnlFormulario";
             this.pnlFormulario.Padding = new System.Windows.Forms.Padding(16);
-            this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlFormulario_Paint);
+            //this.pnlFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlFormulario_Paint);
 
             // ID (solo lectura, se llena al seleccionar)
             this.lblId.Text = "ID:";

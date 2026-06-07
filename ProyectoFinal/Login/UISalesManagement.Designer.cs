@@ -413,7 +413,8 @@ namespace Login
             this.pnlAcciones.Location = new System.Drawing.Point(20, 56);
             this.pnlAcciones.Size = new System.Drawing.Size(320, 200);
             this.pnlAcciones.Name = "pnlAcciones";
-            this.pnlAcciones.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
+            //this.pnlAcciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            //this.pnlAcciones.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             // Botón principal — ocupa todo el ancho del panel
             ConfigurarBotonPrimario(this.btnRegistrarVenta, "Registrar Venta",
@@ -464,7 +465,7 @@ namespace Login
             this.pnlFiltros.Location = new System.Drawing.Point(356, 56);
             this.pnlFiltros.Size = new System.Drawing.Size(624, 200);
             this.pnlFiltros.Name = "pnlFiltros";
-            this.pnlFiltros.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
+            //this.pnlFiltros.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             // Sección filtro por fecha
             ConfigurarLabel(this.lblDesde, "Desde",

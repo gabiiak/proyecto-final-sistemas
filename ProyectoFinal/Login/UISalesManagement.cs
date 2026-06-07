@@ -100,6 +100,7 @@ namespace Login
             UIPaymentState estado = new UIPaymentState(idVenta);
             if (estado.ShowDialog() == DialogResult.OK)
             {
+                int nuevoEstado = estado.estado;
                 NVentas.CambiarEstadoPago(idVenta, estado.estado);
             }
             ActualizarDataGridView();
