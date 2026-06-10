@@ -58,10 +58,11 @@ namespace Login
                     MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
-
-
-
-
+                if (NMetodosPago.ExisteMetodo(txtDescripcion.Text.Trim()))
+                {
+                    MessageBox.Show("Ya existe un método con esa descripción.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 MetodoPago mp = new MetodoPago
                 {
 

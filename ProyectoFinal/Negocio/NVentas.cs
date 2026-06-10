@@ -48,9 +48,9 @@ namespace Negocio
         {
             if (metodo.Equals("Efectivo", StringComparison.OrdinalIgnoreCase))
             {
-                return total * 0.10;
+                total = total * 0.90;
             }
-            else return 1;
+            return total;
         }
         public static double CalcularTotal(List<DetalleVenta> detalles)
         {

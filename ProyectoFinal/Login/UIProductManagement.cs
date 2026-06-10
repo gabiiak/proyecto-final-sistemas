@@ -69,6 +69,16 @@ namespace Login
                     MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
+                if (NProductos.ExisteProductoNombre(txtNombre.Text.Trim()))
+                {
+                    MessageBox.Show("Ya existe un producto con ese nombre.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (NProductos.ExisteProductoDescripcion(txtDescripcion.Text.Trim()))
+                {
+                    MessageBox.Show("Ya existe un producto con esa descripción.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 // Validación de que el precio sea numérico
                 if (!double.TryParse(txtPrecio.Text, out double precioConvertido))

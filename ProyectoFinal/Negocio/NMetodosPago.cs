@@ -10,8 +10,12 @@ namespace Negocio
 {
     public class NMetodosPago
     {
+        public static bool ExisteMetodo(string descripcion)
+        {
+            return GetAll().Any(mp => mp.Descripcion.Equals(descripcion, StringComparison.OrdinalIgnoreCase));
+        }
 
-         public static List<MetodoPago> GetAll()
+        public static List<MetodoPago> GetAll()
     {
         try
         {

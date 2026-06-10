@@ -67,8 +67,7 @@ namespace Login
                 double vuelto = ingresado - deuda;
                 NVentas.CambiarMontoRecibido(idVenta, deuda); // acumula solo lo que faltaba
                 estado = EstadoPago.Pagado;
-                if (vuelto > 0)
-                    MessageBox.Show($"Vuelto: {vuelto:C2}");
+                //if (vuelto > 0)MessageBox.Show($"Vuelto: {vuelto:C2}");
             }
             else
             {

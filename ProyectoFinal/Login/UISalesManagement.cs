@@ -179,6 +179,8 @@ namespace Login
         private void btnDesfiltrar_Click(object sender, EventArgs e)
         {
             ActualizarDataGridView();
+            dtpDesde.Value = DateTime.Today;
+            dtpHasta.Value = DateTime.Today;
         }
 
         private void btnFiltroCliente_Click(object sender, EventArgs e)

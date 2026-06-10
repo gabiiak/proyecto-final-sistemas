@@ -12,25 +12,28 @@ namespace Login
         [STAThread]
         static void Main()
         {
+            System.Globalization.CultureInfo culturaAR = new System.Globalization.CultureInfo("es-AR");
+            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = culturaAR;
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = culturaAR;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var menu = new UIMenu2(); //solo para debug
-            Application.Run(menu);
-            //bool seguirCorriendo = true;
-            //while (seguirCorriendo)
-            //{
-            //    using (var login = new Login())
-            //    {
-            //        //var menu = new UIMenu2();
-            //        if (login.ShowDialog() == DialogResult.OK)
-            //        {
-            //            var menu = new UIMenu2();
-            //            menu.SetUsuario(login.usuarioLogueado);
-            //            Application.Run(menu); //Login()
-            //        }
-            //        else seguirCorriendo = false;
-            //    }
-            //}
+            //var menu = new UIMenu2(); //solo para debug
+            //Application.Run(menu);
+            bool seguirCorriendo = true;
+            while (seguirCorriendo)
+            {
+                using (var login = new Login())
+                {
+                    //var menu = new UIMenu2();
+                   if (login.ShowDialog() == DialogResult.OK)
+                   {
+                        var menu = new UIMenu2();
+                        menu.SetUsuario(login.usuarioLogueado);
+                        Application.Run(menu); //Login()
+                   }
+                    else seguirCorriendo = false;
+               }
+            }
 
         }
     }

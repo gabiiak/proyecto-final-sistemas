@@ -76,7 +76,9 @@ namespace Login
         private void btnAgregarDetalle_Click(object sender, EventArgs e)
         {
             UIRegisterSaleDetail registrarDetalle = new UIRegisterSaleDetail();
-            if(registrarDetalle.ShowDialog() == DialogResult.OK)
+            var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
+            string metodoDescripcion = metodoSeleccionado.Descripcion;
+            if (registrarDetalle.ShowDialog() == DialogResult.OK)
             {
                 foreach (DetalleVenta detalle in registrarDetalle.DetalleVentas)
                 {
@@ -85,6 +87,7 @@ namespace Login
                 ActualizarDataGridView();
                 total = NVentas.CalcularTotal(detalleVentas);
                 labelTotal.Text = total.ToString();
+
                 //labelTotal.Text = total.ToString("C2"); // convierte un valor numérico a una cadena de texto con formato de moneda
                 //estado actual: tengo que programar la lógica en la capa de negocios. la capa de UI solo crea el objeto y lo manda :P
             }
@@ -113,13 +116,25 @@ namespace Login
                 MessageBox.Show("No se puede registrar una venta con un valor nulo.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
+            if(detalleVentas.Count == 0)
+            {
+                MessageBox.Show("Debe registrar al menos un producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             //double recibido = double.Parse(txtPagoRecibido.Text);
-            double.TryParse(txtPagoRecibido.Text, out double recibido);
+            //double.TryParse(txtPagoRecibido.Text, out double recibido);
+            if (!double.TryParse(txtPagoRecibido.Text, out double recibido) || recibido < 0)
+            {
+                MessageBox.Show("Ingrese un monto válido.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             int estado = NVentas.DeterminarEstadoPago(total, recibido);
             if (recibido < total)
             {
+                double deudaACobrar = total - recibido;
                 DialogResult resultado = MessageBox.Show("Ingresó un monto con valor de 0 o con un valor menor al total. " +
-                    "Se registrará una venta con estado PENDIENTE y tendrá que cobrar " + deuda, "Alerta", 
+                    "Se registrará una venta con estado PENDIENTE y tendrá que cobrar " + deudaACobrar.ToString("C2"), "Alerta", 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (resultado == DialogResult.Yes)
                 {
@@ -155,7 +170,7 @@ namespace Login
                     if (metodoSeleccionado.Descripcion.Equals("Efectivo", StringComparison.OrdinalIgnoreCase))
                     {
                         string descripcionMetodo = metodoSeleccionado.Descripcion;
-                        double descuento = NVentas.DescuentoPorEfectivo(total, descripcionMetodo);
+                        double totalDescuento = NVentas.DescuentoPorEfectivo(total, descripcionMetodo);
                         double vuelto = NVentas.CalcularVuelto(total,recibido,metodoSeleccionado.Descripcion);
                         DialogResult result = MessageBox.Show("Ingresó un monto mayor. Debe devolver un vuelto de " + vuelto.ToString("C2"), "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                          if (result == DialogResult.Yes)
@@ -167,7 +182,7 @@ namespace Login
                             {
                                 Cliente = clienteSeleccionado,
                                 Fecha = fecha,
-                                Total = total * descuento,
+                                Total = total, //totalDescuento para más adelante
                                 Metodo = metodoSeleccionado,
                                 Estado_Pago = estado,
                                 Estado_Pedido = EstadoPedido.Preparacion,
