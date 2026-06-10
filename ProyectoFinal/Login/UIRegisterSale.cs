@@ -130,7 +130,7 @@ namespace Login
                 return;
             }
             int estado = NVentas.DeterminarEstadoPago(total, recibido);
-            if (recibido < total)
+            if (total - recibido > 0.01)
             {
                 double deudaACobrar = total - recibido;
                 DialogResult resultado = MessageBox.Show("Ingresó un monto con valor de 0 o con un valor menor al total. " +
@@ -141,6 +141,8 @@ namespace Login
                     var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
                     var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
                     fecha = DateTime.Parse(txtFecha.Text);
+                    recibido = Math.Round(recibido, 2);
+                    total = Math.Round(total, 2);
                     ventaEnMemoria = new Venta
                     {
                         Cliente = clienteSeleccionado,
@@ -149,7 +151,7 @@ namespace Login
                         Metodo = metodoSeleccionado,
                         Estado_Pago = estado,
                         Estado_Pedido = EstadoPedido.Preparacion,
-                        MontoRecibido = recibido
+                        MontoRecibido = (total - recibido <= 0.01) ? total : recibido // <- fix
                     };
                     int idVenta = NVentas.CreateVenta(ventaEnMemoria);
                     ventaEnMemoria.IdVenta = idVenta;
@@ -178,6 +180,8 @@ namespace Login
                             var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
                             metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
                             fecha = DateTime.Parse(txtFecha.Text);
+                            recibido = Math.Round(recibido, 2);
+                            total = Math.Round(total, 2);
                             ventaEnMemoria = new Venta
                             {
                                 Cliente = clienteSeleccionado,
@@ -186,7 +190,7 @@ namespace Login
                                 Metodo = metodoSeleccionado,
                                 Estado_Pago = estado,
                                 Estado_Pedido = EstadoPedido.Preparacion,
-                                MontoRecibido = recibido
+                                MontoRecibido = (total - recibido <= 0.01) ? total : recibido
                             };
                             int idVenta = NVentas.CreateVenta(ventaEnMemoria);
                             ventaEnMemoria.IdVenta = idVenta;
@@ -214,6 +218,8 @@ namespace Login
                         var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
                         var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
                         fecha = DateTime.Parse(txtFecha.Text);
+                        recibido = Math.Round(recibido, 2);
+                        total = Math.Round(total, 2);
                         ventaEnMemoria = new Venta
                         {
                             Cliente = clienteSeleccionado,
@@ -222,7 +228,7 @@ namespace Login
                             Metodo = metodoSeleccionado,
                             Estado_Pago = estado,
                             Estado_Pedido = EstadoPedido.Preparacion,
-                            MontoRecibido = recibido
+                            MontoRecibido = (total - recibido <= 0.01) ? total : recibido 
                         };
                         int idVenta = NVentas.CreateVenta(ventaEnMemoria);
                         ventaEnMemoria.IdVenta = idVenta;

@@ -59,7 +59,7 @@ namespace Negocio
             {
                 total += NDetalleVentas.CalcularSubTotal(detalle);
             }
-            return total;
+            return Math.Round(total, 2);
         }
         public static int DeterminarEstadoPago(double total, double recibido)
         {
