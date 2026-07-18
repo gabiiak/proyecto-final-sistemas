@@ -18,3 +18,5 @@ packages/
 # Build outputs
 [Bb]in/
 [Oo]bj/
+
+packages/
