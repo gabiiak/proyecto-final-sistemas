@@ -62,13 +62,19 @@
       <HintPath>..\packages\HarfBuzzSharp.7.3.0.3\lib\net462\HarfBuzzSharp.dll</HintPath>
     </Reference>
     <Reference Include="itext.bouncy-castle-adapter, Version=9.6.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.bouncy-castle-adapter.9.6.0\lib\net461\itext.bouncy-castle-adapter.dll</HintPath>
+      <HintPath>..\packages\itext.bouncy-castle-adapter.9.7.0\lib\net461\itext.bouncy-castle-adapter.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="itext.commons, Version=9.6.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.commons.9.6.0\lib\net461\itext.commons.dll</HintPath>
+      <HintPath>..\packages\itext.commons.9.7.0\lib\net461\itext.commons.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
     <Reference Include="LiveChartsCore, Version=2.0.4.0, Culture=neutral, PublicKeyToken=cc92a3e13d40c573, processorArchitecture=MSIL">
-      <HintPath>..\packages\LiveChartsCore.2.0.4\lib\net462\LiveChartsCore.dll</HintPath>
+      <HintPath>..\packages\LiveChartsCore.2.0.5\lib\net462\LiveChartsCore.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="LiveChartsCore.SkiaSharpView, Version=2.0.4.0, Culture=neutral, PublicKeyToken=cc92a3e13d40c573, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveChartsCore.SkiaSharpView.2.0.4\lib\net462\LiveChartsCore.SkiaSharpView.dll</HintPath>
