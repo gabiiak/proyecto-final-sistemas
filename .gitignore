@@ -7,3 +7,14 @@ obj/
 *.exe
 *.cache
 *.db
+
+# NuGet
+packages/
+*.nupkg
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
