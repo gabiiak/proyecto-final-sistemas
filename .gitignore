@@ -1,22 +1,22 @@
+# Visual Studio
 .vs/
-# Build outputs
-bin/
-obj/
-*.dll
-*.pdb
-*.exe
-*.cache
-*.db
-
-# NuGet
-packages/
-*.nupkg
-**/packages/*
-!**/packages/build/
-!**/packages/repositories.config
+*.user
+*.suo
 
 # Build outputs
 [Bb]in/
 [Oo]bj/
+*.dll
+*.pdb
+*.exe
+*.cache
 
+# NuGet
 packages/
+*.nupkg
+
+# Base de datos local (cada uno corre la suya)
+*.db
+
+# Carpetas de publish
+publish*/
