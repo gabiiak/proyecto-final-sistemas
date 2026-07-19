@@ -10,6 +10,14 @@ namespace Negocio
 {
     public class NProductos
     {
+        public static bool ExisteProductoDescripcion(string descripcion)
+        {
+            return GetAll().Any(p => p.Descripcion.Equals(descripcion, StringComparison.OrdinalIgnoreCase));
+        }
+        public static bool ExisteProductoNombre(string nombre)
+        {
+            return GetAll().Any(p => p.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+        }
         public static List<Producto> GetAll()
         {
             try

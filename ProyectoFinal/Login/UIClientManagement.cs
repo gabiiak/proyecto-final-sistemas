@@ -18,7 +18,6 @@ namespace Login
         public UIClientManagement()
         {
             InitializeComponent();
-            
         }
 
         private void UIClientManagement_Load(object sender, EventArgs e)
@@ -35,6 +34,11 @@ namespace Login
             if (dgvClientes.Columns.Contains("Activo"))
             {
                 dgvClientes.Columns["Activo"].Visible = false;
+            }
+            if (dgvClientes.Rows.Count > 0)
+            {
+                dgvClientes.ClearSelection();
+                dgvClientes.Rows[0].Selected = true;
             }
         }
         private void Clean()
@@ -56,6 +60,16 @@ namespace Login
                     MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
+                if (NClientes.ExisteCliente(txtNombre.Text.Trim()))
+                {
+                    MessageBox.Show("Ya existe un cliente con ese nombre.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (NClientes.ExisteTelefono(txtTelefono.Text.Trim()))
+                {
+                    MessageBox.Show("Ya existe un cliente con ese telefono.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 string nombre = txtNombre.Text;
                 string empresa = txtEmpresa.Text;
                 string direccion = txtDireccion.Text;
@@ -69,6 +83,7 @@ namespace Login
                 };
                 listaClientes.Add(cli);
                 NClientes.Create(cli);
+                Clean();
                 UpdateDataGrid();
             }
             catch (Exception)
@@ -106,8 +121,8 @@ namespace Login
                     };
                     NClientes.Update(cli);
                     MessageBox.Show("Registro Modificado.", "Exito", MessageBoxButtons.OK);
-                    UpdateDataGrid();
                     Clean();
+                    UpdateDataGrid();                   
                 }
                 else return;
             }
@@ -138,8 +153,8 @@ namespace Login
                 };
                 NClientes.Delete(cli);
                 MessageBox.Show("Registro eliminado.", "Exito", MessageBoxButtons.OK);
-                UpdateDataGrid();
                 Clean();
+                UpdateDataGrid();
             }
             else return;
         }

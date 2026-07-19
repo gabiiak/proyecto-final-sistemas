@@ -41,6 +41,11 @@ namespace Login
             {
                 dgvProductos.Columns["Activo"].Visible = false;
             }
+            if (dgvProductos.Rows.Count > 0)
+            {
+                dgvProductos.ClearSelection();
+                dgvProductos.Rows[0].Selected = true;
+            }
         }
 
         // Método para limpiar los campos
@@ -64,6 +69,16 @@ namespace Login
                     MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
+                if (NProductos.ExisteProductoNombre(txtNombre.Text.Trim()))
+                {
+                    MessageBox.Show("Ya existe un producto con ese nombre.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (NProductos.ExisteProductoDescripcion(txtDescripcion.Text.Trim()))
+                {
+                    MessageBox.Show("Ya existe un producto con esa descripción.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 // Validación de que el precio sea numérico
                 if (!double.TryParse(txtPrecio.Text, out double precioConvertido))
@@ -81,8 +96,8 @@ namespace Login
 
                 listaProductos.Add(prod);
                 NProductos.Create(prod);
-                UpdateDataGrid();
                 Clean();
+                UpdateDataGrid();
             }
             catch (Exception err)
             {
@@ -129,9 +144,9 @@ namespace Login
 
                     NProductos.Update(prod);
                     MessageBox.Show("Registro modificado.", "Exito", MessageBoxButtons.OK);
-
-                    UpdateDataGrid();
                     Clean();
+                    UpdateDataGrid();
+                    
                 }
             }
             catch (Exception err)
@@ -166,8 +181,9 @@ namespace Login
 
                 NProductos.Delete(prod);
                 MessageBox.Show("Registro eliminado.", "Exito", MessageBoxButtons.OK);
-                UpdateDataGrid();
                 Clean();
+                UpdateDataGrid();
+                
             }
         }
 

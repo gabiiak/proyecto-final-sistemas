@@ -20,6 +20,14 @@ namespace Negocio
      */
     public class NClientes
     {
+        public static bool ExisteCliente(string nombre)
+        {
+            return GetAll().Any(c => c.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
+        }
+        public static bool ExisteTelefono(string telefono)
+        {
+            return GetAll().Any(c => c.Telefono.Equals(telefono, StringComparison.OrdinalIgnoreCase));
+        }
         public static List<Cliente> GetAll()
         {
             try
