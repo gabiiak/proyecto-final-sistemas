@@ -17,7 +17,7 @@ namespace Login
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = culturaAR;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login()); //Login()
+            //Application.Run(new Login()); //Login()
             //var menu = new UIMenu2(); //solo para debug
             //Application.Run(menu);
             bool seguirCorriendo = true;
