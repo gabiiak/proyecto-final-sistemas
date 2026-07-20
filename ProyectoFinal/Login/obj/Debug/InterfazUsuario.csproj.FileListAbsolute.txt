@@ -1,7 +1,20 @@
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\InterfazUsuario.csproj.AssemblyReference.cache
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.Login.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.Properties.Resources.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.UIClientManagement.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\Login.UIProductManagement.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\InterfazUsuario.csproj.GenerateResource.cache
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\Debug\InterfazUsuario.csproj.CoreCompileInputs.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\InterfazUsuario.csproj.AssemblyReference.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIConsultSale.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIDeletedPaymentMethod.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIInicio1.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIMenu2.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIOrderState.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIPaymentMethodManagement.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.Menu.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.Login.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.Properties.Resources.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIClientManagement.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIDeletedClients.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIDeletedProducts.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIPaymentState.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIProductManagement.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIRegisterSale.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UIRegisterSaleDetail.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\Login.UISalesManagement.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\InterfazUsuario.csproj.GenerateResource.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\Debug\InterfazUsuario.csproj.CoreCompileInputs.cache

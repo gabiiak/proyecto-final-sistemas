@@ -1,0 +1,75 @@
+{
+  "files": [
+    {
+      "fileName": "./Microsoft.VisualStudio.Text.Data.dll.lce",
+      "SPDXID": "SPDXRef-File--Microsoft.VisualStudio.Text.Data.dll.lce-6676A0E84AD75DA6CD329C77817E8FDCEE872234",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "6e5cdb9fc7210c5d2495c855eb24a7a3b840f6b0985f7665c1e82ef193387b4d"
+        },
+        {
+          "algorithm": "SHA1",
+          "checksumValue": "6676a0e84ad75da6cd329c77817e8fdcee872234"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ],
+      "copyrightText": "NOASSERTION"
+    }
+  ],
+  "packages": [
+    {
+      "name": "TextData",
+      "SPDXID": "SPDXRef-RootPackage",
+      "downloadLocation": "NOASSERTION",
+      "packageVerificationCode": {
+        "packageVerificationCodeValue": "8872c7bcff29633e0a191d7b8e52605bf671b509"
+      },
+      "filesAnalyzed": true,
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoFromFiles": [
+        "NOASSERTION"
+      ],
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "versionInfo": "1.0.0",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:swid/Microsoft/sbom.microsoft/TextData@1.0.0?tag_id=6d656e2d-6726-483a-92b2-cab6de14d6cc"
+        }
+      ],
+      "supplier": "Organization: Microsoft",
+      "hasFiles": [
+        "SPDXRef-File--Microsoft.VisualStudio.Text.Data.dll.lce-6676A0E84AD75DA6CD329C77817E8FDCEE872234"
+      ]
+    }
+  ],
+  "externalDocumentRefs": [],
+  "relationships": [
+    {
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-RootPackage",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    }
+  ],
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "TextData 1.0.0",
+  "documentNamespace": "https://sbom.microsoft/1:34sbAVZth0--DQCSE2iE2Q:kMXbC2KgP0yw9pOD9nhl7g/25574:11325809/TextData:1.0.0:Dddd2botFUOoObJxABoNFw",
+  "creationInfo": {
+    "created": "2025-04-02T19:14:07Z",
+    "creators": [
+      "Organization: Microsoft",
+      "Tool: Microsoft.SBOMTool-3.0.1"
+    ]
+  },
+  "documentDescribes": [
+    "SPDXRef-RootPackage"
+  ]
+}

@@ -1,87 +1,64 @@
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.pdb
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.AssemblyReference.cache
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.CoreCompileInputs.cache
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.pdb
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.pdb
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.AssemblyReference.cache
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.CoreCompileInputs.cache
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\libSkiaSharp.dylib
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\x86\libSkiaSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\x64\libSkiaSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\arm64\libSkiaSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.dll.config
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\BouncyCastle.Cryptography.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\HarfBuzzSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\itext.bouncy-castle-adapter.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\itext.commons.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\LiveChartsCore.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\LiveChartsCore.SkiaSharpView.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\LiveChartsCore.SkiaSharpView.WinForms.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\MaterialSkin.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Logging.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Options.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Primitives.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Newtonsoft.Json.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.GLControl.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.HarfBuzz.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.Views.Desktop.Common.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.Views.WindowsForms.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Buffers.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Diagnostics.DiagnosticSource.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Memory.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Numerics.Vectors.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Text.Encodings.Web.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Text.Json.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Threading.Tasks.Extensions.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.ValueTuple.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\BouncyCastle.Cryptography.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\HarfBuzzSharp.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\itext.bouncy-castle-adapter.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\itext.commons.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\LiveChartsCore.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\LiveChartsCore.SkiaSharpView.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\LiveChartsCore.SkiaSharpView.WinForms.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Logging.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Logging.Abstractions.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Options.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Primitives.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\Newtonsoft.Json.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.GLControl.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.GLControl.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.HarfBuzz.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.Views.Desktop.Common.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.Views.WindowsForms.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Buffers.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Diagnostics.DiagnosticSource.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Memory.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Numerics.Vectors.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Text.Encodings.Web.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Text.Json.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.Threading.Tasks.Extensions.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\bin\x64\Debug\System.ValueTuple.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.AssemblyReference.cache
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.CoreCompileInputs.cache
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.Up2Date
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\libSkiaSharp.dylib
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\x86\libSkiaSharp.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\x64\libSkiaSharp.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\arm64\libSkiaSharp.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.dll.config
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Modelos.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\BouncyCastle.Cryptography.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\HarfBuzzSharp.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\itext.bouncy-castle-adapter.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\itext.commons.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\LiveCharts.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\MaterialSkin.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Logging.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Options.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Primitives.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.GLControl.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.HarfBuzz.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.Views.Desktop.Common.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.Views.WindowsForms.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Memory.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Numerics.Vectors.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Text.Encodings.Web.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Text.Json.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.ValueTuple.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\BouncyCastle.Cryptography.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\HarfBuzzSharp.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\itext.bouncy-castle-adapter.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\itext.commons.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Logging.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Options.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Microsoft.Extensions.Primitives.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\Newtonsoft.Json.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.GLControl.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\OpenTK.GLControl.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.HarfBuzz.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.Views.Desktop.Common.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\SkiaSharp.Views.WindowsForms.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Memory.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Numerics.Vectors.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Text.Encodings.Web.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Text.Json.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\bin\x64\Debug\System.ValueTuple.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.AssemblyReference.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.CoreCompileInputs.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.csproj.Up2Date
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Modelos\obj\x64\Debug\Modelos.pdb

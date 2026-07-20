@@ -1,223 +1,158 @@
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\mvp.db
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\e_sqlite3.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Login.exe.config
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Login.exe
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Login.pdb
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Modelos.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Negocio.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.core.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Buffers.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Data.SQLite.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Memory.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Numerics.Vectors.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Datos.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Data.Sqlite.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.batteries_v2.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.provider.e_sqlite3.dll
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Modelos.pdb
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Negocio.pdb
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Negocio.dll.config
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Buffers.xml
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Memory.xml
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Numerics.Vectors.xml
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Datos.pdb
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Datos.dll.config
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Data.Sqlite.xml
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.AssemblyReference.cache
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.Login.resources
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.Properties.Resources.resources
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.UIClientManagement.resources
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedClients.resources
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.UIProductManagement.resources
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.GenerateResource.cache
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.CoreCompileInputs.cache
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Interfaz.A1F4FAE4.Up2Date
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.exe
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.pdb
-C:\Users\santi\Desktop\git\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.Menu.resources
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\mvp.db
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\e_sqlite3.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\T&GSystem.exe.config
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\T&GSystem.exe
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\T&GSystem.pdb
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Modelos.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Negocio.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.core.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Buffers.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Data.SQLite.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Memory.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Numerics.Vectors.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Datos.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Data.Sqlite.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.batteries_v2.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.provider.e_sqlite3.dll
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Modelos.pdb
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Negocio.pdb
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Negocio.dll.config
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Buffers.xml
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Memory.xml
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Numerics.Vectors.xml
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Datos.pdb
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Datos.dll.config
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Data.Sqlite.xml
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.AssemblyReference.cache
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.Menu.resources
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.Login.resources
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.Properties.Resources.resources
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.UIClientManagement.resources
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedClients.resources
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedProducts.resources
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.UIProductManagement.resources
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.GenerateResource.cache
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.CoreCompileInputs.cache
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Interfaz.A1F4FAE4.Up2Date
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\T&GSystem.exe
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\T&GSystem.pdb
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.UIPaymentMethodManagement.resources
-C:\Users\santi\Desktop\proyecto\proyecto-final-sistemas\ProyectoFinal\Login\obj\x64\Debug\Login.UiDeletedPaymentMethod.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\libSkiaSharp.dylib
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\x86\libSkiaSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\x64\libSkiaSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\arm64\libSkiaSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\mvp.db
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\e_sqlite3.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\libHarfBuzzSharp.dylib
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\x86\libHarfBuzzSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\x64\libHarfBuzzSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\arm64\libHarfBuzzSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\T&GSystem.exe.config
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\T&GSystem.exe
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\T&GSystem.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\BouncyCastle.Cryptography.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\HarfBuzzSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.barcodes.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.bouncy-castle-adapter.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.bouncy-castle-connector.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.commons.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.forms.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.io.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.kernel.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.layout.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.pdfa.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.pdfua.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.sign.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.styledxmlparser.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.svg.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.SkiaSharpView.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.SkiaSharpView.WinForms.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\MaterialSkin.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.Logging.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.Options.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.Primitives.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Modelos.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Negocio.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Newtonsoft.Json.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\OpenTK.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\OpenTK.GLControl.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.HarfBuzz.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.Views.Desktop.Common.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.Views.WindowsForms.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.core.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Buffers.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Data.SQLite.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Diagnostics.DiagnosticSource.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Memory.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Numerics.Vectors.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Security.AccessControl.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Security.Cryptography.Xml.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Security.Principal.Windows.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Text.Encodings.Web.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Text.Json.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Threading.Tasks.Extensions.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.ValueTuple.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Datos.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Data.Sqlite.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.batteries_v2.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.provider.e_sqlite3.dll
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Modelos.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Modelos.dll.config
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Negocio.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Negocio.dll.config
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\BouncyCastle.Cryptography.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\HarfBuzzSharp.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.barcodes.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.bouncy-castle-adapter.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.bouncy-castle-connector.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.commons.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.forms.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.io.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.kernel.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.layout.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.pdfa.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.pdfua.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.sign.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.styledxmlparser.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\itext.svg.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.SkiaSharpView.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.SkiaSharpView.WinForms.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.Logging.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.Logging.Abstractions.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.Options.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Extensions.Primitives.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Newtonsoft.Json.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\OpenTK.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\OpenTK.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\OpenTK.GLControl.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\OpenTK.GLControl.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.HarfBuzz.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.Views.Desktop.Common.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.Views.WindowsForms.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Buffers.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Diagnostics.DiagnosticSource.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Memory.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Numerics.Vectors.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Security.AccessControl.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Security.Cryptography.Xml.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Security.Principal.Windows.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Text.Encodings.Web.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Text.Json.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.Threading.Tasks.Extensions.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\System.ValueTuple.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Datos.pdb
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Datos.dll.config
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Data.Sqlite.xml
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.AssemblyReference.cache
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIConsultSale.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedPaymentMethod.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIInicio1.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIMenu2.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIOrderState.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIPaymentMethodManagement.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.Menu.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.Login.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.Properties.Resources.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIClientManagement.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedClients.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedProducts.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIPaymentState.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIProductManagement.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIRegisterSale.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UIRegisterSaleDetail.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Login.UISalesManagement.resources
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.GenerateResource.cache
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.CoreCompileInputs.cache
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\Interfaz.A1F4FAE4.Up2Date
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\T&GSystem.exe
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Login\obj\x64\Debug\T&GSystem.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\libSkiaSharp.dylib
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\x86\libSkiaSharp.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\x64\libSkiaSharp.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\arm64\libSkiaSharp.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\mvp.db
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\e_sqlite3.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\T&GSystem.exe.config
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\T&GSystem.exe
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\T&GSystem.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\BouncyCastle.Cryptography.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\HarfBuzzSharp.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.barcodes.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.bouncy-castle-connector.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.commons.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.forms.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.io.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.kernel.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.layout.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.pdfa.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.pdfua.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.sign.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.styledxmlparser.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.svg.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\LiveCharts.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.SkiaSharpView.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.SkiaSharpView.WinForms.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\MaterialSkin.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Modelos.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Negocio.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\OpenTK.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\OpenTK.GLControl.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.HarfBuzz.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.Views.Desktop.Common.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.Views.WindowsForms.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.core.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Buffers.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Data.SQLite.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Memory.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Numerics.Vectors.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Security.AccessControl.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Security.Principal.Windows.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Text.Encodings.Web.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Text.Json.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.ValueTuple.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Datos.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Newtonsoft.Json.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Data.Sqlite.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.batteries_v2.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SQLitePCLRaw.provider.e_sqlite3.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Modelos.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Modelos.dll.config
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Negocio.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Negocio.dll.config
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\BouncyCastle.Cryptography.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\HarfBuzzSharp.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.barcodes.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.bouncy-castle-connector.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.commons.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.forms.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.io.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.kernel.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.layout.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.pdfa.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.pdfua.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.sign.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.styledxmlparser.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\itext.svg.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.SkiaSharpView.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\LiveChartsCore.SkiaSharpView.WinForms.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\OpenTK.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\OpenTK.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\OpenTK.GLControl.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\OpenTK.GLControl.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.HarfBuzz.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.Views.Desktop.Common.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\SkiaSharp.Views.WindowsForms.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Buffers.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Memory.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Numerics.Vectors.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Security.AccessControl.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Security.Principal.Windows.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Text.Encodings.Web.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Text.Json.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.ValueTuple.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Datos.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Datos.dll.config
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Data.Sqlite.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.AssemblyReference.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIConsultSale.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedPaymentMethod.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIInicio1.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIMenu2.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIOrderState.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIPaymentMethodManagement.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.Menu.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.Login.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.Properties.Resources.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIClientManagement.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedClients.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIDeletedProducts.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIPaymentState.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIProductManagement.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIRegisterSale.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UIRegisterSaleDetail.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Login.UISalesManagement.resources
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.GenerateResource.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\InterfazUsuario.csproj.CoreCompileInputs.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\Interfaz.A1F4FAE4.Up2Date
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\T&GSystem.exe
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\obj\x64\Debug\T&GSystem.pdb
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.VisualStudio.CoreUtility.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.VisualStudio.Text.Data.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.VisualStudio.Threading.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.VisualStudio.Validation.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Win32.Registry.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Collections.Immutable.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.VisualStudio.CoreUtility.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.VisualStudio.Text.Data.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.VisualStudio.Threading.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.VisualStudio.Validation.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\Microsoft.Win32.Registry.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\System.Collections.Immutable.xml
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\cs\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\de\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\es\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\fr\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\it\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\ja\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\ko\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\pl\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\pt-BR\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\ru\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\tr\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\zh-Hans\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\zh-Hant\Microsoft.VisualStudio.Threading.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\cs\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\de\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\es\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\fr\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\it\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\ja\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\ko\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\pl\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\pt-BR\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\ru\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\tr\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\zh-Hans\Microsoft.VisualStudio.Validation.resources.dll
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Login\bin\x64\Debug\zh-Hant\Microsoft.VisualStudio.Validation.resources.dll

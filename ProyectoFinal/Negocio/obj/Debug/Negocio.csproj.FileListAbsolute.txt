@@ -1,2 +1,2 @@
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
-C:\Codigo\C#\ProyectoFinal\ProyectoFinal\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
+C:\Users\santi\Desktop\Nueva carpeta\Nueva carpeta\ProyectoFinal\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
