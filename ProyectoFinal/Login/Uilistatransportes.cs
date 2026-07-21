@@ -46,9 +46,6 @@ namespace Login
             // de ordenar por columna), así que ahí es donde hay que pintar las filas para
             // que el color no se pierda al hacer clic en un encabezado para ordenar.
             dgvTransportes.CellFormatting += DgvTransportes_CellFormatting;
-            // CellBeginEdit cancela la edición si corresponde, sin depender de la
-            // propiedad ReadOnly de la celda (que también se resetea al ordenar).
-            dgvTransportes.CellBeginEdit += DgvTransportes_CellBeginEdit;
         }
 
         private void UIListaTransportes_Load(object sender, EventArgs e)
@@ -142,24 +139,6 @@ namespace Login
             }
         }
 
-        private void DgvTransportes_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            if (dgvTransportes.Columns[e.ColumnIndex].Name != "colEstado") return;
-
-            DataGridViewRow row = dgvTransportes.Rows[e.RowIndex];
-            object idValue = row.Cells["colIdTransporte"].Value;
-            if (idValue == null) return;
-
-            int id = Convert.ToInt32(idValue);
-            if (estadosOriginales.TryGetValue(id, out int estadoOriginal) && EsEstadoFinal(estadoOriginal))
-            {
-                e.Cancel = true;
-                MessageBox.Show("Este transporte ya fue entregado o cancelado y no se puede modificar.", "Atención",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
         private void btnNuevoTransporte_Click(object sender, EventArgs e)
         {
             using (UITransporte frmNuevo = new UITransporte())
@@ -173,7 +152,7 @@ namespace Login
             }
         }
 
-        private void btnGuardarEstado_Click(object sender, EventArgs e)
+        private void btnCambiarEstado_Click(object sender, EventArgs e)
         {
             if (dgvTransportes.CurrentRow == null)
             {
@@ -182,42 +161,44 @@ namespace Login
                 return;
             }
 
-            // Confirma la edición del combo (si el usuario recién lo cambió y no salió de la celda).
-            dgvTransportes.EndEdit();
+            int idTransporte = Convert.ToInt32(dgvTransportes.CurrentRow.Cells["colIdTransporte"].Value);
 
-            try
+            if (!estadosOriginales.TryGetValue(idTransporte, out int estadoActual))
             {
-                int idTransporte = Convert.ToInt32(dgvTransportes.CurrentRow.Cells["colIdTransporte"].Value);
-
-                if (estadosOriginales.TryGetValue(idTransporte, out int estadoOriginal) && EsEstadoFinal(estadoOriginal))
-                {
-                    MessageBox.Show("Este transporte ya fue entregado o cancelado y no se puede modificar.", "Atención",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                string estadoTexto = dgvTransportes.CurrentRow.Cells["colEstado"].Value?.ToString();
-                int nuevoEstado = Array.IndexOf(NombresEstado, estadoTexto);
-
-                if (nuevoEstado < 0)
-                {
-                    MessageBox.Show("Elegí un estado válido para el transporte.", "Atención",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                // NTransporte.CambiarEstado también valida esto (y el rango del estado)
-                // por si se llama desde otro lado que no sea esta pantalla.
-                NTransporte.CambiarEstado(idTransporte, nuevoEstado);
-
-                MessageBox.Show("Estado actualizado con éxito.", "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                CargarTransportes();
+                MessageBox.Show("No se pudo determinar el estado actual del transporte.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            catch (Exception ex)
+
+            if (EsEstadoFinal(estadoActual))
             {
-                MessageBox.Show(ex.Message, "Error al actualizar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Este transporte ya fue entregado o cancelado y no se puede modificar.", "Atención",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (UITransporteState frmEstado = new UITransporteState(estadoActual))
+            {
+                DialogResult resultado = frmEstado.ShowDialog(this);
+                if (resultado != DialogResult.OK) return;
+
+                int nuevoEstado = frmEstado.retornarEstado();
+
+                try
+                {
+                    // NTransporte.CambiarEstado también valida el rango y el estado final,
+                    // por si se llama desde otro lado que no sea esta pantalla.
+                    NTransporte.CambiarEstado(idTransporte, nuevoEstado);
+
+                    MessageBox.Show("Estado actualizado con éxito.", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    CargarTransportes();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error al actualizar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -252,7 +233,7 @@ namespace Login
             }
         }
 
-       
+
         private void btnEmitirFactura_Click(object sender, EventArgs e)
         {
             if (dgvTransportes.CurrentRow == null)

@@ -19,9 +19,9 @@
             this.colCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEstado = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnNuevoTransporte = new System.Windows.Forms.Button();
-            this.btnGuardarEstado = new System.Windows.Forms.Button();
+            this.btnCambiarEstado = new System.Windows.Forms.Button();
             this.btnEliminarTransporte = new System.Windows.Forms.Button();
             this.btnEmitirFactura = new System.Windows.Forms.Button();
 
@@ -113,13 +113,7 @@
             this.colEstado.DataPropertyName = "Estado";
             this.colEstado.HeaderText = "Estado";
             this.colEstado.Name = "colEstado";
-            this.colEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.colEstado.Items.AddRange(new object[] {
-                "Programado",
-                "En Tránsito",
-                "Entregado",
-                "Cancelado"
-            });
+            this.colEstado.ReadOnly = true;
 
             this.dgvTransportes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
                 this.colIdTransporte,
@@ -144,19 +138,19 @@
             this.btnNuevoTransporte.Name = "btnNuevoTransporte";
             this.btnNuevoTransporte.Click += new System.EventHandler(this.btnNuevoTransporte_Click);
 
-            this.btnGuardarEstado.Text = "Guardar Estado";
-            this.btnGuardarEstado.Location = new System.Drawing.Point(200, 428);
-            this.btnGuardarEstado.Size = new System.Drawing.Size(170, 36);
-            this.btnGuardarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardarEstado.FlatAppearance.BorderSize = 1;
-            this.btnGuardarEstado.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(181, 212, 244);
-            this.btnGuardarEstado.BackColor = System.Drawing.Color.White;
-            this.btnGuardarEstado.ForeColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            this.btnGuardarEstado.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnGuardarEstado.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGuardarEstado.TabIndex = 2;
-            this.btnGuardarEstado.Name = "btnGuardarEstado";
-            this.btnGuardarEstado.Click += new System.EventHandler(this.btnGuardarEstado_Click);
+            this.btnCambiarEstado.Text = "Cambiar Estado";
+            this.btnCambiarEstado.Location = new System.Drawing.Point(200, 428);
+            this.btnCambiarEstado.Size = new System.Drawing.Size(170, 36);
+            this.btnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCambiarEstado.FlatAppearance.BorderSize = 1;
+            this.btnCambiarEstado.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(181, 212, 244);
+            this.btnCambiarEstado.BackColor = System.Drawing.Color.White;
+            this.btnCambiarEstado.ForeColor = System.Drawing.Color.FromArgb(24, 95, 165);
+            this.btnCambiarEstado.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnCambiarEstado.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCambiarEstado.TabIndex = 2;
+            this.btnCambiarEstado.Name = "btnCambiarEstado";
+            this.btnCambiarEstado.Click += new System.EventHandler(this.btnCambiarEstado_Click);
 
             this.btnEliminarTransporte.Text = "Eliminar Transporte";
             this.btnEliminarTransporte.Location = new System.Drawing.Point(380, 428);
@@ -172,7 +166,7 @@
             this.btnEliminarTransporte.Name = "btnEliminarTransporte";
             this.btnEliminarTransporte.Click += new System.EventHandler(this.btnEliminarTransporte_Click);
 
-            
+
 
             this.btnEmitirFactura.Text = "Emitir Factura";
             this.btnEmitirFactura.Location = new System.Drawing.Point(20, 472);
@@ -191,9 +185,8 @@
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.dgvTransportes);
             this.Controls.Add(this.btnNuevoTransporte);
-            this.Controls.Add(this.btnGuardarEstado);
+            this.Controls.Add(this.btnCambiarEstado);
             this.Controls.Add(this.btnEliminarTransporte);
-            this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnEmitirFactura);
 
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransportes)).EndInit();
@@ -208,11 +201,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFecha;
-        private System.Windows.Forms.DataGridViewComboBoxColumn colEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEstado;
         private System.Windows.Forms.Button btnNuevoTransporte;
-        private System.Windows.Forms.Button btnGuardarEstado;
+        private System.Windows.Forms.Button btnCambiarEstado;
         private System.Windows.Forms.Button btnEliminarTransporte;
-        private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnEmitirFactura;
     }
 }
