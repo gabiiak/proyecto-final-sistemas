@@ -9,12 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 
 namespace Login
 {
     public partial class UISalesManagement : Form
     {
         private List<Venta> listadoVentasTotales = new List<Venta>();
+        private List<Venta> listadoVentasFiltradas = new List<Venta>();
         public int idVenta;
         public UISalesManagement()
         {
@@ -32,6 +34,7 @@ namespace Login
         private void ActualizarDataGridView()
         {
             listadoVentasTotales = NVentas.GetAllVentas();
+            listadoVentasFiltradas = listadoVentasTotales;
             //dgvTodasLasVentas.DataSource = null;
             //dgvTodasLasVentas.DataSource = listadoVentasTotalesAÑA;
             dgvTodasLasVentas.Rows.Clear();
@@ -152,6 +155,7 @@ namespace Login
                 MessageBox.Show("No se encontraron ventas por esas fechas...", "Alerta", MessageBoxButtons.OK);
                 return;
             }
+            listadoVentasFiltradas = listaFiltrada;
             dgvTodasLasVentas.Rows.Clear();
             foreach (Venta venta in listaFiltrada)
             {
@@ -192,6 +196,7 @@ namespace Login
             //para debuggear
             //MessageBox.Show($"Id seleccionado: {idClienteSeleccionado}\n" +
             //string.Join("\n", listadoVentasTotales.Select(v => $"Venta {v.IdVenta} - Cliente id: {v.Cliente.Id} - Nombre: {v.Cliente.Nombre}")));
+            listadoVentasFiltradas = listaFiltrada;
             dgvTodasLasVentas.Rows.Clear();
             foreach (Venta venta in listaFiltrada)
             {
@@ -206,6 +211,138 @@ namespace Login
                     );
             }
             dgvTodasLasVentas.Refresh();
+        }
+
+        private void btnExportarExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog saveDialog = new SaveFileDialog();
+                saveDialog.Filter = "Archivo Excel (*.xlsx)|*.xlsx";
+                saveDialog.FileName = "ResumenVentas_" + DateTime.Now.ToString("yyyyMMdd") + ".xlsx";
+
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    ResumenVentas resumen = NVentas.CalcularResumenVentas(listadoVentasFiltradas);
+
+                    int anioActual = DateTime.Now.Year;
+                    Dictionary<int, double> ventasPrimerSemestre = NVentas.GetVentasPorMesSemestre(anioActual, 1);
+                    Dictionary<int, double> ventasSegundoSemestre = NVentas.GetVentasPorMesSemestre(anioActual, 2);
+
+                    GenerarExcelResumen(resumen, ventasPrimerSemestre, ventasSegundoSemestre, saveDialog.FileName);
+
+                    MessageBox.Show("Excel generado correctamente.", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar el Excel: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void GenerarExcelResumen(ResumenVentas resumen,
+    Dictionary<int, double> ventasPrimerSemestre,
+    Dictionary<int, double> ventasSegundoSemestre,
+    string rutaArchivo)
+        {
+            using (XLWorkbook libro = new XLWorkbook())
+            {
+                IXLWorksheet hoja = libro.Worksheets.Add("Resumen Ventas");
+
+                hoja.Cell(1, 1).Value = "Resumen de Ventas";
+                hoja.Cell(1, 1).Style.Font.Bold = true;
+                hoja.Cell(1, 1).Style.Font.FontSize = 14;
+
+                hoja.Cell(3, 1).Value = "Cantidad de ventas";
+                hoja.Cell(3, 2).Value = resumen.CantidadVentas;
+
+                hoja.Cell(4, 1).Value = "Total vendido";
+                hoja.Cell(4, 2).Value = resumen.TotalVentas;
+                hoja.Cell(4, 2).Style.NumberFormat.Format = "$#,##0.00";
+
+                hoja.Cell(5, 1).Value = "Total cobrado";
+                hoja.Cell(5, 2).Value = resumen.TotalCobrado;
+                hoja.Cell(5, 2).Style.NumberFormat.Format = "$#,##0.00";
+
+                hoja.Cell(6, 1).Value = "Total en deuda";
+                hoja.Cell(6, 2).Value = resumen.TotalDeuda;
+                hoja.Cell(6, 2).Style.NumberFormat.Format = "$#,##0.00";
+
+                hoja.Cell(7, 1).Value = "Promedio de venta";
+                hoja.Cell(7, 2).Value = resumen.TicketPromedio;
+                hoja.Cell(7, 2).Style.NumberFormat.Format = "$#,##0.00";
+
+                int fila = 9;
+                hoja.Cell(fila, 1).Value = "Período";
+                hoja.Cell(fila, 2).Value = "Total vendido";
+                hoja.Range(fila, 1, fila, 2).Style.Font.Bold = true;
+                fila++;
+
+                foreach (KeyValuePair<string, double> item in resumen.TotalesPorPeriodo)
+                {
+                    hoja.Cell(fila, 1).Value = item.Key;
+                    hoja.Cell(fila, 2).Value = item.Value;
+                    hoja.Cell(fila, 2).Style.NumberFormat.Format = "$#,##0.00";
+                    fila++;
+                }
+
+                int anioActual = DateTime.Now.Year;
+
+                fila += 2;
+                fila = EscribirTablaSemestre(hoja, fila, "1er Semestre " + anioActual, ventasPrimerSemestre);
+
+                fila += 2;
+                fila = EscribirTablaSemestre(hoja, fila, "2do Semestre " + anioActual, ventasSegundoSemestre);
+
+                hoja.Columns().AdjustToContents();
+                libro.SaveAs(rutaArchivo);
+            }
+        }
+
+        private int EscribirTablaSemestre(IXLWorksheet hoja, int fila, string titulo, Dictionary<int, double> ventasPorMes)
+        {
+            hoja.Cell(fila, 1).Value = "Ventas por mes - " + titulo;
+            hoja.Cell(fila, 1).Style.Font.Bold = true;
+            hoja.Cell(fila, 1).Style.Font.FontSize = 12;
+            fila++;
+            fila++;
+
+            hoja.Cell(fila, 1).Value = "Mes";
+            hoja.Cell(fila, 2).Value = "Total vendido";
+            hoja.Range(fila, 1, fila, 2).Style.Font.Bold = true;
+            fila++;
+
+            foreach (KeyValuePair<int, double> item in ventasPorMes)
+            {
+                hoja.Cell(fila, 1).Value = ObtenerNombreMes(item.Key);
+                hoja.Cell(fila, 2).Value = item.Value;
+                hoja.Cell(fila, 2).Style.NumberFormat.Format = "$#,##0.00";
+                fila++;
+            }
+
+            return fila;
+        }
+
+        private string ObtenerNombreMes(int mes)
+        {
+            switch (mes)
+            {
+                case 1: return "Enero";
+                case 2: return "Febrero";
+                case 3: return "Marzo";
+                case 4: return "Abril";
+                case 5: return "Mayo";
+                case 6: return "Junio";
+                case 7: return "Julio";
+                case 8: return "Agosto";
+                case 9: return "Septiembre";
+                case 10: return "Octubre";
+                case 11: return "Noviembre";
+                case 12: return "Diciembre";
+                default: return "Desconocido";
+            }
         }
 
 

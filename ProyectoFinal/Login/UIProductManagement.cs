@@ -31,12 +31,25 @@ namespace Login
         private void UpdateDataGrid()
         {
             listaProductos = NProductos.GetAll();
-            dgvProductos.DataSource = null;
+            //dgvProductos.DataSource = null;
 
             // ¡Faltaba esta línea! Apaga la generación automática de columnas <- gemini
             //dgvProductos.AutoGenerateColumns = false;
 
-            dgvProductos.DataSource = listaProductos;
+            //dgvProductos.DataSource = listaProductos;
+
+            dgvProductos.Rows.Clear();
+            foreach (Producto p in listaProductos)
+            {
+                dgvProductos.Rows.Add(
+                    p.IdProducto,
+                    p.Nombre,
+                    p.Descripcion,
+                    p.Precio,
+                    p.Activo,
+                    p.FechaCaducidad.ToString("dd-MM-yyyy")
+                    );
+            }
             if (dgvProductos.Columns.Contains("Activo"))
             {
                 dgvProductos.Columns["Activo"].Visible = false;
@@ -55,6 +68,7 @@ namespace Login
             txtNombre.Clear();
             txtDescripcion.Clear();
             txtPrecio.Clear();
+            txtFechaCaducidad.Clear();
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
@@ -64,7 +78,8 @@ namespace Login
                 // Validación de campos vacíos
                 if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
                     string.IsNullOrWhiteSpace(txtDescripcion.Text) ||
-                    string.IsNullOrWhiteSpace(txtPrecio.Text))
+                    string.IsNullOrWhiteSpace(txtPrecio.Text) ||
+                    string.IsNullOrWhiteSpace(txtFechaCaducidad.Text))
                 {
                     MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                     return;
@@ -86,12 +101,13 @@ namespace Login
                     MessageBox.Show("El precio debe ser un número válido.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
-
+                DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text); 
                 Producto prod = new Producto
                 {
                     Nombre = txtNombre.Text,
                     Descripcion = txtDescripcion.Text,
-                    Precio = precioConvertido
+                    Precio = precioConvertido,
+                    FechaCaducidad = fechaCaducidad
                 };
 
                 listaProductos.Add(prod);
@@ -117,7 +133,7 @@ namespace Login
 
                 if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
                     string.IsNullOrWhiteSpace(txtDescripcion.Text) ||
-                    string.IsNullOrWhiteSpace(txtPrecio.Text))
+                    string.IsNullOrWhiteSpace(txtPrecio.Text) || string.IsNullOrWhiteSpace(txtFechaCaducidad.Text))
                 {
                     MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                     return;
@@ -130,6 +146,7 @@ namespace Login
                 }
 
                 int id = int.Parse(labelId.Text);
+                DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text);
                 DialogResult result = MessageBox.Show("¿Desea modificar el registro?", "Alerta", MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
@@ -139,7 +156,8 @@ namespace Login
                         IdProducto = id, // Propiedad de tu modelo Producto
                         Nombre = txtNombre.Text,
                         Descripcion = txtDescripcion.Text,
-                        Precio = precioConvertido
+                        Precio = precioConvertido,
+                        FechaCaducidad = fechaCaducidad
                     };
 
                     NProductos.Update(prod);
@@ -164,6 +182,7 @@ namespace Login
             }
 
             int id = int.Parse(labelId.Text);
+            DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text);
             DialogResult result = MessageBox.Show("¿Desea borrar el registro?", "Alerta", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
@@ -176,7 +195,8 @@ namespace Login
                     IdProducto = id,
                     Nombre = txtNombre.Text,
                     Descripcion = txtDescripcion.Text,
-                    Precio = precioConvertido
+                    Precio = precioConvertido,
+                    FechaCaducidad = fechaCaducidad
                 };
 
                 NProductos.Delete(prod);
@@ -202,6 +222,7 @@ namespace Login
             txtNombre.Text = dgvProductos.CurrentRow.Cells["Nombre"].Value?.ToString();
             txtDescripcion.Text = dgvProductos.CurrentRow.Cells["Descripcion"].Value?.ToString();
             txtPrecio.Text = dgvProductos.CurrentRow.Cells["Precio"].Value?.ToString();
+            txtFechaCaducidad.Text = dgvProductos.CurrentRow.Cells["FechaCaducidad"].Value?.ToString();
         }
 
         private void btnProductosEliminados_Click(object sender, EventArgs e)

@@ -299,6 +299,9 @@ namespace Login
             this.btnProductosEliminados = new System.Windows.Forms.Button();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
 
+            this.lblFechaCaducidad = new System.Windows.Forms.Label();
+            this.txtFechaCaducidad = new System.Windows.Forms.TextBox();
+
             this.pnlFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -353,6 +356,10 @@ namespace Login
             ConfigurarLabel(this.lblPrecio, "Precio ($)", new System.Drawing.Point(16, 112));
             ConfigurarTextBox(this.txtPrecio, new System.Drawing.Point(16, 132), new System.Drawing.Size(180, 32), 2);
 
+            //Fila 3: fecha de caducidad
+            ConfigurarLabel(this.lblFechaCaducidad, "Fecha de caducidad", new System.Drawing.Point(336, 112));
+            ConfigurarTextBox(this.txtFechaCaducidad, new System.Drawing.Point(336, 132), new System.Drawing.Size(230, 32), 2);
+
             this.pnlFormulario.Controls.Add(this.lblId);
             this.pnlFormulario.Controls.Add(this.labelId);
             this.pnlFormulario.Controls.Add(this.lblNombre);
@@ -362,6 +369,8 @@ namespace Login
             this.pnlFormulario.Controls.Add(this.lblPrecio);
             this.pnlFormulario.Controls.Add(this.txtPrecio);
 
+            this.pnlFormulario.Controls.Add(this.lblFechaCaducidad);
+            this.pnlFormulario.Controls.Add(this.txtFechaCaducidad);
             // ── BOTONES ─────────────────────────────────────────────
             ConfigurarBotonPrimario(this.btnRegistrar, "Registrar",
                 new System.Drawing.Point(20, 240), 3);
@@ -411,6 +420,51 @@ namespace Login
             this.dgvProductos.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
             this.dgvProductos.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(248, 250, 253);
             this.dgvProductos.SelectionChanged += new System.EventHandler(this.dgvProductos_SelectionChanged);
+
+            this.IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaCaducidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
+            this.dgvProductos.AutoGenerateColumns = false; // clave: apaga el autogenerado
+
+            this.IdProducto.HeaderText = "ID";
+            this.IdProducto.Name = "IdProducto";
+            this.IdProducto.DataPropertyName = "IdProducto"; // debe coincidir con el nombre de la propiedad en el modelo
+            this.IdProducto.FillWeight = 30;
+
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.DataPropertyName = "Nombre";
+            this.Nombre.FillWeight = 100;
+
+            this.Descripcion.HeaderText = "Descripción";
+            this.Descripcion.Name = "Descripcion";
+            this.Descripcion.DataPropertyName = "Descripcion";
+            this.Descripcion.FillWeight = 140;
+
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            this.Precio.DataPropertyName = "Precio";
+            this.Precio.FillWeight = 60;
+
+            this.Activo.HeaderText = "Activo";
+            this.Activo.Name = "Activo";
+            this.Activo.DataPropertyName = "Activo";
+            this.Activo.FillWeight = 40;
+
+            this.FechaCaducidad.HeaderText = "Fecha de Caducidad";
+            this.FechaCaducidad.Name = "FechaCaducidad";
+            this.FechaCaducidad.DataPropertyName = "FechaCaducidad";
+            this.FechaCaducidad.FillWeight = 90;
+
+            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
+            {
+                this.IdProducto, this.Nombre, this.Descripcion, this.Precio, this.Activo, this.FechaCaducidad
+            });
+
 
             // ── CONTROLS DEL FORM ───────────────────────────────────
             this.Controls.Add(this.lblTitulo);
@@ -531,5 +585,15 @@ namespace Login
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnProductosEliminados;
         private System.Windows.Forms.DataGridView dgvProductos;
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Activo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCaducidad;
+
+        private System.Windows.Forms.Label lblFechaCaducidad;
+        private System.Windows.Forms.TextBox txtFechaCaducidad;
     }
 }

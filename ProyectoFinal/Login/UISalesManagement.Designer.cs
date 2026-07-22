@@ -359,6 +359,7 @@ namespace Login
 
         private void InitializeComponent()
         {
+            this.btnExportarExcel = new System.Windows.Forms.Button();
             this.pnlAcciones = new System.Windows.Forms.Panel();
             this.pnlFiltros = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
@@ -452,12 +453,18 @@ namespace Login
             this.btnConsultarVenta.Size = new System.Drawing.Size(138, 32);
             this.btnConsultarVenta.Click += new System.EventHandler(this.btnConsultarVenta_Click);
 
+            ConfigurarBotonSecundario(this.btnExportarExcel, "Exportar Excel",
+                new System.Drawing.Point(166, 156), 4);
+            this.btnExportarExcel.Size = new System.Drawing.Size(138, 32);  // ancho completo, texto largo
+            this.btnExportarExcel.Click += new System.EventHandler(this.btnExportarExcel_Click);
+
             this.pnlAcciones.Controls.Add(this.btnRegistrarVenta);
             this.pnlAcciones.Controls.Add(this.btnEstadoPago);
             this.pnlAcciones.Controls.Add(this.btnEstadoPedido);
             this.pnlAcciones.Controls.Add(this.lblIdVentaLabel);
             this.pnlAcciones.Controls.Add(this.labelId);
             this.pnlAcciones.Controls.Add(this.btnConsultarVenta);
+            this.pnlAcciones.Controls.Add(this.btnExportarExcel);
 
             // ── PANEL FILTROS ───────────────────────────────────────
             // Zona derecha: filtros por fecha y por cliente
@@ -709,5 +716,6 @@ namespace Login
         private System.Windows.Forms.DataGridViewTextBoxColumn MetodoPago;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoDePago;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoDePedido;
+        private System.Windows.Forms.Button btnExportarExcel;
     }
 }

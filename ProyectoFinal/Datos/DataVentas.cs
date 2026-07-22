@@ -10,6 +10,38 @@ namespace Datos
 {
     public class DataVentas
     {
+        public static Dictionary<int, double> GetVentasPorMesAnio(int anio) // gráfico de línea, año completo
+        {
+            var resultado = new Dictionary<int, double>();
+            // inicializar los 12 meses en 0
+            for (int m = 1; m <= 12; m++)
+                resultado[m] = 0;
+
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT strftime('%m', fecha) as mes, SUM(totalVenta) as total
+                    FROM Ventas
+                    WHERE strftime('%Y', fecha) = @Anio
+                      AND estadoPago != @Anulado
+                    GROUP BY mes";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@Anio", anio.ToString());
+                    cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int mes = int.Parse(reader.GetString(0));
+                            double total = reader.GetDouble(1);
+                            resultado[mes] = total;
+                        }
+                    }
+                }
+            }
+            return resultado;
+        }
         public static List<(string Nombre, double Total)> GetTopClientesPorMonto(int top = 5)// gráfico de barras
         {
             var resultado = new List<(string, double)>();

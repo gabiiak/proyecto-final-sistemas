@@ -18,9 +18,9 @@ namespace Login
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Login()); //Login()
-            //var menu = new UIMenu2(); //solo para debug
-            //Application.Run(menu);
-            bool seguirCorriendo = true;
+            var menu = new UIMenu2(); //solo para debug
+            Application.Run(menu);
+            /*bool seguirCorriendo = true;
             while (seguirCorriendo)
             {
                 using (var login = new Login())
@@ -34,7 +34,7 @@ namespace Login
                    }
                     else seguirCorriendo = false;
                }
-            }
+            }*/
         }
     }
 }

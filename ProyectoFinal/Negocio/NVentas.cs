@@ -23,9 +23,18 @@ namespace Negocio
 
 
         //HACER DTO Y HACER CALCULOS AQUI
+        public static Dictionary<int, double> GetVentasPorMesAnio()
+        {
+            int anio = DateTime.Now.Year;
+            return DataVentas.GetVentasPorMesAnio(anio);
+        }
         public static List<(string Nombre, double Total)> GetTopClientesPorMonto()
         {
             return DataVentas.GetTopClientesPorMonto();
+        }
+        public static Dictionary<int, double> GetVentasPorMesSemestre(int anio, int semestre)
+        {
+            return DataVentas.GetVentasPorMesSemestre(anio, semestre);
         }
         public static Dictionary<int, double> GetVentasPorMesSemestre()
         {
@@ -84,6 +93,53 @@ namespace Negocio
             Venta venta = GetMontoRecibido(idVenta);
             return venta.Total - venta.MontoRecibido;
         }
+
+        public static ResumenVentas CalcularResumenVentas(List<Venta> ventas)
+        {
+            ResumenVentas resumen = new ResumenVentas();
+            resumen.TotalesPorPeriodo = new SortedDictionary<string, double>();
+
+            double totalVentas = 0;
+            double totalCobrado = 0;
+            int cantidadVentas = 0;
+
+            foreach (Venta v in ventas)
+            {
+                if (v.Estado_Pago == EstadoPago.Anulado)
+                    continue; // no cuenta para nada del resumen
+
+                cantidadVentas++;
+                totalVentas += v.Total;
+
+                if (v.Estado_Pago == EstadoPago.Pagado)
+                {
+                    totalCobrado += v.Total;
+                }
+                else if (v.Estado_Pago == EstadoPago.Pendiente)
+                {
+                    totalCobrado += v.MontoRecibido;
+                }
+
+                string periodo = v.Fecha.ToString("yyyy-MM");
+
+                if (resumen.TotalesPorPeriodo.ContainsKey(periodo))
+                    resumen.TotalesPorPeriodo[periodo] += v.Total;
+                else
+                    resumen.TotalesPorPeriodo[periodo] = v.Total;
+            }
+
+            resumen.CantidadVentas = cantidadVentas;
+            resumen.TotalVentas = Math.Round(totalVentas, 2);
+            resumen.TotalCobrado = Math.Round(totalCobrado, 2);
+            resumen.TotalDeuda = Math.Round(totalVentas - totalCobrado, 2);
+            resumen.TicketPromedio = resumen.CantidadVentas > 0
+                ? Math.Round(totalVentas / resumen.CantidadVentas, 2)
+                : 0;
+
+            return resumen;
+        }
+
+
 
     }
 }

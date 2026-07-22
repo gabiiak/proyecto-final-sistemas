@@ -63,7 +63,8 @@ namespace Login
             layoutInferior.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
 
             // ── CARDS ────────────────────────────────────────
-            var cardCartesiano = CrearCard("Ventas por semestre");
+            //var cardCartesiano = CrearCard("Ventas por semestre");
+            var cardCartesiano = CrearCard("Ventas Mensuales");
             var cardTorta = CrearCard("Productos más vendidos");
             var cardBarras = CrearCard("Ventas por cliente");
 
@@ -143,8 +144,9 @@ namespace Login
         // ── GRÁFICO DE LÍNEA — Ventas por mes ───────────────
         private CartesianChart CrearCartesiano()
         {
-            var datos = NVentas.GetVentasPorMesSemestre();
-
+            //para usar datos de ventas por semestres
+            //var datos = NVentas.GetVentasPorMesSemestre();
+            var datos = NVentas.GetVentasPorMesAnio();
             string[] nombresMeses = { "", "Ene", "Feb", "Mar", "Abr", "May", "Jun",
                                    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
 
@@ -238,7 +240,7 @@ namespace Login
             return chart;
         }
 
-        // ── GRÁFICO DE BARRAS — Estado de pedidos ───────────
+        // ── GRÁFICO DE BARRAS — top de clientes jijiji ───────────
         private CartesianChart CrearBarras()
         {
             var datos = NVentas.GetTopClientesPorMonto();
