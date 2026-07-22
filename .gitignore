@@ -7,3 +7,10 @@ obj/
 *.exe
 *.cache
 *.db
+
+**/bin/
+**/obj/
+**/packages/
+*.db
+*.suo
+*.user
