@@ -7,8 +7,9 @@ namespace Login
 {
     internal static class Program
     {
+        /// <summary>
         /// Punto de entrada principal para la aplicación.
-        /// </summary>|
+        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -17,20 +18,23 @@ namespace Login
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = culturaAR;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             //Application.Run(new Login()); //Login()
             var menu = new UIMenu2(); //solo para debug
             Application.Run(menu);
+
+            //var trans = new UIListaTransportes(); //debug de mi compañero, descomentar si hace falta
+
             /*bool seguirCorriendo = true;
             while (seguirCorriendo)
             {
                 using (var login = new Login())
                 {
-                    //var menu = new UIMenu2();
                    if (login.ShowDialog() == DialogResult.OK)
                    {
                         var menu = new UIMenu2();
                         menu.SetUsuario(login.usuarioLogueado);
-                        Application.Run(menu); //Login()
+                        Application.Run(menu); 
                    }
                     else seguirCorriendo = false;
                }
