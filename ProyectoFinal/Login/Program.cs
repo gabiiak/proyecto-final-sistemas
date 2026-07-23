@@ -19,15 +19,8 @@ namespace Login
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = culturaAR;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            // =========================================================
-            // MODO DEBUG - ABRE DIRECTO EL FORMULARIO DE TRANSPORTE
-            // =========================================================
-            Application.Run(new UIListaTransportes());
-
-            // =========================================================
-            // FLUJO ORIGINAL (COMENTADO PARA DEBUG)
-            // =========================================================
+            var trans = new UIListaTransportes();
+            Application.Run(trans);
             /*
             bool seguirCorriendo = true;
             while (seguirCorriendo)

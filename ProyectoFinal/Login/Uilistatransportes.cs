@@ -64,6 +64,7 @@ namespace Login
 
                 DataTable tabla = new DataTable();
                 tabla.Columns.Add("IdTransporte", typeof(int));
+                tabla.Columns.Add("IdVenta", typeof(int));
                 tabla.Columns.Add("Venta", typeof(string));
                 tabla.Columns.Add("Cliente", typeof(string));
                 tabla.Columns.Add("Total", typeof(string));
@@ -74,7 +75,8 @@ namespace Login
 
                 foreach (Transporte t in transportes)
                 {
-                    string venta = t.Venta != null ? $"Venta #{t.Venta.IdVenta}" : "-";
+                    int idVenta = t.Venta != null ? t.Venta.IdVenta : 0;
+                    string venta = $"Venta #{idVenta}" ;
                     string cliente = (t.Venta != null && t.Venta.Cliente != null)
                         ? t.Venta.Cliente.Nombre
                         : "Consumidor Final";
@@ -83,7 +85,7 @@ namespace Login
                         ? NombresEstado[t.Estado]
                         : t.Estado.ToString();
 
-                    tabla.Rows.Add(t.IdTransporte, venta, cliente, total,
+                    tabla.Rows.Add(t.IdTransporte, idVenta, venta, cliente, total,
                         t.Fecha.ToString("dd/MM/yyyy HH:mm"), estado);
 
                     estadosOriginales[t.IdTransporte] = t.Estado;
@@ -96,6 +98,50 @@ namespace Login
                 MessageBox.Show("Error al cargar los transportes: " + error.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private Table GenerarCabecera(string letraTipoDocumento)
+        {
+            // --- CABECERA (Logo + Info Empresa + Tipo de Documento) ---
+            Table cabecera = new Table(UnitValue.CreatePercentArray(new float[] { 20f, 60f, 20f })).SetWidth(UnitValue.CreatePercentValue(100));
+            cabecera.SetBorder(iText.Layout.Borders.Border.NO_BORDER);
+
+            // Celda del Logo
+            try
+            {
+                string rutaLogo = "C:/Codigo/C#/ProyectoFinal/ProyectoFinal/Assets/logoEmpresa.png";
+                ImageData data = ImageDataFactory.Create(rutaLogo);
+                Image img = new Image(data).SetWidth(100).SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
+                cabecera.AddCell(new Cell().Add(img).SetBorder(iText.Layout.Borders.Border.NO_BORDER));
+            }
+            catch (Exception)
+            {
+                cabecera.AddCell(new Cell().SetBorder(iText.Layout.Borders.Border.NO_BORDER));
+            }
+
+            // Celda de Datos de la Empresa
+            Paragraph infoEmpresa = new Paragraph()
+                .Add(new Text("F&G Hamburguesas\n").SetFontSize(20).SetFontColor(ColorConstants.BLACK))
+                .Add(new Text("24950 Deldotto Fernando\n").SetFontSize(9))
+                .Add(new Text("Dirección: Sánchez de Bustamante 5168, B° Dean funes, Córdoba\nTeléfono: +54 9 351 123 4567\nEmail: contacto@fghamburguesas.com").SetFontSize(9).SetFontColor(ColorConstants.GRAY))
+                .SetTextAlignment(TextAlignment.RIGHT);
+            cabecera.AddCell(new Cell().Add(infoEmpresa).SetBorder(iText.Layout.Borders.Border.NO_BORDER));
+
+            // Celda del cuadradito con el tipo de documento (R de Remito)
+            Cell celdaTipoDoc = new Cell()
+                .Add(new Paragraph(letraTipoDocumento)
+                    .SetFontSize(28)
+                    .SetFontColor(ColorConstants.BLACK)
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetMargin(0));
+            celdaTipoDoc.SetBorder(new iText.Layout.Borders.SolidBorder(ColorConstants.BLACK, 1.5f));
+            celdaTipoDoc.SetWidth(20f);
+            celdaTipoDoc.SetHeight(20f);
+            celdaTipoDoc.SetVerticalAlignment(iText.Layout.Properties.VerticalAlignment.MIDDLE);
+            celdaTipoDoc.SetTextAlignment(TextAlignment.CENTER);
+            celdaTipoDoc.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
+            cabecera.AddCell(celdaTipoDoc);
+            return cabecera;
         }
 
         private void DgvTransportes_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -233,6 +279,171 @@ namespace Login
             }
         }
 
+        private void btnEmitirRemito_Click(object sender, EventArgs e)
+        {
+            if (dgvTransportes.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccioná un transporte de la lista.", "Atención",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int idTransporte = Convert.ToInt32(dgvTransportes.CurrentRow.Cells["colIdTransporte"].Value);
+            int idVenta = Convert.ToInt32(dgvTransportes.CurrentRow.Cells["colIdVenta"].Value); // asumiendo que la celda guarda el id, ajustar si es otro nombre de columna
+            string fecha = dgvTransportes.CurrentRow.Cells["colFecha"].Value?.ToString() ?? "-";
+            string estado = dgvTransportes.CurrentRow.Cells["colEstado"].Value?.ToString() ?? "-";
+
+            Venta venta = NVentas.GetVentaById(idVenta);
+            if (venta == null)
+            {
+                MessageBox.Show("No se encontró la venta asociada a este transporte.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            List<DetalleVenta> detalles = NDetalleVentas.GetDetalleByIdVenta(idVenta);
+            if (detalles.Count == 0)
+            {
+                MessageBox.Show("La venta asociada no tiene productos registrados.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "PDF|*.pdf";
+            dialog.FileName = $"Remito_Transporte_{idTransporte}";
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                using (PdfWriter writer = new PdfWriter(dialog.FileName))
+                using (PdfDocument pdf = new PdfDocument(writer))
+                using (Document doc = new Document(pdf))
+                {
+                    iText.Kernel.Colors.Color colorPrimario = new DeviceRgb(24, 95, 165);
+                    iText.Kernel.Colors.Color colorTextoOscuro = new DeviceRgb(44, 62, 80);
+                    iText.Kernel.Colors.Color colorGrisClaro = new DeviceRgb(245, 247, 250);
+
+                    Table tablaTipoDoc = new Table(1).SetWidth(UnitValue.CreatePercentValue(14));
+                    tablaTipoDoc.SetBorder(iText.Layout.Borders.Border.NO_BORDER);
+                    tablaTipoDoc.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
+
+                    Cell celdaTipoDoc = new Cell()
+                        .Add(new Paragraph("R")
+                            .SetFontSize(18)
+                            .SetFontColor(colorTextoOscuro)
+                            .SetTextAlignment(TextAlignment.CENTER)
+                            .SetMargin(0));
+                    celdaTipoDoc.SetBorder(new iText.Layout.Borders.SolidBorder(colorTextoOscuro, 1f));
+                    celdaTipoDoc.SetWidth(24f);
+                    celdaTipoDoc.SetHeight(24f);
+                    celdaTipoDoc.SetVerticalAlignment(iText.Layout.Properties.VerticalAlignment.MIDDLE);
+                    celdaTipoDoc.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.RIGHT);
+
+                    tablaTipoDoc.AddCell(celdaTipoDoc);
+                    doc.Add(tablaTipoDoc);
+                    // --- CABECERA (Logo + Info Empresa) ---
+                    Table cabecera = new Table(UnitValue.CreatePercentArray(new float[] { 20f, 60f })).SetWidth(UnitValue.CreatePercentValue(100));
+                    cabecera.SetBorder(iText.Layout.Borders.Border.NO_BORDER);
+
+                    try
+                    {
+                        string rutaLogo = "C:/Codigo/C#/ProyectoFinal/ProyectoFinal/Assets/logoEmpresa.png";
+                        ImageData data = ImageDataFactory.Create(rutaLogo);
+                        Image img = new Image(data).SetWidth(100).SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
+                        cabecera.AddCell(new Cell().Add(img).SetBorder(iText.Layout.Borders.Border.NO_BORDER));
+                    }
+                    catch (Exception)
+                    {
+                        cabecera.AddCell(new Cell().SetBorder(iText.Layout.Borders.Border.NO_BORDER));
+                    }
+                   
+
+                    Paragraph infoEmpresa = new Paragraph()
+                        .Add(new Text("F&G Hamburguesas\n").SetFontSize(20).SetFontColor(colorPrimario))
+                        .Add(new Text("24950 Deldotto Fernando\n").SetFontSize(9))
+                        .Add(new Text("Dirección: Sánchez de Bustamante 5168, B° Dean funes, Córdoba\nTeléfono: +54 9 351 123 4567\nEmail: contacto@fghamburguesas.com").SetFontSize(9).SetFontColor(ColorConstants.GRAY))
+                        .SetTextAlignment(TextAlignment.RIGHT);
+                    cabecera.AddCell(new Cell().Add(infoEmpresa).SetBorder(iText.Layout.Borders.Border.NO_BORDER));
+                    doc.Add(cabecera);
+                    
+
+                    LineSeparator lineaDivisoria = new LineSeparator(new SolidLine(1f));
+                    lineaDivisoria.SetMarginTop(15f);
+                    lineaDivisoria.SetMarginBottom(15f);
+                    doc.Add(lineaDivisoria);
+
+                    // --- DATOS DEL CLIENTE Y DEL REMITO ---
+                    Table infoRemito = new Table(UnitValue.CreatePercentArray(new float[] { 50f, 50f })).SetWidth(UnitValue.CreatePercentValue(100));
+                    infoRemito.SetBorder(iText.Layout.Borders.Border.NO_BORDER);
+                    infoRemito.SetMarginBottom(20f);
+
+                    Paragraph datosCliente = new Paragraph()
+                        .Add(new Text("DATOS DEL CLIENTE\n").SetFontSize(11).SetFontColor(colorPrimario))
+                        .Add(new Text($"Cliente: {venta.Cliente.Nombre}\n").SetFontSize(10))
+                        .Add(new Text($"Venta asociada: {venta.IdVenta}\n").SetFontSize(10))
+                        .SetFontColor(colorTextoOscuro);
+                    infoRemito.AddCell(new Cell().Add(datosCliente).SetBorder(iText.Layout.Borders.Border.NO_BORDER));
+
+                    Paragraph datosRemito = new Paragraph()
+                        .Add(new Text("REMITO\n").SetFontSize(11).SetFontColor(colorPrimario))
+                        .Add(new Text($"N° Comprobante: {idTransporte.ToString().PadLeft(8, '0')}\n").SetFontSize(10))
+                        .Add(new Text($"Fecha: {fecha}\n").SetFontSize(10))
+                        .Add(new Text($"Estado: {estado}\n").SetFontSize(10))
+                        .SetTextAlignment(TextAlignment.RIGHT)
+                        .SetFontColor(colorTextoOscuro);
+                    infoRemito.AddCell(new Cell().Add(datosRemito).SetBorder(iText.Layout.Borders.Border.NO_BORDER));
+
+                    doc.Add(infoRemito);
+
+                    // --- TABLA DE PRODUCTOS (sin precios, es comprobante de entrega) ---
+                    doc.Add(new Paragraph("DETALLE DE PRODUCTOS ENTREGADOS").SetFontSize(12).SetFontColor(colorTextoOscuro).SetMarginBottom(8f));
+
+                    Table tabla = new Table(UnitValue.CreatePercentArray(new float[] { 70f, 30f })).SetWidth(UnitValue.CreatePercentValue(100));
+
+                    string[] encabezados = { "Producto", "Cantidad" };
+                    foreach (var nomHeader in encabezados)
+                    {
+                        Cell headerCell = new Cell().Add(new Paragraph(nomHeader).SetFontColor(ColorConstants.WHITE).SetFontSize(10));
+                        headerCell.SetBackgroundColor(colorTextoOscuro);
+                        headerCell.SetPadding(6f);
+                        headerCell.SetBorder(iText.Layout.Borders.Border.NO_BORDER);
+                        tabla.AddHeaderCell(headerCell);
+                    }
+
+                    bool filaAlterna = false;
+                    foreach (DetalleVenta detalle in detalles)
+                    {
+                        Cell cProducto = new Cell().Add(new Paragraph(detalle.Producto.Nombre).SetFontSize(10));
+                        Cell cCantidad = new Cell().Add(new Paragraph(detalle.Cantidad.ToString()).SetFontSize(10));
+
+                        Cell[] celdas = { cProducto, cCantidad };
+                        foreach (var celda in celdas)
+                        {
+                            celda.SetPadding(6f);
+                            celda.SetBorder(iText.Layout.Borders.Border.NO_BORDER);
+                            celda.SetBorderBottom(new iText.Layout.Borders.SolidBorder(ColorConstants.LIGHT_GRAY, 0.5f));
+                            if (filaAlterna) celda.SetBackgroundColor(colorGrisClaro);
+                        }
+
+                        tabla.AddCell(cProducto);
+                        tabla.AddCell(cCantidad);
+
+                        filaAlterna = !filaAlterna;
+                    }
+                    doc.Add(tabla);
+
+                    // --- PIE: aclaración de conformidad (sin montos) ---
+                    Paragraph piePagina = new Paragraph()
+                        .Add(new Text("Este remito no constituye factura ni comprobante de pago.\n").SetFontSize(9).SetFontColor(ColorConstants.GRAY))
+                        .Add(new Text("Firma de conformidad de recepción: _______________________"))
+                        .SetMarginTop(30f);
+
+                    doc.Add(piePagina);
+                }
+                MessageBox.Show("Remito emitido con éxito.", "Éxito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
 
         private void btnEmitirFactura_Click(object sender, EventArgs e)
         {

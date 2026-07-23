@@ -102,6 +102,25 @@ namespace Login
                     iText.Kernel.Colors.Color colorTextoOscuro = new DeviceRgb(44, 62, 80); // Gris oscuro profesional
                     iText.Kernel.Colors.Color colorGrisClaro = new DeviceRgb(245, 247, 250); // Fondo para encabezados
 
+                    Table tablaTipoDoc = new Table(1).SetWidth(UnitValue.CreatePercentValue(14));
+                    tablaTipoDoc.SetBorder(iText.Layout.Borders.Border.NO_BORDER);
+                    tablaTipoDoc.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.CENTER);
+
+                    Cell celdaTipoDoc = new Cell()
+                        .Add(new Paragraph("A")
+                            .SetFontSize(18)
+                            .SetFontColor(colorTextoOscuro)
+                            .SetTextAlignment(TextAlignment.CENTER)
+                            .SetMargin(0));
+                    celdaTipoDoc.SetBorder(new iText.Layout.Borders.SolidBorder(colorTextoOscuro, 1f));
+                    celdaTipoDoc.SetWidth(24f);
+                    celdaTipoDoc.SetHeight(24f);
+                    celdaTipoDoc.SetVerticalAlignment(iText.Layout.Properties.VerticalAlignment.MIDDLE);
+                    celdaTipoDoc.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.RIGHT);
+
+                    tablaTipoDoc.AddCell(celdaTipoDoc);
+                    doc.Add(tablaTipoDoc);
+
                     // --- CABECERA DE LA FACTURA (Logo + Info Empresa) ---
                     // Tabla de 2 columnas para organizar el tope del documento sin bordes
                     Table cabecera = new Table(UnitValue.CreatePercentArray(new float[] { 30f, 70f })).SetWidth(UnitValue.CreatePercentValue(100));
@@ -167,7 +186,7 @@ namespace Login
                     doc.Add(infoVenta);
 
                     // --- TABLA DE DETALLES DEL PEDIDO ---
-                    doc.Add(new Paragraph("DETALLE DE COMPRA").SetFontSize(12).SetFontColor(colorTextoOscuro).SetMarginBottom(8f));
+                    doc.Add(new Paragraph("DETALLE DE VENTA").SetFontSize(12).SetFontColor(colorTextoOscuro).SetMarginBottom(8f));
 
                     // Definimos anchos proporcionales para Producto (50%), Cantidad (20%) y Subtotal (30%)
                     Table tabla = new Table(UnitValue.CreatePercentArray(new float[] { 50f, 20f, 30f })).SetWidth(UnitValue.CreatePercentValue(100));

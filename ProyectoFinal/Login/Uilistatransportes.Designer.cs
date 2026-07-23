@@ -20,6 +20,7 @@
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIdVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnNuevoTransporte = new System.Windows.Forms.Button();
             this.btnCambiarEstado = new System.Windows.Forms.Button();
             this.btnEliminarTransporte = new System.Windows.Forms.Button();
@@ -89,6 +90,12 @@
             this.colIdTransporte.ReadOnly = true;
             this.colIdTransporte.FillWeight = 40;
 
+            this.colIdVenta.DataPropertyName = "IdVenta";
+            this.colIdVenta.HeaderText = "IdVenta";
+            this.colIdVenta.Name = "colIdVenta";
+            this.colIdVenta.ReadOnly = true;
+            this.colIdVenta.Visible = false; // oculta, solo para uso interno
+
             this.colVenta.DataPropertyName = "Venta";
             this.colVenta.HeaderText = "Venta";
             this.colVenta.Name = "colVenta";
@@ -117,6 +124,7 @@
 
             this.dgvTransportes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
                 this.colIdTransporte,
+                this.colIdVenta,   // NUEVO
                 this.colVenta,
                 this.colCliente,
                 this.colTotal,
@@ -168,7 +176,7 @@
 
 
 
-            this.btnEmitirFactura.Text = "Emitir Factura";
+            this.btnEmitirFactura.Text = "Emitir Remito";
             this.btnEmitirFactura.Location = new System.Drawing.Point(20, 472);
             this.btnEmitirFactura.Size = new System.Drawing.Size(220, 36);
             this.btnEmitirFactura.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -179,7 +187,7 @@
             this.btnEmitirFactura.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEmitirFactura.TabIndex = 5;
             this.btnEmitirFactura.Name = "btnEmitirFactura";
-            this.btnEmitirFactura.Click += new System.EventHandler(this.btnEmitirFactura_Click);
+            this.btnEmitirFactura.Click += new System.EventHandler(this.btnEmitirRemito_Click);
 
             // ── CONTROLS DEL FORM ───────────────────────────────────
             this.Controls.Add(this.lblTitulo);
@@ -202,6 +210,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIdVenta;
         private System.Windows.Forms.Button btnNuevoTransporte;
         private System.Windows.Forms.Button btnCambiarEstado;
         private System.Windows.Forms.Button btnEliminarTransporte;
