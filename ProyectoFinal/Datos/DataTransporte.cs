@@ -112,5 +112,21 @@ namespace Datos
                 }
             }
         }
+
+        
+        public static int GetIdVentaByTransporte(int idTransporte)
+        {
+            string sqlQuery = @"SELECT idVenta FROM Transportes WHERE idTransporte = @IdTransporte";
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.AddWithValue("@IdTransporte", idTransporte);
+                    object resultado = cmd.ExecuteScalar();
+                    return resultado != null ? Convert.ToInt32(resultado) : 0;
+                }
+            }
+        }
     }
 }

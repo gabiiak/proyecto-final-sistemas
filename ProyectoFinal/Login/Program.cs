@@ -13,6 +13,7 @@ namespace Login
         [STAThread]
         static void Main()
         {
+            //para gabi del futuro: agregar un boton para acceder a los transportes
             System.Globalization.CultureInfo culturaAR = new System.Globalization.CultureInfo("es-AR");
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = culturaAR;
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = culturaAR;

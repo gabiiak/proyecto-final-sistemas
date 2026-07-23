@@ -45,7 +45,6 @@ namespace Negocio
                 throw new ArgumentException("El estado del transporte no es válido.");
 
             int? estadoActual = DataTransporte.GetEstadoActual(idTransporte);
-
             if (estadoActual == null)
                 throw new ArgumentException("El transporte no existe.");
 
@@ -53,6 +52,23 @@ namespace Negocio
                 throw new ArgumentException("Este transporte ya fue entregado o cancelado y no se puede modificar.");
 
             DataTransporte.CambiarEstado(idTransporte, estado);
+
+            // Sincronizar el estado de pedido de la venta asociada
+            int idVenta = DataTransporte.GetIdVentaByTransporte(idTransporte);
+            int estadoPedidoCorrespondiente = MapearEstadoTransporteAPedido(estado);
+            NVentas.CambiarEstadoPedido(idVenta, estadoPedidoCorrespondiente);
         }
+        private static int MapearEstadoTransporteAPedido(int estadoTransporte)
+        {
+            switch (estadoTransporte)
+            {
+                case EstadoTransporte.programado: return EstadoPedido.Listo;
+                case EstadoTransporte.EnTransito: return EstadoPedido.EnViaje;
+                case EstadoTransporte.Entregado: return EstadoPedido.Entregado;
+                case EstadoTransporte.cancelado: return EstadoPedido.Cancelado;
+                default: throw new ArgumentException("Estado de transporte sin mapeo definido.");
+            }
+        }
+
     }
 }

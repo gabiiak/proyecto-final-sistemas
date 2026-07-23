@@ -48,7 +48,7 @@ namespace Login
                     venta.Metodo.Descripcion,
                     GetDescripcionEstadoPago(venta.Estado_Pago),
                     GetEstadoPedido(venta.Estado_Pedido)
-                    //AGREGAR ATRIBUTO TOTAL AL MODELO Y A LA BD TMB
+                    
                     );
             }
         }
@@ -211,6 +211,13 @@ namespace Login
                     );
             }
             dgvTodasLasVentas.Refresh();
+        }
+
+        private void btnTransporte_Click(object sender, EventArgs e)
+        {
+            var trans = new UIListaTransportes();
+            trans.ShowDialog();
+            ActualizarDataGridView();
         }
 
         private void btnExportarExcel_Click(object sender, EventArgs e)
