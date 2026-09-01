@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -129,7 +130,7 @@ namespace Login
                     // Celda del Logo
                     try
                     {
-                        string rutaLogo = "C:/Codigo/C#/ProyectoFinal/ProyectoFinal/Assets/logoEmpresa.png";
+                        string rutaLogo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "logoEmpresa.png");
                         ImageData data = ImageDataFactory.Create(rutaLogo);
                         Image img = new Image(data).SetWidth(100).SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
                         Cell cellLogo = new Cell().Add(img).SetBorder(iText.Layout.Borders.Border.NO_BORDER);

@@ -37,7 +37,7 @@ namespace Login
         {
             lblError.Visible = true;
             string usuario = "administrador";
-            string contraseña = "debug"; //cambiar
+            string contraseña = "administrador"; //cambiar
             //string usuario = "1";
             //string contraseña = "1";
             if (string.IsNullOrWhiteSpace(txtUser.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
@@ -53,9 +53,8 @@ namespace Login
                 usuarioLogueado = usuario;
                 this.DialogResult = DialogResult.OK;
                 this.Hide();
-                //Menu
-                //UIMenu2 Menu = new UIMenu2();
-                //Menu.FormClosed += (s, args) => this.Show(); //<- para escuchar el evento "cerrar"
+                UIMenu2 Menu = new UIMenu2();
+                Menu.FormClosed += (s, args) => this.Show(); //<- para escuchar el evento "cerrar"
                 //this.Hide();
                 //Menu.Show();
                 

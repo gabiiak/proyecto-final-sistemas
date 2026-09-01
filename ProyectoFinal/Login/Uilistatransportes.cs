@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
@@ -347,7 +348,7 @@ namespace Login
 
                     try
                     {
-                        string rutaLogo = "C:/Codigo/C#/ProyectoFinal/ProyectoFinal/Assets/logoEmpresa.png";
+                        string rutaLogo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "logoEmpresa.png");
                         ImageData data = ImageDataFactory.Create(rutaLogo);
                         Image img = new Image(data).SetWidth(100).SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
                         cabecera.AddCell(new Cell().Add(img).SetBorder(iText.Layout.Borders.Border.NO_BORDER));
