@@ -11,21 +11,12 @@
 *.exe
 *.cache
 
-
 # NuGet
 packages/
 *.nupkg
 
 # Base de datos local (cada uno corre la suya)
-*.db
+# *.db
 
 # Carpetas de publish
 publish*/
-*.db
-
-**/bin/
-**/obj/
-**/packages/
-*.db
-*.suo
-*.user
