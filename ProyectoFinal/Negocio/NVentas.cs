@@ -53,6 +53,35 @@ namespace Negocio
                 return recibido - total;
             } else return 0;
         }
+        public static double ModificarCantidad(int detalleVentaId, int nuevaCantidad, string motivo)
+        {
+            if (detalleVentaId <= 0)
+                throw new ArgumentException("Debe indicar un detalle de venta válido.", nameof(detalleVentaId));
+            if (nuevaCantidad <= 0)
+                throw new ArgumentException("La cantidad debe ser un entero positivo mayor a cero.", nameof(nuevaCantidad));
+            if (string.IsNullOrWhiteSpace(motivo))
+                throw new ArgumentException("Debe indicar un motivo para la modificación.", nameof(motivo));
+
+            DetalleVenta detalle = DataDetalleVentas.GetById(detalleVentaId);
+            if (detalle == null)
+                throw new ArgumentException("No existe un detalle de venta con ese id.", nameof(detalleVentaId));
+
+            Venta venta = DataVentas.GetVentaById(detalle.Venta.IdVenta);
+            if (venta == null)
+                throw new InvalidOperationException("No se encontró la venta asociada a este detalle.");
+            if (venta.Estado_Pago != EstadoPedido.Preparacion)
+                throw new InvalidOperationException("Solo se puede modificar la cantidad si la venta está pendiente.");
+
+            double precioUnitarioOriginal = detalle.SubTotal / detalle.Cantidad;
+            double nuevoSubTotal = Math.Round(precioUnitarioOriginal * nuevaCantidad, 2);
+
+            DataDetalleVentas.UpdateCantidad(detalleVentaId, nuevaCantidad, nuevoSubTotal, motivo);
+
+            double nuevoTotal = Math.Round(DataDetalleVentas.GetTotalVentaById(detalle.Venta.IdVenta), 2);
+            DataVentas.UpdateTotal(detalle.Venta.IdVenta, nuevoTotal);
+
+            return nuevoTotal;
+        }
         public static double DescuentoPorEfectivo(double total,string metodo)
         {
             if (metodo.Equals("Efectivo", StringComparison.OrdinalIgnoreCase))

@@ -198,6 +198,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EstadoTransporte.cs" />
+    <Compile Include="Insumo.cs" />
+    <Compile Include="StockInsumo.cs" />
+    <Compile Include="StockProducto.cs" />
     <Compile Include="Transporte.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="DetalleVenta.cs" />

@@ -24,6 +24,8 @@ namespace Login
         private Button btnInicio;
         private Button btnClientes;
         private Button btnProductos;
+        private Button btnInsumos;
+        private Button btnStock;
         private Button btnMetodosPago;
         private Button btnVentas;
         private Button btnCerrarSesion;
@@ -44,6 +46,8 @@ namespace Login
             btnInicio = new Button();
             btnClientes = new Button();
             btnProductos = new Button();
+            btnInsumos = new Button();
+            //btnStock = new Button();
             btnMetodosPago = new Button();
             btnVentas = new Button();
             btnCerrarSesion = new Button();
@@ -69,9 +73,11 @@ namespace Login
             ConfigurarBotonSidebar(btnInicio, "  🏠  Inicio", 0);
             ConfigurarBotonSidebar(btnClientes, "  👥  Clientes", 1);
             ConfigurarBotonSidebar(btnProductos, "  📦  Productos", 2);
-            ConfigurarBotonSidebar(btnMetodosPago, "  💳  Métodos de Pago", 3);
-            ConfigurarBotonSidebar(btnVentas, "  🛒  Ventas", 4);
-            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 5);
+            ConfigurarBotonSidebar(btnInsumos, "  🧰  Insumos", 3);
+            //ConfigurarBotonSidebar(btnStock, "  📊  StockInsumos", 4);
+            ConfigurarBotonSidebar(btnMetodosPago, "  💳  Métodos de Pago", 5);
+            ConfigurarBotonSidebar(btnVentas, "  🛒  Ventas", 6);
+            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 7);
 
             // Label título en el sidebar
             lblTituloApp.Text = "T" + "&&" + "G System";
@@ -84,6 +90,8 @@ namespace Login
             pnlSidebar.Controls.Add(btnCerrarSesion);
             pnlSidebar.Controls.Add(btnVentas);
             pnlSidebar.Controls.Add(btnMetodosPago);
+            //pnlSidebar.Controls.Add(btnStock);
+            pnlSidebar.Controls.Add(btnInsumos);
             pnlSidebar.Controls.Add(btnProductos);
             pnlSidebar.Controls.Add(btnClientes);
             pnlSidebar.Controls.Add(btnInicio);

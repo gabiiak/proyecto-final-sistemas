@@ -70,6 +70,20 @@ namespace Datos
             }
             return resultado;
         }
+        public static int UpdateTotal(int idVenta, double total)
+        {
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"UPDATE Ventas SET total = @total WHERE idVenta = @idVenta";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@total", total);
+                    cmd.Parameters.AddWithValue("@idVenta", idVenta);
+                    connection.Open();
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+        }
         public static Dictionary<int, double> GetVentasPorMesSemestre(int anio, int semestre)// grafico de linea
         {
             // semestre 1 = meses 1-6, semestre 2 = meses 7-12

@@ -21,10 +21,10 @@ namespace Login
             Application.SetCompatibleTextRenderingDefault(false);
 
             //Application.Run(new Login()); //Login()
-            //var menu = new UIMenu2(); //solo para debug
-            //Application.Run(menu);
+            var menu = new UIMenu2(); //solo para debug
+            Application.Run(menu);
 
-            bool seguirCorriendo = true;
+            /*bool seguirCorriendo = true;
             while (seguirCorriendo)
             {
                 using (var login = new Login())
@@ -37,7 +37,7 @@ namespace Login
                    }
                     else seguirCorriendo = false;
                }
-            }
+            }*/
         }
     }
 }

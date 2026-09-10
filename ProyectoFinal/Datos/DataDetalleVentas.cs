@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Logging;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -122,6 +123,74 @@ namespace Datos
                     cmd.Parameters.Add("@Cantidad", (SqliteType)System.Data.SqlDbType.Int).Value = detalle.Cantidad;
                     cmd.Parameters.AddWithValue("@SubTotal", detalle.SubTotal);
                     return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+        public static DetalleVenta GetById(int id)
+        {
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT idDetalleVenta, idVenta, idProducto, cantidad, subTotal
+                            FROM DetalleVentas WHERE idDetalleVenta = @id";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    connection.Open();
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new DetalleVenta
+                            {
+                                IdDetalleVenta = reader.GetInt32(0),
+                                Venta = new Venta
+                                {
+                                    IdVenta = reader.GetInt32(1)
+                                },
+                                Producto = new Producto
+                                {
+                                    IdProducto = reader.GetInt32(2)
+                                },
+                                Cantidad = reader.GetInt32(3),
+                                SubTotal = reader.GetDouble(4)
+                            };
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
+
+        public static int UpdateCantidad(int id, int cantidad, double nuevoSubTotal, string motivo)
+        {
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"UPDATE DetalleVentas 
+                            SET cantidad = @cantidad, subTotal = @subTotal, motivoModificacion = @motivo
+                            WHERE idDetalleVenta = @id";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@subTotal", nuevoSubTotal);
+                    cmd.Parameters.AddWithValue("@motivo", motivo);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    connection.Open();
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static double GetTotalVentaById(int idVenta)
+        {
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT SUM(subTotal) FROM DetalleVentas WHERE idVenta = @idVenta";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@idVenta", idVenta);
+                    connection.Open();
+                    object resultado = cmd.ExecuteScalar();
+                    return resultado == DBNull.Value || resultado == null ? 0 : Convert.ToDouble(resultado);
                 }
             }
         }

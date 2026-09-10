@@ -28,7 +28,10 @@ namespace Login
             // Conectamos cada botón a su handler
             btnInicio.Click += (s, e) => AbrirFormularioHijo(new UIInicio1(), btnInicio);
             btnClientes.Click += (s, e) => AbrirFormularioHijo(new UIClientManagement(), btnClientes);
-            btnProductos.Click += (s, e) => AbrirFormularioHijo(new UIProductManagement(), btnProductos);
+            //btnProductos.Click += (s, e) => AbrirFormularioHijo(new UIProductManagement(), btnProductos);
+            btnProductos.Click += (s, e) => AbrirFormularioHijo(new UIStockProductos(), btnProductos);
+            btnInsumos.Click += (s, e) => AbrirFormularioHijo(new UIStockInsumos(), btnInsumos);
+            //btnStock.Click += (s, e) => AbrirFormularioHijo(new UIStockInsumos(), btnStock);
             btnMetodosPago.Click += (s, e) => AbrirFormularioHijo(new UIPaymentMethodManagement(), btnMetodosPago);
             btnVentas.Click += (s, e) => AbrirFormularioHijo(new UISalesManagement(), btnVentas);
             btnCerrarSesion.Click += BtnCerrarSesion_Click;

@@ -134,8 +134,8 @@
       <HintPath>..\packages\itext.9.7.0\lib\net461\itext.svg.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
-  <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
-</Reference>
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
     <Reference Include="LiveChartsCore, Version=2.0.5.0, Culture=neutral, PublicKeyToken=cc92a3e13d40c573, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveChartsCore.2.0.5\lib\net462\LiveChartsCore.dll</HintPath>
     </Reference>
@@ -296,6 +296,12 @@
     <Compile Include="UIInicio1.Designer.cs">
       <DependentUpon>UIInicio1.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIInsumoManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIInsumoManagement.Designer.cs">
+      <DependentUpon>UIInsumoManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uilistatransportes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,6 +388,18 @@
     <Compile Include="UISalesManagement.Designer.cs">
       <DependentUpon>UISalesManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIStockInsumos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIStockInsumos.Designer.cs">
+      <DependentUpon>UIStockInsumos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIStockProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIStockProductos.Designer.cs">
+      <DependentUpon>UIStockProductos.cs</DependentUpon>
+    </Compile>
     <Compile Include="UITransporte.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -402,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIInicio1.resx">
       <DependentUpon>UIInicio1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIInsumoManagement.resx">
+      <DependentUpon>UIInsumoManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIMenu2.resx">
       <DependentUpon>UIMenu2.cs</DependentUpon>
@@ -451,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UISalesManagement.resx">
       <DependentUpon>UISalesManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIStockInsumos.resx">
+      <DependentUpon>UIStockInsumos.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
