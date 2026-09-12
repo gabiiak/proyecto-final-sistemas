@@ -20,3 +20,6 @@ packages/
 
 # Carpetas de publish
 publish*/
+
+#carpeta de scripts de pwsh
+scripts*/
