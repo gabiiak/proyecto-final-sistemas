@@ -284,6 +284,12 @@
     <Compile Include="UIConsultSale.Designer.cs">
       <DependentUpon>UIConsultSale.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIConsultTanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIConsultTanda.Designer.cs">
+      <DependentUpon>UIConsultTanda.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIDeletedPaymentMethod.cs">
       <SubType>Form</SubType>
     </Compile>

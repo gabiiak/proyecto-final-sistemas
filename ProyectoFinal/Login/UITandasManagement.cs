@@ -143,6 +143,17 @@ namespace Login
                 );
             }
         }
+        private void btnConsultarTanda_Click(object sender, EventArgs e)
+        {
+            if (idTandaSeleccionada <= 0)
+            {
+                MessageBox.Show("Debe seleccionar una tanda de la lista.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            UIConsultTanda consulta = new UIConsultTanda(idTandaSeleccionada);
+            consulta.ShowDialog();
+        }
 
         private void btnFiltroProducto_Click(object sender, EventArgs e)
         {
