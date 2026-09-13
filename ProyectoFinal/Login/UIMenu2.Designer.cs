@@ -25,6 +25,7 @@ namespace Login
         private Button btnClientes;
         private Button btnProductos;
         private Button btnInsumos;
+        private Button btnTandas; // Botón agregado
         private Button btnStock;
         private Button btnMetodosPago;
         private Button btnVentas;
@@ -47,6 +48,7 @@ namespace Login
             btnClientes = new Button();
             btnProductos = new Button();
             btnInsumos = new Button();
+            btnTandas = new Button(); // Inicialización
             //btnStock = new Button();
             btnMetodosPago = new Button();
             btnVentas = new Button();
@@ -55,13 +57,13 @@ namespace Login
             lblFecha = new Label();
             pnlSeparador = new Panel();
 
-        SuspendLayout();
+            SuspendLayout();
 
             // ── FORM ────────────────────────────────────────────────
             ClientSize = new Size(1250, 850);
             Text = "Sistema de Gestión";
             MinimumSize = new Size(900, 550);
-            BackColor = Color.FromArgb(244, 247, 251); // Fondo app
+            BackColor = Color.FromArgb(244, 247, 251);
             this.StartPosition = FormStartPosition.CenterScreen;
 
             // ── SIDEBAR ─────────────────────────────────────────────
@@ -74,10 +76,11 @@ namespace Login
             ConfigurarBotonSidebar(btnClientes, "  👥  Clientes", 1);
             ConfigurarBotonSidebar(btnProductos, "  📦  Productos", 2);
             ConfigurarBotonSidebar(btnInsumos, "  🧰  Insumos", 3);
-            //ConfigurarBotonSidebar(btnStock, "  📊  StockInsumos", 4);
-            ConfigurarBotonSidebar(btnMetodosPago, "  💳  Métodos de Pago", 5);
-            ConfigurarBotonSidebar(btnVentas, "  🛒  Ventas", 6);
-            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 7);
+            ConfigurarBotonSidebar(btnTandas, "  ⚙️  Producción", 4);
+            //ConfigurarBotonSidebar(btnStock, "  📊  StockInsumos", 5);
+            ConfigurarBotonSidebar(btnMetodosPago, "  💳  Métodos de Pago", 6);
+            ConfigurarBotonSidebar(btnVentas, "  🛒  Ventas", 7);
+            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 8);
 
             // Label título en el sidebar
             lblTituloApp.Text = "T" + "&&" + "G System";
@@ -91,6 +94,7 @@ namespace Login
             pnlSidebar.Controls.Add(btnVentas);
             pnlSidebar.Controls.Add(btnMetodosPago);
             //pnlSidebar.Controls.Add(btnStock);
+            pnlSidebar.Controls.Add(btnTandas);
             pnlSidebar.Controls.Add(btnInsumos);
             pnlSidebar.Controls.Add(btnProductos);
             pnlSidebar.Controls.Add(btnClientes);
@@ -98,13 +102,11 @@ namespace Login
             pnlSidebar.Controls.Add(lblTituloApp);
 
             // ── HEADER ──────────────────────────────────────────────
-            //AGREGAR ALGO MÁS AQUI
             pnlHeader.BackColor = Color.White;
             pnlHeader.Dock = DockStyle.Top;
             pnlHeader.Height = 50;
             pnlHeader.Padding = new Padding(20, 0, 20, 0);
 
-            //lblUsuario.Text = "Sesión activa: ";
             lblUsuario.ForeColor = Color.FromArgb(136, 135, 128);
             lblUsuario.Font = new Font("Segoe UI", 9F);
             lblUsuario.TextAlign = ContentAlignment.MiddleLeft;
@@ -113,24 +115,9 @@ namespace Login
 
             pnlHeader.Controls.Add(lblUsuario);
 
-            pnlHeader.BackColor = Color.White;
-            pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Height = 50;
-            pnlHeader.Padding = new Padding(20, 0, 20, 0);
-
-            // Separador inferior del header
-            //pnlHeader.Paint += (s, e) =>
-            //{
-            //    e.Graphics.DrawLine(
-            //        new Pen(Color.FromArgb(211, 209, 199)),
-            //        0, pnlHeader.Height - 1,
-            //        pnlHeader.Width, pnlHeader.Height - 1
-            //    );
-            //};
-
-            // Label módulo activo (dereita)
+            // Label módulo activo
             lblModuloActivo = new Label();
-            lblModuloActivo.Text = ""; //le saque esto xq quedaba feo
+            lblModuloActivo.Text = "";
             lblModuloActivo.ForeColor = Color.FromArgb(28, 58, 94);
             lblModuloActivo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblModuloActivo.TextAlign = ContentAlignment.MiddleLeft;
@@ -143,7 +130,7 @@ namespace Login
             pnlSeparador.Dock = DockStyle.Right;
             pnlSeparador.Width = 1;
 
-            // Label fecha (derecha)
+            // Label fecha
             lblFecha = new Label();
             lblFecha.Text = DateTime.Now.ToString("dddd, d 'de' MMMM 'de' yyyy",
                 new System.Globalization.CultureInfo("es-AR"));
@@ -152,15 +139,6 @@ namespace Login
             lblFecha.TextAlign = ContentAlignment.MiddleRight;
             lblFecha.Dock = DockStyle.Right;
             lblFecha.Width = 260;
-
-            // Label usuario (left) en vez de usar un label heredado de lblusuario, hago todo en un mismo label
-            //lblUsuario = new Label();
-            //lblUsuario.Text = "Usuario";
-            //lblUsuario.ForeColor = Color.FromArgb(136, 135, 128);
-            //lblUsuario.Font = new Font("Segoe UI", 9F);
-            //lblUsuario.TextAlign = ContentAlignment.MiddleLeft;
-            //lblUsuario.Dock = DockStyle.Left;
-            //lblUsuario.Width = 120;
 
             pnlHeader.Controls.Add(lblModuloActivo);
             pnlHeader.Controls.Add(lblUsuario);
@@ -171,7 +149,6 @@ namespace Login
             pnlContenedor.BackColor = Color.FromArgb(244, 247, 251);
             pnlContenedor.Dock = DockStyle.Fill;
 
-            // Orden de agregado al form (importa para el layout)
             Controls.Add(pnlContenedor);
             Controls.Add(pnlHeader);
             Controls.Add(pnlSidebar);
@@ -179,13 +156,12 @@ namespace Login
             ResumeLayout(false);
         }
 
-        // Configura el estilo base de cada botón del sidebar
         private void ConfigurarBotonSidebar(Button btn, string texto, int indice)
         {
             btn.Text = texto;
             btn.FlatStyle = FlatStyle.Flat;
             btn.FlatAppearance.BorderSize = 0;
-            btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(55, 138, 221); // Azul hover
+            btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(55, 138, 221);
             btn.BackColor = Color.Transparent;
             btn.ForeColor = Color.FromArgb(181, 212, 244);
             btn.Font = new Font("Segoe UI", 10F);
@@ -193,16 +169,7 @@ namespace Login
             btn.Padding = new Padding(16, 0, 0, 0);
             btn.Dock = DockStyle.Top;
             btn.Height = 48;
-            //btn.Cursor = Cursors.Hand;
-            btn.Tag = indice; // Guardamos el índice para saber cuál está activo
+            btn.Tag = indice;
         }
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-
-        #endregion
     }
 }

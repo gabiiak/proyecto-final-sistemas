@@ -382,6 +382,18 @@
     <Compile Include="UIRegisterSaleDetail.Designer.cs">
       <DependentUpon>UIRegisterSaleDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIRegisterTanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRegisterTanda.Designer.cs">
+      <DependentUpon>UIRegisterTanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIRegisterTandaDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRegisterTandaDetail.Designer.cs">
+      <DependentUpon>UIRegisterTandaDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="UISalesManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -399,6 +411,18 @@
     </Compile>
     <Compile Include="UIStockProductos.Designer.cs">
       <DependentUpon>UIStockProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UITandasManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UITandasManagement.Designer.cs">
+      <DependentUpon>UITandasManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UITandaState.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UITandaState.Designer.cs">
+      <DependentUpon>UITandaState.cs</DependentUpon>
     </Compile>
     <Compile Include="UITransporte.cs">
       <SubType>Form</SubType>
@@ -470,6 +494,9 @@
     <EmbeddedResource Include="UIRegisterSaleDetail.resx">
       <DependentUpon>UIRegisterSaleDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIRegisterTanda.resx">
+      <DependentUpon>UIRegisterTanda.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UISalesManagement.resx">
       <DependentUpon>UISalesManagement.cs</DependentUpon>
     </EmbeddedResource>
@@ -528,9 +555,7 @@
     <Error Condition="!Exists('..\packages\SkiaSharp.NativeAssets.macOS.3.119.0\build\net462\SkiaSharp.NativeAssets.macOS.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.NativeAssets.macOS.3.119.0\build\net462\SkiaSharp.NativeAssets.macOS.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.NativeAssets.Win32.3.119.0\build\net462\SkiaSharp.NativeAssets.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.NativeAssets.Win32.3.119.0\build\net462\SkiaSharp.NativeAssets.Win32.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.13.2\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.13.2\build\Microsoft.VisualStudio.Threading.Analyzers.targets'))" />
-    
   </Target>
   <Import Project="..\packages\SkiaSharp.NativeAssets.Win32.3.119.0\build\net462\SkiaSharp.NativeAssets.Win32.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.Win32.3.119.0\build\net462\SkiaSharp.NativeAssets.Win32.targets')" />
   <Import Project="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.13.2\build\Microsoft.VisualStudio.Threading.Analyzers.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.13.2\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" />
-  
 </Project>
