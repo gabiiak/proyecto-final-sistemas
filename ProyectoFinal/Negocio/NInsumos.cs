@@ -8,11 +8,12 @@ namespace Negocio
 {
     public  class NInsumos
     {
+        private static readonly string[] UnidadesValidas = { "Kg", "Gr", "Unidad", "Lts" };
         public static List<Modelos.Insumo> GetAllInsumos()
         {
             return Datos.DataInsumos.GetAllInsumos();
         }
-        public static int createInsumo(Modelos.Insumo insumo)
+        public static int Create(Modelos.Insumo insumo)
         {
             if (insumo == null)
                 throw new ArgumentNullException(nameof(insumo), "El insumo no puede ser nulo.");
@@ -22,10 +23,13 @@ namespace Negocio
             
             if (insumo.Nombre.Length > 100)
                 throw new ArgumentException("El nombre del insumo no puede exceder 100 caracteres.", nameof(insumo.Nombre));
-            
-            return Datos.DataInsumos.createInsumo(insumo);
+
+            if (!UnidadesValidas.Contains(insumo.UnidadMedida))
+                throw new ArgumentException("Unidad de medida inválida.");
+
+            return Datos.DataInsumos.Create(insumo);
         }
-        public static int updateInsumo(Modelos.Insumo insumo)
+        public static int Update(Modelos.Insumo insumo)
         {
             if (insumo == null)
                 throw new ArgumentNullException(nameof(insumo), "El insumo no puede ser nulo.");
@@ -39,14 +43,14 @@ namespace Negocio
             if (insumo.Nombre.Length > 100)
                 throw new ArgumentException("El nombre del insumo no puede exceder 100 caracteres.", nameof(insumo.Nombre));
             
-            return Datos.DataInsumos.updateInsumo(insumo);
+            return Datos.DataInsumos.Update(insumo);
         }
-        public static int deleteInsumo(int id)
+        public static int Delete(int id)
         {
             if (id <= 0)
                 throw new ArgumentException("El id debe ser mayor a 0.", nameof(id));
             
-            return Datos.DataInsumos.cambiarEstadoInsumo(id);
+            return Datos.DataInsumos.Delete(id);
         }
         public static Modelos.Insumo GetInsumoById(int id)
         {

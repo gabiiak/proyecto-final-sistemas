@@ -27,15 +27,25 @@ namespace Login
             AbrirFormularioHijo(new UIInicio1(), btnInicio);
             // Conectamos cada botón a su handler
             btnInicio.Click += (s, e) => AbrirFormularioHijo(new UIInicio1(), btnInicio);
-            btnClientes.Click += (s, e) => AbrirFormularioHijo(new UIClientManagement(), btnClientes);
+            btnClientes.Click += (s, e) => AbrirFormularioHijo(new UIGestionClientes(), btnClientes);
             //btnProductos.Click += (s, e) => AbrirFormularioHijo(new UIProductManagement(), btnProductos);
             btnProductos.Click += (s, e) => AbrirFormularioHijo(new UIStockProductos(), btnProductos);
             btnInsumos.Click += (s, e) => AbrirFormularioHijo(new UIStockInsumos(), btnInsumos);
+            btnTandas.Click += (s, e) => AbrirFormularioHijo(new UIGestionTandas(), btnTandas);
             //btnStock.Click += (s, e) => AbrirFormularioHijo(new UIStockInsumos(), btnStock);
-            btnMetodosPago.Click += (s, e) => AbrirFormularioHijo(new UIPaymentMethodManagement(), btnMetodosPago);
-            btnVentas.Click += (s, e) => AbrirFormularioHijo(new UISalesManagement(), btnVentas);
+            btnMetodosPago.Click += (s, e) => AbrirFormularioHijo(new UIGestionMetodosPago(), btnMetodosPago);
+            btnVentas.Click += (s, e) => AbrirFormularioHijo(new UIGestionVentas(), btnVentas);
             btnCerrarSesion.Click += BtnCerrarSesion_Click;
 
+            ConfigurarBotonSidebar(btnInicio, "  🏠  Inicio", 0);
+            ConfigurarBotonSidebar(btnClientes, "  👥  Clientes", 1);
+            ConfigurarBotonSidebar(btnProductos, "  📦  Productos", 2);
+            ConfigurarBotonSidebar(btnInsumos, "  🧰  Insumos", 3);
+            ConfigurarBotonSidebar(btnTandas, "  ⚙️  Producción", 4);
+            //ConfigurarBotonSidebar(btnStock, "  📊  StockInsumos", 4);
+            ConfigurarBotonSidebar(btnMetodosPago, "  💳  Métodos de Pago", 5);
+            ConfigurarBotonSidebar(btnVentas, "  🛒  Ventas", 6);
+            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 7);
             // Abrimos Inicio por defecto
             //btnInicio.PerformClick();
         }

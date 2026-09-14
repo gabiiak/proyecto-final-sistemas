@@ -81,13 +81,13 @@ namespace Login
         private void btnProductos_Click(object sender, EventArgs e)
         {
             // Llamamos al método pasándole una nueva instancia de tu UI de Productos
-            AbrirFormularioHijo(new UIProductManagement());
+            AbrirFormularioHijo(new UIGestionProductos());
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
             // Llamamos al método pasándole una nueva instancia de tu UI de Clientes
-            AbrirFormularioHijo(new UIClientManagement());
+            AbrirFormularioHijo(new UIGestionClientes());
         }
 
         private void btnInicio_Click(object sender, EventArgs e)
@@ -104,12 +104,12 @@ namespace Login
 
         private void btnMetodos_Click(object sender, EventArgs e)
         {
-            AbrirFormularioHijo(new UIPaymentMethodManagement());
+            AbrirFormularioHijo(new UIGestionMetodosPago());
         }
 
         private void btnGestionarVentas_Click(object sender, EventArgs e)
         {
-            AbrirFormularioHijo(new UISalesManagement());
+            AbrirFormularioHijo(new UIGestionVentas());
         }
     }
 }

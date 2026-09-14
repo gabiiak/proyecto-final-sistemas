@@ -224,7 +224,7 @@ namespace Login
                 return;
             }
 
-            using (UITransporteState frmEstado = new UITransporteState(estadoActual))
+            using (UIEstadoTransporte frmEstado = new UIEstadoTransporte(estadoActual))
             {
                 DialogResult resultado = frmEstado.ShowDialog(this);
                 if (resultado != DialogResult.OK) return;

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modelos", "Modelos\Modelos.csproj", "{3E880017-4E80-447C-9703-ECD0F76FDAC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consola", "Consola\Consola.csproj", "{4E8915EA-8D67-495C-B5B4-2B2A95017C8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{3E880017-4E80-447C-9703-ECD0F76FDAC5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E880017-4E80-447C-9703-ECD0F76FDAC5}.Release|x64.ActiveCfg = Release|x64
 		{3E880017-4E80-447C-9703-ECD0F76FDAC5}.Release|x64.Build.0 = Release|x64
+		{4E8915EA-8D67-495C-B5B4-2B2A95017C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8915EA-8D67-495C-B5B4-2B2A95017C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E8915EA-8D67-495C-B5B4-2B2A95017C8D}.Debug|x64.ActiveCfg = Debug|x64
+		{4E8915EA-8D67-495C-B5B4-2B2A95017C8D}.Debug|x64.Build.0 = Debug|x64
+		{4E8915EA-8D67-495C-B5B4-2B2A95017C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8915EA-8D67-495C-B5B4-2B2A95017C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E8915EA-8D67-495C-B5B4-2B2A95017C8D}.Release|x64.ActiveCfg = Release|Any CPU
+		{4E8915EA-8D67-495C-B5B4-2B2A95017C8D}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

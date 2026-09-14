@@ -278,17 +278,35 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UIConsultSale.cs">
+    <Compile Include="UIConsultarVenta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIConsultSale.Designer.cs">
-      <DependentUpon>UIConsultSale.cs</DependentUpon>
+    <Compile Include="UIConsultarVenta.Designer.cs">
+      <DependentUpon>UIConsultarVenta.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIDeletedPaymentMethod.cs">
+    <Compile Include="UIConsultarTanda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIDeletedPaymentMethod.Designer.cs">
-      <DependentUpon>UIDeletedPaymentMethod.cs</DependentUpon>
+    <Compile Include="UIConsultarTanda.Designer.cs">
+      <DependentUpon>UIConsultarTanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIEstadoTanda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIEstadoTanda.Designer.cs">
+      <DependentUpon>UIEstadoTanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIGestionTandas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIGestionTandas.Designer.cs">
+      <DependentUpon>UIGestionTandas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIMetodosPagoEliminados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIMetodosPagoEliminados.Designer.cs">
+      <DependentUpon>UIMetodosPagoEliminados.cs</DependentUpon>
     </Compile>
     <Compile Include="UIInicio1.cs">
       <SubType>Form</SubType>
@@ -296,17 +314,17 @@
     <Compile Include="UIInicio1.Designer.cs">
       <DependentUpon>UIInicio1.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIInsumoManagement.cs">
+    <Compile Include="UIGestionInsumos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIInsumoManagement.Designer.cs">
-      <DependentUpon>UIInsumoManagement.cs</DependentUpon>
+    <Compile Include="UIGestionInsumos.Designer.cs">
+      <DependentUpon>UIGestionInsumos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uilistatransportes.cs">
+    <Compile Include="UIListaTransportes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Uilistatransportes.Designer.cs">
-      <DependentUpon>Uilistatransportes.cs</DependentUpon>
+    <Compile Include="UIListaTransportes.Designer.cs">
+      <DependentUpon>UIListaTransportes.cs</DependentUpon>
     </Compile>
     <Compile Include="UIMenu2.cs">
       <SubType>Form</SubType>
@@ -314,17 +332,17 @@
     <Compile Include="UIMenu2.Designer.cs">
       <DependentUpon>UIMenu2.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIOrderState.cs">
+    <Compile Include="UIEstadoPedido.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIOrderState.Designer.cs">
-      <DependentUpon>UIOrderState.cs</DependentUpon>
+    <Compile Include="UIEstadoPedido.Designer.cs">
+      <DependentUpon>UIEstadoPedido.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIPaymentMethodManagement.cs">
+    <Compile Include="UIGestionMetodosPago.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIPaymentMethodManagement.Designer.cs">
-      <DependentUpon>UIPaymentMethodManagement.cs</DependentUpon>
+    <Compile Include="UIGestionMetodosPago.Designer.cs">
+      <DependentUpon>UIGestionMetodosPago.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
@@ -340,53 +358,71 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UIClientManagement.cs">
+    <Compile Include="UIGestionClientes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIClientManagement.Designer.cs">
-      <DependentUpon>UIClientManagement.cs</DependentUpon>
+    <Compile Include="UIGestionClientes.Designer.cs">
+      <DependentUpon>UIGestionClientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIDeletedClients.cs">
+    <Compile Include="UIClientesEliminados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIDeletedClients.Designer.cs">
-      <DependentUpon>UIDeletedClients.cs</DependentUpon>
+    <Compile Include="UIClientesEliminados.Designer.cs">
+      <DependentUpon>UIClientesEliminados.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIDeletedProducts.cs">
+    <Compile Include="UIProductosEliminados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIDeletedProducts.Designer.cs">
-      <DependentUpon>UIDeletedProducts.cs</DependentUpon>
+    <Compile Include="UIProductosEliminados.Designer.cs">
+      <DependentUpon>UIProductosEliminados.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIPaymentState.cs">
+    <Compile Include="UIEstadoPago.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIPaymentState.Designer.cs">
-      <DependentUpon>UIPaymentState.cs</DependentUpon>
+    <Compile Include="UIEstadoPago.Designer.cs">
+      <DependentUpon>UIEstadoPago.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIProductManagement.cs">
+    <Compile Include="UIGestionProductos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIProductManagement.Designer.cs">
-      <DependentUpon>UIProductManagement.cs</DependentUpon>
+    <Compile Include="UIGestionProductos.Designer.cs">
+      <DependentUpon>UIGestionProductos.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIRegisterSale.cs">
+    <Compile Include="UIRecetaProducto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIRegisterSale.Designer.cs">
-      <DependentUpon>UIRegisterSale.cs</DependentUpon>
+    <Compile Include="UIRecetaProducto.Designer.cs">
+      <DependentUpon>UIRecetaProducto.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIRegisterSaleDetail.cs">
+    <Compile Include="UIRegistrarDetalleTanda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIRegisterSaleDetail.Designer.cs">
-      <DependentUpon>UIRegisterSaleDetail.cs</DependentUpon>
+    <Compile Include="UIRegistrarDetalleTanda.Designer.cs">
+      <DependentUpon>UIRegistrarDetalleTanda.cs</DependentUpon>
     </Compile>
-    <Compile Include="UISalesManagement.cs">
+    <Compile Include="UIRegistrarTanda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UISalesManagement.Designer.cs">
-      <DependentUpon>UISalesManagement.cs</DependentUpon>
+    <Compile Include="UIRegistrarTanda.Designer.cs">
+      <DependentUpon>UIRegistrarTanda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIRegistrarVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRegistrarVenta.Designer.cs">
+      <DependentUpon>UIRegistrarVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIRegistrarDetalleVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRegistrarDetalleVenta.Designer.cs">
+      <DependentUpon>UIRegistrarDetalleVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIGestionVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIGestionVentas.Designer.cs">
+      <DependentUpon>UIGestionVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="UIStockInsumos.cs">
       <SubType>Form</SubType>
@@ -406,32 +442,41 @@
     <Compile Include="UITransporte.Designer.cs">
       <DependentUpon>UITransporte.cs</DependentUpon>
     </Compile>
-    <Compile Include="UITransporteState.cs">
+    <Compile Include="UIEstadoTransporte.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UITransporteState.Designer.cs">
-      <DependentUpon>UITransporteState.cs</DependentUpon>
+    <Compile Include="UIEstadoTransporte.Designer.cs">
+      <DependentUpon>UIEstadoTransporte.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UIConsultSale.resx">
-      <DependentUpon>UIConsultSale.cs</DependentUpon>
+    <EmbeddedResource Include="UIConsultarVenta.resx">
+      <DependentUpon>UIConsultarVenta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIDeletedPaymentMethod.resx">
-      <DependentUpon>UIDeletedPaymentMethod.cs</DependentUpon>
+    <EmbeddedResource Include="UIConsultarTanda.resx">
+      <DependentUpon>UIConsultarTanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIEstadoTanda.resx">
+      <DependentUpon>UIEstadoTanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIGestionTandas.resx">
+      <DependentUpon>UIGestionTandas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIMetodosPagoEliminados.resx">
+      <DependentUpon>UIMetodosPagoEliminados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIInicio1.resx">
       <DependentUpon>UIInicio1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIInsumoManagement.resx">
-      <DependentUpon>UIInsumoManagement.cs</DependentUpon>
+    <EmbeddedResource Include="UIGestionInsumos.resx">
+      <DependentUpon>UIGestionInsumos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIMenu2.resx">
       <DependentUpon>UIMenu2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIOrderState.resx">
-      <DependentUpon>UIOrderState.cs</DependentUpon>
+    <EmbeddedResource Include="UIEstadoPedido.resx">
+      <DependentUpon>UIEstadoPedido.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIPaymentMethodManagement.resx">
-      <DependentUpon>UIPaymentMethodManagement.cs</DependentUpon>
+    <EmbeddedResource Include="UIGestionMetodosPago.resx">
+      <DependentUpon>UIGestionMetodosPago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
@@ -449,29 +494,38 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UIClientManagement.resx">
-      <DependentUpon>UIClientManagement.cs</DependentUpon>
+    <EmbeddedResource Include="UIGestionClientes.resx">
+      <DependentUpon>UIGestionClientes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIDeletedClients.resx">
-      <DependentUpon>UIDeletedClients.cs</DependentUpon>
+    <EmbeddedResource Include="UIClientesEliminados.resx">
+      <DependentUpon>UIClientesEliminados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIDeletedProducts.resx">
-      <DependentUpon>UIDeletedProducts.cs</DependentUpon>
+    <EmbeddedResource Include="UIProductosEliminados.resx">
+      <DependentUpon>UIProductosEliminados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIPaymentState.resx">
-      <DependentUpon>UIPaymentState.cs</DependentUpon>
+    <EmbeddedResource Include="UIEstadoPago.resx">
+      <DependentUpon>UIEstadoPago.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIProductManagement.resx">
-      <DependentUpon>UIProductManagement.cs</DependentUpon>
+    <EmbeddedResource Include="UIGestionProductos.resx">
+      <DependentUpon>UIGestionProductos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIRegisterSale.resx">
-      <DependentUpon>UIRegisterSale.cs</DependentUpon>
+    <EmbeddedResource Include="UIRecetaProducto.resx">
+      <DependentUpon>UIRecetaProducto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIRegisterSaleDetail.resx">
-      <DependentUpon>UIRegisterSaleDetail.cs</DependentUpon>
+    <EmbeddedResource Include="UIRegistrarDetalleTanda.resx">
+      <DependentUpon>UIRegistrarDetalleTanda.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UISalesManagement.resx">
-      <DependentUpon>UISalesManagement.cs</DependentUpon>
+    <EmbeddedResource Include="UIRegistrarTanda.resx">
+      <DependentUpon>UIRegistrarTanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIRegistrarVenta.resx">
+      <DependentUpon>UIRegistrarVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIRegistrarDetalleVenta.resx">
+      <DependentUpon>UIRegistrarDetalleVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIGestionVentas.resx">
+      <DependentUpon>UIGestionVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIStockInsumos.resx">
       <DependentUpon>UIStockInsumos.cs</DependentUpon>
@@ -528,9 +582,7 @@
     <Error Condition="!Exists('..\packages\SkiaSharp.NativeAssets.macOS.3.119.0\build\net462\SkiaSharp.NativeAssets.macOS.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.NativeAssets.macOS.3.119.0\build\net462\SkiaSharp.NativeAssets.macOS.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.NativeAssets.Win32.3.119.0\build\net462\SkiaSharp.NativeAssets.Win32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.NativeAssets.Win32.3.119.0\build\net462\SkiaSharp.NativeAssets.Win32.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.13.2\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.13.2\build\Microsoft.VisualStudio.Threading.Analyzers.targets'))" />
-    
   </Target>
   <Import Project="..\packages\SkiaSharp.NativeAssets.Win32.3.119.0\build\net462\SkiaSharp.NativeAssets.Win32.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.Win32.3.119.0\build\net462\SkiaSharp.NativeAssets.Win32.targets')" />
   <Import Project="..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.13.2\build\Microsoft.VisualStudio.Threading.Analyzers.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Threading.Analyzers.17.13.2\build\Microsoft.VisualStudio.Threading.Analyzers.targets')" />
-  
 </Project>

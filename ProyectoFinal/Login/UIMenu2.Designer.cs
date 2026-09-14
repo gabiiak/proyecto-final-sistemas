@@ -26,6 +26,7 @@ namespace Login
         private Button btnProductos;
         private Button btnInsumos;
         private Button btnStock;
+        private Button btnTandas;
         private Button btnMetodosPago;
         private Button btnVentas;
         private Button btnCerrarSesion;
@@ -45,6 +46,7 @@ namespace Login
             lblUsuario = new Label();
             btnInicio = new Button();
             btnClientes = new Button();
+            btnTandas = new Button();
             btnProductos = new Button();
             btnInsumos = new Button();
             //btnStock = new Button();
@@ -55,7 +57,7 @@ namespace Login
             lblFecha = new Label();
             pnlSeparador = new Panel();
 
-        SuspendLayout();
+            SuspendLayout();
 
             // ── FORM ────────────────────────────────────────────────
             ClientSize = new Size(1250, 850);
@@ -63,6 +65,7 @@ namespace Login
             MinimumSize = new Size(900, 550);
             BackColor = Color.FromArgb(244, 247, 251); // Fondo app
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.WindowState = FormWindowState.Maximized;
 
             // ── SIDEBAR ─────────────────────────────────────────────
             pnlSidebar.BackColor = Color.FromArgb(28, 58, 94);
@@ -70,14 +73,7 @@ namespace Login
             pnlSidebar.Width = 220;
             pnlSidebar.Padding = new Padding(0, 12, 0, 12);
 
-            ConfigurarBotonSidebar(btnInicio, "  🏠  Inicio", 0);
-            ConfigurarBotonSidebar(btnClientes, "  👥  Clientes", 1);
-            ConfigurarBotonSidebar(btnProductos, "  📦  Productos", 2);
-            ConfigurarBotonSidebar(btnInsumos, "  🧰  Insumos", 3);
-            //ConfigurarBotonSidebar(btnStock, "  📊  StockInsumos", 4);
-            ConfigurarBotonSidebar(btnMetodosPago, "  💳  Métodos de Pago", 5);
-            ConfigurarBotonSidebar(btnVentas, "  🛒  Ventas", 6);
-            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 7);
+            
 
             // Label título en el sidebar
             lblTituloApp.Text = "T" + "&&" + "G System";
@@ -91,6 +87,7 @@ namespace Login
             pnlSidebar.Controls.Add(btnVentas);
             pnlSidebar.Controls.Add(btnMetodosPago);
             //pnlSidebar.Controls.Add(btnStock);
+            pnlSidebar.Controls.Add(btnTandas);
             pnlSidebar.Controls.Add(btnInsumos);
             pnlSidebar.Controls.Add(btnProductos);
             pnlSidebar.Controls.Add(btnClientes);

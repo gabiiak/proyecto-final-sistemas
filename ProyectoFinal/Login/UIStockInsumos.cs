@@ -216,7 +216,7 @@ namespace Login
 
         private void btnInsumos_Click(object sender, EventArgs e)
         {
-            UIInsumoManagement insumo = new UIInsumoManagement();
+            UIGestionInsumos insumo = new UIGestionInsumos();
             insumo.Show();
         }
     }

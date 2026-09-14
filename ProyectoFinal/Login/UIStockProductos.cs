@@ -169,7 +169,7 @@ namespace Login
         }
         private void btnProductos_Click (object sender, EventArgs e)
         {
-            UIProductManagement productos = new UIProductManagement();
+            UIGestionProductos productos = new UIGestionProductos();
             productos.Show();
         }
     }

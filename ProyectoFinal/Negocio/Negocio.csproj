@@ -193,12 +193,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NClientes.cs" />
+    <Compile Include="NDetalleTandaProduccion.cs" />
     <Compile Include="NDetalleVentas.cs" />
     <Compile Include="NInsumos.cs" />
     <Compile Include="NMetodosPago.cs" />
     <Compile Include="NProductos.cs" />
+    <Compile Include="NRecetaProducto.cs" />
     <Compile Include="NStockInsumo.cs" />
     <Compile Include="NStockProducto.cs" />
+    <Compile Include="NTandaProduccion.cs" />
     <Compile Include="NTransporte.cs" />
     <Compile Include="NVentas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
