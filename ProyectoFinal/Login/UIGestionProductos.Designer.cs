@@ -39,8 +39,8 @@
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaCaducidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -208,8 +208,8 @@
             this.Nombre,
             this.Descripcion,
             this.Precio,
-            this.Activo,
-            this.FechaCaducidad});
+            this.FechaCaducidad,
+            this.Activo});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -231,7 +231,7 @@
             // 
             // btnGestionRecetas
             // 
-            this.btnGestionRecetas.Location = new System.Drawing.Point(268, 276);
+            this.btnGestionRecetas.Location = new System.Drawing.Point(276, 275);
             this.btnGestionRecetas.Name = "btnGestionRecetas";
             this.btnGestionRecetas.Size = new System.Drawing.Size(234, 29);
             this.btnGestionRecetas.TabIndex = 10;
@@ -267,19 +267,19 @@
             this.Precio.Name = "Precio";
             this.Precio.ReadOnly = true;
             // 
+            // FechaCaducidad
+            // 
+            this.FechaCaducidad.FillWeight = 118.0919F;
+            this.FechaCaducidad.HeaderText = "VidaUtil";
+            this.FechaCaducidad.Name = "FechaCaducidad";
+            this.FechaCaducidad.ReadOnly = true;
+            // 
             // Activo
             // 
             this.Activo.FillWeight = 60.9137F;
             this.Activo.HeaderText = "Activo";
             this.Activo.Name = "Activo";
             this.Activo.ReadOnly = true;
-            // 
-            // FechaCaducidad
-            // 
-            this.FechaCaducidad.FillWeight = 118.0919F;
-            this.FechaCaducidad.HeaderText = "Caducidad";
-            this.FechaCaducidad.Name = "FechaCaducidad";
-            this.FechaCaducidad.ReadOnly = true;
             // 
             // UIGestionProductos
             // 
@@ -420,7 +420,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Activo;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaCaducidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Activo;
     }
 }

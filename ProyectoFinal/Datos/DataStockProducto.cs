@@ -70,6 +70,35 @@ namespace Datos
                 }
             }
         }
+        public static StockProducto GetStockByProductoId(int productoId)
+        {
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT sp.id, sp.producto_id, p.Nombre, sp.cantidad
+                            FROM StockProducto sp
+                            INNER JOIN Productos p ON p.IdProducto = sp.producto_id
+                            WHERE sp.producto_id = @productoId";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@productoId", productoId);
+                    connection.Open();
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new StockProducto
+                            {
+                                Id = reader.GetInt32(0),
+                                ProductoId = reader.GetInt32(1),
+                                NombreProducto = reader.GetString(2),
+                                CantidadDisponible = reader.GetDouble(3)
+                            };
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
 
         public static StockProducto GetStockById(int id)
         {
@@ -89,7 +118,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 ProductoId = reader.GetInt32(1),
                                 NombreProducto = reader.GetString(2),
-                                CantidadDisponible = reader.GetInt32(3)
+                                CantidadDisponible = reader.GetDouble(3)
                             };
                             return stock;
                         }

@@ -12,6 +12,6 @@ namespace Modelos
         public TandaProduccion TandaProduccion { get; set; }
         public Insumo Insumo { get; set; }
         public Empleado Empleado { get; set; }
-        public int CantidadProducida { get; set; }
+        public double CantidadUtilizada { get; set; }
     }
 }

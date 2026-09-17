@@ -20,8 +20,8 @@ namespace Datos
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTandaProd", detalle.TandaProduccion.IdTanda);
                     cmd.Parameters.AddWithValue("@IdInsumo", detalle.Insumo.Id);
-                    cmd.Parameters.AddWithValue("@IdEmpleado", detalle.Empleado.IdEmpleado);
-                    cmd.Parameters.AddWithValue("@CantidadUtilizada", detalle.CantidadProducida);
+                    cmd.Parameters.AddWithValue("@IdEmpleado", detalle.Empleado != null ? (object)detalle.Empleado.IdEmpleado : DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CantidadUtilizada", detalle.CantidadUtilizada);
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
@@ -32,14 +32,27 @@ namespace Datos
             List<DetalleTandaProduccion> lista = new List<DetalleTandaProduccion>();
             using (SqliteConnection connection = Db.GetConnection())
             {
+                /*LEFT JOIN Empleados e ON dt.idEmpleado = e.idEmpleado
+                 * Empleado = new Empleado
+                                {
+                                    IdEmpleado = reader.GetInt32(11),
+                                    Nombre = reader.GetString(12),
+                                    Apellido = reader.GetString(13),
+                                    Telefono = reader.IsDBNull(14) ? string.Empty : reader.GetString(14),
+                                    Cargo = reader.GetString(15),
+                                    Activo = reader.GetInt32(16),
+                                    NumCuenta = reader.GetInt32(17),
+                                    FechaIngreso = DateTime.Parse(reader.GetString(18)),
+                                    Sueldo = reader.GetDouble(19)
+                                }
+                                e.idEmpleado, e.nombre, e.apellido, e.telefono, e.cargo, e.activo, e.numCuenta, e.fechaIngreso, e.sueldo
+                */
                 string sqlQuery = @"SELECT dt.idDetalleTanda, dt.cantidadUtilizada,
                                            t.idTanda, t.fecha, t.hora, t.estado,
-                                           i.id, i.nombre, i.descripcion, i.precio, i.activo,
-                                           e.idEmpleado, e.nombre, e.apellido, e.telefono, e.cargo, e.activo, e.numCuenta, e.fechaIngreso, e.sueldo
+                                           i.id, i.nombre, i.descripcion, i.precio, i.activo       
                                     FROM DetalleTanda dt
                                     INNER JOIN TandaProduccion t ON dt.idTandaProd = t.idTanda
                                     INNER JOIN Insumos i ON dt.idInsumo = i.id
-                                    INNER JOIN Empleados e ON dt.idEmpleado = e.idEmpleado
                                     WHERE dt.idTandaProd = @IdTandaProd
                                     ORDER BY dt.idDetalleTanda ASC";
 
@@ -55,7 +68,7 @@ namespace Datos
                             DetalleTandaProduccion detalle = new DetalleTandaProduccion
                             {
                                 IdDetalleTanda = reader.GetInt32(0),
-                                CantidadProducida = reader.GetInt32(1),
+                                CantidadUtilizada = reader.GetDouble(1),
                                 TandaProduccion = new TandaProduccion
                                 {
                                     IdTanda = reader.GetInt32(2),
@@ -70,19 +83,8 @@ namespace Datos
                                     Descripcion = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
                                     Precio = reader.GetDouble(9),
                                     Activo = reader.GetInt32(10)
-                                },
-                                Empleado = new Empleado
-                                {
-                                    IdEmpleado = reader.GetInt32(11),
-                                    Nombre = reader.GetString(12),
-                                    Apellido = reader.GetString(13),
-                                    Telefono = reader.IsDBNull(14) ? string.Empty : reader.GetString(14),
-                                    Cargo = reader.GetString(15),
-                                    Activo = reader.GetInt32(16),
-                                    NumCuenta = reader.GetInt32(17),
-                                    FechaIngreso = DateTime.Parse(reader.GetString(18)),
-                                    Sueldo = reader.GetDouble(19)
                                 }
+                                
                             };
                             lista.Add(detalle);
                         }

@@ -94,6 +94,37 @@ namespace Login
 
         }
 
+        private void RegistrarVentaEnBaseDeDatos(int estado, double recibido)
+        {
+            var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
+            var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
+            DateTime fecha = DateTime.Parse(txtFecha.Text);
+            recibido = Math.Round(recibido, 2);
+            total = Math.Round(total, 2);
+
+            ventaEnMemoria = new Venta
+            {
+                Cliente = clienteSeleccionado,
+                Fecha = fecha,
+                Total = total,
+                Metodo = metodoSeleccionado,
+                Estado_Pago = estado,
+                Estado_Pedido = EstadoPedido.Preparacion,
+                MontoRecibido = (total - recibido <= 0.01) ? total : recibido
+            };
+
+            int idVenta = NVentas.CreateVenta(ventaEnMemoria);
+            ventaEnMemoria.IdVenta = idVenta;
+
+            foreach (DetalleVenta detalle in detalleVentas)
+            {
+                detalle.Venta = new Venta { IdVenta = idVenta };
+                NDetalleVentas.CreateDetalleVenta(detalle);
+            }
+
+            this.DialogResult = DialogResult.OK;
+        }
+
         private void btnRegistrarVenta_Click(object sender, EventArgs e)
         {
             DateTime fecha;
@@ -105,10 +136,13 @@ namespace Login
                 return;
             }
 
-            if (fecha.Date > DateTime.Now.Date)
+            try
             {
-                MessageBox.Show("No se puede registrar una venta con fecha futura.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                NVentas.ValidarFechaVenta(fecha);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
                 return;
             }
             if (string.IsNullOrEmpty(txtPagoRecibido.Text))
@@ -129,6 +163,12 @@ namespace Login
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            string avisoStock = NVentas.VerificarStockDisponible(detalleVentas);
+            if (avisoStock != null)
+            {
+                MessageBox.Show(avisoStock, "Stock insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // seguís adelante igual, es solo informativo — no hay return acá
+            }
             int estado = NVentas.DeterminarEstadoPago(total, recibido);
             if (total - recibido > 0.01)
             {
@@ -138,29 +178,7 @@ namespace Login
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (resultado == DialogResult.Yes)
                 {
-                    var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
-                    var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
-                    fecha = DateTime.Parse(txtFecha.Text);
-                    recibido = Math.Round(recibido, 2);
-                    total = Math.Round(total, 2);
-                    ventaEnMemoria = new Venta
-                    {
-                        Cliente = clienteSeleccionado,
-                        Fecha = fecha,
-                        Total = total,
-                        Metodo = metodoSeleccionado,
-                        Estado_Pago = estado,
-                        Estado_Pedido = EstadoPedido.Preparacion,
-                        MontoRecibido = (total - recibido <= 0.01) ? total : recibido // <- fix
-                    };
-                    int idVenta = NVentas.CreateVenta(ventaEnMemoria);
-                    ventaEnMemoria.IdVenta = idVenta;
-                    foreach (DetalleVenta detalle in detalleVentas)
-                    {
-                        detalle.Venta = new Venta { IdVenta = idVenta };
-                        NDetalleVentas.CreateDetalleVenta(detalle);
-                    }
-                    this.DialogResult = DialogResult.OK;
+                    RegistrarVentaEnBaseDeDatos(estado, recibido);
                 } 
 
             }
@@ -177,29 +195,7 @@ namespace Login
                         DialogResult result = MessageBox.Show("Ingresó un monto mayor. Debe devolver un vuelto de " + vuelto.ToString("C2"), "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                          if (result == DialogResult.Yes)
                         {
-                            var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
-                            metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
-                            fecha = DateTime.Parse(txtFecha.Text);
-                            recibido = Math.Round(recibido, 2);
-                            total = Math.Round(total, 2);
-                            ventaEnMemoria = new Venta
-                            {
-                                Cliente = clienteSeleccionado,
-                                Fecha = fecha,
-                                Total = total, //totalDescuento para más adelante
-                                Metodo = metodoSeleccionado,
-                                Estado_Pago = estado,
-                                Estado_Pedido = EstadoPedido.Preparacion,
-                                MontoRecibido = (total - recibido <= 0.01) ? total : recibido
-                            };
-                            int idVenta = NVentas.CreateVenta(ventaEnMemoria);
-                            ventaEnMemoria.IdVenta = idVenta;
-                            foreach (DetalleVenta detalle in detalleVentas)
-                            {
-                                detalle.Venta = new Venta { IdVenta = idVenta };
-                                NDetalleVentas.CreateDetalleVenta(detalle);
-                            }
-                            this.DialogResult = DialogResult.OK;
+                            RegistrarVentaEnBaseDeDatos(estado, recibido);
                         }
                             
                     }
@@ -215,29 +211,7 @@ namespace Login
                     DialogResult result = MessageBox.Show("Se concretará una venta con el monto justo pagado y la venta estará PAGADA.", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
-                        var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
-                        var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
-                        fecha = DateTime.Parse(txtFecha.Text);
-                        recibido = Math.Round(recibido, 2);
-                        total = Math.Round(total, 2);
-                        ventaEnMemoria = new Venta
-                        {
-                            Cliente = clienteSeleccionado,
-                            Fecha = fecha,
-                            Total = total,
-                            Metodo = metodoSeleccionado,
-                            Estado_Pago = estado,
-                            Estado_Pedido = EstadoPedido.Preparacion,
-                            MontoRecibido = (total - recibido <= 0.01) ? total : recibido 
-                        };
-                        int idVenta = NVentas.CreateVenta(ventaEnMemoria);
-                        ventaEnMemoria.IdVenta = idVenta;
-                        foreach (DetalleVenta detalle in detalleVentas)
-                        {
-                            detalle.Venta = new Venta { IdVenta = idVenta };
-                            NDetalleVentas.CreateDetalleVenta(detalle);
-                        }
-                        this.DialogResult = DialogResult.OK;
+                        RegistrarVentaEnBaseDeDatos(estado, recibido);
                     }
                 }
             }

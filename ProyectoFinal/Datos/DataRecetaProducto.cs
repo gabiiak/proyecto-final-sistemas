@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    public class DRecetaProducto
+    public class DataRecetaProducto
     {
         public static int Create(RecetaProducto receta)
         {
@@ -72,7 +72,7 @@ namespace Datos
             {
                 connection.Open();
                 string consulta = @"SELECT r.idReceta, r.idProducto, r.idInsumo, r.cantidadPorUnidad,
-                                        i.nombre, i.descripcion
+                                        i.nombre, i.descripcion, i.unidadMedida
                                  FROM RecetaProducto r
                                  INNER JOIN Insumos i ON r.idInsumo = i.id
                                  WHERE r.idProducto = @idProducto;";
@@ -92,7 +92,8 @@ namespace Datos
                                 IdInsumo = reader.GetInt32(2),
                                 CantidadPorUnidad = reader.GetDouble(3),
                                 NombreInsumo = reader.GetString(4),
-                                DescripcionInsumo = reader.GetString(5)
+                                DescripcionInsumo = reader.GetString(5),
+                                UnidadMedidaInsumo= reader.GetString(6)
                             });
                         }
                     }

@@ -56,6 +56,8 @@ namespace Login
                 new System.Drawing.Point(20, 284), 7);
             this.btnProductosEliminados.Click += new System.EventHandler(this.btnProductosEliminados_Click);
 
+            ConfigurarBotonSecundario(this.btnGestionRecetas, "Gestionar Recetas de productos", new System.Drawing.Point(488, 284),6);
+
 
         }
 
@@ -72,7 +74,7 @@ namespace Login
             /*dgvProductos.DataSource = null;
             dgvProductos.DataSource = listaProductos;
             */
-            //dgvProductos.Rows.Clear();
+            dgvProductos.Rows.Clear();
             foreach (Producto p in listaProductos)
             {
                 dgvProductos.Rows.Add(
@@ -80,8 +82,8 @@ namespace Login
                     p.Nombre,
                     p.Descripcion,
                     p.Precio,
-                    p.Activo,
-                    p.FechaCaducidad.ToString("dd-MM-yyyy")
+                    p.VidaUtilDias,
+                    p.Activo
                     );
             }
             if (dgvProductos.Columns.Contains("Activo"))
@@ -135,13 +137,14 @@ namespace Login
                     MessageBox.Show("El precio debe ser un número válido.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
-                DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text); 
+                //DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text); 
+                int vidaUtilDias = int.Parse(txtFechaCaducidad.Text);
                 Producto prod = new Producto
                 {
                     Nombre = txtNombre.Text,
                     Descripcion = txtDescripcion.Text,
                     Precio = precioConvertido,
-                    FechaCaducidad = fechaCaducidad
+                    VidaUtilDias = vidaUtilDias
                 };
 
                 listaProductos.Add(prod);
@@ -180,7 +183,8 @@ namespace Login
                 }
 
                 int id = int.Parse(labelId.Text);
-                DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text);
+                //DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text); 
+                int vidaUtilDias = int.Parse(txtFechaCaducidad.Text);
                 DialogResult result = MessageBox.Show("¿Desea modificar el registro?", "Alerta", MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
@@ -191,7 +195,7 @@ namespace Login
                         Nombre = txtNombre.Text,
                         Descripcion = txtDescripcion.Text,
                         Precio = precioConvertido,
-                        FechaCaducidad = fechaCaducidad
+                        VidaUtilDias = vidaUtilDias
                     };
 
                     NProductos.Update(prod);
@@ -216,7 +220,8 @@ namespace Login
             }
 
             int id = int.Parse(labelId.Text);
-            DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text);
+            //DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text); 
+            int vidaUtilDias = int.Parse(txtFechaCaducidad.Text);
             DialogResult result = MessageBox.Show("¿Desea borrar el registro?", "Alerta", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
@@ -230,7 +235,7 @@ namespace Login
                     Nombre = txtNombre.Text,
                     Descripcion = txtDescripcion.Text,
                     Precio = precioConvertido,
-                    FechaCaducidad = fechaCaducidad
+                    VidaUtilDias = vidaUtilDias
                 };
 
                 NProductos.Delete(prod);

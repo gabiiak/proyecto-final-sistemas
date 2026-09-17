@@ -37,7 +37,7 @@ namespace Login
         {
             lblError.Visible = true;
             string usuario = "administrador";
-            string contraseña = "administrador"; //cambiar
+            string contraseña = "xxintervalouwu"; //cambiar
             //string usuario = "1";
             //string contraseña = "1";
             if (string.IsNullOrWhiteSpace(txtUser.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))

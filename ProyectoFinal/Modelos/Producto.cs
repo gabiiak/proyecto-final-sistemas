@@ -14,6 +14,7 @@ namespace Modelos
         public double Precio { get; set; }
         public int Activo { get; set; }
         public DateTime FechaCaducidad { get; set; }
+        public int VidaUtilDias { get; set; }
 
         public override string ToString()
         {

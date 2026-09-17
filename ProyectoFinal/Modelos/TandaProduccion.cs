@@ -13,5 +13,7 @@ namespace Modelos
         public int EstadoTanda { get; set; }
         public DateTime Fecha { get; set; }
         public DateTime Hora { get; set; }
+        public int CantidadProducida { get; set; }
+        public DateTime FechaCaducidad { get; set; }
     }
 }

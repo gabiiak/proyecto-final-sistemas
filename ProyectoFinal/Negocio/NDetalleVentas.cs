@@ -34,5 +34,19 @@ namespace Negocio
             double subTotal = detalle.Producto.Precio * detalle.Cantidad;
             return subTotal;
         }
+        public static void ValidarStockSuficiente(List<DetalleVenta> detalles)
+        {
+            foreach (DetalleVenta detalle in detalles)
+            {
+                StockProducto stockActual = DataStockProducto.GetStockByProductoId(detalle.Producto.IdProducto);
+
+                if (stockActual == null)
+                    throw new ArgumentException($"No existe stock cargado para el producto '{detalle.Producto.Nombre}'.");
+
+                if (stockActual.CantidadDisponible < detalle.Cantidad)
+                    throw new ArgumentException(
+                        $"Stock insuficiente de '{detalle.Producto.Nombre}'. Disponible: {stockActual.CantidadDisponible}, necesario: {detalle.Cantidad}.");
+            }
+        }
     }
 }

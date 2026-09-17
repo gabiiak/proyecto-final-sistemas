@@ -308,6 +308,40 @@ namespace Datos
                 }
             }
         }
+        public static void MarcarPedidoListoConDescuentoStock(int idVenta, List<DetalleVenta> detalles)
+        {
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                connection.Open();
+                using (SqliteTransaction transaction = connection.BeginTransaction())
+                {
+                    string updateEstado = "UPDATE Ventas SET estadoPedido = @Estado WHERE idVenta = @IdVenta;";
+                    using (SqliteCommand cmd = new SqliteCommand(updateEstado, connection, transaction))
+                    {
+                        cmd.Parameters.AddWithValue("@Estado", EstadoPedido.Listo);
+                        cmd.Parameters.AddWithValue("@IdVenta", idVenta);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    string updateStock = @"UPDATE StockProducto SET cantidad = cantidad - @cantidadVendida
+                                    WHERE producto_id = @productoId;";
+                    foreach (DetalleVenta detalle in detalles)
+                    {
+                        using (SqliteCommand cmd = new SqliteCommand(updateStock, connection, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@cantidadVendida", detalle.Cantidad);
+                            cmd.Parameters.AddWithValue("@productoId", detalle.Producto.IdProducto);
+                            int filas = cmd.ExecuteNonQuery();
+
+                            if (filas == 0)
+                                throw new InvalidOperationException($"No existe stock cargado para el producto '{detalle.Producto.Nombre}'.");
+                        }
+                    }
+
+                    transaction.Commit();
+                }
+            }
+        }
 
         /*using (SqliteConnection connection = Db.GetConnection())
                 {

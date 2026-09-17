@@ -17,5 +17,6 @@ namespace Modelos
         public string NombreInsumo { get; set; }
         public string DescripcionInsumo { get; set; }
 
+        public string UnidadMedidaInsumo { get; set; }
     }
 }

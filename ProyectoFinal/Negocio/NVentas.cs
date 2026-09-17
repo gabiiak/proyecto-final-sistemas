@@ -45,7 +45,44 @@ namespace Negocio
         public static List<Venta> GetAllVentas() { return DataVentas.GetAllVentas(); }
         
         public static int CreateVenta(Venta venta) { return DataVentas.CreateVenta(venta); }
-        
+
+        public static string VerificarStockDisponible(List<DetalleVenta> detalles)
+        {
+            try
+            {
+                NDetalleVentas.ValidarStockSuficiente(detalles);
+                return null;
+            }
+            catch (ArgumentException ex)
+            {
+                return ex.Message;
+            }
+        }
+        public static void MarcarPedidoListo(int idVenta)
+        {
+            Venta venta = DataVentas.GetVentaById(idVenta);
+
+            if (venta == null)
+                throw new ArgumentException("La venta no existe.");
+
+            if (venta.Estado_Pedido != EstadoPedido.Preparacion)
+                throw new ArgumentException("Solo se puede marcar como listo un pedido que está en preparación.");
+
+            List<DetalleVenta> detalles = DataDetalleVentas.GetDetallesByIdVenta(idVenta);
+
+            if (detalles == null || detalles.Count == 0)
+                throw new ArgumentException("La venta no tiene detalle de productos.");
+
+            NDetalleVentas.ValidarStockSuficiente(detalles);
+
+            DataVentas.MarcarPedidoListoConDescuentoStock(idVenta, detalles);
+        }
+        public static void ValidarFechaVenta(DateTime fecha)
+        {
+            if (fecha.Date > DateTime.Now.Date)
+                throw new ArgumentException("No se puede registrar una venta con fecha futura.");
+        }
+
         public static double CalcularVuelto(double total, double recibido, string metodo)
         {
             if (metodo.Equals("Efectivo", StringComparison.OrdinalIgnoreCase) && recibido > total)

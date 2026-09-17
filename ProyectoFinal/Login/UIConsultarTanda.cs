@@ -33,21 +33,20 @@ namespace Login
 
                 List<DetalleTandaProduccion> detalles = NDetalleTandaProduccion.ObtenerDetallesPorTanda(idTanda);
                 dgvDetallesTanda.Rows.Clear();
-                int totalCantidad = 0;
+                double totalCantidad = 0;
 
                 foreach (var det in detalles)
                 {
                     dgvDetallesTanda.Rows.Add(
                         det.IdDetalleTanda,
                         det.Insumo?.Nombre ?? "N/A",
-                        $"{det.Empleado?.Nombre} {det.Empleado?.Apellido}",
-                        det.Empleado?.Cargo ?? "N/A",
-                        det.CantidadProducida
+                        det.CantidadUtilizada,
+                        $"{det.Empleado?.Nombre} {det.Empleado?.Apellido}" ?? "N/A",
+                        det.Empleado?.Cargo ?? "N/A"
                     );
-                    totalCantidad += det.CantidadProducida;
                 }
 
-                lblTotalCantidad.Text = totalCantidad.ToString();
+                lblTotalCantidad.Text = tanda.CantidadProducida.ToString();
             }
             catch (Exception ex)
             {

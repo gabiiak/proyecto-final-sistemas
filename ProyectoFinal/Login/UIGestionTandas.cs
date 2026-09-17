@@ -40,7 +40,8 @@ namespace Login
                     tanda.Producto?.Nombre ?? "N/A",
                     tanda.Fecha.ToString("dd-MM-yyyy"),
                     tanda.Hora.ToString("HH:mm:ss"),
-                    GetDescripcionEstado(tanda.EstadoTanda)
+                    GetDescripcionEstado(tanda.EstadoTanda),
+                    tanda.FechaCaducidad.ToString("dd-MM-yyyy")
                 );
             }
         }
@@ -86,8 +87,30 @@ namespace Login
             {
                 try
                 {
-                    NTandaProduccion.CambiarEstado(idTandaSeleccionada, estadoForm.RetornarEstado());
+                    int nuevoEstado = estadoForm.RetornarEstado();
+
+                    if (nuevoEstado == EstadoTanda.Terminada)
+                    {
+                        NTandaProduccion.FinalizarTanda(idTandaSeleccionada);
+                        MessageBox.Show("Tanda finalizada y stock actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (nuevoEstado == EstadoTanda.Cancelada)
+                    {
+                        NTandaProduccion.CancelarTanda(idTandaSeleccionada);
+                        MessageBox.Show("Tanda cancelada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        // Para EnProceso / Pendiente, si esos cambios de estado no mueven stock,
+                        // ahí sí alcanza con el cambio de estado simple
+                        NTandaProduccion.CambiarEstado(idTandaSeleccionada, nuevoEstado);
+                    }
+
                     ActualizarDataGridView();
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 catch (Exception ex)
                 {
@@ -139,7 +162,8 @@ namespace Login
                     tanda.Producto?.Nombre ?? "N/A",
                     tanda.Fecha.ToString("dd-MM-yyyy"),
                     tanda.Hora.ToString("HH:mm:ss"),
-                    GetDescripcionEstado(tanda.EstadoTanda)
+                    GetDescripcionEstado(tanda.EstadoTanda),
+                    tanda.FechaCaducidad.ToString("dd-MM-yyyy")
                 );
             }
         }
@@ -171,7 +195,8 @@ namespace Login
                     tanda.Producto?.Nombre ?? "N/A",
                     tanda.Fecha.ToString("dd-MM-yyyy"),
                     tanda.Hora.ToString("HH:mm:ss"),
-                    GetDescripcionEstado(tanda.EstadoTanda)
+                    GetDescripcionEstado(tanda.EstadoTanda),
+                    tanda.FechaCaducidad.ToString("dd-MM-yyyy")
                 );
             }
         }

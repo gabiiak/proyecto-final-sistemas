@@ -10,12 +10,64 @@ namespace Login
     {
         private List<DetalleTandaProduccion> listaDetalles = new List<DetalleTandaProduccion>();
         public TandaProduccion tandaEnMemoria = new TandaProduccion();
-        private int totalCantidadProducida = 0;
 
         public UIRegistrarTanda()
         {
             InitializeComponent();
             dgvTanda_Detalles.AllowUserToAddRows = false;
+            ConfigurarLabel(this.lblProducto, "Producto a elaborar", new System.Drawing.Point(16, 16));
+            ConfigurarCombo(this.cbProducto, new System.Drawing.Point(16, 36), new System.Drawing.Size(228, 32), 0);
+            ConfigurarLabel(this.lblCantidadProducto, "Cantidad de producto", new System.Drawing.Point(255, 16));
+
+            ConfigurarTextBox(this.txtCantidadTanda, new System.Drawing.Point(255, 36), new System.Drawing.Size(168, 32), 0);
+            ConfigurarLabel(this.lblFecha, "Fecha", new System.Drawing.Point(16, 84));
+            ConfigurarTextBox(this.txtFecha, new System.Drawing.Point(16, 104), new System.Drawing.Size(210, 32), 1);
+
+            ConfigurarLabel(this.lblHora, "Hora", new System.Drawing.Point(240, 84));
+            ConfigurarTextBox(this.txtHora, new System.Drawing.Point(240, 104), new System.Drawing.Size(224, 32), 2);
+
+            //ConfigurarBotonSecundario(this.btnQuitarDetalle, "Quitar detalle", new System.Drawing.Point(176, 460), 5);
+            ConfigurarBotonPrimario(this.btnAgregarDetalle, "Calcular Insumos", new System.Drawing.Point(20, 460), 4);
+            ConfigurarBotonPrimario(this.btnRegistrarTanda, "Registrar Tanda", new System.Drawing.Point(20, 624), 6);
+        }
+
+        private void CalcularDetalleReceta()
+        {
+            if (cbProducto.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!int.TryParse(txtCantidadTanda.Text, out int cantidadAProducir) || cantidadAProducir <= 0)
+            {
+                MessageBox.Show("Debe ingresar una cantidad numérica mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var productoSeleccionado = (Producto)cbProducto.SelectedItem;
+            
+            List<RecetaProducto> receta = NRecetaProducto.ObtenerPorProducto(productoSeleccionado.IdProducto);
+
+            if (receta == null || receta.Count == 0)
+            {
+                MessageBox.Show("Este producto no tiene una receta definida. Cargue la receta antes de registrar una tanda.",
+                    "Receta no encontrada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            listaDetalles = new List<DetalleTandaProduccion>();
+
+            foreach (RecetaProducto item in receta)
+            {
+                listaDetalles.Add(new DetalleTandaProduccion
+                {
+                    Insumo = new Insumo { Id = item.IdInsumo, Nombre = item.NombreInsumo, UnidadMedida = item.UnidadMedidaInsumo},
+                    CantidadUtilizada = item.CantidadPorUnidad * cantidadAProducir
+                });
+            }
+
+            ActualizarDataGridView();
         }
 
         private void UIRegistrarTanda_Load(object sender, EventArgs e)
@@ -41,27 +93,34 @@ namespace Login
         public void ActualizarDataGridView()
         {
             dgvTanda_Detalles.Rows.Clear();
-            totalCantidadProducida = 0;
             foreach (var det in listaDetalles)
             {
                 dgvTanda_Detalles.Rows.Add(
                     det.Insumo.Nombre,
-                    det.Empleado.Nombre + " " + det.Empleado.Apellido,
-                    det.CantidadProducida
+                    det.CantidadUtilizada,
+                    det.Insumo.UnidadMedida
+                    //det.Empleado.Nombre + " " + det.Empleado.Apellido,
+                    
                 );
-                totalCantidadProducida += det.CantidadProducida;
-            }
-            labelTotalCantidad.Text = totalCantidadProducida.ToString();
+            }    
         }
 
         private void btnAgregarDetalle_Click(object sender, EventArgs e)
         {
-            UIRegistrarDetalleTanda regDetalle = new UIRegistrarDetalleTanda();
+            CalcularDetalleReceta();
+            if (!int.TryParse(txtCantidadTanda.Text, out int cantProducida) || cantProducida <= 0)
+            {
+                MessageBox.Show("Debe ingresar una cantidad numérica mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            labelTotalCantidad.Text = cantProducida.ToString();
+            /*UIRegistrarDetalleTanda regDetalle = new UIRegistrarDetalleTanda();
             if (regDetalle.ShowDialog() == DialogResult.OK)
             {
                 listaDetalles.AddRange(regDetalle.DetallesTanda);
                 ActualizarDataGridView();
-            }
+            }*/
         }
 
         private void btnQuitarDetalle_Click(object sender, EventArgs e)
@@ -100,7 +159,7 @@ namespace Login
                 MessageBox.Show("Debe registrar al menos un detalle de insumo/empleado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            
             try
             {
                 var prodSeleccionado = (Producto)cbProducto.SelectedItem;
@@ -109,18 +168,12 @@ namespace Login
                     Producto = prodSeleccionado,
                     Fecha = fecha,
                     Hora = hora,
-                    EstadoTanda = EstadoTanda.Pendiente
+                    EstadoTanda = EstadoTanda.Pendiente,
+                    CantidadProducida = int.Parse(txtCantidadTanda.Text),
+                    FechaCaducidad = fecha.AddDays(prodSeleccionado.VidaUtilDias)
                 };
 
                 int idNuevaTanda = NTandaProduccion.RegistrarTanda(tandaEnMemoria);
-                tandaEnMemoria.IdTanda = idNuevaTanda;
-
-                foreach (var detalle in listaDetalles)
-                {
-                    detalle.TandaProduccion = tandaEnMemoria;
-                    NDetalleTandaProduccion.RegistrarDetalle(detalle);
-                }
-
                 MessageBox.Show("Tanda de producción registrada correctamente con estado PENDIENTE.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
             }

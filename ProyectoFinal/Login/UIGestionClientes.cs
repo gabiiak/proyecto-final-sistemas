@@ -71,11 +71,11 @@ namespace Login
                     MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
-                if (NClientes.ExisteCliente(txtNombre.Text.Trim()))
+                /*if (NClientes.ExisteCliente(txtNombre.Text.Trim()))
                 {
                     MessageBox.Show("Ya existe un cliente con ese nombre.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
-                }
+                }*/
                 if (NClientes.ExisteTelefono(txtTelefono.Text.Trim()))
                 {
                     MessageBox.Show("Ya existe un cliente con ese telefono.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);

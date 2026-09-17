@@ -23,7 +23,7 @@ namespace Datos
             List<StockInsumo> listaStock = new List<StockInsumo>();
             using (SqliteConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT s.id, s.insumo_id, i.nombre, s.cantidad
+                string sqlQuery = @"SELECT s.id, s.insumo_id, i.nombre, s.cantidad, i.unidadMedida
                                     FROM StockInsumo s
                                     INNER JOIN Insumos i ON i.id = s.insumo_id
                                     WHERE i.activo = 1";
@@ -39,7 +39,8 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 InsumoId = reader.GetInt32(1),
                                 NombreInsumo = reader.GetString(2),
-                                CantidadDisponible = reader.GetDouble(3)
+                                CantidadDisponible = reader.GetDouble(3),
+                                UnidadMedidaInsumo = reader.GetString(4)
                             };
                             listaStock.Add(stock);
                         }
@@ -126,6 +127,36 @@ namespace Datos
                         {
                             return null; // No se encontró el stock con el ID proporcionado
                         }
+                    }
+                }
+            }
+        }
+
+        public static StockInsumo GetStockByInsumoId(int insumoId)
+        {
+            using (SqliteConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT s.id, s.insumo_id, i.nombre, s.cantidad
+                            FROM StockInsumo s
+                            INNER JOIN Insumos i ON i.id = s.insumo_id
+                            WHERE s.insumo_id = @insumoId";
+                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@insumoId", insumoId);
+                    connection.Open();
+                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new StockInsumo
+                            {
+                                Id = reader.GetInt32(0),
+                                InsumoId = reader.GetInt32(1),
+                                NombreInsumo = reader.GetString(2),
+                                CantidadDisponible = reader.GetDouble(3)
+                            };
+                        }
+                        return null;
                     }
                 }
             }

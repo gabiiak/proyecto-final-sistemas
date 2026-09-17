@@ -190,7 +190,7 @@ namespace Login
             this.dgvInsumos.RowHeadersVisible = false;
             this.dgvInsumos.RowTemplate.Height = 35;
             this.dgvInsumos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvInsumos.Size = new System.Drawing.Size(860, 452);
+            this.dgvInsumos.Size = new System.Drawing.Size(760, 252);
             this.dgvInsumos.TabIndex = 7;
             this.dgvInsumos.SelectionChanged += new System.EventHandler(this.dgvInsumos_SelectionChanged);
             // 

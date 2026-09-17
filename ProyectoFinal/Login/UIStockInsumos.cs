@@ -77,6 +77,10 @@ namespace Login
             {
                 dgvStock.Columns["CantidadDisponible"].HeaderText = "Cantidad disponible";
             }
+            if (dgvStock.Columns.Contains("UnidadMedida"))
+            {
+                dgvStock.Columns["UnidadMedida"].HeaderText = "Unidad";
+            }
             if (dgvStock.Rows.Count > 0)
             {
                 dgvStock.ClearSelection();

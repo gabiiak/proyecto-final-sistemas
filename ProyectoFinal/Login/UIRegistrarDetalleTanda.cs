@@ -48,7 +48,31 @@ namespace Login
                 txtDescripcionInsumo.Text = insumo.Descripcion;
             }
         }
+        private List<DetalleTandaProduccion> CalcularDetalleDesdeReceta(int idProducto, int cantidadProducida)
+        {
+            List<RecetaProducto> receta = NRecetaProducto.ObtenerPorProducto(idProducto);
 
+            if (receta == null || receta.Count == 0)
+            {
+                MessageBox.Show("Este producto no tiene una receta definida. Cargue la receta antes de registrar una tanda.",
+                    "Receta no encontrada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return new List<DetalleTandaProduccion>();
+            }
+
+            List<DetalleTandaProduccion> detalles = new List<DetalleTandaProduccion>();
+
+            foreach (RecetaProducto item in receta)
+            {
+                detalles.Add(new DetalleTandaProduccion
+                {
+                    Insumo = new Insumo { Id = item.IdInsumo, Nombre = item.NombreInsumo },
+                    CantidadUtilizada = (item.CantidadPorUnidad * cantidadProducida),
+                    Empleado = null // diferido
+                });
+            }
+
+            return detalles;
+        }
         private void btnRegistrarDetalle_Click(object sender, EventArgs e)
         {
             if (cbInsumo.SelectedItem == null)
@@ -56,11 +80,11 @@ namespace Login
                 MessageBox.Show("Debe seleccionar un insumo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (cbEmpleado.SelectedItem == null)
+            /*if (cbEmpleado.SelectedItem == null)
             {
                 MessageBox.Show("Debe asignar un empleado responsable.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
+            }*/
             if (numUpDownCantidad.Value <= 0)
             {
                 MessageBox.Show("Debe ingresar una cantidad producida mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -75,7 +99,7 @@ namespace Login
             {
                 Insumo = insumoSeleccionado,
                 Empleado = empleadoSeleccionado,
-                CantidadProducida = cantidad
+                CantidadUtilizada = cantidad
             };
 
             detallesTanda.Add(detalle);

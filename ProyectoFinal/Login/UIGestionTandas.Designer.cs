@@ -35,6 +35,7 @@
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaCaducidad = new System.Windows.Forms.DataGridViewTextBoxColumn();            
 
             this.pnlAcciones.SuspendLayout();
             this.pnlFiltros.SuspendLayout();
@@ -95,7 +96,7 @@
             // ── PANEL FILTROS ───────────────────────────────────────
             this.pnlFiltros.BackColor = System.Drawing.Color.White;
             this.pnlFiltros.Location = new System.Drawing.Point(356, 56);
-            this.pnlFiltros.Size = new System.Drawing.Size(624, 240);
+            this.pnlFiltros.Size = new System.Drawing.Size(724, 240);
 
             ConfigurarLabel(this.lblDesde, "Desde", new System.Drawing.Point(16, 16));
             ConfigurarLabel(this.lblHasta, "Hasta", new System.Drawing.Point(16, 68));
@@ -143,7 +144,7 @@
 
             // ── DATAGRIDVIEW PRINCIPAL ──────────────────────────────
             this.dgvTodasLasTandas.Location = new System.Drawing.Point(20, 302);
-            this.dgvTodasLasTandas.Size = new System.Drawing.Size(960, 360);
+            this.dgvTodasLasTandas.Size = new System.Drawing.Size(1060, 360);
             this.dgvTodasLasTandas.ReadOnly = true;
             this.dgvTodasLasTandas.RowTemplate.Height = 35;
             this.dgvTodasLasTandas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -155,11 +156,11 @@
 
             this.IdTanda.HeaderText = "ID Tanda";
             this.IdTanda.Name = "IdTanda";
-            this.IdTanda.FillWeight = 40;
+            this.IdTanda.FillWeight = 20;
 
             this.Producto.HeaderText = "Producto";
             this.Producto.Name = "Producto";
-            this.Producto.FillWeight = 90;
+            this.Producto.FillWeight = 70;
 
             this.Fecha.HeaderText = "Fecha";
             this.Fecha.Name = "Fecha";
@@ -173,8 +174,12 @@
             this.Estado.Name = "Estado";
             this.Estado.FillWeight = 70;
 
+            this.FechaCaducidad.HeaderText = "FechaCaducidad";
+            this.FechaCaducidad.Name = "FechaCaducidad";
+            this.FechaCaducidad.FillWeight = 60;
+
             this.dgvTodasLasTandas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                this.IdTanda, this.Producto, this.Fecha, this.Hora, this.Estado
+                this.IdTanda, this.Producto, this.Fecha, this.Hora, this.Estado, this.FechaCaducidad
             });
 
             this.Controls.Add(this.lblTitulo);
@@ -260,6 +265,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCaducidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
     }
 }

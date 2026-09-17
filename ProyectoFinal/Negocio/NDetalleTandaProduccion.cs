@@ -7,6 +7,22 @@ namespace Negocio
 {
     public class NDetalleTandaProduccion
     {
+        public static void ValidarStockSuficiente(List<RecetaProducto> receta, int cantidadProducida)
+        {
+            foreach (RecetaProducto item in receta)
+            {
+                double cantidadNecesaria = item.CantidadPorUnidad * cantidadProducida;
+
+                StockInsumo stockActual = DataStockInsumo.GetStockByInsumoId(item.IdInsumo);
+
+                if (stockActual == null)
+                    throw new ArgumentException($"No existe stock cargado para el insumo '{item.NombreInsumo}'.");
+
+                if (stockActual.CantidadDisponible < cantidadNecesaria)
+                    throw new ArgumentException(
+                        $"Stock insuficiente de '{item.NombreInsumo}'. Disponible: {stockActual.CantidadDisponible}, necesario: {cantidadNecesaria}.");
+            }
+        }
         public static int RegistrarDetalle(DetalleTandaProduccion detalle)
         {
             if (detalle == null)
@@ -18,10 +34,9 @@ namespace Negocio
             if (detalle.Insumo == null || detalle.Insumo.Id <= 0)
                 throw new ArgumentException("Debe seleccionar un insumo válido.");
 
-            if (detalle.Empleado == null || detalle.Empleado.IdEmpleado <= 0)
-                throw new ArgumentException("Debe asignar un empleado responsable válido.");
+            //if (detalle.Empleado == null || detalle.Empleado.IdEmpleado <= 0) throw new ArgumentException("Debe asignar un empleado responsable válido.");
 
-            if (detalle.CantidadProducida <= 0)
+            if (detalle.CantidadUtilizada <= 0)
                 throw new ArgumentException("La cantidad producida debe ser mayor a cero.");
 
             // Valida que la tanda no esté cerrada ni cancelada

@@ -14,5 +14,6 @@ namespace Modelos
         public int InsumoId { get; set; }
         public string NombreInsumo { get; set; }
         public double CantidadDisponible { get; set; }
+        public string UnidadMedidaInsumo { get; set; }
     }
 }

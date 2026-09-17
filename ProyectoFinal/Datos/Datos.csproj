@@ -225,7 +225,7 @@
     <Compile Include="DataTransporte.cs" />
     <Compile Include="DataVentas.cs" />
     <Compile Include="Db.cs" />
-    <Compile Include="DRecetaProducto.cs" />
+    <Compile Include="DataRecetaProducto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

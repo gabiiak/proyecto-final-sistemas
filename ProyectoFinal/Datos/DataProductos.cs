@@ -14,7 +14,7 @@ namespace Datos
             List<Producto> lista = new List<Producto>();
             using (SqliteConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT IdProducto, Nombre, Descripcion, Precio, Activo, fechaCaducidad FROM Productos WHERE Activo != 0";
+                string sqlQuery = @"SELECT IdProducto, Nombre, Descripcion, Precio, vidaUtilDias, Activo FROM Productos WHERE Activo != 0";
                 using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
                 {
                     connection.Open();
@@ -29,12 +29,13 @@ namespace Datos
                                 // reader.IsDBNull(2) ? "" : <- en la DB la descripción ya no puede ser null 
                                 Descripcion = reader.GetString(2),
                                 Precio = reader.GetDouble(3),
-                                Activo = reader.GetInt32(4),
-                                FechaCaducidad = DateTime.ParseExact(
+                                VidaUtilDias = reader.GetInt32(4),
+                                Activo = reader.GetInt32(5)
+                                /*FechaCaducidad = DateTime.ParseExact(
                                     reader.GetString(5),
                                     new[] { "yyyy-MM-dd", "dd-MM-yyyy" },
                                     System.Globalization.CultureInfo.InvariantCulture,
-                                    System.Globalization.DateTimeStyles.None),
+                                    System.Globalization.DateTimeStyles.None)*/
                             };
                             lista.Add(prod);
                         }
@@ -48,7 +49,7 @@ namespace Datos
             List<Producto> listaDeleted = new List<Producto>();
             using (SqliteConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT IdProducto, Nombre, Descripcion, Precio, fechaCaducidad, Activo FROM Productos WHERE Activo = 0";
+                string sqlQuery = @"SELECT IdProducto, Nombre, Descripcion, Precio, vidaUtilDias, Activo FROM Productos WHERE Activo = 0";
                 using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
                 {
                     connection.Open();
@@ -62,11 +63,12 @@ namespace Datos
                                 Nombre = reader.GetString(1),
                                 Descripcion = reader.GetString(2),
                                 Precio = reader.GetDouble(3),
-                                FechaCaducidad = DateTime.ParseExact(
-                                    reader.GetString(4),
+                                VidaUtilDias = reader.GetInt32(4),
+                                /*FechaCaducidad = DateTime.ParseExact(
+                                    reader.GetString(5),
                                     new[] { "yyyy-MM-dd", "dd-MM-yyyy" },
-                                    CultureInfo.InvariantCulture,
-                                    DateTimeStyles.None),
+                                    System.Globalization.CultureInfo.InvariantCulture,
+                                    System.Globalization.DateTimeStyles.None)*/
                                 Activo = reader.GetInt32(5)
                             };
                             listaDeleted.Add(prod);
@@ -79,8 +81,8 @@ namespace Datos
 
         public static void Create(Producto producto)
         {
-            string sqlQuery = @"INSERT INTO Productos (Nombre, Descripcion, Precio, fechaCaducidad) VALUES 
-            (@Nombre, @Descripcion, @Precio, @FechaCaducidad)";
+            string sqlQuery = @"INSERT INTO Productos (Nombre, Descripcion, Precio, vidaUtilDias) VALUES 
+            (@Nombre, @Descripcion, @Precio, @VidaUtil)";
             using (SqliteConnection connection = Db.GetConnection())
             {
                 using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
@@ -91,7 +93,7 @@ namespace Datos
                     cmd.Parameters.AddWithValue("@Nombre", producto.Nombre);
                     cmd.Parameters.AddWithValue("@Descripcion", producto.Descripcion);
                     cmd.Parameters.AddWithValue("@Precio", producto.Precio);
-                    cmd.Parameters.AddWithValue("@FechaCaducidad", producto.FechaCaducidad.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@VidaUtil", producto.VidaUtilDias);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -100,7 +102,7 @@ namespace Datos
         public static void Update(Producto producto)
         {
             // Nombres de parámetros exactos
-            string sqlQuery = @"UPDATE Productos SET Nombre = @Nombre, Descripcion = @Descripcion, Precio = @Precio, fechaCaducidad = @FechaCaducidad WHERE IdProducto = @IdProducto";
+            string sqlQuery = @"UPDATE Productos SET Nombre = @Nombre, Descripcion = @Descripcion, Precio = @Precio, vidaUtilDias = @VidaUtil WHERE IdProducto = @IdProducto";
             using (SqliteConnection connection = Db.GetConnection())
             {
                 using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
@@ -110,7 +112,7 @@ namespace Datos
                     cmd.Parameters.AddWithValue("@Nombre", producto.Nombre); // Corregido a mayúscula
                     cmd.Parameters.AddWithValue("@Descripcion", producto.Descripcion);
                     cmd.Parameters.AddWithValue("@Precio", producto.Precio); // Corregido a mayúscula
-                    cmd.Parameters.AddWithValue("@FechaCaducidad", producto.FechaCaducidad.ToString("yyyy-MM-dd"));
+                    cmd.Parameters.AddWithValue("@VidaUtil", producto.VidaUtilDias);
                     cmd.ExecuteNonQuery();
                 }
             }

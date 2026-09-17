@@ -25,10 +25,10 @@ namespace Negocio
             if (receta.CantidadPorUnidad <= 0)
                 throw new ArgumentException("La cantidad por unidad debe ser mayor a cero.");
 
-            if (DRecetaProducto.ExisteInsumoEnReceta(receta.IdProducto, receta.IdInsumo))
+            if (DataRecetaProducto.ExisteInsumoEnReceta(receta.IdProducto, receta.IdInsumo))
                 throw new ArgumentException("Este insumo ya forma parte de la receta de este producto. Modifique la cantidad existente en lugar de agregarlo de nuevo.");
 
-            return DRecetaProducto.Create(receta);
+            return DataRecetaProducto.Create(receta);
         }
 
         public static void Update(RecetaProducto receta)
@@ -42,7 +42,7 @@ namespace Negocio
             if (receta.CantidadPorUnidad <= 0)
                 throw new ArgumentException("La cantidad por unidad debe ser mayor a cero.");
 
-            DRecetaProducto.Update(receta);
+            DataRecetaProducto.Update(receta);
         }
 
         public static void Delete(int idReceta)
@@ -50,7 +50,7 @@ namespace Negocio
             if (idReceta <= 0)
                 throw new ArgumentException("Id de receta inválido.");
 
-            DRecetaProducto.Delete(idReceta);
+            DataRecetaProducto.Delete(idReceta);
         }
 
         public static List<RecetaProducto> ObtenerPorProducto(int idProducto)
@@ -58,7 +58,7 @@ namespace Negocio
             if (idProducto <= 0)
                 throw new ArgumentException("Debe seleccionar un producto válido.");
 
-            return DRecetaProducto.ObtenerPorProducto(idProducto);
+            return DataRecetaProducto.ObtenerPorProducto(idProducto);
         }
         public static void ReemplazarReceta(int idProducto, List<RecetaProducto> receta)
         {
@@ -80,9 +80,13 @@ namespace Negocio
 
                 if (item.CantidadPorUnidad <= 0)
                     throw new ArgumentException("Todas las cantidades deben ser mayores a cero.");
+                
+                if (item.CantidadPorUnidad > 10)
+                    throw new ArgumentException(
+                        $"La cantidad '{item.CantidadPorUnidad}' parece muy alta para un insumo medido en Kg. Verifique que esté expresada correctamente.");
             }
 
-            DRecetaProducto.ReemplazarReceta(idProducto, receta);
+            DataRecetaProducto.ReemplazarReceta(idProducto, receta);
         }
     }
 }

@@ -119,7 +119,27 @@ namespace Login
             UIEstadoPedido pedido = new UIEstadoPedido();
             if (pedido.ShowDialog() == DialogResult.OK)
             {
-                NVentas.CambiarEstadoPedido(idVenta, pedido.estado);
+                try
+                {
+                    if (pedido.estado == EstadoPedido.Listo)
+                    {
+                        NVentas.MarcarPedidoListo(idVenta);
+                        MessageBox.Show("Pedido marcado como listo. Stock actualizado.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        NVentas.CambiarEstadoPedido(idVenta, pedido.estado);
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error inesperado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             ActualizarDataGridView();
         }
