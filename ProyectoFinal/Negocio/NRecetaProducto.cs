@@ -60,6 +60,20 @@ namespace Negocio
 
             return DataRecetaProducto.ObtenerPorProducto(idProducto);
         }
+        private static bool CantidadRazonable(double cantidad, string unidadMedida)
+        {
+            switch (unidadMedida?.ToLower())
+            {
+                case "kg":
+                    return cantidad <= 10; // más de 10 Kg por unidad de producto es sospechoso
+                case "gr":
+                    return cantidad <= 1000; // más de 1000 gr (=1kg) por unidad de producto es sospechoso
+                case "unidad":
+                    return cantidad <= 50; // más de 50 unidades (ej. huevos) por producto es sospechoso
+                default:
+                    return true; // unidad desconocida, no bloqueamos por las dudas
+            }
+        }
         public static void ReemplazarReceta(int idProducto, List<RecetaProducto> receta)
         {
             if (idProducto <= 0)
@@ -80,10 +94,11 @@ namespace Negocio
 
                 if (item.CantidadPorUnidad <= 0)
                     throw new ArgumentException("Todas las cantidades deben ser mayores a cero.");
-                
-                if (item.CantidadPorUnidad > 10)
+
+                if (!CantidadRazonable(item.CantidadPorUnidad, item.UnidadMedidaInsumo))
                     throw new ArgumentException(
-                        $"La cantidad '{item.CantidadPorUnidad}' parece muy alta para un insumo medido en Kg. Verifique que esté expresada correctamente.");
+                        $"La cantidad '{item.CantidadPorUnidad}' parece muy alta para el insumo '{item.NombreInsumo}' " +
+                        $"(medido en {item.UnidadMedidaInsumo}). Verifique que esté expresada correctamente.");
             }
 
             DataRecetaProducto.ReemplazarReceta(idProducto, receta);

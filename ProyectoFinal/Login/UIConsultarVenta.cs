@@ -32,6 +32,28 @@ namespace Login
             InitializeComponent();
             dgvConsultaVenta.AllowUserToAddRows = false;
             this.idVenta = idVenta; //para recibir el id del label y asignarlo con constructor
+
+            ConfigurarLabelKey(this.lblClienteKey, "Cliente", new System.Drawing.Point(16, 12));
+            ConfigurarLabelKey(this.lblFechaKey, "Fecha", new System.Drawing.Point(16, 56));
+            ConfigurarLabelKey(this.lblEstadoPagoKey, "Estado de pago", new System.Drawing.Point(240, 12));
+            ConfigurarLabelKey(this.lblEstadoPedidoKey, "Estado del pedido", new System.Drawing.Point(240, 76));
+            ConfigurarLabelKey(this.lblMetodoKey, "Método de pago", new System.Drawing.Point(16, 96));
+
+            ConfigurarLabelValor(this.labelCliente, new System.Drawing.Point(16, 30));
+            ConfigurarLabelValor(this.labelFecha, new System.Drawing.Point(16, 69));
+            ConfigurarLabelValor(this.labelEstadoPago, new System.Drawing.Point(240, 30));
+            ConfigurarLabelValor(this.labelEstadoPedido, new System.Drawing.Point(240, 94));
+            ConfigurarLabelValor(this.labelMetodo, new System.Drawing.Point(16, 109));
+
+            ConfigurarBotonPrimario(this.btnEmitirFactura, "Emitir Factura PDF",
+                new System.Drawing.Point(20, 528), 1);
+            this.btnEmitirFactura.Size = new System.Drawing.Size(280, 40);
+            this.btnEmitirFactura.Click += new System.EventHandler(this.btnEmitirFactura_Click);
+
+            ConfigurarBotonSecundario(this.btnSalir, "Cerrar",
+                new System.Drawing.Point(312, 528), 2);
+            this.btnSalir.Size = new System.Drawing.Size(148, 40);
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
         }
 
         private void UIConsultSale_Load(object sender, EventArgs e)
@@ -259,6 +281,25 @@ namespace Login
         {
             this.Close();
         }
+
+        private void ConfigurarLabelKey(System.Windows.Forms.Label lbl, string texto,
+            System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabelKey(lbl, texto, ubicacion);
+
+        private void ConfigurarLabelValor(System.Windows.Forms.Label lbl,
+            System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabelValor(lbl, ubicacion);
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void pnlPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+            => UIStyles.PintarPanelRedondeado(sender, e);
     }
 }
 /*using (PdfWriter writer = new PdfWriter(dialog.FileName))

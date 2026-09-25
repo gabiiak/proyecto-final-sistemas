@@ -23,6 +23,21 @@ namespace Login
             InitializeComponent();
             // Por las dudas el Designer no lo tenga enlazado:
             this.Load += UITransporte_Load;
+            ConfigurarLabel(this.lblVentas, "Ventas a incluir en el transporte",
+                new System.Drawing.Point(16, 16));
+            ConfigurarLabel(this.lblFecha, "Fecha y Hora Programada",
+                new System.Drawing.Point(16, 152));
+            ConfigurarLabel(this.lblEstado, "Estado del Transporte",
+                new System.Drawing.Point(16, 205));
+            ConfigurarBotonPrimario(this.btnRegistrarTransporte, "Registrar",
+                new System.Drawing.Point(20, 384), 3);
+            this.btnRegistrarTransporte.Size = new System.Drawing.Size(240, 40);
+            this.btnRegistrarTransporte.Click += new System.EventHandler(this.btnRegistrarTransporte_Click);
+
+            ConfigurarBotonSecundario(this.btnSalirTransporte, "Cancelar",
+                new System.Drawing.Point(272, 384), 4);
+            this.btnSalirTransporte.Size = new System.Drawing.Size(128, 40);
+            this.btnSalirTransporte.Click += new System.EventHandler(this.btnSalirTransporte_Click);
         }
 
         private void UITransporte_Load(object sender, EventArgs e)
@@ -155,5 +170,20 @@ namespace Login
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto,
+            System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabel(lbl, texto, ubicacion, new System.Drawing.Size(280, 18));
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void pnlPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+            => UIStyles.PintarPanelRedondeado(sender, e);
     }
 }

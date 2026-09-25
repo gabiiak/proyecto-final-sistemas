@@ -275,5 +275,28 @@ namespace Login
             UIRecetaProducto recetita = new UIRecetaProducto();
             recetita.Show();
         }
+
+        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto,
+            System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabel(lbl, texto, ubicacion, new System.Drawing.Size(200, 18));
+
+        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt,
+            System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarTextBox(txt, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonFantasma(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonFantasma(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(220, 30));
+
+        private void pnlFormulario_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+            => UIStyles.PintarPanelRedondeado(sender, e);
     }
 }

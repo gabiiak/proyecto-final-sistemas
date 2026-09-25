@@ -15,6 +15,21 @@ namespace Login
             InitializeComponent();
             this.idTanda = idTanda;
             dgvDetallesTanda.AllowUserToAddRows = false;
+
+            ConfigurarLabelHeader(this.lblIdLabel, "ID Tanda:", new System.Drawing.Point(16, 12));
+            ConfigurarLabelHeaderValor(this.lblValorId, "-", new System.Drawing.Point(90, 12));
+
+            ConfigurarLabelHeader(this.lblProductoLabel, "Producto:", new System.Drawing.Point(16, 40));
+            ConfigurarLabelHeaderValor(this.lblValorProducto, "-", new System.Drawing.Point(90, 40));
+
+            ConfigurarLabelHeader(this.lblEstadoLabel, "Estado:", new System.Drawing.Point(16, 70));
+            ConfigurarLabelHeaderValor(this.lblValorEstado, "-", new System.Drawing.Point(90, 70));
+
+            ConfigurarLabelHeader(this.lblFechaLabel, "Fecha:", new System.Drawing.Point(340, 12));
+            ConfigurarLabelHeaderValor(this.lblValorFecha, "-", new System.Drawing.Point(400, 12));
+
+            ConfigurarLabelHeader(this.lblHoraLabel, "Hora:", new System.Drawing.Point(340, 40));
+            ConfigurarLabelHeaderValor(this.lblValorHora, "-", new System.Drawing.Point(400, 40));
         }
 
         private void UIEstadoTanda_Load(object sender, EventArgs e)
@@ -41,8 +56,9 @@ namespace Login
                         det.IdDetalleTanda,
                         det.Insumo?.Nombre ?? "N/A",
                         det.CantidadUtilizada,
-                        $"{det.Empleado?.Nombre} {det.Empleado?.Apellido}" ?? "N/A",
-                        det.Empleado?.Cargo ?? "N/A"
+                        det.Insumo.UnidadMedida
+                        //$"{det.Empleado?.Nombre} {det.Empleado?.Apellido}" ?? "N/A",
+                        //det.Empleado?.Cargo ?? "N/A"
                     );
                 }
 
@@ -70,5 +86,11 @@ namespace Login
         {
             this.Close();
         }
+
+        private void ConfigurarLabelHeader(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabelHeader(lbl, texto, ubicacion);
+
+        private void ConfigurarLabelHeaderValor(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabelHeaderValor(lbl, texto, ubicacion);
     }
 }

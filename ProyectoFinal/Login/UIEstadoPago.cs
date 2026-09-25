@@ -118,5 +118,8 @@ namespace Login
                 default: return "DESCONOCIDO";
             }
         }
+
+        private void pnlPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+            => UIStyles.PintarPanelRedondeado(sender, e);
     }
 }

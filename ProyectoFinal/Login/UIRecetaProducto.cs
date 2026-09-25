@@ -52,12 +52,15 @@ namespace Login
 
                 int idInsumo = Convert.ToInt32(fila.Cells["cmbInsumo"].Value);
                 double cantidad = Convert.ToDouble(fila.Cells["cantidad"].Value);
+                Insumo insumo = listaInsumos.FirstOrDefault(i => i.Id == idInsumo);
 
                 receta.Add(new RecetaProducto
                 {
                     IdProducto = idProducto,
                     IdInsumo = idInsumo,
-                    CantidadPorUnidad = cantidad
+                    CantidadPorUnidad = cantidad,
+                    NombreInsumo = insumo?.Nombre,
+                    UnidadMedidaInsumo = insumo?.UnidadMedida
                 });
             }
 

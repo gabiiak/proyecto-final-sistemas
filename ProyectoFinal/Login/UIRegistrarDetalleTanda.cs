@@ -14,6 +14,29 @@ namespace Login
         public UIRegistrarDetalleTanda()
         {
             InitializeComponent();
+            ConfigurarLabel(this.lblInsumo, "Insumo", new System.Drawing.Point(16, 12));
+            ConfigurarCombo(this.cbInsumo, new System.Drawing.Point(16, 30), new System.Drawing.Size(348, 30), 0);
+            this.cbInsumo.SelectedIndexChanged += new System.EventHandler(this.cbInsumo_SelectedIndexChanged);
+
+            // Descripción Insumo
+            ConfigurarLabel(this.lblDescripcion, "Descripción del Insumo", new System.Drawing.Point(16, 68));
+            ConfigurarTextBox(this.txtDescripcionInsumo, new System.Drawing.Point(16, 86), new System.Drawing.Size(348, 30), 1);
+            this.txtDescripcionInsumo.ReadOnly = true;
+            this.txtDescripcionInsumo.BackColor = System.Drawing.Color.FromArgb(230, 241, 251);
+
+            // Empleado Responsable
+            ConfigurarLabel(this.lblEmpleado, "Empleado Responsable", new System.Drawing.Point(16, 126));
+            ConfigurarCombo(this.cbEmpleado, new System.Drawing.Point(16, 144), new System.Drawing.Size(348, 30), 2);
+
+            // Cantidad Producida
+            ConfigurarLabel(this.lblCantidad, "Cantidad Producida", new System.Drawing.Point(16, 186));
+            ConfigurarBotonPrimario(this.btnRegistrarDetalle, "Registrar", new System.Drawing.Point(20, 340), 4);
+            this.btnRegistrarDetalle.Size = new System.Drawing.Size(240, 40);
+            this.btnRegistrarDetalle.Click += new System.EventHandler(this.btnRegistrarDetalle_Click);
+
+            ConfigurarBotonSecundario(this.btnSalirDetalle, "Cancelar", new System.Drawing.Point(272, 340), 5);
+            this.btnSalirDetalle.Size = new System.Drawing.Size(128, 40);
+            this.btnSalirDetalle.Click += new System.EventHandler(this.btnSalirDetalle_Click);
         }
 
         private void UIRegistrarDetalleTanda_Load(object sender, EventArgs e)
@@ -119,5 +142,20 @@ namespace Login
         {
             this.Close();
         }
+
+        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabel(lbl, texto, ubicacion, new System.Drawing.Size(220, 18));
+
+        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarTextBox(txt, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarCombo(System.Windows.Forms.ComboBox cb, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarComboBox(cb, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex);
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex);
     }
 }

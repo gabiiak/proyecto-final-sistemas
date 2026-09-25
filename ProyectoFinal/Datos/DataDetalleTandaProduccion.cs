@@ -49,7 +49,7 @@ namespace Datos
                 */
                 string sqlQuery = @"SELECT dt.idDetalleTanda, dt.cantidadUtilizada,
                                            t.idTanda, t.fecha, t.hora, t.estado,
-                                           i.id, i.nombre, i.descripcion, i.precio, i.activo       
+                                           i.id, i.nombre, i.descripcion, i.precio, i.activo, i.unidadMedida       
                                     FROM DetalleTanda dt
                                     INNER JOIN TandaProduccion t ON dt.idTandaProd = t.idTanda
                                     INNER JOIN Insumos i ON dt.idInsumo = i.id
@@ -82,7 +82,8 @@ namespace Datos
                                     Nombre = reader.GetString(7),
                                     Descripcion = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
                                     Precio = reader.GetDouble(9),
-                                    Activo = reader.GetInt32(10)
+                                    Activo = reader.GetInt32(10),
+                                    UnidadMedida = reader.GetString(11)
                                 }
                                 
                             };

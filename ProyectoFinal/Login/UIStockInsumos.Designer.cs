@@ -208,69 +208,6 @@ namespace Login
 
         }
 
-        // Mantienes los métodos helper dentro del Designer o de la clase parcial
-        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
-        {
-            lbl.Text = texto;
-            lbl.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            lbl.Font = new System.Drawing.Font("Segoe UI", 9F);
-            lbl.Location = ubicacion;
-            lbl.Size = new System.Drawing.Size(200, 18);
-            lbl.AutoSize = false;
-        }
-
-        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
-        {
-            txt.Location = ubicacion;
-            txt.Size = tamaño;
-            txt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            txt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txt.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
-            txt.TabIndex = tabIndex;
-        }
-
-        private void ConfigurarComboBox(System.Windows.Forms.ComboBox cmb, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
-        {
-            cmb.Location = ubicacion;
-            cmb.Size = tamaño;
-            cmb.Font = new System.Drawing.Font("Segoe UI", 10F);
-            cmb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            cmb.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
-            cmb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cmb.TabIndex = tabIndex;
-        }
-
-        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(140, 36);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.ForeColor = System.Drawing.Color.White;
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = btn.Text.ToLower();
-        }
-
-        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(140, 36);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 1;
-            btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(181, 212, 244);
-            btn.BackColor = System.Drawing.Color.White;
-            btn.ForeColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = btn.Text.ToLower();
-        }
-
         // ── DECLARACIÓN ─────────────────────────────────────────
         private System.Windows.Forms.Button btnInsumos;
         private System.Windows.Forms.Panel pnlFormulario;

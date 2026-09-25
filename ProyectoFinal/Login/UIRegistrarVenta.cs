@@ -23,6 +23,38 @@ namespace Login
         {
             InitializeComponent();
             dgvVenta_DetalleVenta.AllowUserToAddRows = false;
+            ConfigurarLabel(this.lblCliente, "Cliente", new System.Drawing.Point(16, 16));
+            ConfigurarLabel(this.lblMetodo, "Método de pago", new System.Drawing.Point(256, 16));
+            ConfigurarCombo(this.cbCliente, new System.Drawing.Point(16, 36), new System.Drawing.Size(220, 32), 0);
+            ConfigurarCombo(this.cbMetodo, new System.Drawing.Point(256, 36), new System.Drawing.Size(208, 32), 1);
+
+            // Fila 2: Fecha transacción
+            ConfigurarLabel(this.lblFecha, "Fecha de transacción", new System.Drawing.Point(16, 84));
+            ConfigurarTextBox(this.txtFecha, new System.Drawing.Point(16, 104), new System.Drawing.Size(448, 32), 2);
+            ConfigurarBotonPrimario(this.btnAgregarDetalle, "Agregar detalle",
+                new System.Drawing.Point(20, 460), 4);
+            this.btnAgregarDetalle.Click += new System.EventHandler(this.btnAgregarDetalle_Click);
+
+            ConfigurarBotonSecundario(this.btnQuitarDetalle, "Quitar detalle",
+                new System.Drawing.Point(176, 460), 5);
+            this.btnQuitarDetalle.ForeColor = System.Drawing.Color.FromArgb(150, 30, 30);
+            this.btnQuitarDetalle.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(220, 180, 180);
+            this.btnQuitarDetalle.Click += new System.EventHandler(this.btnQuitarDetalle_Click);
+            ConfigurarLabel(this.lblPagoRecibido, "Pago recibido ($)",
+                new System.Drawing.Point(260, 10));
+            ConfigurarTextBox(this.txtPagoRecibido,
+                new System.Drawing.Point(260, 28), new System.Drawing.Size(120, 32), 6);
+
+            ConfigurarBotonSecundario(this.btnPagoJusto, "Pago justo",
+                new System.Drawing.Point(392, 28), 7);
+            this.btnPagoJusto.Size = new System.Drawing.Size(72, 32);
+            this.btnPagoJusto.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.btnPagoJusto.Click += new System.EventHandler(this.btnPagoJusto_Click);
+            ConfigurarBotonPrimario(this.btnRegistrarVenta, "Registrar Venta",
+                new System.Drawing.Point(20, 624), 8);
+            this.btnRegistrarVenta.Size = new System.Drawing.Size(480, 44);
+            this.btnRegistrarVenta.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.btnRegistrarVenta.Click += new System.EventHandler(this.btnRegistrarVenta_Click);
         }
 
         private void UIRegisterSale_Load(object sender, EventArgs e)
@@ -243,5 +275,28 @@ namespace Login
             labelTotal.Text = total.ToString();
             ActualizarDataGridView();
         }
+
+        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto,
+            System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabel(lbl, texto, ubicacion, new System.Drawing.Size(220, 18));
+
+        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt,
+            System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarTextBox(txt, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarCombo(System.Windows.Forms.ComboBox cb,
+            System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarComboBox(cb, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void pnlPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+            => UIStyles.PintarPanelRedondeado(sender, e);
     }
 }

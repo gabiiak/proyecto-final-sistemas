@@ -89,29 +89,7 @@
 
             // ── BOTONES ─────────────────────────────────────────────
             // Primario: Registrar
-            ConfigurarBotonPrimario(this.btnRegistrar, "Registrar",
-                new System.Drawing.Point(20, 252), 4);
-            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
-
-            // Secundarios: Modificar, Eliminar, Limpiar
-            ConfigurarBotonSecundario(this.btnModificar, "Modificar",
-                new System.Drawing.Point(176, 252), 5);
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-
-            ConfigurarBotonSecundario(this.btnEliminar, "Eliminar",
-                new System.Drawing.Point(332, 252), 6);
-            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(150, 30, 30);
-            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(220, 180, 180);
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-
-            ConfigurarBotonSecundario(this.btnLimpiar, "Limpiar",
-                new System.Drawing.Point(488, 252), 7);
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-
-            // Botón fantasma: Clientes Eliminados
-            ConfigurarBotonFantasma(this.btnListarBorrados, "Ver clientes eliminados",
-                new System.Drawing.Point(20, 300), 8);
-            this.btnListarBorrados.Click += new System.EventHandler(this.btnListarBorrados_Click);
+            
 
             // ── DATAGRIDVIEW ────────────────────────────────────────
             this.dgvClientes.Location = new System.Drawing.Point(20, 344);
@@ -154,95 +132,6 @@
             this.pnlFormulario.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
-        }
-
-        // ── HELPERS DE ESTILO ────────────────────────────────────
-        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto,
-            System.Drawing.Point ubicacion)
-        {
-            lbl.Text = texto;
-            lbl.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            lbl.Font = new System.Drawing.Font("Segoe UI", 9F);
-            lbl.Location = ubicacion;
-            lbl.Size = new System.Drawing.Size(200, 18);
-            lbl.AutoSize = false;
-        }
-
-        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt,
-            System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
-        {
-            txt.Location = ubicacion;
-            txt.Size = tamaño;
-            txt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            txt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txt.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
-            txt.TabIndex = tabIndex;
-        }
-
-        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
-            System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(140, 36);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.ForeColor = System.Drawing.Color.White;
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = btn.Text.ToLower();
-        }
-
-        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
-            System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(140, 36);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 1;
-            btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(181, 212, 244);
-            btn.BackColor = System.Drawing.Color.White;
-            btn.ForeColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = btn.Text.ToLower();
-        }
-
-        private void ConfigurarBotonFantasma(System.Windows.Forms.Button btn, string texto,
-            System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(220, 30);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = System.Drawing.Color.Transparent;
-            btn.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            btn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = btn.Text.ToLower();
-        }
-
-        // ── BORDE REDONDEADO DEL PANEL ───────────────────────────
-        private void pnlFormulario_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
-        {
-            var panel = sender as System.Windows.Forms.Panel;
-            var g = e.Graphics;
-            var pen = new System.Drawing.Pen(System.Drawing.Color.FromArgb(211, 209, 199), 1f);
-            var rect = new System.Drawing.Rectangle(0, 0, panel.Width - 1, panel.Height - 1);
-            int r = 8;
-            var path = new System.Drawing.Drawing2D.GraphicsPath();
-            path.AddArc(rect.X, rect.Y, r * 2, r * 2, 180, 90);
-            path.AddArc(rect.Right - r * 2, rect.Y, r * 2, r * 2, 270, 90);
-            path.AddArc(rect.Right - r * 2, rect.Bottom - r * 2, r * 2, r * 2, 0, 90);
-            path.AddArc(rect.X, rect.Bottom - r * 2, r * 2, r * 2, 90, 90);
-            path.CloseFigure();
-            g.DrawPath(pen, path);
         }
 
         // ── DECLARACIÓN ─────────────────────────────────────────

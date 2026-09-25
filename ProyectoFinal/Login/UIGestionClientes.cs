@@ -29,6 +29,30 @@ namespace Login
             ConfigurarLabel(this.lblTelefono, "Teléfono", new System.Drawing.Point(336, 112));
             ConfigurarTextBox(this.txtDireccion, new System.Drawing.Point(16, 132), new System.Drawing.Size(300, 32), 2);
             ConfigurarTextBox(this.txtTelefono, new System.Drawing.Point(336, 132), new System.Drawing.Size(300, 32), 3);
+
+            ConfigurarBotonPrimario(this.btnRegistrar, "Registrar",
+                new System.Drawing.Point(20, 252), 4);
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
+
+            // Secundarios: Modificar, Eliminar, Limpiar
+            ConfigurarBotonSecundario(this.btnModificar, "Modificar",
+                new System.Drawing.Point(176, 252), 5);
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+
+            ConfigurarBotonSecundario(this.btnEliminar, "Eliminar",
+                new System.Drawing.Point(332, 252), 6);
+            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(150, 30, 30);
+            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(220, 180, 180);
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+
+            ConfigurarBotonSecundario(this.btnLimpiar, "Limpiar",
+                new System.Drawing.Point(488, 252), 7);
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+
+            // Botón fantasma: Clientes Eliminados
+            ConfigurarBotonFantasma(this.btnListarBorrados, "Ver clientes eliminados",
+                new System.Drawing.Point(20, 300), 8);
+            this.btnListarBorrados.Click += new System.EventHandler(this.btnListarBorrados_Click);
         }
 
         private void UIClientManagement_Load(object sender, EventArgs e)
@@ -190,5 +214,28 @@ namespace Login
             UIClientesEliminados deleted = new UIClientesEliminados();
             deleted.Show();
         }
+
+        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto,
+            System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabel(lbl, texto, ubicacion, new System.Drawing.Size(200, 18));
+
+        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt,
+            System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarTextBox(txt, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonFantasma(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonFantasma(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(220, 30));
+
+        private void pnlFormulario_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+            => UIStyles.PintarPanelRedondeado(sender, e);
     }
 }

@@ -62,8 +62,7 @@
             this.pnlFormulario.Name = "pnlFormulario";
 
             // 1. Selección de Ventas (una o varias, con checks)
-            ConfigurarLabel(this.lblVentas, "Ventas a incluir en el transporte",
-                new System.Drawing.Point(16, 16));
+            
 
             this.clbVentas.Location = new System.Drawing.Point(16, 36);
             this.clbVentas.Size = new System.Drawing.Size(348, 110);
@@ -78,8 +77,7 @@
             this.clbVentas.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbVentas_ItemCheck);
 
             // 2. Fecha del Transporte
-            ConfigurarLabel(this.lblFecha, "Fecha y Hora Programada",
-                new System.Drawing.Point(16, 152));
+            
 
             this.dtpFecha.Location = new System.Drawing.Point(16, 172);
             this.dtpFecha.Size = new System.Drawing.Size(348, 25);
@@ -96,8 +94,7 @@
             this.dtpFecha.Name = "dtpFecha";
 
             // 3. Estado del Transporte
-            ConfigurarLabel(this.lblEstado, "Estado del Transporte",
-                new System.Drawing.Point(16, 205));
+            
 
             this.cbEstado.Location = new System.Drawing.Point(16, 225);
             this.cbEstado.Size = new System.Drawing.Size(348, 32);
@@ -156,15 +153,7 @@
             this.pnlInfoVenta.Controls.Add(this.labelTotalCobrar);
 
             // ── BOTONES ─────────────────────────────────────────────
-            ConfigurarBotonPrimario(this.btnRegistrarTransporte, "Registrar",
-                new System.Drawing.Point(20, 384), 3);
-            this.btnRegistrarTransporte.Size = new System.Drawing.Size(240, 40);
-            this.btnRegistrarTransporte.Click += new System.EventHandler(this.btnRegistrarTransporte_Click);
-
-            ConfigurarBotonSecundario(this.btnSalirTransporte, "Cancelar",
-                new System.Drawing.Point(272, 384), 4);
-            this.btnSalirTransporte.Size = new System.Drawing.Size(128, 40);
-            this.btnSalirTransporte.Click += new System.EventHandler(this.btnSalirTransporte_Click);
+            
 
             // ── CONTROLS DEL FORM ───────────────────────────────────
             this.Controls.Add(this.lblTitulo);
@@ -176,66 +165,6 @@
             this.pnlFormulario.ResumeLayout(false);
             this.pnlInfoVenta.ResumeLayout(false);
             this.ResumeLayout(false);
-        }
-
-        // ── HELPERS ──────────────────────────────────────────────
-        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto,
-            System.Drawing.Point ubicacion)
-        {
-            lbl.Text = texto;
-            lbl.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            lbl.Font = new System.Drawing.Font("Segoe UI", 9F);
-            lbl.Location = ubicacion;
-            lbl.Size = new System.Drawing.Size(280, 18);
-            lbl.AutoSize = false;
-        }
-
-        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
-            System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(140, 36);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.ForeColor = System.Drawing.Color.White;
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = texto.ToLower();
-        }
-
-        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
-            System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(140, 36);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 1;
-            btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(181, 212, 244);
-            btn.BackColor = System.Drawing.Color.White;
-            btn.ForeColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = texto.ToLower();
-        }
-
-        private void pnlPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
-        {
-            var panel = sender as System.Windows.Forms.Panel;
-            var pen = new System.Drawing.Pen(System.Drawing.Color.FromArgb(211, 209, 199), 1f);
-            var rect = new System.Drawing.Rectangle(0, 0, panel.Width - 1, panel.Height - 1);
-            int r = 8;
-            var path = new System.Drawing.Drawing2D.GraphicsPath();
-            path.AddArc(rect.X, rect.Y, r * 2, r * 2, 180, 90);
-            path.AddArc(rect.Right - r * 2, rect.Y, r * 2, r * 2, 270, 90);
-            path.AddArc(rect.Right - r * 2, rect.Bottom - r * 2, r * 2, r * 2, 0, 90);
-            path.AddArc(rect.X, rect.Bottom - r * 2, r * 2, r * 2, 90, 90);
-            path.CloseFigure();
-            e.Graphics.DrawPath(pen, path);
         }
 
         // ── DECLARACIÓN ─────────────────────────────────────────

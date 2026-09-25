@@ -23,6 +23,59 @@ namespace Login
             InitializeComponent();
             dgvTodasLasVentas.AllowUserToAddRows = false;
             CargarFiltroClientes();
+
+            ConfigurarBotonPrimario(this.btnRegistrarVenta, "Registrar Venta",
+                new System.Drawing.Point(16, 16), 0);
+            this.btnRegistrarVenta.Size = new System.Drawing.Size(288, 40);
+            this.btnRegistrarVenta.Click += new System.EventHandler(this.btnRegistrarVenta_Click);
+
+            // Botones de estado — lado a lado
+            ConfigurarBotonSecundario(this.btnEstadoPago, "Estado de Pago",
+                new System.Drawing.Point(16, 72), 1);
+            this.btnEstadoPago.Size = new System.Drawing.Size(138, 36);
+            this.btnEstadoPago.Click += new System.EventHandler(this.btnEstadoPago_Click);
+
+            ConfigurarBotonSecundario(this.btnEstadoPedido, "Estado de Pedido",
+                new System.Drawing.Point(166, 72), 2);
+            this.btnEstadoPedido.Size = new System.Drawing.Size(138, 36);
+            this.btnEstadoPedido.Click += new System.EventHandler(this.btnEstadoPedido_Click);
+
+            ConfigurarBotonSecundario(this.btnConsultarVenta, "Ver detalle",
+                new System.Drawing.Point(16, 156), 3);
+            this.btnConsultarVenta.Size = new System.Drawing.Size(138, 32);
+            this.btnConsultarVenta.Click += new System.EventHandler(this.btnConsultarVenta_Click);
+
+            ConfigurarBotonSecundario(this.btnExportarExcel, "Exportar Excel",
+                new System.Drawing.Point(166, 156), 4);
+            this.btnExportarExcel.Size = new System.Drawing.Size(138, 32);  // ancho completo, texto largo
+            this.btnExportarExcel.Click += new System.EventHandler(this.btnExportarExcel_Click);
+
+            ConfigurarBotonSecundario(this.btnTransporte, "Gestionar transporte",
+                new System.Drawing.Point(16, 196), 4);
+            this.btnTransporte.Size = new System.Drawing.Size(288, 32);  // ancho completo, texto largo
+            this.btnTransporte.Click += new System.EventHandler(this.btnTransporte_Click);
+
+            ConfigurarLabel(this.lblDesde, "Desde",
+                new System.Drawing.Point(16, 16));
+            ConfigurarLabel(this.lblHasta, "Hasta",
+                new System.Drawing.Point(16, 68));
+
+            ConfigurarBotonPrimario(this.btnFiltrarPorFecha, "Filtrar por fecha",
+                new System.Drawing.Point(16, 145), 6);
+            this.btnFiltrarPorFecha.Size = new System.Drawing.Size(180, 36);
+            this.btnFiltrarPorFecha.Click += new System.EventHandler(this.btnFiltrarPorFecha_Click);
+
+            ConfigurarLabel(this.lblFiltroCliente, "Filtrar por cliente",
+                new System.Drawing.Point(246, 16));
+
+            ConfigurarBotonPrimario(this.btnFiltroCliente, "Filtrar",
+                new System.Drawing.Point(246, 76), 8);
+            this.btnFiltroCliente.Size = new System.Drawing.Size(120, 36);
+            this.btnFiltroCliente.Click += new System.EventHandler(this.btnFiltroCliente_Click);
+
+            ConfigurarBotonFantasma(this.btnDesfiltrar, "Quitar filtros",
+                new System.Drawing.Point(246, 124), 9);
+            this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
         }
 
         private void UISalesManagement_Load(object sender, EventArgs e)
@@ -371,6 +424,25 @@ namespace Login
                 default: return "Desconocido";
             }
         }
+
+        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto,
+            System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabel(lbl, texto, ubicacion, new System.Drawing.Size(200, 18));
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonFantasma(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonFantasma(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(200, 30));
+
+        private void pnlPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+            => UIStyles.PintarPanelRedondeado(sender, e);
 
 
 

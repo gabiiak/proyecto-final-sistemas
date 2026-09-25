@@ -223,5 +223,20 @@ namespace Login
             UIGestionInsumos insumo = new UIGestionInsumos();
             insumo.Show();
         }
+
+        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabel(lbl, texto, ubicacion, new System.Drawing.Size(200, 18));
+
+        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarTextBox(txt, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarComboBox(System.Windows.Forms.ComboBox cmb, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarComboBox(cmb, ubicacion, tamaño, tabIndex, System.Windows.Forms.ComboBoxStyle.DropDownList);
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
     }
 }

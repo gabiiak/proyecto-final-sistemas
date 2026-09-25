@@ -51,7 +51,7 @@ namespace Login
 
             if (receta == null || receta.Count == 0)
             {
-                MessageBox.Show("Este producto no tiene una receta definida. Cargue la receta antes de registrar una tanda.",
+                MessageBox.Show("Este producto no tiene una receta definida. Cargue la receta en Productos -> Gestionar Productos -> Gestionar Recetas antes de registrar una tanda.",
                     "Receta no encontrada", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -182,5 +182,20 @@ namespace Login
                 MessageBox.Show("Error al guardar la tanda: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabel(lbl, texto, ubicacion, new System.Drawing.Size(220, 18));
+
+        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarTextBox(txt, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarCombo(System.Windows.Forms.ComboBox cb, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarComboBox(cb, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
     }
 }

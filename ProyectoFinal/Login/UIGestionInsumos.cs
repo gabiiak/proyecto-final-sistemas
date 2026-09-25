@@ -220,6 +220,22 @@ namespace Login
             rbLts.Checked = unidadMedida == "Lts";
             rbUnidad.Checked = unidadMedida == "Unidad";
         }
+
+        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto,
+            System.Drawing.Point ubicacion)
+            => UIStyles.ConfigurarLabel(lbl, texto, ubicacion, new System.Drawing.Size(200, 18));
+
+        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt,
+            System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
+            => UIStyles.ConfigurarTextBox(txt, ubicacion, tamaño, tabIndex);
+
+        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonPrimario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
+
+        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
+            System.Drawing.Point ubicacion, int tabIndex)
+            => UIStyles.ConfigurarBotonSecundario(btn, texto, ubicacion, tabIndex, new System.Drawing.Size(140, 36));
         // NOTA: cuando se agregue StockInsumo (Insumo + CantidadDisponible), este formulario
         // no necesita cambios: seguirá gestionando el catálogo de Insumo tal cual.
         // El manejo de stock (alta de cantidad, ajustes, listado con CantidadDisponible)

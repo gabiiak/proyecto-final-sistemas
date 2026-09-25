@@ -72,21 +72,7 @@
             //this.pnlAcciones.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             // Botón principal — ocupa todo el ancho del panel
-            ConfigurarBotonPrimario(this.btnRegistrarVenta, "Registrar Venta",
-                new System.Drawing.Point(16, 16), 0);
-            this.btnRegistrarVenta.Size = new System.Drawing.Size(288, 40);
-            this.btnRegistrarVenta.Click += new System.EventHandler(this.btnRegistrarVenta_Click);
-
-            // Botones de estado — lado a lado
-            ConfigurarBotonSecundario(this.btnEstadoPago, "Estado de Pago",
-                new System.Drawing.Point(16, 72), 1);
-            this.btnEstadoPago.Size = new System.Drawing.Size(138, 36);
-            this.btnEstadoPago.Click += new System.EventHandler(this.btnEstadoPago_Click);
-
-            ConfigurarBotonSecundario(this.btnEstadoPedido, "Estado de Pedido",
-                new System.Drawing.Point(166, 72), 2);
-            this.btnEstadoPedido.Size = new System.Drawing.Size(138, 36);
-            this.btnEstadoPedido.Click += new System.EventHandler(this.btnEstadoPedido_Click);
+            
 
             // Separador visual: ID de venta seleccionada
             this.lblIdVentaLabel.Text = "Venta seleccionada:";
@@ -102,20 +88,7 @@
             this.labelId.Size = new System.Drawing.Size(80, 20);
             this.labelId.Name = "labelId";
 
-            ConfigurarBotonSecundario(this.btnConsultarVenta, "Ver detalle",
-                new System.Drawing.Point(16, 156), 3);
-            this.btnConsultarVenta.Size = new System.Drawing.Size(138, 32);
-            this.btnConsultarVenta.Click += new System.EventHandler(this.btnConsultarVenta_Click);
-
-            ConfigurarBotonSecundario(this.btnExportarExcel, "Exportar Excel",
-                new System.Drawing.Point(166, 156), 4);
-            this.btnExportarExcel.Size = new System.Drawing.Size(138, 32);  // ancho completo, texto largo
-            this.btnExportarExcel.Click += new System.EventHandler(this.btnExportarExcel_Click);
-
-            ConfigurarBotonSecundario(this.btnTransporte, "Gestionar transporte",
-                new System.Drawing.Point(16, 196), 4);
-            this.btnTransporte.Size = new System.Drawing.Size(288, 32);  // ancho completo, texto largo
-            this.btnTransporte.Click += new System.EventHandler(this.btnTransporte_Click);
+            
 
             this.pnlAcciones.Controls.Add(this.btnTransporte);
             this.pnlAcciones.Controls.Add(this.btnRegistrarVenta);
@@ -135,10 +108,7 @@
             //this.pnlFiltros.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             // Sección filtro por fecha
-            ConfigurarLabel(this.lblDesde, "Desde",
-                new System.Drawing.Point(16, 16));
-            ConfigurarLabel(this.lblHasta, "Hasta",
-                new System.Drawing.Point(16, 68));
+            
 
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDesde.Location = new System.Drawing.Point(16, 36);
@@ -154,10 +124,7 @@
             this.dtpHasta.TabIndex = 5;
             this.dtpHasta.Name = "dtpHasta";
 
-            ConfigurarBotonPrimario(this.btnFiltrarPorFecha, "Filtrar por fecha",
-                new System.Drawing.Point(16, 145), 6);
-            this.btnFiltrarPorFecha.Size = new System.Drawing.Size(180, 36);
-            this.btnFiltrarPorFecha.Click += new System.EventHandler(this.btnFiltrarPorFecha_Click);
+            
 
             // Separador vertical simulado con un panel de 1px
             var pnlSepVertical = new System.Windows.Forms.Panel
@@ -169,8 +136,7 @@
             };
 
             // Sección filtro por cliente
-            ConfigurarLabel(this.lblFiltroCliente, "Filtrar por cliente",
-                new System.Drawing.Point(246, 16));
+            
 
             this.cbClienteFiltro.Location = new System.Drawing.Point(246, 36);
             this.cbClienteFiltro.Size = new System.Drawing.Size(196, 28);
@@ -179,14 +145,7 @@
             this.cbClienteFiltro.TabIndex = 7;
             this.cbClienteFiltro.Name = "cbClienteFiltro";
 
-            ConfigurarBotonPrimario(this.btnFiltroCliente, "Filtrar",
-                new System.Drawing.Point(246, 76), 8);
-            this.btnFiltroCliente.Size = new System.Drawing.Size(120, 36);
-            this.btnFiltroCliente.Click += new System.EventHandler(this.btnFiltroCliente_Click);
-
-            ConfigurarBotonFantasma(this.btnDesfiltrar, "Quitar filtros",
-                new System.Drawing.Point(246, 124), 9);
-            this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
+            
 
             this.pnlFiltros.Controls.Add(this.lblDesde);
             this.pnlFiltros.Controls.Add(this.dtpDesde);
@@ -271,82 +230,6 @@
             this.pnlFiltros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTodasLasVentas)).EndInit();
             this.ResumeLayout(false);
-        }
-
-        // ── HELPERS DE ESTILO ────────────────────────────────────
-        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto,
-            System.Drawing.Point ubicacion)
-        {
-            lbl.Text = texto;
-            lbl.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            lbl.Font = new System.Drawing.Font("Segoe UI", 9F);
-            lbl.Location = ubicacion;
-            lbl.Size = new System.Drawing.Size(200, 18);
-            lbl.AutoSize = false;
-        }
-
-        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto,
-            System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(140, 36);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.ForeColor = System.Drawing.Color.White;
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = texto.ToLower();
-        }
-
-        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto,
-            System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(140, 36);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 1;
-            btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(181, 212, 244);
-            btn.BackColor = System.Drawing.Color.White;
-            btn.ForeColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = texto.ToLower();
-        }
-
-        private void ConfigurarBotonFantasma(System.Windows.Forms.Button btn, string texto,
-            System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(200, 30);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = System.Drawing.Color.Transparent;
-            btn.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            btn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-            btn.Name = texto.ToLower();
-        }
-
-        private void pnlPanel_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
-        {
-            var panel = sender as System.Windows.Forms.Panel;
-            var pen = new System.Drawing.Pen(System.Drawing.Color.FromArgb(211, 209, 199), 1f);
-            var rect = new System.Drawing.Rectangle(0, 0, panel.Width - 1, panel.Height - 1);
-            int r = 8;
-            var path = new System.Drawing.Drawing2D.GraphicsPath();
-            path.AddArc(rect.X, rect.Y, r * 2, r * 2, 180, 90);
-            path.AddArc(rect.Right - r * 2, rect.Y, r * 2, r * 2, 270, 90);
-            path.AddArc(rect.Right - r * 2, rect.Bottom - r * 2, r * 2, r * 2, 0, 90);
-            path.AddArc(rect.X, rect.Bottom - r * 2, r * 2, r * 2, 90, 90);
-            path.CloseFigure();
-            e.Graphics.DrawPath(pen, path);
         }
 
         // ── DECLARACIÓN ─────────────────────────────────────────

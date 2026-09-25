@@ -53,22 +53,7 @@
             this.pnlFormulario.Size = new System.Drawing.Size(380, 275);
 
             // Insumo
-            ConfigurarLabel(this.lblInsumo, "Insumo", new System.Drawing.Point(16, 12));
-            ConfigurarCombo(this.cbInsumo, new System.Drawing.Point(16, 30), new System.Drawing.Size(348, 30), 0);
-            this.cbInsumo.SelectedIndexChanged += new System.EventHandler(this.cbInsumo_SelectedIndexChanged);
-
-            // Descripción Insumo
-            ConfigurarLabel(this.lblDescripcion, "Descripción del Insumo", new System.Drawing.Point(16, 68));
-            ConfigurarTextBox(this.txtDescripcionInsumo, new System.Drawing.Point(16, 86), new System.Drawing.Size(348, 30), 1);
-            this.txtDescripcionInsumo.ReadOnly = true;
-            this.txtDescripcionInsumo.BackColor = System.Drawing.Color.FromArgb(230, 241, 251);
-
-            // Empleado Responsable
-            ConfigurarLabel(this.lblEmpleado, "Empleado Responsable", new System.Drawing.Point(16, 126));
-            ConfigurarCombo(this.cbEmpleado, new System.Drawing.Point(16, 144), new System.Drawing.Size(348, 30), 2);
-
-            // Cantidad Producida
-            ConfigurarLabel(this.lblCantidad, "Cantidad Producida", new System.Drawing.Point(16, 186));
+           
             this.numUpDownCantidad.Location = new System.Drawing.Point(16, 206);
             this.numUpDownCantidad.Size = new System.Drawing.Size(100, 30);
             this.numUpDownCantidad.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -92,13 +77,7 @@
             this.pnlFormulario.Controls.Add(this.lblUnidades);
 
             // Botones
-            ConfigurarBotonPrimario(this.btnRegistrarDetalle, "Registrar", new System.Drawing.Point(20, 340), 4);
-            this.btnRegistrarDetalle.Size = new System.Drawing.Size(240, 40);
-            this.btnRegistrarDetalle.Click += new System.EventHandler(this.btnRegistrarDetalle_Click);
-
-            ConfigurarBotonSecundario(this.btnSalirDetalle, "Cancelar", new System.Drawing.Point(272, 340), 5);
-            this.btnSalirDetalle.Size = new System.Drawing.Size(128, 40);
-            this.btnSalirDetalle.Click += new System.EventHandler(this.btnSalirDetalle_Click);
+            
 
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pnlFormulario);
@@ -108,63 +87,6 @@
             this.pnlFormulario.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownCantidad)).EndInit();
             this.ResumeLayout(false);
-        }
-
-        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
-        {
-            lbl.Text = texto;
-            lbl.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            lbl.Font = new System.Drawing.Font("Segoe UI", 9F);
-            lbl.Location = ubicacion;
-            lbl.Size = new System.Drawing.Size(220, 18);
-        }
-
-        private void ConfigurarTextBox(System.Windows.Forms.TextBox txt, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
-        {
-            txt.Location = ubicacion;
-            txt.Size = tamaño;
-            txt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            txt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txt.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
-            txt.TabIndex = tabIndex;
-        }
-
-        private void ConfigurarCombo(System.Windows.Forms.ComboBox cb, System.Drawing.Point ubicacion, System.Drawing.Size tamaño, int tabIndex)
-        {
-            cb.Location = ubicacion;
-            cb.Size = tamaño;
-            cb.Font = new System.Drawing.Font("Segoe UI", 10F);
-            cb.FormattingEnabled = true;
-            cb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            cb.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
-            cb.TabIndex = tabIndex;
-        }
-
-        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.ForeColor = System.Drawing.Color.White;
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-        }
-
-        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 1;
-            btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(181, 212, 244);
-            btn.BackColor = System.Drawing.Color.White;
-            btn.ForeColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
         }
 
         private System.Windows.Forms.Panel pnlFormulario;

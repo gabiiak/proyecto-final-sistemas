@@ -47,39 +47,6 @@
             this.lblSubtulo.Size = new System.Drawing.Size(260, 18);
             this.lblSubtulo.Name = "lblSubtulo";
 
-            // ── BOTONES DE ESTADO ───────────────────────────────────
-            // Mismos 4 estados que maneja colEstado en la grilla de transportes.
-            // El estado CANCELADO queda separado visualmente, igual que en
-            // UIOrderState, por ser un estado final "negativo".
-
-            // PROGRAMADO
-            ConfigurarBotonEstado(this.btnProgramado, "PROGRAMADO",
-                new System.Drawing.Point(20, 80),
-                System.Drawing.Color.FromArgb(24, 95, 165),
-                System.Drawing.Color.White, 0);
-            this.btnProgramado.Click += new System.EventHandler(this.btnProgramado_Click);
-
-            // EN TRÁNSITO
-            ConfigurarBotonEstado(this.btnEnTransito, "EN TRÁNSITO",
-                new System.Drawing.Point(20, 136),
-                System.Drawing.Color.FromArgb(24, 95, 165),
-                System.Drawing.Color.White, 1);
-            this.btnEnTransito.Click += new System.EventHandler(this.btnEnTransito_Click);
-
-            // ENTREGADO — estado final positivo
-            ConfigurarBotonEstado(this.btnEntregado, "ENTREGADO",
-                new System.Drawing.Point(20, 192),
-                System.Drawing.Color.FromArgb(24, 95, 165),
-                System.Drawing.Color.White, 2);
-            this.btnEntregado.Click += new System.EventHandler(this.btnEntregado_Click);
-
-            // CANCELADO — estado final negativo, separado visualmente
-            ConfigurarBotonEstado(this.btnCancelado, "CANCELADO",
-                new System.Drawing.Point(20, 264),
-                System.Drawing.Color.FromArgb(150, 30, 30),
-                System.Drawing.Color.White, 3);
-            this.btnCancelado.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(220, 180, 180);
-            this.btnCancelado.Click += new System.EventHandler(this.btnCancelado_Click);
 
             // ── CONTROLS DEL FORM ───────────────────────────────────
             this.Controls.Add(this.lblTitulo);
@@ -90,22 +57,6 @@
             this.Controls.Add(this.btnCancelado);
 
             this.ResumeLayout(false);
-        }
-
-        private void ConfigurarBotonEstado(System.Windows.Forms.Button btn, string texto,
-            System.Drawing.Point ubicacion, System.Drawing.Color backColor,
-            System.Drawing.Color foreColor, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(260, 44);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = backColor;
-            btn.ForeColor = foreColor;
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
         }
 
         // ── DECLARACIÓN ─────────────────────────────────────────

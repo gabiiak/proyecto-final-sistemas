@@ -126,7 +126,7 @@ namespace Login
             //};
 
             // Label módulo activo (dereita)
-            lblModuloActivo = new Label();
+            
             lblModuloActivo.Text = ""; //le saque esto xq quedaba feo
             lblModuloActivo.ForeColor = Color.FromArgb(28, 58, 94);
             lblModuloActivo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
@@ -135,13 +135,13 @@ namespace Login
             lblModuloActivo.Width = 200;
 
             // Separador vertical
-            pnlSeparador = new Panel();
+            
             pnlSeparador.BackColor = Color.FromArgb(211, 209, 199);
             pnlSeparador.Dock = DockStyle.Right;
             pnlSeparador.Width = 1;
 
             // Label fecha (derecha)
-            lblFecha = new Label();
+           
             lblFecha.Text = DateTime.Now.ToString("dddd, d 'de' MMMM 'de' yyyy",
                 new System.Globalization.CultureInfo("es-AR"));
             lblFecha.ForeColor = Color.FromArgb(136, 135, 128);
@@ -176,23 +176,6 @@ namespace Login
             ResumeLayout(false);
         }
 
-        // Configura el estilo base de cada botón del sidebar
-        private void ConfigurarBotonSidebar(Button btn, string texto, int indice)
-        {
-            btn.Text = texto;
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(55, 138, 221); // Azul hover
-            btn.BackColor = Color.Transparent;
-            btn.ForeColor = Color.FromArgb(181, 212, 244);
-            btn.Font = new Font("Segoe UI", 10F);
-            btn.TextAlign = ContentAlignment.MiddleLeft;
-            btn.Padding = new Padding(16, 0, 0, 0);
-            btn.Dock = DockStyle.Top;
-            btn.Height = 48;
-            //btn.Cursor = Cursors.Hand;
-            btn.Tag = indice; // Guardamos el índice para saber cuál está activo
-        }
         #region Windows Form Designer generated code
 
         /// <summary>

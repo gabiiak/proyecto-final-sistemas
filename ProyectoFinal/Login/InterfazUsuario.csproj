@@ -278,6 +278,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UIStyles.cs" />
     <Compile Include="UIConsultarVenta.cs">
       <SubType>Form</SubType>
     </Compile>

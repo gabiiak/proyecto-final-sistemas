@@ -18,6 +18,9 @@ namespace Negocio
                 throw new ArgumentException("Debe seleccionar un producto válido.", nameof(stock));
             if (stock.CantidadDisponible < 0)
                 throw new ArgumentException("La cantidad no puede ser negativa.", nameof(stock));
+            if (DataStockProducto.GetStockByProductoId(stock.ProductoId) != null)
+                throw new ArgumentException("Ya existe una fila de stock para este producto. Modifique la cantidad existente en lugar de crear una nueva.");
+
             return DataStockProducto.CrearStock(stock);
         }
 

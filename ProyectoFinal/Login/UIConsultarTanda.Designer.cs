@@ -29,7 +29,7 @@
             this.IdDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Insumo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            //this.Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTotal = new System.Windows.Forms.Panel();
             this.lblTotalLabel = new System.Windows.Forms.Label();
@@ -62,21 +62,6 @@
             this.pnlCabecera.BackColor = System.Drawing.Color.White;
             this.pnlCabecera.Location = new System.Drawing.Point(20, 52);
             this.pnlCabecera.Size = new System.Drawing.Size(610, 110);
-
-            ConfigurarLabelHeader(this.lblIdLabel, "ID Tanda:", new System.Drawing.Point(16, 12));
-            ConfigurarLabelHeaderValor(this.lblValorId, "-", new System.Drawing.Point(90, 12));
-
-            ConfigurarLabelHeader(this.lblProductoLabel, "Producto:", new System.Drawing.Point(16, 40));
-            ConfigurarLabelHeaderValor(this.lblValorProducto, "-", new System.Drawing.Point(90, 40));
-
-            ConfigurarLabelHeader(this.lblEstadoLabel, "Estado:", new System.Drawing.Point(16, 70));
-            ConfigurarLabelHeaderValor(this.lblValorEstado, "-", new System.Drawing.Point(90, 70));
-
-            ConfigurarLabelHeader(this.lblFechaLabel, "Fecha:", new System.Drawing.Point(340, 12));
-            ConfigurarLabelHeaderValor(this.lblValorFecha, "-", new System.Drawing.Point(400, 12));
-
-            ConfigurarLabelHeader(this.lblHoraLabel, "Hora:", new System.Drawing.Point(340, 40));
-            ConfigurarLabelHeaderValor(this.lblValorHora, "-", new System.Drawing.Point(400, 40));
 
             this.pnlCabecera.Controls.Add(this.lblIdLabel);
             this.pnlCabecera.Controls.Add(this.lblValorId);
@@ -115,20 +100,20 @@
             this.Insumo.Name = "Insumo";
             this.Insumo.FillWeight = 80;
 
-            this.Empleado.HeaderText = "Empleado";
+            this.Empleado.HeaderText = "UnidadMedida";
             this.Empleado.Name = "Empleado";
             this.Empleado.FillWeight = 90;
-
+            /*
             this.Cargo.HeaderText = "Cargo";
             this.Cargo.Name = "Cargo";
             this.Cargo.FillWeight = 70;
-
+            */
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.FillWeight = 50;
 
             this.dgvDetallesTanda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-                this.IdDetalle, this.Insumo, this.Empleado, this.Cargo, this.Cantidad
+                this.IdDetalle, this.Insumo, this.Cantidad, this.Empleado
             });
 
             // Panel Resumen Total
@@ -174,24 +159,6 @@
             this.pnlTotal.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallesTanda)).EndInit();
             this.ResumeLayout(false);
-        }
-
-        private void ConfigurarLabelHeader(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
-        {
-            lbl.Text = texto;
-            lbl.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            lbl.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            lbl.Location = ubicacion;
-            lbl.Size = new System.Drawing.Size(70, 20);
-        }
-
-        private void ConfigurarLabelHeaderValor(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
-        {
-            lbl.Text = texto;
-            lbl.ForeColor = System.Drawing.Color.FromArgb(28, 58, 94);
-            lbl.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            lbl.Location = ubicacion;
-            lbl.Size = new System.Drawing.Size(230, 20);
         }
 
         private System.Windows.Forms.Label lblTitulo;

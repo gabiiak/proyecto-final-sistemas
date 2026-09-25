@@ -133,5 +133,9 @@ namespace Login
         {
 
         }
+
+        // Configura el estilo base de cada botón del sidebar
+        private void ConfigurarBotonSidebar(Button btn, string texto, int indice)
+            => UIStyles.ConfigurarBotonSidebar(btn, texto, indice);
     }
 }

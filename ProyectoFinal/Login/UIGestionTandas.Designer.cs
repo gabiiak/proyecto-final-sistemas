@@ -62,18 +62,7 @@
             this.pnlAcciones.Size = new System.Drawing.Size(320, 240);
 
             // Botón principal
-            ConfigurarBotonPrimario(this.btnRegistrarTanda, "Nueva Tanda", new System.Drawing.Point(16, 16), 0);
-            this.btnRegistrarTanda.Size = new System.Drawing.Size(288, 40);
-            this.btnRegistrarTanda.Click += new System.EventHandler(this.btnRegistrarTanda_Click);
-
-            // Botones secundarios en fila
-            ConfigurarBotonSecundario(this.btnCambiarEstado, "Cambiar Estado", new System.Drawing.Point(16, 68), 1);
-            this.btnCambiarEstado.Size = new System.Drawing.Size(138, 36);
-            this.btnCambiarEstado.Click += new System.EventHandler(this.btnCambiarEstado_Click);
-
-            ConfigurarBotonSecundario(this.btnConsultarTanda, "Ver Detalle", new System.Drawing.Point(166, 68), 2);
-            this.btnConsultarTanda.Size = new System.Drawing.Size(138, 36);
-            this.btnConsultarTanda.Click += new System.EventHandler(this.btnConsultarTanda_Click);
+            
 
             // Indicador de ID seleccionada
             this.lblIdTandaLabel.Text = "Tanda seleccionada:";
@@ -98,8 +87,7 @@
             this.pnlFiltros.Location = new System.Drawing.Point(356, 56);
             this.pnlFiltros.Size = new System.Drawing.Size(724, 240);
 
-            ConfigurarLabel(this.lblDesde, "Desde", new System.Drawing.Point(16, 16));
-            ConfigurarLabel(this.lblHasta, "Hasta", new System.Drawing.Point(16, 68));
+            
 
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDesde.Location = new System.Drawing.Point(16, 36);
@@ -109,9 +97,7 @@
             this.dtpHasta.Location = new System.Drawing.Point(16, 88);
             this.dtpHasta.Size = new System.Drawing.Size(180, 28);
 
-            ConfigurarBotonPrimario(this.btnFiltrarPorFecha, "Filtrar por fecha", new System.Drawing.Point(16, 145), 3);
-            this.btnFiltrarPorFecha.Size = new System.Drawing.Size(180, 36);
-            this.btnFiltrarPorFecha.Click += new System.EventHandler(this.btnFiltrarPorFecha_Click);
+            
 
             var pnlSepVertical = new System.Windows.Forms.Panel
             {
@@ -120,16 +106,7 @@
                 Size = new System.Drawing.Size(1, 168)
             };
 
-            ConfigurarLabel(this.lblFiltroProducto, "Filtrar por producto", new System.Drawing.Point(246, 16));
-            this.cbProductoFiltro.Location = new System.Drawing.Point(246, 36);
-            this.cbProductoFiltro.Size = new System.Drawing.Size(196, 28);
-
-            ConfigurarBotonPrimario(this.btnFiltroProducto, "Filtrar", new System.Drawing.Point(246, 76), 4);
-            this.btnFiltroProducto.Size = new System.Drawing.Size(120, 36);
-            this.btnFiltroProducto.Click += new System.EventHandler(this.btnFiltroProducto_Click);
-
-            ConfigurarBotonFantasma(this.btnDesfiltrar, "Quitar filtros", new System.Drawing.Point(246, 124), 5);
-            this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
+            
 
             this.pnlFiltros.Controls.Add(this.lblDesde);
             this.pnlFiltros.Controls.Add(this.dtpDesde);
@@ -191,56 +168,6 @@
             this.pnlFiltros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTodasLasTandas)).EndInit();
             this.ResumeLayout(false);
-        }
-
-        private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
-        {
-            lbl.Text = texto;
-            lbl.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            lbl.Font = new System.Drawing.Font("Segoe UI", 9F);
-            lbl.Location = ubicacion;
-            lbl.Size = new System.Drawing.Size(200, 18);
-        }
-
-        private void ConfigurarBotonPrimario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.ForeColor = System.Drawing.Color.White;
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-        }
-
-        private void ConfigurarBotonSecundario(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 1;
-            btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(181, 212, 244);
-            btn.BackColor = System.Drawing.Color.White;
-            btn.ForeColor = System.Drawing.Color.FromArgb(24, 95, 165);
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
-        }
-
-        private void ConfigurarBotonFantasma(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(200, 30);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = System.Drawing.Color.Transparent;
-            btn.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
-            btn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
         }
 
         private System.Windows.Forms.Panel pnlAcciones;

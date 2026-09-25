@@ -44,19 +44,6 @@
             this.lblSubtitulo.Location = new System.Drawing.Point(20, 50);
             this.lblSubtitulo.Size = new System.Drawing.Size(260, 18);
 
-            // Botones
-            ConfigurarBotonEstado(this.btnPendiente, "PENDIENTE", new System.Drawing.Point(20, 80), System.Drawing.Color.FromArgb(24, 95, 165), System.Drawing.Color.White, 0);
-            this.btnPendiente.Click += new System.EventHandler(this.btnPendiente_Click);
-
-            ConfigurarBotonEstado(this.btnEnProceso, "EN PROCESO", new System.Drawing.Point(20, 136), System.Drawing.Color.FromArgb(24, 95, 165), System.Drawing.Color.White, 1);
-            this.btnEnProceso.Click += new System.EventHandler(this.btnEnProceso_Click);
-
-            ConfigurarBotonEstado(this.btnTerminada, "TERMINADA", new System.Drawing.Point(20, 192), System.Drawing.Color.FromArgb(24, 95, 165), System.Drawing.Color.White, 2);
-            this.btnTerminada.Click += new System.EventHandler(this.btnTerminada_Click);
-
-            ConfigurarBotonEstado(this.btnCancelada, "CANCELADA", new System.Drawing.Point(20, 260), System.Drawing.Color.FromArgb(150, 30, 30), System.Drawing.Color.White, 3);
-            this.btnCancelada.Click += new System.EventHandler(this.btnCancelada_Click);
-
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblSubtitulo);
             this.Controls.Add(this.btnPendiente);
@@ -65,20 +52,6 @@
             this.Controls.Add(this.btnCancelada);
 
             this.ResumeLayout(false);
-        }
-
-        private void ConfigurarBotonEstado(System.Windows.Forms.Button btn, string texto, System.Drawing.Point ubicacion, System.Drawing.Color backColor, System.Drawing.Color foreColor, int tabIndex)
-        {
-            btn.Text = texto;
-            btn.Location = ubicacion;
-            btn.Size = new System.Drawing.Size(260, 44);
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = backColor;
-            btn.ForeColor = foreColor;
-            btn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            btn.TabIndex = tabIndex;
         }
 
         private System.Windows.Forms.Label lblTitulo;
