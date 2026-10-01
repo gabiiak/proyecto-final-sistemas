@@ -158,7 +158,9 @@ GO
 CREATE TABLE dbo.StockProducto (
     [id]          INT IDENTITY(1,1) NOT NULL,
     [producto_id] INT           NOT NULL,
-    [cantidad]    DECIMAL(18,4) NULL,
+    -- INT a proposito: el stock de productos se cuenta por unidades (medallones), no por peso.
+    -- Los insumos SI van en DECIMAL porque ahi si hay fracciones (98,2 Kg de carne, 0,15 Kg por medallon).
+    [cantidad]    INT           NULL,
     CONSTRAINT [PK_StockProducto] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT [FK_StockProducto_Producto] FOREIGN KEY ([producto_id])
         REFERENCES dbo.Productos ([IdProducto]) ON UPDATE CASCADE ON DELETE CASCADE
@@ -168,6 +170,7 @@ GO
 CREATE TABLE dbo.StockInsumo (
     [id]        INT IDENTITY(1,1) NOT NULL,
     [insumo_id] INT           NOT NULL,
+    -- DECIMAL porque los insumos se miden en Kg/Gr y admiten fracciones
     [cantidad]  DECIMAL(18,4) NULL,
     CONSTRAINT [PK_StockInsumo] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT [FK_StockInsumo_Insumo] FOREIGN KEY ([insumo_id])

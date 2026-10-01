@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,7 +69,7 @@ namespace Login
             cmbProductos.SelectedIndex = -1;
             txtCantidad.Clear();
         }
-        private bool ValidarCampos(out decimal cantidad)
+        private bool ValidarCampos(out int cantidad)
         {
             cantidad = 0;
             if (cmbProductos.SelectedValue == null)
@@ -83,10 +82,11 @@ namespace Login
                 MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                 return false;
             }
-            if (!decimal.TryParse(txtCantidad.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out cantidad)
-                && !decimal.TryParse(txtCantidad.Text.Trim(), out cantidad))
+            // int a proposito: el stock de productos se cuenta por unidades, no por peso.
+            // Rechaza "3,5" porque medio medallón no existe.
+            if (!int.TryParse(txtCantidad.Text.Trim(), out cantidad))
             {
-                MessageBox.Show("La cantidad ingresada no es válida.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("La cantidad debe ser un número entero de unidades.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (cantidad < 0)
@@ -100,7 +100,7 @@ namespace Login
         {
             try
             {
-                if (!ValidarCampos(out decimal cantidad)) return;
+                if (!ValidarCampos(out int cantidad)) return;
 
 
 
@@ -127,7 +127,7 @@ namespace Login
                     MessageBox.Show("Debe seleccionar un registro de stock.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
-                if (!ValidarCampos(out decimal cantidad)) return;
+                if (!ValidarCampos(out int cantidad)) return;
 
                 int id = int.Parse(labelId.Text);
                 DialogResult result = MessageBox.Show("Desea modificar el registro?", "Alerta", MessageBoxButtons.YesNo);

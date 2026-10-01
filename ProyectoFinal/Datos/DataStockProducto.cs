@@ -29,7 +29,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 ProductoId = reader.GetInt32(1),
                                 NombreProducto = reader.GetString(2),
-                                CantidadDisponible = reader.GetDecimal(3)
+                                CantidadDisponible = reader.GetInt32(3)
                             };
                             listaProductos.Add(stock);
                         }
@@ -90,7 +90,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 ProductoId = reader.GetInt32(1),
                                 NombreProducto = reader.GetString(2),
-                                CantidadDisponible = reader.GetDecimal(3)
+                                CantidadDisponible = reader.GetInt32(3)
                             };
                         }
                         return null;
@@ -117,7 +117,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 ProductoId = reader.GetInt32(1),
                                 NombreProducto = reader.GetString(2),
-                                CantidadDisponible = reader.GetDecimal(3)
+                                CantidadDisponible = reader.GetInt32(3)
                             };
                             return stock;
                         }
