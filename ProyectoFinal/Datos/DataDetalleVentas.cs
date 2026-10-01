@@ -62,7 +62,7 @@ namespace Datos
                             {
                                 IdDetalleVenta = reader.GetInt32(0),
                                 Cantidad = reader.GetInt32(1),
-                                SubTotal = (double)reader.GetDecimal(2),
+                                SubTotal = reader.GetDecimal(2),
                                 Producto = new Producto
                                 {
                                     IdProducto = reader.GetInt32(3),
@@ -101,7 +101,7 @@ namespace Datos
                                     Nombre = reader.GetString(2),
                                 },
                                 Cantidad = reader.GetInt32(3),
-                                SubTotal = (double)reader.GetDecimal(4)
+                                SubTotal = reader.GetDecimal(4)
                             };
                             listaDetalleVentas.Add(detalle);
                         }
@@ -152,7 +152,7 @@ namespace Datos
                                     IdProducto = reader.GetInt32(2)
                                 },
                                 Cantidad = reader.GetInt32(3),
-                                SubTotal = (double)reader.GetDecimal(4)
+                                SubTotal = reader.GetDecimal(4)
                             };
                         }
                         return null;
@@ -161,7 +161,7 @@ namespace Datos
             }
         }
 
-        public static int UpdateCantidad(int id, int cantidad, double nuevoSubTotal, string motivo)
+        public static int UpdateCantidad(int id, int cantidad, decimal nuevoSubTotal, string motivo)
         {
             using (SqlConnection connection = Db.GetConnection())
             {
@@ -180,7 +180,7 @@ namespace Datos
             }
         }
 
-        public static double GetTotalVentaById(int idVenta)
+        public static decimal GetTotalVentaById(int idVenta)
         {
             using (SqlConnection connection = Db.GetConnection())
             {
@@ -190,7 +190,7 @@ namespace Datos
                     cmd.Parameters.AddWithValue("@idVenta", idVenta);
                     connection.Open();
                     object resultado = cmd.ExecuteScalar();
-                    return resultado == DBNull.Value || resultado == null ? 0 : Convert.ToDouble(resultado);
+                    return resultado == DBNull.Value || resultado == null ? 0 : Convert.ToDecimal(resultado);
                 }
             }
         }

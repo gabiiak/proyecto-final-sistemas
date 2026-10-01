@@ -1,4 +1,4 @@
-﻿using Modelos;
+using Modelos;
 using Negocio; // Asegúrate de tener este using para llamar a NProductos
 using System;
 using System.Collections.Generic;
@@ -29,8 +29,10 @@ namespace Login
             ConfigurarLabel(this.lblPrecio, "Precio ($)", new System.Drawing.Point(16, 112));
             ConfigurarTextBox(this.txtPrecio, new System.Drawing.Point(16, 132), new System.Drawing.Size(180, 32), 2);
 
-            //Fila 3: fecha de caducidad
-            ConfigurarLabel(this.lblFechaCaducidad, "Fecha de caducidad", new System.Drawing.Point(336, 112));
+            //Fila 3: vida útil en días
+            // La caducidad de un lote no se carga acá: se calcula sola al finalizar la tanda
+            // como fecha de la tanda + VidaUtilDias del producto (ver NTandaProduccion).
+            ConfigurarLabel(this.lblFechaCaducidad, "Vida útil (días)", new System.Drawing.Point(336, 112));
             ConfigurarTextBox(this.txtFechaCaducidad, new System.Drawing.Point(336, 132), new System.Drawing.Size(230, 32), 2);
             
             // ── BOTONES ─────────────────────────────────────────────
@@ -132,13 +134,16 @@ namespace Login
                 }
 
                 // Validación de que el precio sea numérico
-                if (!double.TryParse(txtPrecio.Text, out double precioConvertido))
+                if (!decimal.TryParse(txtPrecio.Text, out decimal precioConvertido))
                 {
                     MessageBox.Show("El precio debe ser un número válido.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
-                //DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text); 
-                int vidaUtilDias = int.Parse(txtFechaCaducidad.Text);
+                if (!int.TryParse(txtFechaCaducidad.Text, out int vidaUtilDias) || vidaUtilDias <= 0)
+                {
+                    MessageBox.Show("La vida útil debe ser un número entero de días mayor a cero.", "Alerta", MessageBoxButtons.OK);
+                    return;
+                }
                 Producto prod = new Producto
                 {
                     Nombre = txtNombre.Text,
@@ -176,15 +181,18 @@ namespace Login
                     return;
                 }
 
-                if (!double.TryParse(txtPrecio.Text, out double precioConvertido)) // este va a capa de negocio
+                if (!decimal.TryParse(txtPrecio.Text, out decimal precioConvertido)) // este va a capa de negocio
                 {
                     MessageBox.Show("El precio debe ser un número válido.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
 
                 int id = int.Parse(labelId.Text);
-                //DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text); 
-                int vidaUtilDias = int.Parse(txtFechaCaducidad.Text);
+                if (!int.TryParse(txtFechaCaducidad.Text, out int vidaUtilDias) || vidaUtilDias <= 0)
+                {
+                    MessageBox.Show("La vida útil debe ser un número entero de días mayor a cero.", "Alerta", MessageBoxButtons.OK);
+                    return;
+                }
                 DialogResult result = MessageBox.Show("¿Desea modificar el registro?", "Alerta", MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
@@ -220,14 +228,17 @@ namespace Login
             }
 
             int id = int.Parse(labelId.Text);
-            //DateTime fechaCaducidad = DateTime.Parse(txtFechaCaducidad.Text); 
-            int vidaUtilDias = int.Parse(txtFechaCaducidad.Text);
+            if (!int.TryParse(txtFechaCaducidad.Text, out int vidaUtilDias) || vidaUtilDias <= 0)
+            {
+                MessageBox.Show("La vida útil debe ser un número entero de días mayor a cero.", "Alerta", MessageBoxButtons.OK);
+                return;
+            }
             DialogResult result = MessageBox.Show("¿Desea borrar el registro?", "Alerta", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
                 // Parseo básico para llenar el objeto antes de borrar
-                double.TryParse(txtPrecio.Text, out double precioConvertido);
+                decimal.TryParse(txtPrecio.Text, out decimal precioConvertido);
 
                 Producto prod = new Producto
                 {

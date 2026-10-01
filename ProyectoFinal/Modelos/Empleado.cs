@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +16,6 @@ namespace Modelos
         public int Activo { get; set; }
         public int NumCuenta { get; set; }
         public DateTime FechaIngreso { get; set; }
-        public double Sueldo { get; set; }
+        public decimal Sueldo { get; set; }
     }
 }

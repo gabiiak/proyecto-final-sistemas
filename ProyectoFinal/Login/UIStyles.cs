@@ -6,8 +6,7 @@ namespace Login
 {
     public static class UIStyles
     {
-        //public static Color Primario = Color.FromArgb(24, 95, 165);
-        public static Color Primario = Color.Red;
+        public static Color Primario = Color.FromArgb(24, 95, 165);
         public static Color AzulOscuro = Color.FromArgb(28, 58, 94);
         public static Color HoverSidebar = Color.FromArgb(55, 138, 221);
         public static Color BordeClaro = Color.FromArgb(181, 212, 244);

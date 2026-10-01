@@ -1,4 +1,4 @@
-﻿using Modelos;
+using Modelos;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Login
     {
         private List<DetalleVenta> detalleVentas = new List<DetalleVenta>();
         public List<DetalleVenta> DetalleVentas => detalleVentas; //lista de lectura
-        double subTotal = 0;
+        decimal subTotal = 0;
         public UIRegistrarDetalleVenta()
         {
             InitializeComponent();

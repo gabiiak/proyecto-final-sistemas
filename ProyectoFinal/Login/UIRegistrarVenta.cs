@@ -1,4 +1,4 @@
-﻿using Modelos;
+using Modelos;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -17,8 +17,8 @@ namespace Login
     {
         private List<DetalleVenta> detalleVentas = new List<DetalleVenta>();
         public Venta ventaEnMemoria = new Venta();
-        private double total;
-        public double deuda = 0.00;
+        private decimal total;
+        public decimal deuda = 0.00m;
         public UIRegistrarVenta()
         {
             InitializeComponent();
@@ -126,7 +126,7 @@ namespace Login
 
         }
 
-        private void RegistrarVentaEnBaseDeDatos(int estado, double recibido)
+        private void RegistrarVentaEnBaseDeDatos(int estado, decimal recibido)
         {
             var clienteSeleccionado = (Cliente)cbCliente.SelectedItem;
             var metodoSeleccionado = (MetodoPago)cbMetodo.SelectedItem;
@@ -142,7 +142,7 @@ namespace Login
                 Metodo = metodoSeleccionado,
                 Estado_Pago = estado,
                 Estado_Pedido = EstadoPedido.Preparacion,
-                MontoRecibido = (total - recibido <= 0.01) ? total : recibido
+                MontoRecibido = (total - recibido <= 0.01m) ? total : recibido
             };
 
             int idVenta = NVentas.CreateVenta(ventaEnMemoria);
@@ -187,9 +187,9 @@ namespace Login
                 MessageBox.Show("Debe registrar al menos un producto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            //double recibido = double.Parse(txtPagoRecibido.Text);
-            //double.TryParse(txtPagoRecibido.Text, out double recibido);
-            if (!double.TryParse(txtPagoRecibido.Text, out double recibido) || recibido < 0)
+            //decimal recibido = decimal.Parse(txtPagoRecibido.Text);
+            //decimal.TryParse(txtPagoRecibido.Text, out decimal recibido);
+            if (!decimal.TryParse(txtPagoRecibido.Text, out decimal recibido) || recibido < 0)
             {
                 MessageBox.Show("Ingrese un monto válido.", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -202,9 +202,9 @@ namespace Login
                 // seguís adelante igual, es solo informativo — no hay return acá
             }
             int estado = NVentas.DeterminarEstadoPago(total, recibido);
-            if (total - recibido > 0.01)
+            if (total - recibido > 0.01m)
             {
-                double deudaACobrar = total - recibido;
+                decimal deudaACobrar = total - recibido;
                 DialogResult resultado = MessageBox.Show("Ingresó un monto con valor de 0 o con un valor menor al total. " +
                     "Se registrará una venta con estado PENDIENTE y tendrá que cobrar " + deudaACobrar.ToString("C2"), "Alerta", 
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -222,8 +222,8 @@ namespace Login
                     if (metodoSeleccionado.Descripcion.Equals("Efectivo", StringComparison.OrdinalIgnoreCase))
                     {
                         string descripcionMetodo = metodoSeleccionado.Descripcion;
-                        double totalDescuento = NVentas.DescuentoPorEfectivo(total, descripcionMetodo);
-                        double vuelto = NVentas.CalcularVuelto(total,recibido,metodoSeleccionado.Descripcion);
+                        decimal totalDescuento = NVentas.DescuentoPorEfectivo(total, descripcionMetodo);
+                        decimal vuelto = NVentas.CalcularVuelto(total,recibido,metodoSeleccionado.Descripcion);
                         DialogResult result = MessageBox.Show("Ingresó un monto mayor. Debe devolver un vuelto de " + vuelto.ToString("C2"), "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                          if (result == DialogResult.Yes)
                         {
@@ -251,7 +251,7 @@ namespace Login
         }
         private void btnPagoJusto_Click(object sender, EventArgs e)
         {
-            double recibido = total;
+            decimal recibido = total;
             txtPagoRecibido.Text = recibido.ToString("");
         }
         

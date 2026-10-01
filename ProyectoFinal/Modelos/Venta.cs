@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +14,9 @@ namespace Modelos
         public DateTime Fecha { get; set; } 
         public int Estado_Pedido { get; set; } //= EstadoPedido.Preparacion;
         public int Estado_Pago { get; set; } //= EstadoPago.Pendiente;
-        public double Total { get; set; }
+        public decimal Total { get; set; }
 
-        public double MontoRecibido { get; set; } //atributo soporte. acordarse de meterlo en UML
+        public decimal MontoRecibido { get; set; } //atributo soporte. acordarse de meterlo en UML
 
     }
 }

@@ -90,7 +90,7 @@ namespace Datos
                                 IdReceta = reader.GetInt32(0),
                                 IdProducto = reader.GetInt32(1),
                                 IdInsumo = reader.GetInt32(2),
-                                CantidadPorUnidad = (double)reader.GetDecimal(3),
+                                CantidadPorUnidad = reader.GetDecimal(3),
                                 NombreInsumo = reader.GetString(4),
                                 DescripcionInsumo = reader.GetString(5),
                                 UnidadMedidaInsumo= reader.GetString(6)

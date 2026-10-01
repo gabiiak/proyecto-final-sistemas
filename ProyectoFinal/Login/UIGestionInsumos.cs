@@ -86,7 +86,7 @@ namespace Login
             rbLts.Checked = false;
         }
 
-        private bool ValidarCampos(out double precio)
+        private bool ValidarCampos(out decimal precio)
         {
             precio = 0;
             if (string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtDescripcion.Text)
@@ -95,8 +95,8 @@ namespace Login
                 MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                 return false;
             }
-            if (!double.TryParse(txtPrecio.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out precio)
-                && !double.TryParse(txtPrecio.Text.Trim(), out precio))
+            if (!decimal.TryParse(txtPrecio.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out precio)
+                && !decimal.TryParse(txtPrecio.Text.Trim(), out precio))
             {
                 MessageBox.Show("El precio ingresado no es válido.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -118,7 +118,7 @@ namespace Login
         {
             try
             {
-                if (!ValidarCampos(out double precio)) return;
+                if (!ValidarCampos(out decimal precio)) return;
                 string unidadSeleccionada = rbGr.Checked ? "Gr" : rbKg.Checked ? "Kg" : rbLts.Checked ? "Lts" : rbUnidad.Checked ? "Unidad" : null; 
                 Insumo insumo = new Insumo
                 {
@@ -146,7 +146,7 @@ namespace Login
                     MessageBox.Show("Debe seleccionar un insumo.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
-                if (!ValidarCampos(out double precio)) return;
+                if (!ValidarCampos(out decimal precio)) return;
                 string unidadSeleccionada = rbGr.Checked ? "Gr" : rbKg.Checked ? "Kg" : rbLts.Checked ? "Lts" : rbUnidad.Checked ? "Unidad" : null;
                 int id = int.Parse(labelId.Text);
                 DialogResult result = MessageBox.Show("Desea modificar el registro?", "Alerta", MessageBoxButtons.YesNo);

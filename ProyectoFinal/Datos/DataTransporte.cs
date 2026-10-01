@@ -54,7 +54,7 @@ namespace Datos
                                 Venta = new Venta
                                 {
                                     IdVenta = reader.GetInt32(3),
-                                    Total = (double)reader.GetDecimal(4),
+                                    Total = reader.GetDecimal(4),
                                     Cliente = new Cliente
                                     {
                                         Id = reader.GetInt32(5),

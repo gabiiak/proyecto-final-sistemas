@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,6 @@ namespace Modelos
         public int Id { get; set; }
         public int ProductoId { get; set; }
         public string NombreProducto { get; set; }
-        public double CantidadDisponible { get; set; }
+        public decimal CantidadDisponible { get; set; }
     }
 }

@@ -360,7 +360,7 @@ namespace Login
                 hoja.Range(fila, 1, fila, 2).Style.Font.Bold = true;
                 fila++;
 
-                foreach (KeyValuePair<string, double> item in resumen.TotalesPorPeriodo)
+                foreach (KeyValuePair<string, decimal> item in resumen.TotalesPorPeriodo)
                 {
                     hoja.Cell(fila, 1).Value = item.Key;
                     hoja.Cell(fila, 2).Value = item.Value;

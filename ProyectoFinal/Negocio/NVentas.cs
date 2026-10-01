@@ -83,14 +83,14 @@ namespace Negocio
                 throw new ArgumentException("No se puede registrar una venta con fecha futura.");
         }
 
-        public static double CalcularVuelto(double total, double recibido, string metodo)
+        public static decimal CalcularVuelto(decimal total, decimal recibido, string metodo)
         {
             if (metodo.Equals("Efectivo", StringComparison.OrdinalIgnoreCase) && recibido > total)
             {
                 return recibido - total;
             } else return 0;
         }
-        public static double ModificarCantidad(int detalleVentaId, int nuevaCantidad, string motivo)
+        public static decimal ModificarCantidad(int detalleVentaId, int nuevaCantidad, string motivo)
         {
             if (detalleVentaId <= 0)
                 throw new ArgumentException("Debe indicar un detalle de venta válido.", nameof(detalleVentaId));
@@ -109,34 +109,34 @@ namespace Negocio
             if (venta.Estado_Pago != EstadoPedido.Preparacion)
                 throw new InvalidOperationException("Solo se puede modificar la cantidad si la venta está pendiente.");
 
-            double precioUnitarioOriginal = detalle.SubTotal / detalle.Cantidad;
-            double nuevoSubTotal = Math.Round(precioUnitarioOriginal * nuevaCantidad, 2);
+            decimal precioUnitarioOriginal = detalle.SubTotal / detalle.Cantidad;
+            decimal nuevoSubTotal = Math.Round(precioUnitarioOriginal * nuevaCantidad, 2);
 
             DataDetalleVentas.UpdateCantidad(detalleVentaId, nuevaCantidad, nuevoSubTotal, motivo);
 
-            double nuevoTotal = Math.Round(DataDetalleVentas.GetTotalVentaById(detalle.Venta.IdVenta), 2);
+            decimal nuevoTotal = Math.Round(DataDetalleVentas.GetTotalVentaById(detalle.Venta.IdVenta), 2);
             DataVentas.UpdateTotal(detalle.Venta.IdVenta, nuevoTotal);
 
             return nuevoTotal;
         }
-        public static double DescuentoPorEfectivo(double total,string metodo)
+        public static decimal DescuentoPorEfectivo(decimal total,string metodo)
         {
             if (metodo.Equals("Efectivo", StringComparison.OrdinalIgnoreCase))
             {
-                total = total * 0.90;
+                total = total * 0.90m;
             }
             return total;
         }
-        public static double CalcularTotal(List<DetalleVenta> detalles)
+        public static decimal CalcularTotal(List<DetalleVenta> detalles)
         {
-            double total = 0;
+            decimal total = 0;
             foreach (DetalleVenta detalle in detalles)
             {
                 total += NDetalleVentas.CalcularSubTotal(detalle);
             }
             return Math.Round(total, 2);
         }
-        public static int DeterminarEstadoPago(double total, double recibido)
+        public static int DeterminarEstadoPago(decimal total, decimal recibido)
         {
             if (recibido >= total) return EstadoPago.Pagado;
             return EstadoPago.Pendiente;
@@ -148,13 +148,13 @@ namespace Negocio
         public static void CambiarEstadoPedido(int idVenta, int estadoPedido) { DataVentas.CambiarEstadoPedido(idVenta, estadoPedido); }
         public static Venta GetVentaById(int idVenta) { return DataVentas.GetVentaById(idVenta); }
         public static Venta GetMontoRecibido(int idVenta) { return DataVentas.GetMontoRecibido(idVenta); }
-        public static void CambiarMontoRecibido (int idVenta, double ingresado)
+        public static void CambiarMontoRecibido (int idVenta, decimal ingresado)
         {
             Venta venta = GetMontoRecibido(idVenta);
-            double nuevoMonto = venta.MontoRecibido + ingresado;
+            decimal nuevoMonto = venta.MontoRecibido + ingresado;
             DataVentas.CambiarMontoRecibido(idVenta, nuevoMonto);
         }
-        public static double CalcularDeuda(int idVenta)
+        public static decimal CalcularDeuda(int idVenta)
         {
             Venta venta = GetMontoRecibido(idVenta);
             return venta.Total - venta.MontoRecibido;
@@ -163,10 +163,10 @@ namespace Negocio
         public static ResumenVentas CalcularResumenVentas(List<Venta> ventas)
         {
             ResumenVentas resumen = new ResumenVentas();
-            resumen.TotalesPorPeriodo = new SortedDictionary<string, double>();
+            resumen.TotalesPorPeriodo = new SortedDictionary<string, decimal>();
 
-            double totalVentas = 0;
-            double totalCobrado = 0;
+            decimal totalVentas = 0;
+            decimal totalCobrado = 0;
             int cantidadVentas = 0;
 
             foreach (Venta v in ventas)

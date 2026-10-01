@@ -28,7 +28,7 @@ namespace Datos
                                 Nombre = reader.GetString(1),
                                 // reader.IsDBNull(2) ? "" : <- en la DB la descripción ya no puede ser null 
                                 Descripcion = reader.GetString(2),
-                                Precio = (double)reader.GetDecimal(3),
+                                Precio = reader.GetDecimal(3),
                                 VidaUtilDias = reader.GetInt32(4),
                                 Activo = reader.IsDBNull(5) ? 1 : (reader.GetBoolean(5) ? 1 : 0)
                                 /*FechaCaducidad = DateTime.ParseExact(
@@ -62,7 +62,7 @@ namespace Datos
                                 IdProducto = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                                 Descripcion = reader.GetString(2),
-                                Precio = (double)reader.GetDecimal(3),
+                                Precio = reader.GetDecimal(3),
                                 VidaUtilDias = reader.GetInt32(4),
                                 /*FechaCaducidad = DateTime.ParseExact(
                                     reader.GetString(5),

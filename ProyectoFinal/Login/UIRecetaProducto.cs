@@ -1,4 +1,4 @@
-﻿using Modelos;
+using Modelos;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -51,7 +51,7 @@ namespace Login
                     continue;
 
                 int idInsumo = Convert.ToInt32(fila.Cells["cmbInsumo"].Value);
-                double cantidad = Convert.ToDouble(fila.Cells["cantidad"].Value);
+                decimal cantidad = Convert.ToDecimal(fila.Cells["cantidad"].Value);
                 Insumo insumo = listaInsumos.FirstOrDefault(i => i.Id == idInsumo);
 
                 receta.Add(new RecetaProducto

@@ -13,7 +13,7 @@ namespace Modelos
         public int Id { get; set; }
         public int InsumoId { get; set; }
         public string NombreInsumo { get; set; }
-        public double CantidadDisponible { get; set; }
+        public decimal CantidadDisponible { get; set; }
         public string UnidadMedidaInsumo { get; set; }
     }
 }

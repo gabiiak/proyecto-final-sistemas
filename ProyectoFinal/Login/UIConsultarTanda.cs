@@ -1,4 +1,4 @@
-﻿using Modelos;
+using Modelos;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace Login
 
                 List<DetalleTandaProduccion> detalles = NDetalleTandaProduccion.ObtenerDetallesPorTanda(idTanda);
                 dgvDetallesTanda.Rows.Clear();
-                double totalCantidad = 0;
+                decimal totalCantidad = 0;
 
                 foreach (var det in detalles)
                 {

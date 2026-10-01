@@ -60,7 +60,7 @@ namespace Datos
                                     IdProducto = reader.GetInt32(5),
                                     Nombre = reader.GetString(6),
                                     Descripcion = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
-                                    Precio = (double)reader.GetDecimal(8),
+                                    Precio = reader.GetDecimal(8),
                                     Activo = reader.IsDBNull(9) ? 1 : (reader.GetBoolean(9) ? 1 : 0),
                                     VidaUtilDias = reader.IsDBNull(10) ? 0 : reader.GetInt32(10)
                                 }
@@ -105,7 +105,7 @@ namespace Datos
                                     IdProducto = reader.GetInt32(5),
                                     Nombre = reader.GetString(6),
                                     Descripcion = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
-                                    Precio = (double)reader.GetDecimal(8),
+                                    Precio = reader.GetDecimal(8),
                                     Activo = reader.IsDBNull(9) ? 1 : (reader.GetBoolean(9) ? 1 : 0),
                                     VidaUtilDias = reader.IsDBNull(10) ? 0 : reader.GetInt32(10)
                                 }

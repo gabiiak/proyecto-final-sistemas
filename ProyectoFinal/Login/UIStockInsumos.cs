@@ -95,7 +95,7 @@ namespace Login
             txtCantidad.Clear();
         }
 
-        private bool ValidarCampos(out double cantidad)
+        private bool ValidarCampos(out decimal cantidad)
         {
             cantidad = 0;
             if (cmbInsumos.SelectedValue == null)
@@ -108,8 +108,8 @@ namespace Login
                 MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                 return false;
             }
-            if (!double.TryParse(txtCantidad.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out cantidad)
-                && !double.TryParse(txtCantidad.Text.Trim(), out cantidad))
+            if (!decimal.TryParse(txtCantidad.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out cantidad)
+                && !decimal.TryParse(txtCantidad.Text.Trim(), out cantidad))
             {
                 MessageBox.Show("La cantidad ingresada no es válida.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -126,7 +126,7 @@ namespace Login
         {
             try
             {
-                if (!ValidarCampos(out double cantidad)) return;
+                if (!ValidarCampos(out decimal cantidad)) return;
 
                 StockInsumo stock = new StockInsumo
                 {
@@ -152,7 +152,7 @@ namespace Login
                     MessageBox.Show("Debe seleccionar un registro de stock.", "Alerta", MessageBoxButtons.OK);
                     return;
                 }
-                if (!ValidarCampos(out double cantidad)) return;
+                if (!ValidarCampos(out decimal cantidad)) return;
 
                 int id = int.Parse(labelId.Text);
                 DialogResult result = MessageBox.Show("Desea modificar el registro?", "Alerta", MessageBoxButtons.YesNo);

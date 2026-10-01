@@ -60,7 +60,7 @@ namespace Negocio
 
             return DataRecetaProducto.ObtenerPorProducto(idProducto);
         }
-        private static bool CantidadRazonable(double cantidad, string unidadMedida)
+        private static bool CantidadRazonable(decimal cantidad, string unidadMedida)
         {
             switch (unidadMedida?.ToLower())
             {

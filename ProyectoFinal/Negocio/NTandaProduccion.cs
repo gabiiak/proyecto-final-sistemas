@@ -144,7 +144,6 @@ namespace Negocio
                     throw new ArgumentException(
                         $"Stock insuficiente de '{detalle.Insumo.Nombre}' al momento de finalizar. Disponible: {stockActual.CantidadDisponible}, necesario: {detalle.CantidadUtilizada}.");
             }
-            Console.WriteLine($"DEBUG - idProducto: {tanda.Producto.IdProducto}, cantidadProducida: {tanda.CantidadProducida}");
             DataTandaProduccion.FinalizarTandaConMovimientoStock(idTanda, tanda.Producto.IdProducto, tanda.CantidadProducida, detalles, fechaCaducidadCalculada);
         }
     }

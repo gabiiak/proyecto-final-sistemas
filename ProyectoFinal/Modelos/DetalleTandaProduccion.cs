@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,6 @@ namespace Modelos
         public TandaProduccion TandaProduccion { get; set; }
         public Insumo Insumo { get; set; }
         public Empleado Empleado { get; set; }
-        public double CantidadUtilizada { get; set; }
+        public decimal CantidadUtilizada { get; set; }
     }
 }

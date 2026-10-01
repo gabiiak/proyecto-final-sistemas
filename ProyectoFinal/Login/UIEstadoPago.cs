@@ -1,4 +1,4 @@
-﻿using Modelos;
+using Modelos;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace Login
             this.idVenta = idVenta;
             Venta venta = NVentas.GetVentaById(idVenta);
             int estadoVenta = venta.Estado_Pago;
-            double deuda = NVentas.CalcularDeuda(idVenta);
+            decimal deuda = NVentas.CalcularDeuda(idVenta);
             labelDeuda.Text = deuda.ToString("C2");
             labelEstado.Text = GetDescripcionEstadoPago(estadoVenta);
             if (labelEstado.Text.Equals("PAGADO", StringComparison.OrdinalIgnoreCase))
@@ -53,18 +53,18 @@ namespace Login
                 MessageBox.Show("La deuda ya fue anulada y no puede cambiarse su estado. Intente registrando otra venta.");
                 return;
             }
-            double deuda = NVentas.CalcularDeuda(idVenta);
-            //double ingresado = double.Parse(txtDeuda.Text);
+            decimal deuda = NVentas.CalcularDeuda(idVenta);
+            //decimal ingresado = decimal.Parse(txtDeuda.Text);
             //try parse se fija que no ingrese otra cosa que no sea un num.
-            if (!double.TryParse(txtDeuda.Text, out double ingresado) || ingresado <= 0)
+            if (!decimal.TryParse(txtDeuda.Text, out decimal ingresado) || ingresado <= 0)
             {
                 MessageBox.Show("Ingrese un monto válido.");
                 return;
             }
-            double aux = deuda - ingresado;
-            if (ingresado >= deuda || aux < 0.1)
+            decimal aux = deuda - ingresado;
+            if (ingresado >= deuda || aux < 0.1m)
             {
-                double vuelto = ingresado - deuda;
+                decimal vuelto = ingresado - deuda;
                 NVentas.CambiarMontoRecibido(idVenta, deuda); // acumula solo lo que faltaba
                 estado = EstadoPago.Pagado;
                 //if (vuelto > 0)MessageBox.Show($"Vuelto: {vuelto:C2}");
@@ -105,7 +105,7 @@ namespace Login
 
         private void btnPagoJusto_Click(object sender, EventArgs e)
         {
-            double deuda = NVentas.CalcularDeuda(idVenta);
+            decimal deuda = NVentas.CalcularDeuda(idVenta);
             txtDeuda.Text = deuda.ToString();
         }
         private string GetDescripcionEstadoPago(int estado)

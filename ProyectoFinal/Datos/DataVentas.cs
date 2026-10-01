@@ -70,7 +70,7 @@ namespace Datos
             }
             return resultado;
         }
-        public static int UpdateTotal(int idVenta, double total)
+        public static int UpdateTotal(int idVenta, decimal total)
         {
             using (SqlConnection connection = Db.GetConnection())
             {
@@ -149,7 +149,7 @@ namespace Datos
                                 //Fecha = reader.GetDateTime(1),
                                 Estado_Pago = (int)reader.GetByte(2),
                                 Estado_Pedido = (int)reader.GetByte(3),
-                                Total = (double)reader.GetDecimal(4),
+                                Total = reader.GetDecimal(4),
                                 Cliente = new Cliente
                                 {
                                     Id = reader.GetInt32(5),
@@ -183,8 +183,8 @@ namespace Datos
                         {
                             return new Venta
                             {
-                                Total = (double)reader.GetDecimal(0),
-                                MontoRecibido = (double)reader.GetDecimal(1)
+                                Total = reader.GetDecimal(0),
+                                MontoRecibido = reader.GetDecimal(1)
                             };
                         }
                     }
@@ -192,7 +192,7 @@ namespace Datos
                 }
             }
         }
-        public static void CambiarMontoRecibido(int idVenta, double total)
+        public static void CambiarMontoRecibido(int idVenta, decimal total)
         {
             string sqlQuery = @"UPDATE Ventas SET montoRecibido = @MontoRecibido WHERE idVenta = @IdVenta";
             using (SqlConnection connection = Db.GetConnection())
@@ -231,7 +231,7 @@ namespace Datos
                                     Nombre = reader.GetString(2)
                                 },
                                 Fecha = reader.GetDateTime(3),
-                                Total = (double)reader.GetDecimal(4),
+                                Total = reader.GetDecimal(4),
                                 Metodo = new MetodoPago
                                 {
                                     Descripcion = reader.GetString(5)

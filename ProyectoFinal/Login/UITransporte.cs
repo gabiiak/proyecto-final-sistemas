@@ -1,4 +1,4 @@
-﻿using Modelos;
+using Modelos;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -87,7 +87,7 @@ namespace Login
 
         private void ActualizarTotal()
         {
-            double total = 0;
+            decimal total = 0;
             for (int i = 0; i < clbVentas.Items.Count && i < ventasDisponibles.Count; i++)
             {
                 if (clbVentas.GetItemChecked(i))

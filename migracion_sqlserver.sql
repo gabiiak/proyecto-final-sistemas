@@ -122,7 +122,6 @@ CREATE TABLE dbo.Productos (
     [Descripcion]    NVARCHAR(500)  NOT NULL,
     [Precio]         DECIMAL(18,4)  NOT NULL,
     [Activo]         BIT            NOT NULL DEFAULT 1,
-    [fechaCaducidad] DATE           NULL,
     [vidaUtilDias]   INT            NULL,
     CONSTRAINT [PK_Productos] PRIMARY KEY CLUSTERED ([IdProducto] ASC)
 );
@@ -283,19 +282,18 @@ SET IDENTITY_INSERT dbo.MetodosPago OFF;
 
 -- Productos (6 filas)
 -- Se preservan los IDs originales, asi que hay que habilitar IDENTITY_INSERT para esta tabla.
--- NOTA: la columna fechaCaducidad viene de mvp.db con 2029-06-25 en los 6 productos. No tiene
--- relacion con vidaUtilDias (90 dias) y ningun codigo activo la lee; la caducidad real de un
+-- La columna fechaCaducidad que venia de mvp.db (2029-06-25 en los 6 productos) se elimino en la
+-- fase 2: no tenia relacion con vidaUtilDias y ningun codigo la leia. La caducidad real de un
 -- lote se calcula al finalizar la tanda (fecha + vidaUtilDias) y se guarda en
--- TandaProduccion.fechaCaducidad. Se conserva tal cual para no perder datos; queda marcada
--- para eliminar en la fase 2.
+-- TandaProduccion.fechaCaducidad.
 SET IDENTITY_INSERT dbo.Productos ON;
-INSERT INTO [Productos] (IdProducto, Nombre, Descripcion, Precio, Activo, fechaCaducidad, vidaUtilDias) VALUES
-  (N'1', N'carne-150grs', N'medallon de carne 30% grasa', 2000.3, 1, N'2029-06-25', N'90'),
-  (N'2', N'magra-150grs', N'medallon de carne 90% magra', 3900.3, 1, N'2029-06-25', N'90'),
-  (N'3', N'pollo-150grs', N'medallon de pollo y especias', 4100.3, 1, N'2029-06-25', N'90'),
-  (N'4', N'pescado-120grs', N'medallon de merluza condimentado', 2100.3, 1, N'2029-06-25', N'90'),
-  (N'5', N'vegana-120grs', N'medallón de legumbres 100% origen vegetal', 4100, 1, N'2029-06-25', N'90'),
-  (N'6', N'smash-90grs', N'mix de carne y chorizo para smashear', 5100, 1, N'2029-06-25', N'90');
+INSERT INTO [Productos] (IdProducto, Nombre, Descripcion, Precio, Activo, vidaUtilDias) VALUES
+  (N'1', N'carne-150grs', N'medallon de carne 30% grasa', 2000.3, 1, N'90'),
+  (N'2', N'magra-150grs', N'medallon de carne 90% magra', 3900.3, 1, N'90'),
+  (N'3', N'pollo-150grs', N'medallon de pollo y especias', 4100.3, 1, N'90'),
+  (N'4', N'pescado-120grs', N'medallon de merluza condimentado', 2100.3, 1, N'90'),
+  (N'5', N'vegana-120grs', N'medallón de legumbres 100% origen vegetal', 4100, 1, N'90'),
+  (N'6', N'smash-90grs', N'mix de carne y chorizo para smashear', 5100, 1, N'90');
 SET IDENTITY_INSERT dbo.Productos OFF;
 
 -- Insumos (8 filas)

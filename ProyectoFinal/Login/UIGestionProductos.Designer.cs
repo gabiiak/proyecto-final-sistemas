@@ -270,7 +270,7 @@
             // FechaCaducidad
             // 
             this.FechaCaducidad.FillWeight = 118.0919F;
-            this.FechaCaducidad.HeaderText = "VidaUtil";
+            this.FechaCaducidad.HeaderText = "Vida útil (días)";
             this.FechaCaducidad.Name = "FechaCaducidad";
             this.FechaCaducidad.ReadOnly = true;
             // 

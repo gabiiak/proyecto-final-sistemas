@@ -39,7 +39,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 InsumoId = reader.GetInt32(1),
                                 NombreInsumo = reader.GetString(2),
-                                CantidadDisponible = (double)reader.GetDecimal(3),
+                                CantidadDisponible = reader.GetDecimal(3),
                                 UnidadMedidaInsumo = reader.GetString(4)
                             };
                             listaStock.Add(stock);
@@ -119,7 +119,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 InsumoId = reader.GetInt32(1),
                                 NombreInsumo = reader.GetString(2),
-                                CantidadDisponible = (double)reader.GetDecimal(3)
+                                CantidadDisponible = reader.GetDecimal(3)
                             };
                             return stock;
                         }
@@ -153,7 +153,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 InsumoId = reader.GetInt32(1),
                                 NombreInsumo = reader.GetString(2),
-                                CantidadDisponible = (double)reader.GetDecimal(3)
+                                CantidadDisponible = reader.GetDecimal(3)
                             };
                         }
                         return null;

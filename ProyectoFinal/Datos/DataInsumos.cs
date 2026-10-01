@@ -31,7 +31,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                                 Descripcion = reader.GetString(2),
-                                Precio = (double)reader.GetDecimal(3),
+                                Precio = reader.GetDecimal(3),
                                 UnidadMedida = reader.GetString(4),
                                 Activo = reader.IsDBNull(5) ? 1 : (reader.GetBoolean(5) ? 1 : 0)
 
@@ -114,7 +114,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                                 Descripcion = reader.GetString(2),
-                                Precio = (double)reader.GetDecimal(3),
+                                Precio = reader.GetDecimal(3),
                                 Activo = reader.IsDBNull(4) ? 1 : (reader.GetBoolean(4) ? 1 : 0)
                             };
                             return insumo;

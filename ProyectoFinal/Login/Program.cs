@@ -20,10 +20,10 @@ namespace Login
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var menu = new UIGestionVentas(); //solo para debug
-            Application.Run(menu);
+            //var menu = new UIGestionVentas(); //solo para debug
+            //Application.Run(menu);
 
-            /*bool seguirCorriendo = true;
+            bool seguirCorriendo = true;
             while (seguirCorriendo)
             {
                 using (var login = new Login())
@@ -36,7 +36,7 @@ namespace Login
                    }
                     else seguirCorriendo = false;
                }
-            }*/
+            }
         }
     }
 }

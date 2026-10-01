@@ -29,9 +29,9 @@ namespace Negocio
 
         public static void CreateDetalleVenta(DetalleVenta detalle) { DataDetalleVentas.CreateDetalleVenta(detalle); }
 
-        public static double CalcularSubTotal(DetalleVenta detalle)
+        public static decimal CalcularSubTotal(DetalleVenta detalle)
         {
-            double subTotal = detalle.Producto.Precio * detalle.Cantidad;
+            decimal subTotal = detalle.Producto.Precio * detalle.Cantidad;
             return subTotal;
         }
         public static void ValidarStockSuficiente(List<DetalleVenta> detalles)

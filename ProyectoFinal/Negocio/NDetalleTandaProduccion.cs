@@ -11,7 +11,7 @@ namespace Negocio
         {
             foreach (RecetaProducto item in receta)
             {
-                double cantidadNecesaria = item.CantidadPorUnidad * cantidadProducida;
+                decimal cantidadNecesaria = item.CantidadPorUnidad * cantidadProducida;
 
                 StockInsumo stockActual = DataStockInsumo.GetStockByInsumoId(item.IdInsumo);
 

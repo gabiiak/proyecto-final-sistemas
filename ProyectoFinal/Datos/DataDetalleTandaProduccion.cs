@@ -43,7 +43,7 @@ namespace Datos
                                     Activo = reader.IsDBNull(16) ? 1 : (reader.GetBoolean(16) ? 1 : 0),
                                     NumCuenta = reader.GetInt32(17),
                                     FechaIngreso = reader.GetDateTime(18),
-                                    Sueldo = (double)reader.GetDecimal(19)
+                                    Sueldo = reader.GetDecimal(19)
                                 }
                                 e.idEmpleado, e.nombre, e.apellido, e.telefono, e.cargo, e.activo, e.numCuenta, e.fechaIngreso, e.sueldo
                 */
@@ -68,7 +68,7 @@ namespace Datos
                             DetalleTandaProduccion detalle = new DetalleTandaProduccion
                             {
                                 IdDetalleTanda = reader.GetInt32(0),
-                                CantidadUtilizada = (double)reader.GetDecimal(1),
+                                CantidadUtilizada = reader.GetDecimal(1),
                                 TandaProduccion = new TandaProduccion
                                 {
                                     IdTanda = reader.GetInt32(2),
@@ -81,7 +81,7 @@ namespace Datos
                                     Id = reader.GetInt32(5),
                                     Nombre = reader.GetString(6),
                                     Descripcion = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
-                                    Precio = (double)reader.GetDecimal(8),
+                                    Precio = reader.GetDecimal(8),
                                     Activo = reader.IsDBNull(9) ? 1 : (reader.GetBoolean(9) ? 1 : 0),
                                     UnidadMedida = reader.IsDBNull(10) ? string.Empty : reader.GetString(10)
                                 }

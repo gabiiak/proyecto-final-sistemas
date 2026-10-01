@@ -15,12 +15,6 @@ namespace Login
         private Form formularioActivo = null;
         private Button botonActivo = null;
 
-        // Colores de la paleta
-        private readonly Color ColorSidebar = Color.FromArgb(28, 58, 94);
-        private readonly Color ColorItemActivo = Color.FromArgb(55, 138, 221);
-        private readonly Color ColorTextoNormal = Color.FromArgb(181, 212, 244);
-        private readonly Color ColorTextoActivo = Color.White;
-
         public UIMenu2()
         {
             InitializeComponent();
@@ -78,7 +72,7 @@ namespace Login
             formHijo.TopLevel = false;
             formHijo.FormBorderStyle = FormBorderStyle.None;
             formHijo.Dock = DockStyle.Fill;
-            formHijo.BackColor = Color.FromArgb(244, 247, 251);
+            formHijo.BackColor = UIStyles.FondoCampo;
 
             pnlContenedor.Controls.Clear();
             pnlContenedor.Controls.Add(formHijo);
@@ -93,13 +87,13 @@ namespace Login
             if (botonActivo != null)
             {
                 botonActivo.BackColor = Color.Transparent;
-                botonActivo.ForeColor = ColorTextoNormal;
+                botonActivo.ForeColor = UIStyles.BordeClaro;
             }
 
             // Marcar el nuevo botón como activo
             botonActivo = boton;
-            botonActivo.BackColor = ColorItemActivo;
-            botonActivo.ForeColor = ColorTextoActivo;
+            botonActivo.BackColor = UIStyles.HoverSidebar;
+            botonActivo.ForeColor = UIStyles.Blanco;
         }
 
         private void BtnCerrarSesion_Click(object sender, EventArgs e)
