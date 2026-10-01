@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+using System.Data;
+using System.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Modelos;
 using System;
@@ -14,22 +15,21 @@ namespace Datos
         public static List<(string Nombre, int Cantidad)> GetProductosMasVendidos(int top = 4) //torta
         {
             var resultado = new List<(string, int)>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT p.Nombre, SUM(dv.cantidad) as totalCantidad
+                string sqlQuery = @"SELECT TOP (@Top) p.Nombre, SUM(dv.cantidad) as totalCantidad
                             FROM DetalleVentas dv
                             INNER JOIN Productos p ON dv.idProducto = p.idProducto
                             INNER JOIN Ventas v ON dv.idVenta = v.idVenta
                             WHERE v.estadoPago != @Anulado
                             GROUP BY p.idProducto, p.Nombre
-                            ORDER BY totalCantidad DESC
-                            LIMIT @Top";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                            ORDER BY totalCantidad DESC";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
                     cmd.Parameters.AddWithValue("@Top", top);
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -43,18 +43,18 @@ namespace Datos
         public static List<DetalleVenta> GetDetallesByIdVenta(int idVenta)
         {
             List<DetalleVenta> lista = new List<DetalleVenta>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT dv.idDetalleVenta, dv.cantidad, dv.subTotal,
                                    p.idProducto, p.nombre
                             FROM DetalleVentas dv
                             INNER JOIN Productos p ON dv.idProducto = p.idProducto
                             WHERE dv.idVenta = @IdVenta";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdVenta", idVenta);
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -62,7 +62,7 @@ namespace Datos
                             {
                                 IdDetalleVenta = reader.GetInt32(0),
                                 Cantidad = reader.GetInt32(1),
-                                SubTotal = reader.GetDouble(2),
+                                SubTotal = (double)reader.GetDecimal(2),
                                 Producto = new Producto
                                 {
                                     IdProducto = reader.GetInt32(3),
@@ -78,14 +78,14 @@ namespace Datos
         public static List<DetalleVenta> GetAllDetalleVentas() //para mostrar en la venta todos los detalles
         {
             List<DetalleVenta> listaDetalleVentas = new List<DetalleVenta>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT v.idVenta, dv.idDetalleVenta AS NúmeroDetalle, p.Nombre, dv.cantidad AS Cantidad, dv.subTotal 
                                     FROM DetalleVentas dv INNER JOIN Ventas v on dv.idVenta = v.idVenta INNER JOIN Productos p on dv.idProducto = p.IdProducto";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -101,7 +101,7 @@ namespace Datos
                                     Nombre = reader.GetString(2),
                                 },
                                 Cantidad = reader.GetInt32(3),
-                                SubTotal = reader.GetDouble(4)
+                                SubTotal = (double)reader.GetDecimal(4)
                             };
                             listaDetalleVentas.Add(detalle);
                         }
@@ -113,14 +113,14 @@ namespace Datos
         public static int CreateDetalleVenta(DetalleVenta detalle) // int para devolver el id venta
         {
             string sqlQuery = @"INSERT INTO DetalleVentas(idVenta, idProducto, cantidad, subTotal) VALUES (@IdVenta, @IdProducto, @Cantidad,@SubTotal);";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.Add("@IdVenta", (SqliteType)System.Data.SqlDbType.Int).Value = detalle.Venta.IdVenta;
-                    cmd.Parameters.Add("@IdProducto", (SqliteType)System.Data.SqlDbType.Int).Value = detalle.Producto.IdProducto;
-                    cmd.Parameters.Add("@Cantidad", (SqliteType)System.Data.SqlDbType.Int).Value = detalle.Cantidad;
+                    cmd.Parameters.Add("@IdVenta", SqlDbType.Int).Value = detalle.Venta.IdVenta;
+                    cmd.Parameters.Add("@IdProducto", SqlDbType.Int).Value = detalle.Producto.IdProducto;
+                    cmd.Parameters.Add("@Cantidad", SqlDbType.Int).Value = detalle.Cantidad;
                     cmd.Parameters.AddWithValue("@SubTotal", detalle.SubTotal);
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -128,15 +128,15 @@ namespace Datos
         }
         public static DetalleVenta GetById(int id)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT idDetalleVenta, idVenta, idProducto, cantidad, subTotal
                             FROM DetalleVentas WHERE idDetalleVenta = @id";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -152,7 +152,7 @@ namespace Datos
                                     IdProducto = reader.GetInt32(2)
                                 },
                                 Cantidad = reader.GetInt32(3),
-                                SubTotal = reader.GetDouble(4)
+                                SubTotal = (double)reader.GetDecimal(4)
                             };
                         }
                         return null;
@@ -163,12 +163,12 @@ namespace Datos
 
         public static int UpdateCantidad(int id, int cantidad, double nuevoSubTotal, string motivo)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"UPDATE DetalleVentas 
                             SET cantidad = @cantidad, subTotal = @subTotal, motivoModificacion = @motivo
                             WHERE idDetalleVenta = @id";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@cantidad", cantidad);
                     cmd.Parameters.AddWithValue("@subTotal", nuevoSubTotal);
@@ -182,10 +182,10 @@ namespace Datos
 
         public static double GetTotalVentaById(int idVenta)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT SUM(subTotal) FROM DetalleVentas WHERE idVenta = @idVenta";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@idVenta", idVenta);
                     connection.Open();

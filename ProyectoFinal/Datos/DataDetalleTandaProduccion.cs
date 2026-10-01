@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+using System.Data.SqlClient;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -11,11 +11,11 @@ namespace Datos
         {
             string sqlQuery = @"INSERT INTO DetalleTanda(idTandaProd, idInsumo, idEmpleado, cantidadUtilizada)
                                 VALUES (@IdTandaProd, @IdInsumo, @IdEmpleado, @CantidadUtilizada);
-                                SELECT last_insert_rowid();";
+                                SELECT SCOPE_IDENTITY();";
 
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTandaProd", detalle.TandaProduccion.IdTanda);
@@ -30,7 +30,7 @@ namespace Datos
         public static List<DetalleTandaProduccion> GetDetallesByTanda(int idTanda)
         {
             List<DetalleTandaProduccion> lista = new List<DetalleTandaProduccion>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 /*LEFT JOIN Empleados e ON dt.idEmpleado = e.idEmpleado
                  * Empleado = new Empleado
@@ -40,15 +40,15 @@ namespace Datos
                                     Apellido = reader.GetString(13),
                                     Telefono = reader.IsDBNull(14) ? string.Empty : reader.GetString(14),
                                     Cargo = reader.GetString(15),
-                                    Activo = reader.GetInt32(16),
+                                    Activo = reader.IsDBNull(16) ? 1 : (reader.GetBoolean(16) ? 1 : 0),
                                     NumCuenta = reader.GetInt32(17),
-                                    FechaIngreso = DateTime.Parse(reader.GetString(18)),
-                                    Sueldo = reader.GetDouble(19)
+                                    FechaIngreso = reader.GetDateTime(18),
+                                    Sueldo = (double)reader.GetDecimal(19)
                                 }
                                 e.idEmpleado, e.nombre, e.apellido, e.telefono, e.cargo, e.activo, e.numCuenta, e.fechaIngreso, e.sueldo
                 */
                 string sqlQuery = @"SELECT dt.idDetalleTanda, dt.cantidadUtilizada,
-                                           t.idTanda, t.fecha, t.hora, t.estado,
+                                           t.idTanda, t.fecha, t.estado,
                                            i.id, i.nombre, i.descripcion, i.precio, i.activo, i.unidadMedida       
                                     FROM DetalleTanda dt
                                     INNER JOIN TandaProduccion t ON dt.idTandaProd = t.idTanda
@@ -56,34 +56,34 @@ namespace Datos
                                     WHERE dt.idTandaProd = @IdTandaProd
                                     ORDER BY dt.idDetalleTanda ASC";
 
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTandaProd", idTanda);
 
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             DetalleTandaProduccion detalle = new DetalleTandaProduccion
                             {
                                 IdDetalleTanda = reader.GetInt32(0),
-                                CantidadUtilizada = reader.GetDouble(1),
+                                CantidadUtilizada = (double)reader.GetDecimal(1),
                                 TandaProduccion = new TandaProduccion
                                 {
                                     IdTanda = reader.GetInt32(2),
-                                    Fecha = DateTime.Parse(reader.GetString(3)),
-                                    Hora = DateTime.Parse(reader.GetString(4)),
-                                    EstadoTanda = reader.GetInt32(5)
+                                    Fecha = reader.GetDateTime(3),
+                                    Hora = reader.GetDateTime(3), // la hora se lee del mismo DATETIME2
+                                    EstadoTanda = (int)reader.GetByte(4)
                                 },
                                 Insumo = new Insumo
                                 {
-                                    Id = reader.GetInt32(6),
-                                    Nombre = reader.GetString(7),
-                                    Descripcion = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
-                                    Precio = reader.GetDouble(9),
-                                    Activo = reader.GetInt32(10),
-                                    UnidadMedida = reader.GetString(11)
+                                    Id = reader.GetInt32(5),
+                                    Nombre = reader.GetString(6),
+                                    Descripcion = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                                    Precio = (double)reader.GetDecimal(8),
+                                    Activo = reader.IsDBNull(9) ? 1 : (reader.GetBoolean(9) ? 1 : 0),
+                                    UnidadMedida = reader.IsDBNull(10) ? string.Empty : reader.GetString(10)
                                 }
                                 
                             };
@@ -98,9 +98,9 @@ namespace Datos
         public static void EliminarDetalle(int idDetalleTanda)
         {
             string sqlQuery = @"DELETE FROM DetalleTanda WHERE idDetalleTanda = @IdDetalleTanda";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdDetalleTanda", idDetalleTanda);
@@ -112,9 +112,9 @@ namespace Datos
         public static void EliminarDetallesPorTanda(int idTanda)
         {
             string sqlQuery = @"DELETE FROM DetalleTanda WHERE idTandaProd = @IdTandaProd";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTandaProd", idTanda);

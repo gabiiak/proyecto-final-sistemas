@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+using System.Data.SqlClient;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -14,15 +14,15 @@ namespace Datos
         public static List<Insumo> GetAllInsumos()
         {
             List<Insumo> listaInsumos = new List<Insumo>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT i.id, i.nombre, i.descripcion, i.precio, i.unidadMedida, i.activo
                                     FROM Insumos i
                                     WHERE i.activo = 1";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -31,9 +31,9 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                                 Descripcion = reader.GetString(2),
-                                Precio = reader.GetDouble(3),
+                                Precio = (double)reader.GetDecimal(3),
                                 UnidadMedida = reader.GetString(4),
-                                Activo = reader.GetInt32(5)
+                                Activo = reader.IsDBNull(5) ? 1 : (reader.GetBoolean(5) ? 1 : 0)
 
                             };
                             listaInsumos.Add(insumo);
@@ -45,11 +45,11 @@ namespace Datos
         }
         public static int Create(Insumo insumo)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"INSERT INTO Insumos (nombre, descripcion, precio, activo, unidadMedida) 
                                     VALUES (@nombre, @descripcion, @precio, 1, @unidad)";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@nombre", insumo.Nombre);
                     cmd.Parameters.AddWithValue("@descripcion", insumo.Descripcion);
@@ -62,12 +62,12 @@ namespace Datos
         }
         public static int Update(Insumo insumo)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"UPDATE Insumos 
                                     SET nombre = @nombre, descripcion = @descripcion, precio = @precio, unidadMedida = @unidad
                                     WHERE id = @id";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@nombre", insumo.Nombre);
                     cmd.Parameters.AddWithValue("@descripcion", insumo.Descripcion);
@@ -81,12 +81,12 @@ namespace Datos
         }
         public static int Delete(int id)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"UPDATE Insumos 
                                         SET activo = 0
                                         WHERE id = @id";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     connection.Open();
@@ -96,16 +96,16 @@ namespace Datos
         }
         public static Insumo GetInsumoById(int id)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT i.id, i.nombre, i.descripcion, i.precio, i.activo
                                     FROM Insumos i
                                     WHERE i.id = @id";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -114,8 +114,8 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                                 Descripcion = reader.GetString(2),
-                                Precio = reader.GetDouble(3),
-                                Activo = reader.GetInt32(4)
+                                Precio = (double)reader.GetDecimal(3),
+                                Activo = reader.IsDBNull(4) ? 1 : (reader.GetBoolean(4) ? 1 : 0)
                             };
                             return insumo;
                         }

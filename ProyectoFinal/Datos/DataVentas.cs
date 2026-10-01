@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+using System.Data;
+using System.Data.SqlClient;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -17,24 +18,24 @@ namespace Datos
             for (int m = 1; m <= 12; m++)
                 resultado[m] = 0;
 
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT strftime('%m', fecha) as mes, SUM(totalVenta) as total
+                string sqlQuery = @"SELECT MONTH(fecha) as mes, SUM(totalVenta) as total
                     FROM Ventas
-                    WHERE strftime('%Y', fecha) = @Anio
+                    WHERE YEAR(fecha) = @Anio
                       AND estadoPago != @Anulado
-                    GROUP BY mes";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                    GROUP BY MONTH(fecha)";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@Anio", anio.ToString());
+                    cmd.Parameters.Add("@Anio", SqlDbType.Int).Value = anio;
                     cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            int mes = int.Parse(reader.GetString(0));
-                            double total = reader.GetDouble(1);
+                            int mes = reader.GetInt32(0);
+                            double total = (double)reader.GetDecimal(1);
                             resultado[mes] = total;
                         }
                     }
@@ -45,25 +46,24 @@ namespace Datos
         public static List<(string Nombre, double Total)> GetTopClientesPorMonto(int top = 5)// gráfico de barras
         {
             var resultado = new List<(string, double)>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT c.nombre, SUM(v.totalVenta) as totalFacturado
+                string sqlQuery = @"SELECT TOP (@Top) c.nombre, SUM(v.totalVenta) as totalFacturado
                             FROM Ventas v
                             INNER JOIN Clientes c ON v.idCliente = c.id
                             WHERE v.estadoPago != @Anulado
                             GROUP BY c.id, c.nombre
-                            ORDER BY totalFacturado DESC
-                            LIMIT @Top";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                            ORDER BY totalFacturado DESC";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
                     cmd.Parameters.AddWithValue("@Top", top);
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            resultado.Add((reader.GetString(0), reader.GetDouble(1)));
+                            resultado.Add((reader.GetString(0), (double)reader.GetDecimal(1)));
                         }
                     }
                 }
@@ -72,10 +72,10 @@ namespace Datos
         }
         public static int UpdateTotal(int idVenta, double total)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"UPDATE Ventas SET total = @total WHERE idVenta = @idVenta";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@total", total);
                     cmd.Parameters.AddWithValue("@idVenta", idVenta);
@@ -95,27 +95,27 @@ namespace Datos
             for (int m = mesInicio; m <= mesFin; m++)
                 resultado[m] = 0;
 
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT strftime('%m', fecha) as mes, SUM(totalVenta) as total
+                string sqlQuery = @"SELECT MONTH(fecha) as mes, SUM(totalVenta) as total
                             FROM Ventas
-                            WHERE strftime('%Y', fecha) = @Anio
-                              AND CAST(strftime('%m', fecha) AS INTEGER) BETWEEN @MesInicio AND @MesFin
+                            WHERE YEAR(fecha) = @Anio
+                              AND MONTH(fecha) BETWEEN @MesInicio AND @MesFin
                               AND estadoPago != @Anulado
-                            GROUP BY mes";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                            GROUP BY MONTH(fecha)";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@Anio", anio.ToString());
-                    cmd.Parameters.AddWithValue("@MesInicio", mesInicio);
-                    cmd.Parameters.AddWithValue("@MesFin", mesFin);
+                    cmd.Parameters.Add("@Anio", SqlDbType.Int).Value = anio;
+                    cmd.Parameters.Add("@MesInicio", SqlDbType.Int).Value = mesInicio;
+                    cmd.Parameters.Add("@MesFin", SqlDbType.Int).Value = mesFin;
                     cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            int mes = int.Parse(reader.GetString(0));
-                            double total = reader.GetDouble(1);
+                            int mes = reader.GetInt32(0);
+                            double total = (double)reader.GetDecimal(1);
                             resultado[mes] = total;
                         }
                     }
@@ -125,7 +125,7 @@ namespace Datos
         }
         public static Venta GetVentaById(int idVenta)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT v.idVenta, v.fecha, v.estadoPago, v.estadoPedido, v.totalVenta,
                                    c.id, c.nombre,
@@ -134,27 +134,22 @@ namespace Datos
                             INNER JOIN Clientes c ON v.idCliente = c.id
                             INNER JOIN MetodosPago mp ON v.idMetodoPago = mp.idMetodoPago
                             WHERE v.idVenta = @IdVenta";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdVenta", idVenta);
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             return new Venta
                             {
                                 IdVenta = reader.GetInt32(0),
-                                Fecha = DateTime.ParseExact(
-                                    reader.GetString(1),
-                                    new string[] { "yyyy-MM-dd", "dd-MM-yyyy" }, // prueba ambos formatos
-                                    System.Globalization.CultureInfo.InvariantCulture,
-                                    System.Globalization.DateTimeStyles.None
-                                ),
+                                Fecha = reader.GetDateTime(1),
                                 //Fecha = reader.GetDateTime(1),
-                                Estado_Pago = reader.GetInt32(2),
-                                Estado_Pedido = reader.GetInt32(3),
-                                Total = reader.GetDouble(4),
+                                Estado_Pago = (int)reader.GetByte(2),
+                                Estado_Pedido = (int)reader.GetByte(3),
+                                Total = (double)reader.GetDecimal(4),
                                 Cliente = new Cliente
                                 {
                                     Id = reader.GetInt32(5),
@@ -175,21 +170,21 @@ namespace Datos
         
         public static Venta GetMontoRecibido(int idVenta)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT totalVenta, montoRecibido FROM Ventas WHERE idVenta = @IdVenta";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdVenta", idVenta);
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             return new Venta
                             {
-                                Total = reader.GetDouble(0),
-                                MontoRecibido = reader.GetDouble(1)
+                                Total = (double)reader.GetDecimal(0),
+                                MontoRecibido = (double)reader.GetDecimal(1)
                             };
                         }
                     }
@@ -200,9 +195,9 @@ namespace Datos
         public static void CambiarMontoRecibido(int idVenta, double total)
         {
             string sqlQuery = @"UPDATE Ventas SET montoRecibido = @MontoRecibido WHERE idVenta = @IdVenta";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdVenta", idVenta);
@@ -214,16 +209,16 @@ namespace Datos
         public static List<Venta> GetAllVentas()
         {
             List<Venta> listaVentas = new List<Venta>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT v.idVenta, c.id, c.nombre, v.fecha, v.totalVenta, mp.descripcion, v.estadoPago, v.estadoPedido
                                     FROM Ventas v
                                     INNER JOIN Clientes c ON v.idCliente = c.id
                                     INNER JOIN MetodosPago mp ON v.idMetodoPago = mp.idMetodoPago";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -235,20 +230,14 @@ namespace Datos
                                     Id = reader.GetInt32(1),
                                     Nombre = reader.GetString(2)
                                 },
-                                Fecha = DateTime.ParseExact(
-                                    reader.GetString(3),
-                                    new string[] { "yyyy-MM-dd", "dd-MM-yyyy" }, // prueba ambos formatos
-                                    System.Globalization.CultureInfo.InvariantCulture,
-                                    System.Globalization.DateTimeStyles.None
-                                ),
-                                //Fecha = reader.GetDateTime(3),
-                                Total = reader.GetDouble(4),
+                                Fecha = reader.GetDateTime(3),
+                                Total = (double)reader.GetDecimal(4),
                                 Metodo = new MetodoPago
                                 {
                                     Descripcion = reader.GetString(5)
                                 },
-                                Estado_Pago = reader.GetInt32(6),
-                                Estado_Pedido = reader.GetInt32(7)
+                                Estado_Pago = (int)reader.GetByte(6),
+                                Estado_Pedido = (int)reader.GetByte(7)
                             };
                             listaVentas.Add(venta);
                         }
@@ -261,20 +250,20 @@ namespace Datos
         {
             string sqlQuery = @"INSERT INTO Ventas(idCliente, idMetodoPago, fecha, estadoPedido, estadoPago, totalVenta, montoRecibido) 
                                 VALUES (@Id, @IdMetodoPago, @Fecha, @EstadoPedido, @EstadoPago, @Total, @MontoRecibido);
-                                SELECT last_insert_rowid();";
+                                SELECT SCOPE_IDENTITY();";
 
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.Add("@Id", (SqliteType)System.Data.SqlDbType.Int).Value = venta.Cliente.Id;
-                    cmd.Parameters.Add("@IdMetodoPago", (SqliteType)System.Data.SqlDbType.Int).Value = venta.Metodo.IdMetodoPago;
-                    cmd.Parameters.Add("@Fecha", (SqliteType)System.Data.SqlDbType.Text).Value = venta.Fecha.ToString("yyyy-MM-dd"); // <- cambiar a datetime para SQLServer
-                    cmd.Parameters.AddWithValue("@EstadoPedido", venta.Estado_Pedido);
-                    cmd.Parameters.AddWithValue("@EstadoPago", venta.Estado_Pago);
-                    cmd.Parameters.AddWithValue("@Total", venta.Total);
-                    cmd.Parameters.AddWithValue("@MontoRecibido", venta.MontoRecibido);
+                    cmd.Parameters.Add("@Id", SqlDbType.Int).Value = venta.Cliente.Id;
+                    cmd.Parameters.Add("@IdMetodoPago", SqlDbType.Int).Value = venta.Metodo.IdMetodoPago;
+                    cmd.Parameters.Add("@Fecha", SqlDbType.Date).Value = venta.Fecha;
+                    cmd.Parameters.Add("@EstadoPedido", SqlDbType.Int).Value = venta.Estado_Pedido;
+                    cmd.Parameters.Add("@EstadoPago", SqlDbType.Int).Value = venta.Estado_Pago;
+                    cmd.Parameters.Add("@Total", SqlDbType.Decimal).Value = (decimal)venta.Total;
+                    cmd.Parameters.Add("@MontoRecibido", SqlDbType.Decimal).Value = (decimal)venta.MontoRecibido;
                     //cmd.ExecuteNonQuery(); <- esto llama ejecutar 2 veces. mejor usar execute scalar
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -283,9 +272,9 @@ namespace Datos
         public static void CambiarEstadoPago(int idVenta, int estadoPago)
         {
             string sqlQuery = @"UPDATE Ventas SET estadoPago = @EstadoPago WHERE idVenta = @IdVenta";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdVenta", idVenta);
@@ -297,9 +286,9 @@ namespace Datos
         public static void CambiarEstadoPedido(int idVenta, int estadoPedido)
         {
             string sqlQuery = @"UPDATE Ventas SET estadoPedido = @EstadoPedido WHERE idVenta = @IdVenta";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdVenta", idVenta);
@@ -310,13 +299,13 @@ namespace Datos
         }
         public static void MarcarPedidoListoConDescuentoStock(int idVenta, List<DetalleVenta> detalles)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
-                using (SqliteTransaction transaction = connection.BeginTransaction())
+                using (SqlTransaction transaction = connection.BeginTransaction())
                 {
                     string updateEstado = "UPDATE Ventas SET estadoPedido = @Estado WHERE idVenta = @IdVenta;";
-                    using (SqliteCommand cmd = new SqliteCommand(updateEstado, connection, transaction))
+                    using (SqlCommand cmd = new SqlCommand(updateEstado, connection, transaction))
                     {
                         cmd.Parameters.AddWithValue("@Estado", EstadoPedido.Listo);
                         cmd.Parameters.AddWithValue("@IdVenta", idVenta);
@@ -327,7 +316,7 @@ namespace Datos
                                     WHERE producto_id = @productoId;";
                     foreach (DetalleVenta detalle in detalles)
                     {
-                        using (SqliteCommand cmd = new SqliteCommand(updateStock, connection, transaction))
+                        using (SqlCommand cmd = new SqlCommand(updateStock, connection, transaction))
                         {
                             cmd.Parameters.AddWithValue("@cantidadVendida", detalle.Cantidad);
                             cmd.Parameters.AddWithValue("@productoId", detalle.Producto.IdProducto);
@@ -343,13 +332,13 @@ namespace Datos
             }
         }
 
-        /*using (SqliteConnection connection = Db.GetConnection())
+        /*using (SqlConnection connection = Db.GetConnection())
                 {
                     string sqlQuery = @"";
-                    using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                    using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                     {
                         connection.Open();
-                        using (SqliteDataReader reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {

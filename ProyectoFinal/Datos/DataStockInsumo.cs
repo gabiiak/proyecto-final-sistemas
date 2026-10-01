@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+using System.Data.SqlClient;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -21,16 +21,16 @@ namespace Datos
         public static List<StockInsumo> GetAllStock()
         {
             List<StockInsumo> listaStock = new List<StockInsumo>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT s.id, s.insumo_id, i.nombre, s.cantidad, i.unidadMedida
                                     FROM StockInsumo s
                                     INNER JOIN Insumos i ON i.id = s.insumo_id
                                     WHERE i.activo = 1";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -39,7 +39,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 InsumoId = reader.GetInt32(1),
                                 NombreInsumo = reader.GetString(2),
-                                CantidadDisponible = reader.GetDouble(3),
+                                CantidadDisponible = (double)reader.GetDecimal(3),
                                 UnidadMedidaInsumo = reader.GetString(4)
                             };
                             listaStock.Add(stock);
@@ -52,12 +52,12 @@ namespace Datos
 
         public static int createStock(StockInsumo stock)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"INSERT INTO StockInsumo (insumo_id, cantidad) 
                             VALUES (@insumoId, @cantidad);
-                            SELECT last_insert_rowid();";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                            SELECT SCOPE_IDENTITY();";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@insumoId", stock.InsumoId);
                     cmd.Parameters.AddWithValue("@cantidad", stock.CantidadDisponible);
@@ -69,12 +69,12 @@ namespace Datos
 
         public static int updateStock(StockInsumo stock)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"UPDATE StockInsumo 
                                     SET cantidad = @cantidad
                                     WHERE id = @id";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@cantidad", stock.CantidadDisponible);
                     cmd.Parameters.AddWithValue("@id", stock.Id);
@@ -86,10 +86,10 @@ namespace Datos
 
         public static int deleteStock(int id)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"DELETE FROM StockInsumo WHERE id = @id";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     connection.Open();
@@ -100,17 +100,17 @@ namespace Datos
 
         public static StockInsumo GetStockById(int id)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT s.id, s.insumo_id, i.nombre, s.cantidad
                                     FROM StockInsumo s
                                     INNER JOIN Insumos i ON i.id = s.insumo_id
                                     WHERE s.id = @id";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -119,7 +119,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 InsumoId = reader.GetInt32(1),
                                 NombreInsumo = reader.GetString(2),
-                                CantidadDisponible = reader.GetDouble(3)
+                                CantidadDisponible = (double)reader.GetDecimal(3)
                             };
                             return stock;
                         }
@@ -134,17 +134,17 @@ namespace Datos
 
         public static StockInsumo GetStockByInsumoId(int insumoId)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT s.id, s.insumo_id, i.nombre, s.cantidad
                             FROM StockInsumo s
                             INNER JOIN Insumos i ON i.id = s.insumo_id
                             WHERE s.insumo_id = @insumoId";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@insumoId", insumoId);
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
@@ -153,7 +153,7 @@ namespace Datos
                                 Id = reader.GetInt32(0),
                                 InsumoId = reader.GetInt32(1),
                                 NombreInsumo = reader.GetString(2),
-                                CantidadDisponible = reader.GetDouble(3)
+                                CantidadDisponible = (double)reader.GetDecimal(3)
                             };
                         }
                         return null;

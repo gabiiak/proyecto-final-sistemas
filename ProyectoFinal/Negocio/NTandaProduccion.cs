@@ -131,7 +131,7 @@ namespace Negocio
             if (tanda.Producto.VidaUtilDias <= 0)
                 throw new ArgumentException($"El producto '{tanda.Producto.Nombre}' no tiene definida su vida útil en días.");
 
-            DateTime fechaCaducidadCalculada = tanda.Fecha.AddDays(tanda.Producto.VidaUtilDias);
+            DateTime fechaCaducidadCalculada = tanda.Fecha.Date.AddDays(tanda.Producto.VidaUtilDias);
             // Revalidar stock (puede haber cambiado desde que se creó la tanda)
             foreach (DetalleTandaProduccion detalle in detalles)
             {

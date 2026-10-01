@@ -1,5 +1,5 @@
-﻿using DocumentFormat.OpenXml.Drawing.Wordprocessing;
-using Microsoft.Data.Sqlite;
+using DocumentFormat.OpenXml.Drawing.Wordprocessing;
+using System.Data.SqlClient;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -12,13 +12,13 @@ namespace Datos
         public static List<Producto> GetAllProductos()
         {
             List<Producto> lista = new List<Producto>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT IdProducto, Nombre, Descripcion, Precio, vidaUtilDias, Activo FROM Productos WHERE Activo != 0";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -28,9 +28,9 @@ namespace Datos
                                 Nombre = reader.GetString(1),
                                 // reader.IsDBNull(2) ? "" : <- en la DB la descripción ya no puede ser null 
                                 Descripcion = reader.GetString(2),
-                                Precio = reader.GetDouble(3),
+                                Precio = (double)reader.GetDecimal(3),
                                 VidaUtilDias = reader.GetInt32(4),
-                                Activo = reader.GetInt32(5)
+                                Activo = reader.IsDBNull(5) ? 1 : (reader.GetBoolean(5) ? 1 : 0)
                                 /*FechaCaducidad = DateTime.ParseExact(
                                     reader.GetString(5),
                                     new[] { "yyyy-MM-dd", "dd-MM-yyyy" },
@@ -47,13 +47,13 @@ namespace Datos
         public static List<Producto> GetAllDeletedProductos() //<- para mostrar los registros con activo -> 0
         {
             List<Producto> listaDeleted = new List<Producto>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT IdProducto, Nombre, Descripcion, Precio, vidaUtilDias, Activo FROM Productos WHERE Activo = 0";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -62,14 +62,14 @@ namespace Datos
                                 IdProducto = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
                                 Descripcion = reader.GetString(2),
-                                Precio = reader.GetDouble(3),
+                                Precio = (double)reader.GetDecimal(3),
                                 VidaUtilDias = reader.GetInt32(4),
                                 /*FechaCaducidad = DateTime.ParseExact(
                                     reader.GetString(5),
                                     new[] { "yyyy-MM-dd", "dd-MM-yyyy" },
                                     System.Globalization.CultureInfo.InvariantCulture,
                                     System.Globalization.DateTimeStyles.None)*/
-                                Activo = reader.GetInt32(5)
+                                Activo = reader.IsDBNull(5) ? 1 : (reader.GetBoolean(5) ? 1 : 0)
                             };
                             listaDeleted.Add(prod);
                         }
@@ -83,9 +83,9 @@ namespace Datos
         {
             string sqlQuery = @"INSERT INTO Productos (Nombre, Descripcion, Precio, vidaUtilDias) VALUES 
             (@Nombre, @Descripcion, @Precio, @VidaUtil)";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     // Si producto.Descripcion es null, mandamos un DBNull a SQLite
@@ -103,9 +103,9 @@ namespace Datos
         {
             // Nombres de parámetros exactos
             string sqlQuery = @"UPDATE Productos SET Nombre = @Nombre, Descripcion = @Descripcion, Precio = @Precio, vidaUtilDias = @VidaUtil WHERE IdProducto = @IdProducto";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdProducto", producto.IdProducto);
@@ -121,9 +121,9 @@ namespace Datos
         public static void Delete(Producto producto)
         {
             string sqlQuery = @"UPDATE Productos SET Activo = 0 WHERE IdProducto = @IdProducto"; //baja lógica. no deleteamos directamente de la base de datos
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdProducto", producto.IdProducto);
@@ -134,9 +134,9 @@ namespace Datos
         public static void ShowDeletedProducts(Producto producto)
         {
             string sqlQuery = @"UPDATE Productos SET Activo = 1 WHERE IdProducto = @IdProducto"; 
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdProducto", producto.IdProducto);

@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+using System.Data;
+using System.Data.SqlClient;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,16 @@ namespace Datos
         {
             string sqlQuery = @"INSERT INTO Transportes(idVenta, fecha, estado)
                                 VALUES (@IdVenta, @Fecha, @Estado);
-                                SELECT last_insert_rowid();";
+                                SELECT SCOPE_IDENTITY();";
 
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@IdVenta", transporte.Venta.IdVenta);
-                    cmd.Parameters.AddWithValue("@Fecha", transporte.Fecha.ToString("yyyy-MM-dd HH:mm:ss"));
-                    cmd.Parameters.AddWithValue("@Estado", transporte.Estado);
+                    cmd.Parameters.Add("@IdVenta", SqlDbType.Int).Value = transporte.Venta.IdVenta;
+                    cmd.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = transporte.Fecha;
+                    cmd.Parameters.Add("@Estado", SqlDbType.Int).Value = transporte.Estado;
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
@@ -29,7 +30,7 @@ namespace Datos
         public static List<Transporte> GetAllTransportes()
         {
             List<Transporte> lista = new List<Transporte>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT t.idTransporte, t.fecha, t.estado,
                                    v.idVenta, v.totalVenta,
@@ -38,22 +39,22 @@ namespace Datos
                             INNER JOIN Ventas v ON t.idVenta = v.idVenta
                             INNER JOIN Clientes c ON v.idCliente = c.id
                             ORDER BY t.idTransporte ASC";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             Transporte transporte = new Transporte
                             {
                                 IdTransporte = reader.GetInt32(0),
-                                Fecha = DateTime.Parse(reader.GetString(1)),
-                                Estado = reader.GetInt32(2),
+                                Fecha = reader.GetDateTime(1),
+                                Estado = (int)reader.GetByte(2),
                                 Venta = new Venta
                                 {
                                     IdVenta = reader.GetInt32(3),
-                                    Total = reader.GetDouble(4),
+                                    Total = (double)reader.GetDecimal(4),
                                     Cliente = new Cliente
                                     {
                                         Id = reader.GetInt32(5),
@@ -72,9 +73,9 @@ namespace Datos
         public static int? GetEstadoActual(int idTransporte)
         {
             string sqlQuery = @"SELECT estado FROM Transportes WHERE idTransporte = @IdTransporte";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTransporte", idTransporte);
@@ -87,9 +88,9 @@ namespace Datos
         public static void EliminarTransporte(int idTransporte)
         {
             string sqlQuery = @"DELETE FROM Transportes WHERE idTransporte = @IdTransporte";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTransporte", idTransporte);
@@ -101,9 +102,9 @@ namespace Datos
         public static void CambiarEstado(int idTransporte, int estado)
         {
             string sqlQuery = @"UPDATE Transportes SET estado = @Estado WHERE idTransporte = @IdTransporte";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTransporte", idTransporte);
@@ -117,9 +118,9 @@ namespace Datos
         public static int GetIdVentaByTransporte(int idTransporte)
         {
             string sqlQuery = @"SELECT idVenta FROM Transportes WHERE idTransporte = @IdTransporte";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTransporte", idTransporte);

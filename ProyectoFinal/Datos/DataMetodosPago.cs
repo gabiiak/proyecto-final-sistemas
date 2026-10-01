@@ -1,4 +1,4 @@
-using Microsoft.Data.Sqlite;
+using System.Data.SqlClient;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -10,13 +10,13 @@ namespace Datos
         public static List<MetodoPago> GetAll()
         {
             List<MetodoPago> lista = new List<MetodoPago>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT * FROM MetodosPago WHERE activo != 0";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -24,7 +24,7 @@ namespace Datos
                             {
                                 IdMetodoPago = reader.GetInt32(0),
                                 Descripcion = reader.GetString(1),
-                                Activo = reader.GetInt32(2)
+                                Activo = reader.IsDBNull(2) ? 1 : (reader.GetBoolean(2) ? 1 : 0)
                             };
                             lista.Add(mp);
                         }
@@ -37,13 +37,13 @@ namespace Datos
         public static List<MetodoPago> GetAllDeletedMetodos()
         {
             List<MetodoPago> listaDeleted = new List<MetodoPago>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT * FROM MetodosPago WHERE activo = 0";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -51,7 +51,7 @@ namespace Datos
                             {
                                 IdMetodoPago = reader.GetInt32(0),
                                 Descripcion = reader.GetString(1),
-                                Activo = reader.GetInt32(2)
+                                Activo = reader.IsDBNull(2) ? 1 : (reader.GetBoolean(2) ? 1 : 0)
                             };
                             listaDeleted.Add(mp);
                         }
@@ -63,10 +63,10 @@ namespace Datos
 
         public static void Create(MetodoPago metodoPago)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"INSERT INTO MetodosPago (Descripcion, Activo) VALUES (@Descripcion, @Activo)";
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@Descripcion", metodoPago.Descripcion);
@@ -79,9 +79,9 @@ namespace Datos
         public static void Update(MetodoPago metodoPago)
         {
             string sqlQuery = @"UPDATE MetodosPago SET Descripcion = @Descripcion, Activo = @Activo WHERE IdMetodoPago = @IdMetodoPago";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdMetodoPago", metodoPago.IdMetodoPago);
@@ -95,9 +95,9 @@ namespace Datos
         public static void Delete(MetodoPago metodoPago)
         {
             string sqlQuery = @"UPDATE MetodosPago SET Activo = 0 WHERE IdMetodoPago = @IdMetodoPago";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdMetodoPago", metodoPago.IdMetodoPago);
@@ -110,9 +110,9 @@ namespace Datos
         public static void RestoreMetodoPago(MetodoPago metodoPago)
         {
             string sqlQuery = @"UPDATE MetodosPago SET Activo = 1 WHERE IdMetodoPago = @IdMetodoPago";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdMetodoPago", metodoPago.IdMetodoPago);

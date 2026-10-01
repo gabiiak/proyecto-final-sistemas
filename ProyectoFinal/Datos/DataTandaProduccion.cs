@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+using System.Data;
+using System.Data.SqlClient;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -9,20 +10,20 @@ namespace Datos
     {
         public static int CreateTanda(TandaProduccion tanda)
         {
-            string sqlQuery = @"INSERT INTO TandaProduccion(idProducto, fecha, hora, estado, cantidadProducida)
-                                VALUES (@IdProducto, @Fecha, @Hora, @Estado, @Cantidad);
-                                SELECT last_insert_rowid();";
+            string sqlQuery = @"INSERT INTO TandaProduccion(idProducto, fecha, estado, cantidadProducida)
+                                VALUES (@IdProducto, @Fecha, @Estado, @Cantidad);
+                                SELECT SCOPE_IDENTITY();";
 
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@IdProducto", tanda.Producto.IdProducto);
-                    cmd.Parameters.AddWithValue("@Fecha", tanda.Fecha.ToString("yyyy-MM-dd"));
-                    cmd.Parameters.AddWithValue("@Hora", tanda.Hora.ToString("yyyy-MM-dd HH:mm:ss"));
-                    cmd.Parameters.AddWithValue("@Estado", tanda.EstadoTanda);
-                    cmd.Parameters.AddWithValue("@Cantidad", tanda.CantidadProducida);
+                    cmd.Parameters.Add("@IdProducto", SqlDbType.Int).Value = tanda.Producto.IdProducto;
+                    // fecha y hora van unidas en un solo DATETIME2
+                    cmd.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = tanda.Fecha.Date.Add(tanda.Hora.TimeOfDay);
+                    cmd.Parameters.Add("@Estado", SqlDbType.Int).Value = tanda.EstadoTanda;
+                    cmd.Parameters.Add("@Cantidad", SqlDbType.Int).Value = tanda.CantidadProducida;
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
@@ -31,37 +32,37 @@ namespace Datos
         public static List<TandaProduccion> GetAllTandas()
         {
             List<TandaProduccion> lista = new List<TandaProduccion>();
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT t.idTanda, t.fecha, t.hora, t.estado,t.cantidadProducida, t.fechaCaducidad,
+                string sqlQuery = @"SELECT t.idTanda, t.fecha, t.estado,t.cantidadProducida, t.fechaCaducidad,
                                            p.idProducto, p.nombre, p.descripcion, p.precio, p.activo, p.vidaUtilDias
                                     FROM TandaProduccion t
                                     INNER JOIN Productos p ON t.idProducto = p.idProducto
                                     ORDER BY t.idTanda ASC";
 
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             TandaProduccion tanda = new TandaProduccion
                             {
                                 IdTanda = reader.GetInt32(0),
-                                Fecha = DateTime.Parse(reader.GetString(1)),
-                                Hora = DateTime.Parse(reader.GetString(2)),
-                                EstadoTanda = reader.GetInt32(3),
-                                CantidadProducida = reader.GetInt32(4),
-                                FechaCaducidad = reader.IsDBNull(5) ? DateTime.MinValue : DateTime.Parse(reader.GetString(5)),
+                                Fecha = reader.GetDateTime(1),
+                                Hora = reader.GetDateTime(1), // la hora se lee del mismo DATETIME2
+                                EstadoTanda = (int)reader.GetByte(2),
+                                CantidadProducida = reader.GetInt32(3),
+                                FechaCaducidad = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4),
                                 Producto = new Producto
                                 {
-                                    IdProducto = reader.GetInt32(6),
-                                    Nombre = reader.GetString(7),
-                                    Descripcion = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
-                                    Precio = reader.GetDouble(9),
-                                    Activo = reader.GetInt32(10),
-                                    VidaUtilDias = reader.GetInt32(11)
+                                    IdProducto = reader.GetInt32(5),
+                                    Nombre = reader.GetString(6),
+                                    Descripcion = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                                    Precio = (double)reader.GetDecimal(8),
+                                    Activo = reader.IsDBNull(9) ? 1 : (reader.GetBoolean(9) ? 1 : 0),
+                                    VidaUtilDias = reader.IsDBNull(10) ? 0 : reader.GetInt32(10)
                                 }
                             };
                             lista.Add(tanda);
@@ -74,39 +75,39 @@ namespace Datos
 
         public static TandaProduccion GetTandaById(int idTanda)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT t.idTanda, t.fecha, t.hora, t.estado,t.cantidadProducida, t.fechaCaducidad,
+                string sqlQuery = @"SELECT t.idTanda, t.fecha, t.estado,t.cantidadProducida, t.fechaCaducidad,
                                            p.idProducto, p.nombre, p.descripcion, p.precio, p.activo, p.vidaUtilDias
                                     FROM TandaProduccion t
                                     INNER JOIN Productos p ON t.idProducto = p.idProducto
                                     WHERE t.idTanda = @IdTanda";
 
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTanda", idTanda);
 
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             return new TandaProduccion
                             {
                                 IdTanda = reader.GetInt32(0),
-                                Fecha = DateTime.Parse(reader.GetString(1)),
-                                Hora = DateTime.Parse(reader.GetString(2)),
-                                EstadoTanda = reader.GetInt32(3),
-                                CantidadProducida = reader.GetInt32(4),
-                                FechaCaducidad = reader.IsDBNull(5) ? DateTime.MinValue : DateTime.Parse(reader.GetString(5)),
+                                Fecha = reader.GetDateTime(1),
+                                Hora = reader.GetDateTime(1), // la hora se lee del mismo DATETIME2
+                                EstadoTanda = (int)reader.GetByte(2),
+                                CantidadProducida = reader.GetInt32(3),
+                                FechaCaducidad = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4),
                                 Producto = new Producto
                                 {
-                                    IdProducto = reader.GetInt32(6),
-                                    Nombre = reader.GetString(7),
-                                    Descripcion = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
-                                    Precio = reader.GetDouble(9),
-                                    Activo = reader.GetInt32(10),
-                                    VidaUtilDias = reader.GetInt32(11)
+                                    IdProducto = reader.GetInt32(5),
+                                    Nombre = reader.GetString(6),
+                                    Descripcion = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                                    Precio = (double)reader.GetDecimal(8),
+                                    Activo = reader.IsDBNull(9) ? 1 : (reader.GetBoolean(9) ? 1 : 0),
+                                    VidaUtilDias = reader.IsDBNull(10) ? 0 : reader.GetInt32(10)
                                 }
                             };
                         }
@@ -119,9 +120,9 @@ namespace Datos
         public static void CambiarEstado(int idTanda, int estadoTanda)
         {
             string sqlQuery = @"UPDATE TandaProduccion SET estado = @Estado WHERE idTanda = @IdTanda";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTanda", idTanda);
@@ -134,9 +135,9 @@ namespace Datos
         public static int? GetEstadoActual(int idTanda)
         {
             string sqlQuery = @"SELECT estado FROM TandaProduccion WHERE idTanda = @IdTanda";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTanda", idTanda);
@@ -149,9 +150,9 @@ namespace Datos
         public static void EliminarTanda(int idTanda)
         {
             string sqlQuery = @"DELETE FROM TandaProduccion WHERE idTanda = @IdTanda";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTanda", idTanda);
@@ -163,9 +164,9 @@ namespace Datos
         public static int GetIdProductoByTanda(int idTanda)
         {
             string sqlQuery = @"SELECT idProducto FROM TandaProduccion WHERE idTanda = @IdTanda";
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdTanda", idTanda);
@@ -176,25 +177,25 @@ namespace Datos
         }
         public static int CrearTandaConDetalle(TandaProduccion tanda, List<DetalleTandaProduccion> detalles) //aquí aprendí transacciones SQL owo
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
-                using (SqliteTransaction transaction = connection.BeginTransaction())
+                using (SqlTransaction transaction = connection.BeginTransaction())
                 {
                     // 1. Insertar cabecera de tanda
-                    string insertTanda = @"INSERT INTO TandaProduccion(idProducto, fecha, hora, cantidadProducida, estado)
-                                    VALUES (@IdProducto, @Fecha, @Hora, @CantidadProducida, @Estado);
-                                    SELECT last_insert_rowid();";
+                    string insertTanda = @"INSERT INTO TandaProduccion(idProducto, fecha, cantidadProducida, estado)
+                                    VALUES (@IdProducto, @Fecha, @CantidadProducida, @Estado);
+                                    SELECT SCOPE_IDENTITY();";
 
                     int idTanda;
-                    using (SqliteCommand cmd = new SqliteCommand(insertTanda, connection, transaction))
+                    using (SqlCommand cmd = new SqlCommand(insertTanda, connection, transaction))
                     {
-                        cmd.Parameters.AddWithValue("@IdProducto", tanda.Producto.IdProducto);
-                        cmd.Parameters.AddWithValue("@Fecha", tanda.Fecha.ToString("yyyy-MM-dd"));
-                        cmd.Parameters.AddWithValue("@Hora", tanda.Hora.ToString("HH:mm:ss"));
-                        cmd.Parameters.AddWithValue("@CantidadProducida", tanda.CantidadProducida);
+                        cmd.Parameters.Add("@IdProducto", SqlDbType.Int).Value = tanda.Producto.IdProducto;
+                        // fecha y hora van unidas en un solo DATETIME2
+                        cmd.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = tanda.Fecha.Date.Add(tanda.Hora.TimeOfDay);
+                        cmd.Parameters.Add("@CantidadProducida", SqlDbType.Int).Value = tanda.CantidadProducida;
                         //cmd.Parameters.AddWithValue("@FechaCaducidad", tanda.FechaCaducidad.ToString("yyyy-MM-dd"));
-                        cmd.Parameters.AddWithValue("@Estado", tanda.EstadoTanda);
+                        cmd.Parameters.Add("@Estado", SqlDbType.Int).Value = tanda.EstadoTanda;
                         idTanda = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
@@ -204,7 +205,7 @@ namespace Datos
 
                     foreach (DetalleTandaProduccion detalle in detalles)
                     {
-                        using (SqliteCommand cmd = new SqliteCommand(insertDetalle, connection, transaction))
+                        using (SqlCommand cmd = new SqlCommand(insertDetalle, connection, transaction))
                         {
                             cmd.Parameters.AddWithValue("@IdTandaProd", idTanda);
                             cmd.Parameters.AddWithValue("@IdInsumo", detalle.Insumo.Id);
@@ -222,17 +223,17 @@ namespace Datos
         }
         public static void FinalizarTandaConMovimientoStock(int idTanda, int idProducto, double cantidadProducida, List<DetalleTandaProduccion> detalles, DateTime fechaCaducidadCalculada)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
-                using (SqliteTransaction transaction = connection.BeginTransaction())
+                using (SqlTransaction transaction = connection.BeginTransaction())
                 {
                     // 1. Cambiar estado de la tanda
                     string updateEstado = "UPDATE TandaProduccion SET estado = @Estado, fechaCaducidad = @FechaCaducidad WHERE idTanda = @IdTanda;";
-                    using (SqliteCommand cmd = new SqliteCommand(updateEstado, connection, transaction))
+                    using (SqlCommand cmd = new SqlCommand(updateEstado, connection, transaction))
                     {
                         cmd.Parameters.AddWithValue("@Estado", EstadoTanda.Terminada);
-                        cmd.Parameters.AddWithValue("@FechaCaducidad", fechaCaducidadCalculada.ToString("yyyy-MM-dd"));
+                        cmd.Parameters.Add("@FechaCaducidad", SqlDbType.Date).Value = fechaCaducidadCalculada;
                         cmd.Parameters.AddWithValue("@IdTanda", idTanda);
                         cmd.ExecuteNonQuery();
                     }
@@ -242,7 +243,7 @@ namespace Datos
                                           WHERE insumo_id = @insumoId;";
                     foreach (DetalleTandaProduccion detalle in detalles)
                     {
-                        using (SqliteCommand cmd = new SqliteCommand(updateStockInsumo, connection, transaction))
+                        using (SqlCommand cmd = new SqlCommand(updateStockInsumo, connection, transaction))
                         {
                             cmd.Parameters.AddWithValue("@cantidadUsada", detalle.CantidadUtilizada);
                             cmd.Parameters.AddWithValue("@insumoId", detalle.Insumo.Id);
@@ -256,7 +257,7 @@ namespace Datos
                     // 3. Sumar stock del producto terminado
                     string updateStockProducto = @"UPDATE StockProducto SET cantidad = cantidad + @cantidadProducida
                                             WHERE producto_id = @productoId;";
-                    using (SqliteCommand cmd = new SqliteCommand(updateStockProducto, connection, transaction))
+                    using (SqlCommand cmd = new SqlCommand(updateStockProducto, connection, transaction))
                     {
                         cmd.Parameters.AddWithValue("@cantidadProducida", cantidadProducida);
                         cmd.Parameters.AddWithValue("@productoId", idProducto);

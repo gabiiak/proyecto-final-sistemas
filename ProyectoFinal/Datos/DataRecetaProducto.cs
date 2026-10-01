@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+using System.Data.SqlClient;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -12,14 +12,14 @@ namespace Datos
     {
         public static int Create(RecetaProducto receta)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
                 string sqlQuery = @"INSERT INTO RecetaProducto (idProducto, idInsumo, cantidadPorUnidad)
                                  VALUES (@idProducto, @idInsumo, @cantidadPorUnidad);
-                                 SELECT last_insert_rowid();";
+                                 SELECT SCOPE_IDENTITY();";
 
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@idProducto", receta.IdProducto);
                     cmd.Parameters.AddWithValue("@idInsumo", receta.IdInsumo);
@@ -33,14 +33,14 @@ namespace Datos
 
         public static void Update(RecetaProducto receta)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
                 string sqlQuery = @"UPDATE RecetaProducto
                                  SET cantidadPorUnidad = @cantidadPorUnidad
                                  WHERE idReceta = @idReceta;";
 
-                using (SqliteCommand cmd = new SqliteCommand(sqlQuery, connection))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     cmd.Parameters.AddWithValue("@cantidadPorUnidad", receta.CantidadPorUnidad);
                     cmd.Parameters.AddWithValue("@idReceta", receta.IdReceta);
@@ -51,12 +51,12 @@ namespace Datos
 
         public static void Delete(int idReceta)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
                 string consulta = "DELETE FROM RecetaProducto WHERE idReceta = @idReceta;";
 
-                using (SqliteCommand cmd = new SqliteCommand(consulta, connection))
+                using (SqlCommand cmd = new SqlCommand(consulta, connection))
                 {
                     cmd.Parameters.AddWithValue("@idReceta", idReceta);
                     cmd.ExecuteNonQuery();
@@ -68,7 +68,7 @@ namespace Datos
         {
             List<RecetaProducto> listado = new List<RecetaProducto>();
 
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
                 string consulta = @"SELECT r.idReceta, r.idProducto, r.idInsumo, r.cantidadPorUnidad,
@@ -77,11 +77,11 @@ namespace Datos
                                  INNER JOIN Insumos i ON r.idInsumo = i.id
                                  WHERE r.idProducto = @idProducto;";
 
-                using (SqliteCommand cmd = new SqliteCommand(consulta, connection))
+                using (SqlCommand cmd = new SqlCommand(consulta, connection))
                 {
                     cmd.Parameters.AddWithValue("@idProducto", idProducto);
 
-                    using (SqliteDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
@@ -90,7 +90,7 @@ namespace Datos
                                 IdReceta = reader.GetInt32(0),
                                 IdProducto = reader.GetInt32(1),
                                 IdInsumo = reader.GetInt32(2),
-                                CantidadPorUnidad = reader.GetDouble(3),
+                                CantidadPorUnidad = (double)reader.GetDecimal(3),
                                 NombreInsumo = reader.GetString(4),
                                 DescripcionInsumo = reader.GetString(5),
                                 UnidadMedidaInsumo= reader.GetString(6)
@@ -105,13 +105,13 @@ namespace Datos
 
         public static bool ExisteInsumoEnReceta(int idProducto, int idInsumo)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
                 string consulta = @"SELECT COUNT(*) FROM RecetaProducto
                                  WHERE idProducto = @idProducto AND idInsumo = @idInsumo;";
 
-                using (SqliteCommand cmd = new SqliteCommand(consulta, connection))
+                using (SqlCommand cmd = new SqlCommand(consulta, connection))
                 {
                     cmd.Parameters.AddWithValue("@idProducto", idProducto);
                     cmd.Parameters.AddWithValue("@idInsumo", idInsumo);
@@ -123,13 +123,13 @@ namespace Datos
         }
         public static void ReemplazarReceta(int idProducto, List<RecetaProducto> receta)
         {
-            using (SqliteConnection connection = Db.GetConnection())
+            using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
-                using (SqliteTransaction transaction = connection.BeginTransaction())
+                using (SqlTransaction transaction = connection.BeginTransaction())
                 {
                     string deleteQuery = "DELETE FROM RecetaProducto WHERE idProducto = @idProducto;";
-                    using (SqliteCommand cmdDelete = new SqliteCommand(deleteQuery, connection, transaction))
+                    using (SqlCommand cmdDelete = new SqlCommand(deleteQuery, connection, transaction))
                     {
                         cmdDelete.Parameters.AddWithValue("@idProducto", idProducto);
                         cmdDelete.ExecuteNonQuery();
@@ -140,7 +140,7 @@ namespace Datos
 
                     foreach (RecetaProducto item in receta)
                     {
-                        using (SqliteCommand cmdInsert = new SqliteCommand(insertQuery, connection, transaction))
+                        using (SqlCommand cmdInsert = new SqlCommand(insertQuery, connection, transaction))
                         {
                             cmdInsert.Parameters.AddWithValue("@idProducto", idProducto);
                             cmdInsert.Parameters.AddWithValue("@idInsumo", item.IdInsumo);
