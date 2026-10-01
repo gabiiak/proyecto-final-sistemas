@@ -9,6 +9,9 @@
     2) El script es idempotente: borra las tablas si ya existen y las vuelve a crear con sus datos.
     3) NO usar IF DB_ID(...) con CREATE DATABASE en Azure SQL Database (no lo permite).
        En ese caso crear la base desde el portal y ejecutar solo desde la linea USE hacia abajo.
+    4) Para crear una base de PRUEBA separada (TandGSystemTest), cambiar el nombre en las 2
+       unicas apariciones de abajo, o mejor usar sqlcmd:
+         sqlcmd -S localhost -E -v BaseNombre="TandGSystemTest" -i migracion_sqlserver.sql
 
   IMPORTANTE - decisiones de mapeo (SQLite -> SQL Server):
     * INTEGER PRIMARY KEY AUTOINCREMENT  ->  INT IDENTITY(1,1) PRIMARY KEY
@@ -62,13 +65,14 @@ SET QUOTED_IDENTIFIER ON;
 GO
 
 -- Crear la base si no existe (omitir este bloque si la base ya existe).
-IF DB_ID(N'TandGSystem') IS NULL
+-- $(BaseNombre) permite crear una base de prueba separada; sqlcmd lo reemplaza por el valor de -v.
+IF DB_ID(N'$(BaseNombre)') IS NULL
 BEGIN
-    CREATE DATABASE [TandGSystem];
+    EXEC('CREATE DATABASE [$(BaseNombre)]');
 END
 GO
 
-USE [TandGSystem];
+USE [$(BaseNombre)];
 GO
 
 SET DATEFORMAT dmy;  -- guarda contra literales ambiguos (los del script son ISO, asi que es solo una red de seguridad)
