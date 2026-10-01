@@ -30,6 +30,7 @@ namespace Login
         private Button btnMetodosPago;
         private Button btnVentas;
         private Button btnCerrarSesion;
+        private Button btnTema;
 
         protected override void Dispose(bool disposing)
         {
@@ -53,6 +54,7 @@ namespace Login
             btnMetodosPago = new Button();
             btnVentas = new Button();
             btnCerrarSesion = new Button();
+            btnTema = new Button();
             lblModuloActivo = new Label();
             lblFecha = new Label();
             pnlSeparador = new Panel();
@@ -83,7 +85,12 @@ namespace Login
             lblTituloApp.Dock = DockStyle.Top;
             lblTituloApp.Height = 60;
 
+            // Botón de tema: anclado abajo, fuera de la pila de módulos
+            btnTema.Text = "  🌙  Tema oscuro";
+            btnTema.Name = "btnTema";
+
             pnlSidebar.Controls.Add(btnCerrarSesion);
+            pnlSidebar.Controls.Add(btnTema);
             pnlSidebar.Controls.Add(btnVentas);
             pnlSidebar.Controls.Add(btnMetodosPago);
             //pnlSidebar.Controls.Add(btnStock);
