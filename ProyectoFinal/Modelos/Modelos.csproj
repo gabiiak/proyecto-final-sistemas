@@ -197,12 +197,17 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compra.cs" />
+    <Compile Include="DetalleCompra.cs" />
     <Compile Include="DetalleTandaProduccion.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="EstadoTanda.cs" />
     <Compile Include="EstadoTransporte.cs" />
+    <Compile Include="EstadoCompra.cs" />
     <Compile Include="Insumo.cs" />
+    <Compile Include="Proveedor.cs" />
     <Compile Include="RecetaProducto.cs" />
+    <Compile Include="ResumenCompras.cs" />
     <Compile Include="StockInsumo.cs" />
     <Compile Include="StockProducto.cs" />
     <Compile Include="TandaProduccion.cs" />

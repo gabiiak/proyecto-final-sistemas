@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,19 +26,22 @@ namespace Login
 
             ConfigurarBotonSidebar(btnInicio, "  🏠  Inicio", 0);
             ConfigurarBotonSidebar(btnClientes, "  👥  Clientes", 1);
-            ConfigurarBotonSidebar(btnProductos, "  📦  Productos", 2);
-            ConfigurarBotonSidebar(btnInsumos, "  🧰  Insumos", 3);
-            ConfigurarBotonSidebar(btnTandas, "  ⚙️  Producción", 4);
-            //ConfigurarBotonSidebar(btnStock, "  📊  StockInsumos", 4);
-            ConfigurarBotonSidebar(btnMetodosPago, "  💳  Métodos de Pago", 5);
-            ConfigurarBotonSidebar(btnVentas, "  🛒  Ventas", 6);
-            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 7);
+            ConfigurarBotonSidebar(btnProveedores, "  🏭  Proveedores", 2);
+            ConfigurarBotonSidebar(btnProductos, "  📦  Productos", 3);
+            ConfigurarBotonSidebar(btnInsumos, "  🧰  Insumos", 4);
+            ConfigurarBotonSidebar(btnTandas, "  ⚙️  Producción", 5);
+            //ConfigurarBotonSidebar(btnStock, "  📊  StockInsumos", 5);
+            ConfigurarBotonSidebar(btnMetodosPago, "  💳  Métodos de Pago", 6);
+            ConfigurarBotonSidebar(btnVentas, "  🛒  Ventas", 7);
+            ConfigurarBotonSidebar(btnCompras, "  🧾  Compras", 8);
+            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 9);
 
             ConfigurarBotonTema();
 
             // Conectamos cada botón a su handler
             btnInicio.Click += (s, e) => AbrirModulo(btnInicio, () => new UIInicio1());
             btnClientes.Click += (s, e) => AbrirModulo(btnClientes, () => new UIGestionClientes());
+            btnProveedores.Click += (s, e) => AbrirModulo(btnProveedores, () => new UIGestionProveedores());
             //btnProductos.Click += (s, e) => AbrirModulo(btnProductos, () => new UIProductManagement());
             btnProductos.Click += (s, e) => AbrirModulo(btnProductos, () => new UIStockProductos());
             btnInsumos.Click += (s, e) => AbrirModulo(btnInsumos, () => new UIStockInsumos());
@@ -45,6 +49,7 @@ namespace Login
             //btnStock.Click += (s, e) => AbrirModulo(btnStock, () => new UIStockInsumos());
             btnMetodosPago.Click += (s, e) => AbrirModulo(btnMetodosPago, () => new UIGestionMetodosPago());
             btnVentas.Click += (s, e) => AbrirModulo(btnVentas, () => new UIGestionVentas());
+            btnCompras.Click += (s, e) => AbrirModulo(btnCompras, () => new UIGestionCompras());
             btnCerrarSesion.Click += BtnCerrarSesion_Click;
 
             btnTema.Click += BtnTema_Click;

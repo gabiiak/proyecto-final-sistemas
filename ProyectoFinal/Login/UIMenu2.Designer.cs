@@ -23,12 +23,14 @@ namespace Login
         // Botones del sidebar
         private Button btnInicio;
         private Button btnClientes;
+        private Button btnProveedores;
         private Button btnProductos;
         private Button btnInsumos;
         private Button btnStock;
         private Button btnTandas;
         private Button btnMetodosPago;
         private Button btnVentas;
+        private Button btnCompras;
         private Button btnCerrarSesion;
         private Button btnTema;
 
@@ -40,147 +42,223 @@ namespace Login
 
         private void InitializeComponent()
         {
-            pnlSidebar = new Panel();
-            pnlContenedor = new Panel();
-            pnlHeader = new Panel();
-            lblTituloApp = new Label();
-            lblUsuario = new Label();
-            btnInicio = new Button();
-            btnClientes = new Button();
-            btnTandas = new Button();
-            btnProductos = new Button();
-            btnInsumos = new Button();
-            //btnStock = new Button();
-            btnMetodosPago = new Button();
-            btnVentas = new Button();
-            btnCerrarSesion = new Button();
-            btnTema = new Button();
-            lblModuloActivo = new Label();
-            lblFecha = new Label();
-            pnlSeparador = new Panel();
+            this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.btnCerrarSesion = new System.Windows.Forms.Button();
+            this.btnTema = new System.Windows.Forms.Button();
+            this.btnCompras = new System.Windows.Forms.Button();
+            this.btnVentas = new System.Windows.Forms.Button();
+            this.btnMetodosPago = new System.Windows.Forms.Button();
+            this.btnTandas = new System.Windows.Forms.Button();
+            this.btnInsumos = new System.Windows.Forms.Button();
+            this.btnProductos = new System.Windows.Forms.Button();
+            this.btnProveedores = new System.Windows.Forms.Button();
+            this.btnClientes = new System.Windows.Forms.Button();
+            this.btnInicio = new System.Windows.Forms.Button();
+            this.lblTituloApp = new System.Windows.Forms.Label();
+            this.pnlContenedor = new System.Windows.Forms.Panel();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.lblUsuario = new System.Windows.Forms.Label();
+            this.lblModuloActivo = new System.Windows.Forms.Label();
+            this.pnlSeparador = new System.Windows.Forms.Panel();
+            this.lblFecha = new System.Windows.Forms.Label();
+            this.pnlSidebar.SuspendLayout();
+            this.pnlHeader.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // pnlSidebar
+            // 
+            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(58)))), ((int)(((byte)(94)))));
+            this.pnlSidebar.Controls.Add(this.btnCerrarSesion);
+            this.pnlSidebar.Controls.Add(this.btnTema);
+            this.pnlSidebar.Controls.Add(this.btnCompras);
+            this.pnlSidebar.Controls.Add(this.btnVentas);
+            this.pnlSidebar.Controls.Add(this.btnMetodosPago);
+            this.pnlSidebar.Controls.Add(this.btnTandas);
+            this.pnlSidebar.Controls.Add(this.btnInsumos);
+            this.pnlSidebar.Controls.Add(this.btnProductos);
+            this.pnlSidebar.Controls.Add(this.btnProveedores);
+            this.pnlSidebar.Controls.Add(this.btnClientes);
+            this.pnlSidebar.Controls.Add(this.btnInicio);
+            this.pnlSidebar.Controls.Add(this.lblTituloApp);
+            this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
+            this.pnlSidebar.Name = "pnlSidebar";
+            this.pnlSidebar.Padding = new System.Windows.Forms.Padding(0, 12, 0, 12);
+            this.pnlSidebar.Size = new System.Drawing.Size(220, 749);
+            this.pnlSidebar.TabIndex = 2;
+            // 
+            // btnCerrarSesion
+            // 
+            this.btnCerrarSesion.Location = new System.Drawing.Point(0, 0);
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.Size = new System.Drawing.Size(75, 23);
+            this.btnCerrarSesion.TabIndex = 0;
+            // 
+            // btnTema
+            // 
+            this.btnTema.Location = new System.Drawing.Point(0, 0);
+            this.btnTema.Name = "btnTema";
+            this.btnTema.Size = new System.Drawing.Size(75, 23);
+            this.btnTema.TabIndex = 1;
+            this.btnTema.Text = "  🌙  Tema oscuro";
+            // 
+            // btnCompras
+            // 
+            this.btnCompras.Location = new System.Drawing.Point(0, 0);
+            this.btnCompras.Name = "btnCompras";
+            this.btnCompras.Size = new System.Drawing.Size(75, 23);
+            this.btnCompras.TabIndex = 11;
+            // 
+            // btnVentas
+            // 
+            this.btnVentas.Location = new System.Drawing.Point(0, 0);
+            this.btnVentas.Name = "btnVentas";
+            this.btnVentas.Size = new System.Drawing.Size(75, 23);
+            this.btnVentas.TabIndex = 2;
+            // 
+            // btnMetodosPago
+            // 
+            this.btnMetodosPago.Location = new System.Drawing.Point(0, 0);
+            this.btnMetodosPago.Name = "btnMetodosPago";
+            this.btnMetodosPago.Size = new System.Drawing.Size(75, 23);
+            this.btnMetodosPago.TabIndex = 3;
+            // 
+            // btnTandas
+            // 
+            this.btnTandas.Location = new System.Drawing.Point(0, 0);
+            this.btnTandas.Name = "btnTandas";
+            this.btnTandas.Size = new System.Drawing.Size(75, 23);
+            this.btnTandas.TabIndex = 4;
+            // 
+            // btnInsumos
+            // 
+            this.btnInsumos.Location = new System.Drawing.Point(0, 0);
+            this.btnInsumos.Name = "btnInsumos";
+            this.btnInsumos.Size = new System.Drawing.Size(75, 23);
+            this.btnInsumos.TabIndex = 5;
+            // 
+            // btnProductos
+            // 
+            this.btnProductos.Location = new System.Drawing.Point(0, 0);
+            this.btnProductos.Name = "btnProductos";
+            this.btnProductos.Size = new System.Drawing.Size(75, 23);
+            this.btnProductos.TabIndex = 6;
+            // 
+            // btnProveedores
+            // 
+            this.btnProveedores.Location = new System.Drawing.Point(0, 0);
+            this.btnProveedores.Name = "btnProveedores";
+            this.btnProveedores.Size = new System.Drawing.Size(75, 23);
+            this.btnProveedores.TabIndex = 10;
+            // 
+            // btnClientes
+            // 
+            this.btnClientes.Location = new System.Drawing.Point(0, 0);
+            this.btnClientes.Name = "btnClientes";
+            this.btnClientes.Size = new System.Drawing.Size(75, 23);
+            this.btnClientes.TabIndex = 7;
+            // 
+            // btnInicio
+            // 
+            this.btnInicio.Location = new System.Drawing.Point(0, 0);
+            this.btnInicio.Name = "btnInicio";
+            this.btnInicio.Size = new System.Drawing.Size(75, 23);
+            this.btnInicio.TabIndex = 8;
+            // 
+            // lblTituloApp
+            // 
+            this.lblTituloApp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblTituloApp.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTituloApp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(212)))), ((int)(((byte)(244)))));
+            this.lblTituloApp.Location = new System.Drawing.Point(0, 12);
+            this.lblTituloApp.Name = "lblTituloApp";
+            this.lblTituloApp.Size = new System.Drawing.Size(220, 60);
+            this.lblTituloApp.TabIndex = 9;
+            this.lblTituloApp.Text = "T&&G System";
+            this.lblTituloApp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlContenedor
+            // 
+            this.pnlContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
+            this.pnlContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContenedor.Location = new System.Drawing.Point(220, 50);
+            this.pnlContenedor.Name = "pnlContenedor";
+            this.pnlContenedor.Size = new System.Drawing.Size(808, 699);
+            this.pnlContenedor.TabIndex = 0;
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.BackColor = System.Drawing.Color.White;
+            this.pnlHeader.Controls.Add(this.lblModuloActivo);
+            this.pnlHeader.Controls.Add(this.lblUsuario);
+            this.pnlHeader.Controls.Add(this.pnlSeparador);
+            this.pnlHeader.Controls.Add(this.lblFecha);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(220, 0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
+            this.pnlHeader.Size = new System.Drawing.Size(808, 50);
+            this.pnlHeader.TabIndex = 1;
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(135)))), ((int)(((byte)(128)))));
+            this.lblUsuario.Location = new System.Drawing.Point(20, 0);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(220, 50);
+            this.lblUsuario.TabIndex = 0;
+            this.lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblModuloActivo
+            // 
+            this.lblModuloActivo.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblModuloActivo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblModuloActivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(58)))), ((int)(((byte)(94)))));
+            this.lblModuloActivo.Location = new System.Drawing.Point(327, 0);
+            this.lblModuloActivo.Name = "lblModuloActivo";
+            this.lblModuloActivo.Size = new System.Drawing.Size(200, 50);
+            this.lblModuloActivo.TabIndex = 1;
+            this.lblModuloActivo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlSeparador
+            // 
+            this.pnlSeparador.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(209)))), ((int)(((byte)(199)))));
+            this.pnlSeparador.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlSeparador.Location = new System.Drawing.Point(527, 0);
+            this.pnlSeparador.Name = "pnlSeparador";
+            this.pnlSeparador.Size = new System.Drawing.Size(1, 50);
+            this.pnlSeparador.TabIndex = 2;
+            // 
+            // lblFecha
+            // 
+            this.lblFecha.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblFecha.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblFecha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(135)))), ((int)(((byte)(128)))));
+            this.lblFecha.Location = new System.Drawing.Point(528, 0);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(260, 50);
+            this.lblFecha.TabIndex = 3;
+            this.lblFecha.Text = "martes, 6 de octubre de 2026";
+            this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // UIMenu2
+            // 
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
+            this.ClientSize = new System.Drawing.Size(1028, 749);
+            this.Controls.Add(this.pnlContenedor);
+            this.Controls.Add(this.pnlHeader);
+            this.Controls.Add(this.pnlSidebar);
+            this.MinimumSize = new System.Drawing.Size(900, 550);
+            this.Name = "UIMenu2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Sistema de Gestión";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.pnlSidebar.ResumeLayout(false);
+            this.pnlHeader.ResumeLayout(false);
+            this.ResumeLayout(false);
 
-            SuspendLayout();
-
-            // ── FORM ────────────────────────────────────────────────
-            ClientSize = new Size(1250, 850);
-            Text = "Sistema de Gestión";
-            MinimumSize = new Size(900, 550);
-            BackColor = Color.FromArgb(244, 247, 251); // Fondo app
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.WindowState = FormWindowState.Maximized;
-
-            // ── SIDEBAR ─────────────────────────────────────────────
-            pnlSidebar.BackColor = Color.FromArgb(28, 58, 94);
-            pnlSidebar.Dock = DockStyle.Left;
-            pnlSidebar.Width = 220;
-            pnlSidebar.Padding = new Padding(0, 12, 0, 12);
-
-            
-
-            // Label título en el sidebar
-            lblTituloApp.Text = "T" + "&&" + "G System";
-            lblTituloApp.ForeColor = Color.FromArgb(181, 212, 244);
-            lblTituloApp.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            lblTituloApp.TextAlign = ContentAlignment.MiddleCenter;
-            lblTituloApp.Dock = DockStyle.Top;
-            lblTituloApp.Height = 60;
-
-            // Botón de tema: anclado abajo, fuera de la pila de módulos
-            btnTema.Text = "  🌙  Tema oscuro";
-            btnTema.Name = "btnTema";
-
-            pnlSidebar.Controls.Add(btnCerrarSesion);
-            pnlSidebar.Controls.Add(btnTema);
-            pnlSidebar.Controls.Add(btnVentas);
-            pnlSidebar.Controls.Add(btnMetodosPago);
-            //pnlSidebar.Controls.Add(btnStock);
-            pnlSidebar.Controls.Add(btnTandas);
-            pnlSidebar.Controls.Add(btnInsumos);
-            pnlSidebar.Controls.Add(btnProductos);
-            pnlSidebar.Controls.Add(btnClientes);
-            pnlSidebar.Controls.Add(btnInicio);
-            pnlSidebar.Controls.Add(lblTituloApp);
-
-            // ── HEADER ──────────────────────────────────────────────
-            //AGREGAR ALGO MÁS AQUI
-            pnlHeader.BackColor = Color.White;
-            pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Height = 50;
-            pnlHeader.Padding = new Padding(20, 0, 20, 0);
-
-            //lblUsuario.Text = "Sesión activa: ";
-            lblUsuario.ForeColor = Color.FromArgb(136, 135, 128);
-            lblUsuario.Font = new Font("Segoe UI", 9F);
-            lblUsuario.TextAlign = ContentAlignment.MiddleLeft;
-            lblUsuario.Dock = DockStyle.Left;
-            lblUsuario.Width = 220;
-
-            pnlHeader.Controls.Add(lblUsuario);
-
-            pnlHeader.BackColor = Color.White;
-            pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Height = 50;
-            pnlHeader.Padding = new Padding(20, 0, 20, 0);
-
-            // Separador inferior del header
-            //pnlHeader.Paint += (s, e) =>
-            //{
-            //    e.Graphics.DrawLine(
-            //        new Pen(Color.FromArgb(211, 209, 199)),
-            //        0, pnlHeader.Height - 1,
-            //        pnlHeader.Width, pnlHeader.Height - 1
-            //    );
-            //};
-
-            // Label módulo activo (dereita)
-            
-            lblModuloActivo.Text = ""; //le saque esto xq quedaba feo
-            lblModuloActivo.ForeColor = Color.FromArgb(28, 58, 94);
-            lblModuloActivo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            lblModuloActivo.TextAlign = ContentAlignment.MiddleLeft;
-            lblModuloActivo.Dock = DockStyle.Right;
-            lblModuloActivo.Width = 200;
-
-            // Separador vertical
-            
-            pnlSeparador.BackColor = Color.FromArgb(211, 209, 199);
-            pnlSeparador.Dock = DockStyle.Right;
-            pnlSeparador.Width = 1;
-
-            // Label fecha (derecha)
-           
-            lblFecha.Text = DateTime.Now.ToString("dddd, d 'de' MMMM 'de' yyyy",
-                new System.Globalization.CultureInfo("es-AR"));
-            lblFecha.ForeColor = Color.FromArgb(136, 135, 128);
-            lblFecha.Font = new Font("Segoe UI", 9F);
-            lblFecha.TextAlign = ContentAlignment.MiddleRight;
-            lblFecha.Dock = DockStyle.Right;
-            lblFecha.Width = 260;
-
-            // Label usuario (left) en vez de usar un label heredado de lblusuario, hago todo en un mismo label
-            //lblUsuario = new Label();
-            //lblUsuario.Text = "Usuario";
-            //lblUsuario.ForeColor = Color.FromArgb(136, 135, 128);
-            //lblUsuario.Font = new Font("Segoe UI", 9F);
-            //lblUsuario.TextAlign = ContentAlignment.MiddleLeft;
-            //lblUsuario.Dock = DockStyle.Left;
-            //lblUsuario.Width = 120;
-
-            pnlHeader.Controls.Add(lblModuloActivo);
-            pnlHeader.Controls.Add(lblUsuario);
-            pnlHeader.Controls.Add(pnlSeparador);
-            pnlHeader.Controls.Add(lblFecha);
-
-            // ── CONTENEDOR ──────────────────────────────────────────
-            pnlContenedor.BackColor = Color.FromArgb(244, 247, 251);
-            pnlContenedor.Dock = DockStyle.Fill;
-
-            // Orden de agregado al form (importa para el layout)
-            Controls.Add(pnlContenedor);
-            Controls.Add(pnlHeader);
-            Controls.Add(pnlSidebar);
-
-            ResumeLayout(false);
         }
 
         #region Windows Form Designer generated code

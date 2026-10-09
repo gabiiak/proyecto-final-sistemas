@@ -278,6 +278,48 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UIConsultarCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIConsultarCompra.Designer.cs">
+      <DependentUpon>UIConsultarCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIEstadoCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIEstadoCompra.Designer.cs">
+      <DependentUpon>UIEstadoCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIGestionCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIGestionCompras.Designer.cs">
+      <DependentUpon>UIGestionCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIGestionProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIGestionProveedores.Designer.cs">
+      <DependentUpon>UIGestionProveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIProveedoresEliminados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIProveedoresEliminados.Designer.cs">
+      <DependentUpon>UIProveedoresEliminados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIRegistrarCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRegistrarCompra.Designer.cs">
+      <DependentUpon>UIRegistrarCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIRegistrarDetalleCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRegistrarDetalleCompra.Designer.cs">
+      <DependentUpon>UIRegistrarDetalleCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIStyles.cs" />
     <Compile Include="UIConsultarVenta.cs">
       <SubType>Form</SubType>
@@ -449,6 +491,9 @@
     <Compile Include="UIEstadoTransporte.Designer.cs">
       <DependentUpon>UIEstadoTransporte.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UIGestionProveedores.resx">
+      <DependentUpon>UIGestionProveedores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIConsultarVenta.resx">
       <DependentUpon>UIConsultarVenta.cs</DependentUpon>
     </EmbeddedResource>
@@ -509,6 +554,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIGestionProductos.resx">
       <DependentUpon>UIGestionProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIProveedoresEliminados.resx">
+      <DependentUpon>UIProveedoresEliminados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIRecetaProducto.resx">
       <DependentUpon>UIRecetaProducto.cs</DependentUpon>
