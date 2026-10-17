@@ -81,6 +81,14 @@ GO
 --------------------------------------------------------------------------------
 -- 0) DROP de tablas e indices (orden inverso por dependencias) - hace el script idempotente
 --------------------------------------------------------------------------------
+IF OBJECT_ID(N'dbo.DetallePresupuesto', N'U') IS NOT NULL DROP TABLE dbo.DetallePresupuesto;
+IF OBJECT_ID(N'dbo.Presupuesto', N'U')        IS NOT NULL DROP TABLE dbo.Presupuesto;
+IF OBJECT_ID(N'dbo.PrecioProveedor', N'U')    IS NOT NULL DROP TABLE dbo.PrecioProveedor;
+IF OBJECT_ID(N'dbo.DetalleSolicitudCotizacion', N'U') IS NOT NULL DROP TABLE dbo.DetalleSolicitudCotizacion;
+IF OBJECT_ID(N'dbo.SolicitudCotizacion', N'U') IS NOT NULL DROP TABLE dbo.SolicitudCotizacion;
+IF OBJECT_ID(N'dbo.DetalleCompras', N'U') IS NOT NULL DROP TABLE dbo.DetalleCompras;
+IF OBJECT_ID(N'dbo.Compras', N'U') IS NOT NULL DROP TABLE dbo.Compras;
+IF OBJECT_ID(N'dbo.Proveedores', N'U') IS NOT NULL DROP TABLE dbo.Proveedores;
 IF OBJECT_ID(N'dbo.DetalleVentas', N'U') IS NOT NULL DROP TABLE dbo.DetalleVentas;
 IF OBJECT_ID(N'dbo.Transportes', N'U')    IS NOT NULL DROP TABLE dbo.Transportes;
 IF OBJECT_ID(N'dbo.DetalleTanda', N'U')  IS NOT NULL DROP TABLE dbo.DetalleTanda;
@@ -141,6 +149,17 @@ CREATE TABLE dbo.Insumos (
     [activo]        BIT           NULL,
     [unidadMedida]  NVARCHAR(20)  NULL,
     CONSTRAINT [PK_Insumos] PRIMARY KEY CLUSTERED ([id] ASC)
+);
+GO
+
+CREATE TABLE dbo.Proveedores (
+    [IdProveedor] INT IDENTITY(1,1) NOT NULL,
+    [Nombre]      NVARCHAR(100) NOT NULL,
+    [Direccion]   NVARCHAR(250) NULL,
+    [Telefono]    NVARCHAR(50)  NULL,
+    [Email]       NVARCHAR(150) NULL,
+    [activo]      BIT           NOT NULL DEFAULT 1,
+    CONSTRAINT [PK_Proveedores] PRIMARY KEY CLUSTERED ([IdProveedor] ASC)
 );
 GO
 
@@ -256,6 +275,101 @@ CREATE TABLE dbo.Transportes (
     CONSTRAINT [PK_Transportes] PRIMARY KEY CLUSTERED ([idTransporte] ASC),
     CONSTRAINT [FK_Transporte_Venta] FOREIGN KEY ([idVenta])
         REFERENCES dbo.Ventas ([idVenta]) ON UPDATE CASCADE ON DELETE CASCADE
+);
+GO
+
+CREATE TABLE dbo.Compras (
+    [idCompra]     INT IDENTITY(1,1) NOT NULL,
+    [idProveedor]  INT           NOT NULL,
+    [fecha]        DATE          NOT NULL,
+    [estado]       TINYINT       NOT NULL DEFAULT 0,   -- 0..5 (Modelos/EstadoCompra.cs)
+    [totalCompra]  DECIMAL(18,4) NULL,
+    [montoPagado]  DECIMAL(18,4) NULL,
+    CONSTRAINT [PK_Compras] PRIMARY KEY CLUSTERED ([idCompra] ASC),
+    CONSTRAINT [FK_Compras_Proveedor] FOREIGN KEY ([idProveedor])
+        REFERENCES dbo.Proveedores ([IdProveedor]) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+GO
+
+CREATE TABLE dbo.DetalleCompras (
+    [idDetalleCompra]    INT IDENTITY(1,1) NOT NULL,
+    [idCompra]           INT           NOT NULL,
+    [idInsumo]           INT           NOT NULL,
+    [cantidad]           INT           NOT NULL,
+    [subTotal]           DECIMAL(18,4) NULL,
+    [motivoModificacion] NVARCHAR(200) NULL,
+    CONSTRAINT [PK_DetalleCompras] PRIMARY KEY CLUSTERED ([idDetalleCompra] ASC),
+    CONSTRAINT [FK_DetalleCompras_Compra] FOREIGN KEY ([idCompra])
+        REFERENCES dbo.Compras ([idCompra]) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT [FK_DetalleCompras_Insumo] FOREIGN KEY ([idInsumo])
+        REFERENCES dbo.Insumos ([id]) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+GO
+
+CREATE TABLE dbo.SolicitudCotizacion (
+    [idSolicitud] INT IDENTITY(1,1) NOT NULL,
+    [idProveedor] INT           NOT NULL,
+    [fecha]       DATE          NOT NULL,
+    [estado]      TINYINT       NOT NULL DEFAULT 0,   -- 0..3 (Modelos/EstadoSolicitudCotizacion.cs)
+    CONSTRAINT [PK_SolicitudCotizacion] PRIMARY KEY CLUSTERED ([idSolicitud] ASC),
+    CONSTRAINT [FK_SolicitudCotizacion_Proveedor] FOREIGN KEY ([idProveedor])
+        REFERENCES dbo.Proveedores ([IdProveedor]) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+GO
+
+CREATE TABLE dbo.DetalleSolicitudCotizacion (
+    [idDetalleSolicitud] INT IDENTITY(1,1) NOT NULL,
+    [idSolicitud]        INT           NOT NULL,
+    [idInsumo]           INT           NOT NULL,
+    [cantidad]           DECIMAL(18,4) NOT NULL,
+    CONSTRAINT [PK_DetalleSolicitudCotizacion] PRIMARY KEY CLUSTERED ([idDetalleSolicitud] ASC),
+    CONSTRAINT [FK_DetalleSolicitudCotizacion_Solicitud] FOREIGN KEY ([idSolicitud])
+        REFERENCES dbo.SolicitudCotizacion ([idSolicitud]) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT [FK_DetalleSolicitudCotizacion_Insumo] FOREIGN KEY ([idInsumo])
+        REFERENCES dbo.Insumos ([id]) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+GO
+
+-- ---------- Presupuestos (KAN-81) ----------
+
+CREATE TABLE dbo.PrecioProveedor (
+    [idPrecioProveedor]  INT IDENTITY(1,1) NOT NULL,
+    [idProveedor]        INT           NOT NULL,
+    [idInsumo]           INT           NOT NULL,
+    [precio]             DECIMAL(18,4) NOT NULL,
+    [fechaActualizacion] DATE          NOT NULL,
+    CONSTRAINT [PK_PrecioProveedor] PRIMARY KEY CLUSTERED ([idPrecioProveedor] ASC),
+    CONSTRAINT [FK_PrecioProveedor_Proveedor] FOREIGN KEY ([idProveedor])
+        REFERENCES dbo.Proveedores ([IdProveedor]) ON UPDATE CASCADE ON DELETE NO ACTION,
+    CONSTRAINT [FK_PrecioProveedor_Insumo] FOREIGN KEY ([idInsumo])
+        REFERENCES dbo.Insumos ([id]) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+GO
+
+CREATE TABLE dbo.Presupuesto (
+    [idPresupuesto] INT IDENTITY(1,1) NOT NULL,
+    [idSolicitud]   INT           NOT NULL,
+    [fecha]         DATE          NOT NULL,
+    [total]         DECIMAL(18,4) NOT NULL DEFAULT 0,
+    [activo]        BIT           NOT NULL DEFAULT 1,
+    CONSTRAINT [PK_Presupuesto] PRIMARY KEY CLUSTERED ([idPresupuesto] ASC),
+    CONSTRAINT [FK_Presupuesto_Solicitud] FOREIGN KEY ([idSolicitud])
+        REFERENCES dbo.SolicitudCotizacion ([idSolicitud]) ON UPDATE CASCADE ON DELETE NO ACTION
+);
+GO
+
+CREATE TABLE dbo.DetallePresupuesto (
+    [idDetallePresupuesto] INT IDENTITY(1,1) NOT NULL,
+    [idPresupuesto]        INT           NOT NULL,
+    [idInsumo]             INT           NOT NULL,
+    [cantidad]             DECIMAL(18,4) NOT NULL,
+    [precioUnitario]       DECIMAL(18,4) NOT NULL,
+    [subtotal]             DECIMAL(18,4) NOT NULL,
+    CONSTRAINT [PK_DetallePresupuesto] PRIMARY KEY CLUSTERED ([idDetallePresupuesto] ASC),
+    CONSTRAINT [FK_DetallePresupuesto_Presupuesto] FOREIGN KEY ([idPresupuesto])
+        REFERENCES dbo.Presupuesto ([idPresupuesto]) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT [FK_DetallePresupuesto_Insumo] FOREIGN KEY ([idInsumo])
+        REFERENCES dbo.Insumos ([id]) ON UPDATE CASCADE ON DELETE NO ACTION
 );
 GO
 
@@ -408,6 +522,7 @@ SELECT * FROM (
     SELECT 'MetodosPago',    COUNT_BIG(*) FROM dbo.MetodosPago                      UNION ALL
     SELECT 'Productos',       COUNT_BIG(*) FROM dbo.Productos                         UNION ALL
     SELECT 'Insumos',         COUNT_BIG(*) FROM dbo.Insumos                           UNION ALL
+    SELECT 'Proveedores',     COUNT_BIG(*) FROM dbo.Proveedores                       UNION ALL
     SELECT 'RecetaProducto',  COUNT_BIG(*) FROM dbo.RecetaProducto                    UNION ALL
     SELECT 'StockProducto',   COUNT_BIG(*) FROM dbo.StockProducto                     UNION ALL
     SELECT 'StockInsumo',     COUNT_BIG(*) FROM dbo.StockInsumo                       UNION ALL
@@ -415,7 +530,14 @@ SELECT * FROM (
     SELECT 'DetalleTanda',    COUNT_BIG(*) FROM dbo.DetalleTanda                      UNION ALL
     SELECT 'Ventas',          COUNT_BIG(*) FROM dbo.Ventas                            UNION ALL
     SELECT 'DetalleVentas',   COUNT_BIG(*) FROM dbo.DetalleVentas                     UNION ALL
-    SELECT 'Transportes',     COUNT_BIG(*) FROM dbo.Transportes
+    SELECT 'Transportes',     COUNT_BIG(*) FROM dbo.Transportes                       UNION ALL
+    SELECT 'Compras',         COUNT_BIG(*) FROM dbo.Compras                           UNION ALL
+    SELECT 'DetalleCompras',  COUNT_BIG(*) FROM dbo.DetalleCompras                    UNION ALL
+    SELECT 'SolicitudCotizacion',        COUNT_BIG(*) FROM dbo.SolicitudCotizacion        UNION ALL
+    SELECT 'DetalleSolicitudCotizacion', COUNT_BIG(*) FROM dbo.DetalleSolicitudCotizacion UNION ALL
+    SELECT 'Presupuesto',                COUNT_BIG(*) FROM dbo.Presupuesto                UNION ALL
+    SELECT 'DetallePresupuesto',         COUNT_BIG(*) FROM dbo.DetallePresupuesto         UNION ALL
+    SELECT 'PrecioProveedor',            COUNT_BIG(*) FROM dbo.PrecioProveedor
 ) AS Conteo ORDER BY Tabla;
 GO
 

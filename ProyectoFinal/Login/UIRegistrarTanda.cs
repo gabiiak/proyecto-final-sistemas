@@ -156,7 +156,7 @@ namespace Login
 
             if (listaDetalles.Count == 0)
             {
-                MessageBox.Show("Debe registrar al menos un detalle de insumo/empleado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe registrar al menos un detalle de insumo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             
@@ -179,8 +179,36 @@ namespace Login
             }
             catch (Exception ex)
             {
+                if (EsErrorDeStock(ex))
+                {
+                    Producto productoSeleccionado = cbProducto.SelectedItem as Producto;
+                    int cantidad;
+                    if (productoSeleccionado != null &&
+                        int.TryParse(txtCantidadTanda.Text, out cantidad) && cantidad > 0)
+                    {
+                        DialogResult respuesta = MessageBox.Show(
+                            ex.Message + "\n\n¿Desea solicitar más insumos?",
+                            "Stock insuficiente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            UIRegistrarSolicitudCotizacion solicitud =
+                                new UIRegistrarSolicitudCotizacion(productoSeleccionado.IdProducto, cantidad);
+                            solicitud.ShowDialog();
+                            return;
+                        }
+                    }
+                }
+
                 MessageBox.Show("Error al guardar la tanda: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // Es un poquito rebuscado; investigar si puedo hacerlo de otro modo...
+        private bool EsErrorDeStock(Exception ex)
+        {
+            return ex is ArgumentException &&
+                   (ex.Message.StartsWith("Stock insuficiente") || ex.Message.StartsWith("No existe stock cargado"));
         }
 
         private void ConfigurarLabel(System.Windows.Forms.Label lbl, string texto, System.Drawing.Point ubicacion)
