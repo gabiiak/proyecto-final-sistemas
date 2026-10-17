@@ -25,6 +25,7 @@ namespace Login
             InitializeComponent();
 
             ConfigurarBotonSidebar(btnInicio, "  🏠  Inicio", 0);
+
             ConfigurarBotonSidebar(btnClientes, "  👥  Clientes", 1);
             ConfigurarBotonSidebar(btnProveedores, "  🏭  Proveedores", 2);
             ConfigurarBotonSidebar(btnProductos, "  📦  Productos", 3);

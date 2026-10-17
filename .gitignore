@@ -28,5 +28,10 @@ scripts*/
 ProyectoFinal/Consola/mvp.db
 
 #Recursos de opencode
-Opencode/
 opencode.json
+.opencode/
+docs/
+specs/
+AGENTS.md
+MEMORY.md
+

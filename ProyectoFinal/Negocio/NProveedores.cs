@@ -27,6 +27,14 @@ namespace Negocio
             }
         }
 
+        public static Proveedor GetById(int idProveedor)
+        {
+            if (idProveedor <= 0)
+                throw new ArgumentException("El identificador del proveedor no es válido.");
+
+            return DataProveedores.GetById(idProveedor);
+        }
+
         public static List<Proveedor> GetAllDeleted()
         {
             try

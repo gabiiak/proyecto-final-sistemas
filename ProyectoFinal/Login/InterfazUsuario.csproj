@@ -296,6 +296,36 @@
     <Compile Include="UIGestionCompras.Designer.cs">
       <DependentUpon>UIGestionCompras.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIGestionSolicitudesCotizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIGestionSolicitudesCotizacion.Designer.cs">
+      <DependentUpon>UIGestionSolicitudesCotizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIGestionPresupuestos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIGestionPresupuestos.Designer.cs">
+      <DependentUpon>UIGestionPresupuestos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIRegistrarPresupuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRegistrarPresupuesto.Designer.cs">
+      <DependentUpon>UIRegistrarPresupuesto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIConsultarPresupuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIConsultarPresupuesto.Designer.cs">
+      <DependentUpon>UIConsultarPresupuesto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIPresupuestosEliminados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIPresupuestosEliminados.Designer.cs">
+      <DependentUpon>UIPresupuestosEliminados.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIGestionProveedores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +349,12 @@
     </Compile>
     <Compile Include="UIRegistrarDetalleCompra.Designer.cs">
       <DependentUpon>UIRegistrarDetalleCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIRegistrarSolicitudCotizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRegistrarSolicitudCotizacion.Designer.cs">
+      <DependentUpon>UIRegistrarSolicitudCotizacion.cs</DependentUpon>
     </Compile>
     <Compile Include="UIStyles.cs" />
     <Compile Include="UIConsultarVenta.cs">
@@ -579,6 +615,24 @@
     <EmbeddedResource Include="UIStockInsumos.resx">
       <DependentUpon>UIStockInsumos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIRegistrarSolicitudCotizacion.resx">
+      <DependentUpon>UIRegistrarSolicitudCotizacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIGestionSolicitudesCotizacion.resx">
+      <DependentUpon>UIGestionSolicitudesCotizacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIGestionPresupuestos.resx">
+      <DependentUpon>UIGestionPresupuestos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIRegistrarPresupuesto.resx">
+      <DependentUpon>UIRegistrarPresupuesto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIConsultarPresupuesto.resx">
+      <DependentUpon>UIConsultarPresupuesto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIPresupuestosEliminados.resx">
+      <DependentUpon>UIPresupuestosEliminados.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -622,6 +676,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+  <Content Include="..\Assets\logoEmpresa.png">
+    <Link>Assets\logoEmpresa.png</Link>
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </Content>
+</ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SkiaSharp.NativeAssets.macOS.3.119.0\build\net462\SkiaSharp.NativeAssets.macOS.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.macOS.3.119.0\build\net462\SkiaSharp.NativeAssets.macOS.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

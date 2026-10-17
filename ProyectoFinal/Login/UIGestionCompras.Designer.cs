@@ -22,6 +22,8 @@
             this.btnCambiarEstado = new System.Windows.Forms.Button();
             this.btnRegistrarPago = new System.Windows.Forms.Button();
             this.btnConsultarCompra = new System.Windows.Forms.Button();
+            this.btnSolicitudesCotizacion = new System.Windows.Forms.Button();
+            this.btnPresupuestos = new System.Windows.Forms.Button();
             this.lblDesde = new System.Windows.Forms.Label();
             this.lblHasta = new System.Windows.Forms.Label();
             this.dtpDesde = new System.Windows.Forms.DateTimePicker();
@@ -63,7 +65,7 @@
             // ── PANEL ACCIONES ──────────────────────────────────────
             this.pnlAcciones.BackColor = System.Drawing.Color.White;
             this.pnlAcciones.Location = new System.Drawing.Point(20, 56);
-            this.pnlAcciones.Size = new System.Drawing.Size(320, 240);
+            this.pnlAcciones.Size = new System.Drawing.Size(320, 300);
             this.pnlAcciones.Name = "pnlAcciones";
 
             this.lblIdCompraLabel.Text = "Compra seleccionada:";
@@ -85,7 +87,10 @@
             this.pnlAcciones.Controls.Add(this.lblIdCompraLabel);
             this.pnlAcciones.Controls.Add(this.labelId);
             this.pnlAcciones.Controls.Add(this.btnConsultarCompra);
+            this.pnlAcciones.Controls.Add(this.btnSolicitudesCotizacion);
+            this.pnlAcciones.Controls.Add(this.btnPresupuestos);
             this.pnlAcciones.Controls.Add(this.btnExportarExcel);
+            this.btnSolicitudesCotizacion.Name = "btnSolicitudesCotizacion";
 
             // ── PANEL FILTROS ───────────────────────────────────────
             this.pnlFiltros.BackColor = System.Drawing.Color.White;
@@ -134,8 +139,8 @@
             this.pnlFiltros.Controls.Add(this.btnDesfiltrar);
 
             // ── DATAGRIDVIEW ────────────────────────────────────────
-            this.dgvTodasLasCompras.Location = new System.Drawing.Point(20, 302);
-            this.dgvTodasLasCompras.Size = new System.Drawing.Size(960, 384);
+            this.dgvTodasLasCompras.Location = new System.Drawing.Point(20, 372);
+            this.dgvTodasLasCompras.Size = new System.Drawing.Size(960, 292);
             this.dgvTodasLasCompras.Name = "dgvTodasLasCompras";
             this.dgvTodasLasCompras.TabIndex = 10;
             this.dgvTodasLasCompras.AllowUserToAddRows = false;
@@ -223,6 +228,8 @@
         private System.Windows.Forms.Button btnCambiarEstado;
         private System.Windows.Forms.Button btnRegistrarPago;
         private System.Windows.Forms.Button btnConsultarCompra;
+        private System.Windows.Forms.Button btnSolicitudesCotizacion;
+        private System.Windows.Forms.Button btnPresupuestos;
         private System.Windows.Forms.Button btnExportarExcel;
         private System.Windows.Forms.Label lblDesde;
         private System.Windows.Forms.Label lblHasta;

@@ -220,8 +220,11 @@
     <Compile Include="DataDetalleVentas.cs" />
     <Compile Include="DataInsumos.cs" />
     <Compile Include="DataMetodosPago.cs" />
+    <Compile Include="DataPrecioProveedor.cs" />
+    <Compile Include="DataPresupuesto.cs" />
     <Compile Include="DataProductos.cs" />
     <Compile Include="DataProveedores.cs" />
+    <Compile Include="DataSolicitudCotizacion.cs" />
     <Compile Include="DataStockInsumo.cs" />
     <Compile Include="DataStockProducto.cs" />
     <Compile Include="DataTandaProduccion.cs" />

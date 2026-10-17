@@ -199,9 +199,11 @@
     <Compile Include="NDetalleVentas.cs" />
     <Compile Include="NInsumos.cs" />
     <Compile Include="NMetodosPago.cs" />
+    <Compile Include="NPresupuesto.cs" />
     <Compile Include="NProductos.cs" />
     <Compile Include="NProveedores.cs" />
     <Compile Include="NRecetaProducto.cs" />
+    <Compile Include="NSolicitudCotizacion.cs" />
     <Compile Include="NStockInsumo.cs" />
     <Compile Include="NStockProducto.cs" />
     <Compile Include="NTandaProduccion.cs" />

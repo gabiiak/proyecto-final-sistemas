@@ -28,9 +28,9 @@ namespace Datos
                             {
                                 IdProveedor = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
-                                Direccion = reader.GetString(2),
-                                Telefono = reader.GetString(3),
-                                Email = reader.GetString(4),
+                                Direccion = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                Telefono = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                Email = reader.IsDBNull(4) ? null : reader.GetString(4),
                                 activo = reader.IsDBNull(5) ? 1 : (reader.GetBoolean(5) ? 1 : 0)
                             };
                             lista.Add(prov);
@@ -39,6 +39,36 @@ namespace Datos
                 }
             }
             return lista;
+        }
+
+        public static Proveedor GetById(int idProveedor)
+        {
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT IdProveedor, Nombre, Direccion, Telefono, Email, activo FROM Proveedores WHERE IdProveedor = @idProveedor";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
+                {
+                    cmd.Parameters.AddWithValue("@idProveedor", idProveedor);
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Proveedor prov = new Proveedor
+                            {
+                                IdProveedor = reader.GetInt32(0),
+                                Nombre = reader.GetString(1),
+                                Direccion = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                Telefono = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                Email = reader.IsDBNull(4) ? null : reader.GetString(4),
+                                activo = reader.IsDBNull(5) ? 1 : (reader.GetBoolean(5) ? 1 : 0)
+                            };
+                            return prov;
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         public  static void Create(Proveedor proveedor)
@@ -106,9 +136,9 @@ namespace Datos
                             {
                                 IdProveedor = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
-                                Direccion = reader.GetString(2),
-                                Telefono = reader.GetString(3),
-                                Email = reader.GetString(4),
+                                Direccion = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                Telefono = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                Email = reader.IsDBNull(4) ? null : reader.GetString(4),
                                 activo = reader.IsDBNull(5) ? 1 : (reader.GetBoolean(5) ? 1 : 0)
                             };
                             listaDeleted.Add(prov);

@@ -48,6 +48,16 @@ namespace Login
             this.btnExportarExcel.Size = new System.Drawing.Size(138, 32);
             this.btnExportarExcel.Click += new System.EventHandler(this.btnExportarExcel_Click);
 
+            ConfigurarBotonSecundario(this.btnSolicitudesCotizacion, "Solicitudes de cotización",
+                new System.Drawing.Point(16, 200), 5);
+            this.btnSolicitudesCotizacion.Size = new System.Drawing.Size(288, 32);
+            this.btnSolicitudesCotizacion.Click += new System.EventHandler(this.btnSolicitudesCotizacion_Click);
+
+            ConfigurarBotonSecundario(this.btnPresupuestos, "Presupuestos",
+                new System.Drawing.Point(16, 240), 7);
+            this.btnPresupuestos.Size = new System.Drawing.Size(288, 32);
+            this.btnPresupuestos.Click += new System.EventHandler(this.btnPresupuestos_Click);
+
             ConfigurarLabel(this.lblDesde, "Desde", new System.Drawing.Point(16, 16));
             ConfigurarLabel(this.lblHasta, "Hasta", new System.Drawing.Point(16, 68));
 
@@ -250,6 +260,18 @@ namespace Login
 
             UIConsultarCompra consulta = new UIConsultarCompra(id);
             consulta.Show();
+        }
+
+        private void btnSolicitudesCotizacion_Click(object sender, EventArgs e)
+        {
+            UIGestionSolicitudesCotizacion gestion = new UIGestionSolicitudesCotizacion();
+            gestion.ShowDialog();
+        }
+
+        private void btnPresupuestos_Click(object sender, EventArgs e)
+        {
+            UIGestionPresupuestos gestion = new UIGestionPresupuestos();
+            gestion.ShowDialog();
         }
 
         // ---------- Diálogos simples armados por código ----------
