@@ -152,7 +152,7 @@
             this.labelTotal.Size = new System.Drawing.Size(160, 32);
             this.labelTotal.Name = "labelTotal";
 
-            // Pago recibido — lado derecho del panel total
+            // Cobro recibido — lado derecho del panel total
             
 
             this.pnlTotal.Controls.Add(this.lblTotalLabel);
@@ -163,7 +163,7 @@
             this.pnlTotal.Controls.Add(this.btnPagoJusto);
 
             // ── HINT DE ESTADOS ─────────────────────────────────────
-            this.lblEstadoHint.Text = "≤ 0 o sin pago → PENDIENTE   |   pago justo → PAGADO";
+            this.lblEstadoHint.Text = "≤ 0 o sin cobro → PENDIENTE   |   cobro justo → COBRADO";
             this.lblEstadoHint.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
             this.lblEstadoHint.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Italic);
             this.lblEstadoHint.Location = new System.Drawing.Point(20, 600);

@@ -20,7 +20,7 @@
             this.lblIdVentaLabel = new System.Windows.Forms.Label();
             this.labelId = new System.Windows.Forms.Label();
             this.btnRegistrarVenta = new System.Windows.Forms.Button();
-            this.btnEstadoPago = new System.Windows.Forms.Button();
+            this.btnEstadoCobro = new System.Windows.Forms.Button();
             this.btnEstadoPedido = new System.Windows.Forms.Button();
             this.btnConsultarVenta = new System.Windows.Forms.Button();
             this.lblDesde = new System.Windows.Forms.Label();
@@ -38,7 +38,7 @@
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MetodoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstadoDePago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstadoDeCobro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstadoDePedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             this.pnlAcciones.SuspendLayout();
@@ -92,7 +92,7 @@
 
             this.pnlAcciones.Controls.Add(this.btnTransporte);
             this.pnlAcciones.Controls.Add(this.btnRegistrarVenta);
-            this.pnlAcciones.Controls.Add(this.btnEstadoPago);
+            this.pnlAcciones.Controls.Add(this.btnEstadoCobro);
             this.pnlAcciones.Controls.Add(this.btnEstadoPedido);
             this.pnlAcciones.Controls.Add(this.lblIdVentaLabel);
             this.pnlAcciones.Controls.Add(this.labelId);
@@ -206,9 +206,9 @@
             this.MetodoPago.Name = "MetodoPago";
             this.MetodoPago.FillWeight = 80;
 
-            this.EstadoDePago.HeaderText = "Estado de Pago";
-            this.EstadoDePago.Name = "EstadoDePago";
-            this.EstadoDePago.FillWeight = 80;
+            this.EstadoDeCobro.HeaderText = "Estado de Cobro";
+            this.EstadoDeCobro.Name = "EstadoDeCobro";
+            this.EstadoDeCobro.FillWeight = 80;
 
             this.EstadoDePedido.HeaderText = "Estado de Pedido";
             this.EstadoDePedido.Name = "EstadoDePedido";
@@ -217,7 +217,7 @@
             this.dgvTodasLasVentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
             {
                 this.IdVenta, this.Cliente, this.Fecha, this.Total,
-                this.MetodoPago, this.EstadoDePago, this.EstadoDePedido
+                this.MetodoPago, this.EstadoDeCobro, this.EstadoDePedido
             });
 
             // ── CONTROLS DEL FORM ───────────────────────────────────
@@ -239,7 +239,7 @@
         private System.Windows.Forms.Label lblIdVentaLabel;
         private System.Windows.Forms.Label labelId;
         private System.Windows.Forms.Button btnRegistrarVenta;
-        private System.Windows.Forms.Button btnEstadoPago;
+        private System.Windows.Forms.Button btnEstadoCobro;
         private System.Windows.Forms.Button btnEstadoPedido;
         private System.Windows.Forms.Button btnConsultarVenta;
         private System.Windows.Forms.Label lblDesde;
@@ -257,7 +257,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn MetodoPago;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstadoDePago;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstadoDeCobro;
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoDePedido;
         private System.Windows.Forms.Button btnExportarExcel;
         private System.Windows.Forms.Button btnTransporte;

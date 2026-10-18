@@ -39,17 +39,77 @@ namespace Negocio
         public static Compra GetMontoPagado(int idCompra) { return DataCompras.GetMontoPagado(idCompra); }
 
         // ---------- Alta ----------
-        public static int CreateCompra(Compra compra)
+        public static int RegistrarPedidoCompra(Compra compra, List<DetalleCompra> detalles)
+        {
+            if (compra == null)
+                throw new ArgumentException("La compra no puede ser nula.");
+            if (compra.IdProveedor <= 0)
+                throw new ArgumentException("Debe indicar un proveedor válido.");
+            if (compra.IdPresupuesto == null || compra.IdPresupuesto <= 0)
+                throw new ArgumentException("Debe indicar un presupuesto válido.");
+
+            Presupuesto presupuesto = NPresupuesto.GetById(compra.IdPresupuesto.Value);
+            if (presupuesto == null || presupuesto.Activo != 1)
+                throw new ArgumentException("El presupuesto no existe o está eliminado.");
+            if (presupuesto.EstadoSolicitud != EstadoSolicitudCotizacion.Aceptada)
+                throw new ArgumentException("El presupuesto no pertenece a una solicitud aceptada.");
+            if (presupuesto.IdProveedor != compra.IdProveedor)
+                throw new ArgumentException("El proveedor de la compra no coincide con el del presupuesto.");
+
+            NDetalleCompras.ValidarDetalles(detalles);
+
+            // El pedido solo puede incluir insumos cotizados en el presupuesto del proveedor.
+            List<DetallePresupuesto> detallesPresupuesto = NPresupuesto.GetDetalles(compra.IdPresupuesto.Value);
+            foreach (DetalleCompra detalle in detalles)
+            {
+                if (!detallesPresupuesto.Exists(d => d.IdInsumo == detalle.IdInsumo))
+                {
+                    Insumo insumo = NInsumos.GetInsumoById(detalle.IdInsumo);
+                    string nombre = insumo != null ? insumo.Nombre : detalle.IdInsumo.ToString();
+                    throw new ArgumentException($"El insumo {nombre} no está en el presupuesto del proveedor.");
+                }
+            }
+
+            compra.Estado = EstadoCompra.Emitida;
+            compra.EstadoPago = EstadoPago.Pendiente;
+            compra.Fecha = compra.Fecha == default(DateTime) ? DateTime.Now.Date : compra.Fecha.Date;
+            ValidarFechaCompra(compra.Fecha);
+            compra.TotalCompra = (double)CalcularTotal(detalles);
+
+            return DataCompras.CrearCompraConDetalle(compra, detalles);
+        }
+
+        public static int RegistrarCompraManual(Compra compra, List<DetalleCompra> detalles)
         {
             if (compra == null)
                 throw new ArgumentException("La compra no puede ser nula.");
             if (compra.IdProveedor <= 0)
                 throw new ArgumentException("Debe indicar un proveedor válido.");
 
-            ValidarFechaCompra(compra.Fecha);
+            NDetalleCompras.ValidarDetalles(detalles);
 
-            compra.Estado = EstadoCompra.Emitida;
-            return DataCompras.CreateCompra(compra);
+            compra.IdPresupuesto = null;
+            compra.Estado = EstadoCompra.Aceptada;
+            compra.Fecha = compra.Fecha == default(DateTime) ? DateTime.Now.Date : compra.Fecha.Date;
+            ValidarFechaCompra(compra.Fecha);
+            compra.TotalCompra = (double)CalcularTotal(detalles);
+            compra.EstadoPago = DeterminarEstadoPago((decimal)compra.TotalCompra, (decimal)compra.montoPagado);
+
+            return DataCompras.CrearCompraConDetalle(compra, detalles);
+        }
+
+        public static void ModificarPedidoCompra(int idCompra, List<DetalleCompra> detalles)
+        {
+            Compra compra = DataCompras.GetCompraById(idCompra);
+            if (compra == null)
+                throw new ArgumentException("La compra no existe.");
+            if (compra.Estado != EstadoCompra.Emitida)
+                throw new InvalidOperationException("Solo se puede modificar un pedido emitido.");
+
+            NDetalleCompras.ValidarDetalles(detalles);
+
+            compra.TotalCompra = (double)CalcularTotal(detalles);
+            DataCompras.ModificarCompraConDetalle(compra, detalles);
         }
 
         public static void ValidarFechaCompra(DateTime fecha)
@@ -69,7 +129,7 @@ namespace Negocio
         }
 
         // ---------- Estados ----------
-        // Emitida -> Aceptada -> Pagado -> Enviada -> Entregada
+        // Emitida -> Aceptada -> Enviada -> Recibida
         // Cancelada solo desde Emitida o Aceptada.
         public static bool EsTransicionValida(int actual, int nuevo)
         {
@@ -78,13 +138,11 @@ namespace Negocio
                 case EstadoCompra.Emitida:
                     return nuevo == EstadoCompra.Aceptada || nuevo == EstadoCompra.Cancelada;
                 case EstadoCompra.Aceptada:
-                    return nuevo == EstadoCompra.Pagado || nuevo == EstadoCompra.Cancelada;
-                case EstadoCompra.Pagado:
-                    return nuevo == EstadoCompra.Enviada;
+                    return nuevo == EstadoCompra.Enviada || nuevo == EstadoCompra.Cancelada;
                 case EstadoCompra.Enviada:
-                    return nuevo == EstadoCompra.Entregada;
+                    return nuevo == EstadoCompra.Recibida;
                 default:
-                    return false; // Entregada y Cancelada son finales
+                    return false; // Recibida y Cancelada son finales
             }
         }
 
@@ -94,20 +152,17 @@ namespace Negocio
             if (compra == null)
                 throw new ArgumentException("La compra no existe.");
 
-            // Entregada solo por MarcarCompraEntregada, que suma el stock
-            if (nuevoEstado == EstadoCompra.Entregada)
-                throw new InvalidOperationException("Use MarcarCompraEntregada para registrar la entrega.");
+            // Recibida solo por MarcarCompraRecibida, que suma el stock
+            if (nuevoEstado == EstadoCompra.Recibida)
+                throw new InvalidOperationException("Use MarcarCompraRecibida para registrar la recepción.");
 
             if (!EsTransicionValida(compra.Estado, nuevoEstado))
                 throw new InvalidOperationException("La transición de estado no es válida.");
 
-            if (nuevoEstado == EstadoCompra.Pagado && compra.montoPagado < compra.TotalCompra)
-                throw new InvalidOperationException("No se puede marcar como pagada: el monto pagado no cubre el total.");
-
             DataCompras.CambiarEstado(idCompra, nuevoEstado);
         }
 
-        public static void MarcarCompraEntregada(int idCompra)
+        public static void MarcarCompraRecibida(int idCompra)
         {
             Compra compra = DataCompras.GetCompraById(idCompra);
 
@@ -115,7 +170,7 @@ namespace Negocio
                 throw new ArgumentException("La compra no existe.");
 
             if (compra.Estado != EstadoCompra.Enviada)
-                throw new ArgumentException("Solo se puede marcar como entregada una compra que fue enviada.");
+                throw new ArgumentException("Solo se puede marcar como recibida una compra que fue enviada.");
 
             List<DetalleCompra> detalles = DataDetalleCompras.GetDetallesByIdCompra(idCompra);
 
@@ -124,41 +179,16 @@ namespace Negocio
 
             NDetalleCompras.ValidarDetalles(detalles);
 
-            DataCompras.MarcarCompraEntregadaConIncrementoStock(idCompra, detalles);
-        }
-
-        // ---------- Detalle ----------
-        public static decimal ModificarCantidad(int detalleCompraId, int nuevaCantidad, string motivo)
-        {
-            if (detalleCompraId <= 0)
-                throw new ArgumentException("Debe indicar un detalle de compra válido.", nameof(detalleCompraId));
-            if (nuevaCantidad <= 0)
-                throw new ArgumentException("La cantidad debe ser un entero positivo mayor a cero.", nameof(nuevaCantidad));
-            if (string.IsNullOrWhiteSpace(motivo))
-                throw new ArgumentException("Debe indicar un motivo para la modificación.", nameof(motivo));
-
-            DetalleCompra detalle = DataDetalleCompras.GetById(detalleCompraId);
-            if (detalle == null)
-                throw new ArgumentException("No existe un detalle de compra con ese id.", nameof(detalleCompraId));
-
-            Compra compra = DataCompras.GetCompraById(detalle.IdCompra);
-            if (compra == null)
-                throw new InvalidOperationException("No se encontró la compra asociada a este detalle.");
-            if (compra.Estado != EstadoCompra.Emitida)
-                throw new InvalidOperationException("Solo se puede modificar la cantidad si la compra está emitida.");
-
-            decimal precioUnitarioOriginal = (decimal)detalle.Subtotal / detalle.Cantidad;
-            decimal nuevoSubTotal = Math.Round(precioUnitarioOriginal * nuevaCantidad, 2);
-
-            DataDetalleCompras.UpdateCantidad(detalleCompraId, nuevaCantidad, nuevoSubTotal, motivo);
-
-            decimal nuevoTotal = Math.Round(DataDetalleCompras.GetTotalCompraById(detalle.IdCompra), 2);
-            DataCompras.UpdateTotal(detalle.IdCompra, nuevoTotal);
-
-            return nuevoTotal;
+            DataCompras.MarcarCompraRecibidaConIncrementoStock(idCompra, detalles);
         }
 
         // ---------- Pagos ----------
+        public static int DeterminarEstadoPago(decimal total, decimal pagado)
+        {
+            if (pagado >= total) return EstadoPago.Pagado;
+            return EstadoPago.Pendiente;
+        }
+
         public static void RegistrarPago(int idCompra, decimal ingresado)
         {
             if (ingresado <= 0)
@@ -177,9 +207,18 @@ namespace Negocio
             decimal nuevoMonto = (decimal)compra.montoPagado + ingresado;
             DataCompras.CambiarMontoPagado(idCompra, nuevoMonto);
 
-            // Si ya fue aceptada y quedó saldada, pasa a Pagado
-            if (compra.Estado == EstadoCompra.Aceptada && nuevoMonto >= (decimal)compra.TotalCompra)
-                DataCompras.CambiarEstado(idCompra, EstadoCompra.Pagado);
+            // El pago no cambia el estado de la compra, solo el estado de pago.
+            if (nuevoMonto >= (decimal)compra.TotalCompra)
+                DataCompras.CambiarEstadoPago(idCompra, EstadoPago.Pagado);
+        }
+
+        public static void ActualizarFechas(int idCompra, DateTime fecha, DateTime? fechaRecepcion)
+        {
+            ValidarFechaCompra(fecha);
+            if (fechaRecepcion.HasValue && fechaRecepcion.Value.Date < fecha.Date)
+                throw new ArgumentException("La fecha de recepción no puede ser anterior a la fecha de la compra.");
+
+            DataCompras.ActualizarFechas(idCompra, fecha, fechaRecepcion);
         }
 
         public static decimal CalcularDeuda(int idCompra)
@@ -207,8 +246,8 @@ namespace Negocio
                 decimal total = (decimal)c.TotalCompra;
                 totalCompras += total;
 
-                // Pagado, Enviada y Entregada ya están saldadas
-                if (c.Estado >= EstadoCompra.Pagado)
+                // Pagado => saldada; si no, se usa el monto pagado acumulado
+                if (c.EstadoPago == EstadoPago.Pagado)
                     totalPagado += total;
                 else
                     totalPagado += (decimal)c.montoPagado;

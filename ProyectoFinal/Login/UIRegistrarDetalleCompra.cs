@@ -58,7 +58,7 @@ namespace Login
         private void ActualizarSubTotal()
         {
             decimal precio = numUpDownPrecio.Value;
-            int cantidad = (int)numUpDownCantidad.Value;
+            decimal cantidad = numUpDownCantidad.Value;
 
             subTotal = (cantidad > 0)
                 ? NDetalleCompras.CalcularSubTotal(precio, cantidad)
@@ -95,7 +95,7 @@ namespace Login
             }
 
             Insumo insumoSeleccionado = (Insumo)cbInsumo.SelectedItem;
-            int cantidad = (int)numUpDownCantidad.Value;
+            decimal cantidad = numUpDownCantidad.Value;
 
             DetalleCompra detalle = new DetalleCompra
             {
@@ -112,7 +112,7 @@ namespace Login
         private void Clean()
         {
             numUpDownPrecio.Value = 0;
-            numUpDownCantidad.Value = 0;
+            numUpDownCantidad.Value = numUpDownCantidad.Minimum;
             subTotal = 0;
             labelSubtotal.Text = subTotal.ToString("C2");
         }

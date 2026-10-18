@@ -21,13 +21,13 @@ namespace Datos
                             FROM DetalleVentas dv
                             INNER JOIN Productos p ON dv.idProducto = p.idProducto
                             INNER JOIN Ventas v ON dv.idVenta = v.idVenta
-                            WHERE v.estadoPago != @Anulado
+                            WHERE v.estadoCobro != @Anulado
                             GROUP BY p.idProducto, p.Nombre
                             ORDER BY totalCantidad DESC";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
+                    cmd.Parameters.AddWithValue("@Anulado", EstadoCobro.Anulado);
                     cmd.Parameters.AddWithValue("@Top", top);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

@@ -15,9 +15,8 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblSubtulo = new System.Windows.Forms.Label();
             this.btnAceptada = new System.Windows.Forms.Button();
-            this.btnPagada = new System.Windows.Forms.Button();
             this.btnEnviada = new System.Windows.Forms.Button();
-            this.btnEntregada = new System.Windows.Forms.Button();
+            this.btnRecibida = new System.Windows.Forms.Button();
             this.btnCancelada = new System.Windows.Forms.Button();
 
             this.SuspendLayout();
@@ -52,9 +51,8 @@
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblSubtulo);
             this.Controls.Add(this.btnAceptada);
-            this.Controls.Add(this.btnPagada);
             this.Controls.Add(this.btnEnviada);
-            this.Controls.Add(this.btnEntregada);
+            this.Controls.Add(this.btnRecibida);
             this.Controls.Add(this.btnCancelada);
 
             this.ResumeLayout(false);
@@ -64,9 +62,8 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label lblSubtulo;
         private System.Windows.Forms.Button btnAceptada;
-        private System.Windows.Forms.Button btnPagada;
         private System.Windows.Forms.Button btnEnviada;
-        private System.Windows.Forms.Button btnEntregada;
+        private System.Windows.Forms.Button btnRecibida;
         private System.Windows.Forms.Button btnCancelada;
     }
 }

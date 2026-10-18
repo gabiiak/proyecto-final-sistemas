@@ -284,6 +284,30 @@
     <Compile Include="UIConsultarCompra.Designer.cs">
       <DependentUpon>UIConsultarCompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIEditarFechasCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIEditarFechasCompra.Designer.cs">
+      <DependentUpon>UIEditarFechasCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIInsumoPedidoCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIInsumoPedidoCompra.Designer.cs">
+      <DependentUpon>UIInsumoPedidoCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIRegistrarPedidoCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRegistrarPedidoCompra.Designer.cs">
+      <DependentUpon>UIRegistrarPedidoCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIGestionPedidosCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIGestionPedidosCompra.Designer.cs">
+      <DependentUpon>UIGestionPedidosCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIEstadoCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -455,11 +479,11 @@
     <Compile Include="UIProductosEliminados.Designer.cs">
       <DependentUpon>UIProductosEliminados.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIEstadoPago.cs">
+    <Compile Include="UIEstadoCobro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIEstadoPago.Designer.cs">
-      <DependentUpon>UIEstadoPago.cs</DependentUpon>
+    <Compile Include="UIEstadoCobro.Designer.cs">
+      <DependentUpon>UIEstadoCobro.cs</DependentUpon>
     </Compile>
     <Compile Include="UIGestionProductos.cs">
       <SubType>Form</SubType>
@@ -585,8 +609,20 @@
     <EmbeddedResource Include="UIProductosEliminados.resx">
       <DependentUpon>UIProductosEliminados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIEstadoPago.resx">
-      <DependentUpon>UIEstadoPago.cs</DependentUpon>
+    <EmbeddedResource Include="UIEstadoCobro.resx">
+      <DependentUpon>UIEstadoCobro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIEditarFechasCompra.resx">
+      <DependentUpon>UIEditarFechasCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIInsumoPedidoCompra.resx">
+      <DependentUpon>UIInsumoPedidoCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIRegistrarPedidoCompra.resx">
+      <DependentUpon>UIRegistrarPedidoCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIGestionPedidosCompra.resx">
+      <DependentUpon>UIGestionPedidosCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIGestionProductos.resx">
       <DependentUpon>UIGestionProductos.cs</DependentUpon>

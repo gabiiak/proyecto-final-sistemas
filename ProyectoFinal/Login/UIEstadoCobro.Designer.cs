@@ -1,6 +1,6 @@
 ﻿namespace Login
 {
-    partial class UIEstadoPago
+    partial class UIEstadoCobro
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -29,17 +29,17 @@
 
             // ── FORM ────────────────────────────────────────────────
             this.ClientSize = new System.Drawing.Size(380, 300);
-            this.Text = "Estado de Pago";
+            this.Text = "Estado de Cobro";
             this.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.Name = "UIPaymentState";
+            this.Name = "UIEstadoCobro";
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Load += new System.EventHandler(this.UIPaymentState_Load);
+            this.Load += new System.EventHandler(this.UIEstadoCobro_Load);
 
             // ── TÍTULO ──────────────────────────────────────────────
-            this.lblTitulo.Text = "Estado de Pago";
+            this.lblTitulo.Text = "Estado de Cobro";
             this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(28, 58, 94);
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
             this.lblTitulo.Location = new System.Drawing.Point(20, 16);
@@ -70,7 +70,7 @@
             this.labelDeuda.Name = "labelDeuda";
 
             // Pago a registrar + botón pago justo
-            this.lblPagoKey.Text = "Pago a registrar ($)";
+            this.lblPagoKey.Text = "Cobro a registrar ($)";
             this.lblPagoKey.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
             this.lblPagoKey.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblPagoKey.Location = new System.Drawing.Point(16, 68);
@@ -86,7 +86,7 @@
             this.txtDeuda.TabIndex = 0;
             this.txtDeuda.Name = "txtDeuda";
 
-            this.btnPagoJusto.Text = "Pago justo";
+            this.btnPagoJusto.Text = "Cobro justo";
             this.btnPagoJusto.Location = new System.Drawing.Point(228, 86);
             this.btnPagoJusto.Size = new System.Drawing.Size(96, 32);
             this.btnPagoJusto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -125,7 +125,7 @@
             this.pnlFormulario.Controls.Add(this.labelEstado);
 
             // ── BOTONES ─────────────────────────────────────────────
-            this.bntPagarDeuda.Text = "Pagar Deuda";
+            this.bntPagarDeuda.Text = "Cobrar deuda";
             this.bntPagarDeuda.Location = new System.Drawing.Point(20, 228);
             this.bntPagarDeuda.Size = new System.Drawing.Size(160, 40);
             this.bntPagarDeuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -138,7 +138,7 @@
             this.bntPagarDeuda.Name = "bntPagarDeuda";
             this.bntPagarDeuda.Click += new System.EventHandler(this.bntPagarDeuda_Click);
 
-            this.btnAnularPago.Text = "Anular Pago";
+            this.btnAnularPago.Text = "Anular cobro";
             this.btnAnularPago.Location = new System.Drawing.Point(196, 228);
             this.btnAnularPago.Size = new System.Drawing.Size(164, 40);
             this.btnAnularPago.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

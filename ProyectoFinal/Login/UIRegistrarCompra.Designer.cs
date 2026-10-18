@@ -147,7 +147,7 @@
             this.pnlTotal.Controls.Add(this.btnPagoTotal);
 
             // ── HINT DE ESTADO ──────────────────────────────────────
-            this.lblEstadoHint.Text = "Estado inicial: EMITIDA   |   el pago no puede superar el total";
+            this.lblEstadoHint.Text = "La compra se registra ACEPTADA   |   el pago no puede superar el total";
             this.lblEstadoHint.ForeColor = System.Drawing.Color.FromArgb(136, 135, 128);
             this.lblEstadoHint.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Italic);
             this.lblEstadoHint.Location = new System.Drawing.Point(20, 600);

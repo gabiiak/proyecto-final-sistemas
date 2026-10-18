@@ -30,28 +30,37 @@ namespace Login
             // Columna izquierda
             ConfigurarLabelKey(this.lblProveedorKey, "Proveedor", new System.Drawing.Point(16, 12));
             ConfigurarLabelKey(this.lblFechaKey, "Fecha", new System.Drawing.Point(16, 56));
-            ConfigurarLabelKey(this.lblDeudaKey, "Deuda pendiente", new System.Drawing.Point(16, 100));
+            ConfigurarLabelKey(this.lblFechaRecepcionKey, "Fecha de recepción", new System.Drawing.Point(16, 100));
+            ConfigurarLabelKey(this.lblDeudaKey, "Deuda pendiente", new System.Drawing.Point(16, 144));
 
             ConfigurarLabelValor(this.labelProveedor, new System.Drawing.Point(16, 30));
             ConfigurarLabelValor(this.labelFecha, new System.Drawing.Point(16, 74));
-            ConfigurarLabelValor(this.labelDeuda, new System.Drawing.Point(16, 118));
+            ConfigurarLabelValor(this.labelFechaRecepcion, new System.Drawing.Point(16, 118));
+            ConfigurarLabelValor(this.labelDeuda, new System.Drawing.Point(16, 162));
 
             // Columna derecha
             ConfigurarLabelKey(this.lblEstadoKey, "Estado de la compra", new System.Drawing.Point(240, 12));
-            ConfigurarLabelKey(this.lblPagadoKey, "Monto pagado", new System.Drawing.Point(240, 56));
+            ConfigurarLabelKey(this.lblEstadoPagoKey, "Estado de pago", new System.Drawing.Point(240, 56));
+            ConfigurarLabelKey(this.lblPagadoKey, "Monto pagado", new System.Drawing.Point(240, 100));
 
             ConfigurarLabelValor(this.labelEstado, new System.Drawing.Point(240, 30));
-            ConfigurarLabelValor(this.labelPagado, new System.Drawing.Point(240, 74));
+            ConfigurarLabelValor(this.labelEstadoPago, new System.Drawing.Point(240, 74));
+            ConfigurarLabelValor(this.labelPagado, new System.Drawing.Point(240, 118));
 
             ConfigurarBotonPrimario(this.btnEmitirOrden, "Emitir Orden de Compra PDF",
-                new System.Drawing.Point(20, 528), 1);
+                new System.Drawing.Point(20, 548), 1);
             this.btnEmitirOrden.Size = new System.Drawing.Size(280, 40);
             this.btnEmitirOrden.Click += new System.EventHandler(this.btnEmitirOrden_Click);
 
             ConfigurarBotonSecundario(this.btnSalir, "Cerrar",
-                new System.Drawing.Point(312, 528), 2);
+                new System.Drawing.Point(312, 548), 2);
             this.btnSalir.Size = new System.Drawing.Size(148, 40);
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+
+            ConfigurarBotonSecundario(this.btnEditarFechas, "Editar fechas",
+                new System.Drawing.Point(20, 596), 3);
+            this.btnEditarFechas.Size = new System.Drawing.Size(200, 36);
+            this.btnEditarFechas.Click += new System.EventHandler(this.btnEditarFechas_Click);
         }
 
         private void UIConsultarCompra_Load(object sender, EventArgs e)
@@ -74,7 +83,11 @@ namespace Login
 
             labelProveedor.Text = proveedor != null ? proveedor.Nombre : "Desconocido";
             labelFecha.Text = compra.Fecha.ToString("dd-MM-yyyy");
+            labelFechaRecepcion.Text = compra.FechaRecepcion.HasValue
+                ? compra.FechaRecepcion.Value.ToString("dd-MM-yyyy")
+                : "-";
             labelEstado.Text = GetDescripcionEstado(compra.Estado);
+            labelEstadoPago.Text = GetDescripcionEstadoPago(compra.EstadoPago);
             labelPagado.Text = compra.montoPagado.ToString("C2");
             labelDeuda.Text = (compra.TotalCompra - compra.montoPagado).ToString("C2");
             labelTotal.Text = compra.TotalCompra.ToString("C2");
@@ -103,12 +116,28 @@ namespace Login
             {
                 case EstadoCompra.Emitida: return "EMITIDA";
                 case EstadoCompra.Aceptada: return "ACEPTADA";
-                case EstadoCompra.Pagado: return "PAGADA";
                 case EstadoCompra.Enviada: return "ENVIADA";
-                case EstadoCompra.Entregada: return "ENTREGADA";
+                case EstadoCompra.Recibida: return "RECIBIDA";
                 case EstadoCompra.Cancelada: return "CANCELADA";
                 default: return "DESCONOCIDO";
             }
+        }
+
+        private string GetDescripcionEstadoPago(int estadoPago)
+        {
+            switch (estadoPago)
+            {
+                case EstadoPago.Pendiente: return "PENDIENTE";
+                case EstadoPago.Pagado: return "PAGADA";
+                default: return "DESCONOCIDO";
+            }
+        }
+
+        private void btnEditarFechas_Click(object sender, EventArgs e)
+        {
+            UIEditarFechasCompra editar = new UIEditarFechasCompra(idCompra);
+            editar.ShowDialog();
+            CargarCompra();
         }
 
         private void btnEmitirOrden_Click(object sender, EventArgs e)
@@ -132,18 +161,21 @@ namespace Login
                     Table cabecera = new Table(UnitValue.CreatePercentArray(new float[] { 30f, 70f })).SetWidth(UnitValue.CreatePercentValue(100));
                     cabecera.SetBorder(iText.Layout.Borders.Border.NO_BORDER);
 
-                    try
+                    string rutaLogo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "logoEmpresa.png");
+                    if (File.Exists(rutaLogo))
                     {
-                        string rutaLogo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "logoEmpresa.png");
                         ImageData data = ImageDataFactory.Create(rutaLogo);
                         Image img = new Image(data).SetWidth(100).SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
                         Cell cellLogo = new Cell().Add(img).SetBorder(iText.Layout.Borders.Border.NO_BORDER);
                         cabecera.AddCell(cellLogo);
                     }
-                    catch (Exception)
+                    else
                     {
-                        // Si no encuentra el logo, celda vacía para no romper el diseño
-                        cabecera.AddCell(new Cell().SetBorder(iText.Layout.Borders.Border.NO_BORDER));
+                        // Fallback explícito: si falta el logo, se muestra el nombre de la empresa.
+                        Cell cellLogo = new Cell()
+                            .Add(new Paragraph("F&G Hamburguesas").SetFontSize(11).SetFontColor(colorPrimario))
+                            .SetBorder(iText.Layout.Borders.Border.NO_BORDER);
+                        cabecera.AddCell(cellLogo);
                     }
 
                     Paragraph infoEmpresa = new Paragraph()
@@ -177,7 +209,9 @@ namespace Login
                         .Add(new Text("ORDEN DE COMPRA\n").SetFontSize(11).SetFontColor(colorPrimario))
                         .Add(new Text($"N° Orden: {idCompra.ToString().PadLeft(8, '0')}\n").SetFontSize(10))
                         .Add(new Text($"Fecha: {labelFecha.Text}\n").SetFontSize(10))
+                        .Add(new Text($"Fecha de recepción: {labelFechaRecepcion.Text}\n").SetFontSize(10))
                         .Add(new Text($"Estado: {labelEstado.Text}\n").SetFontSize(10))
+                        .Add(new Text($"Estado de pago: {labelEstadoPago.Text}\n").SetFontSize(10))
                         .Add(new Text($"Monto pagado: {labelPagado.Text}\n").SetFontSize(10))
                         .SetTextAlignment(TextAlignment.RIGHT)
                         .SetFontColor(colorTextoOscuro);

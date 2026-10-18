@@ -9,9 +9,9 @@ namespace Datos
     public class DataDetalleCompras
     {
         // Gráfico de torta: insumos más comprados
-        public static List<(string Nombre, int Cantidad)> GetInsumosMasComprados(int top = 4)
+        public static List<(string Nombre, decimal Cantidad)> GetInsumosMasComprados(int top = 4)
         {
-            var resultado = new List<(string, int)>();
+            var resultado = new List<(string, decimal)>();
             using (SqlConnection connection = Db.GetConnection())
             {
                 string sqlQuery = @"SELECT TOP (@Top) i.nombre, SUM(dc.cantidad) as totalCantidad
@@ -30,7 +30,7 @@ namespace Datos
                     {
                         while (reader.Read())
                         {
-                            resultado.Add((reader.GetString(0), reader.GetInt32(1)));
+                            resultado.Add((reader.GetString(0), reader.GetDecimal(1)));
                         }
                     }
                 }
@@ -92,7 +92,7 @@ namespace Datos
                     connection.Open();
                     cmd.Parameters.Add("@IdCompra", SqlDbType.Int).Value = detalle.IdCompra;
                     cmd.Parameters.Add("@IdInsumo", SqlDbType.Int).Value = detalle.IdInsumo;
-                    cmd.Parameters.Add("@Cantidad", SqlDbType.Int).Value = detalle.Cantidad;
+                    cmd.Parameters.Add("@Cantidad", SqlDbType.Decimal).Value = detalle.Cantidad;
                     cmd.Parameters.Add("@SubTotal", SqlDbType.Decimal).Value = (decimal)detalle.Subtotal;
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -119,25 +119,6 @@ namespace Datos
             }
         }
 
-        public static int UpdateCantidad(int id, int cantidad, decimal nuevoSubTotal, string motivo)
-        {
-            using (SqlConnection connection = Db.GetConnection())
-            {
-                string sqlQuery = @"UPDATE DetalleCompras
-                                    SET cantidad = @cantidad, subTotal = @subTotal, motivoModificacion = @motivo
-                                    WHERE idDetalleCompra = @id";
-                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
-                {
-                    cmd.Parameters.Add("@cantidad", SqlDbType.Int).Value = cantidad;
-                    cmd.Parameters.Add("@subTotal", SqlDbType.Decimal).Value = nuevoSubTotal;
-                    cmd.Parameters.Add("@motivo", SqlDbType.NVarChar).Value = (object)motivo ?? DBNull.Value;
-                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = id;
-                    connection.Open();
-                    return cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
         public static decimal GetTotalCompraById(int idCompra)
         {
             using (SqlConnection connection = Db.GetConnection())
@@ -153,6 +134,20 @@ namespace Datos
             }
         }
 
+        public static void EliminarPorCompra(int idCompra)
+        {
+            string sqlQuery = @"DELETE FROM DetalleCompras WHERE idCompra = @IdCompra";
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.Add("@IdCompra", SqlDbType.Int).Value = idCompra;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         private static DetalleCompra MapDetalle(SqlDataReader reader)
         {
             return new DetalleCompra
@@ -160,7 +155,7 @@ namespace Datos
                 IdDetalleCompra = reader.GetInt32(0),
                 IdCompra = reader.GetInt32(1),
                 IdInsumo = reader.GetInt32(2),
-                Cantidad = reader.GetInt32(3),
+                Cantidad = reader.GetDecimal(3),
                 Subtotal = (double)reader.GetDecimal(4)
             };
         }

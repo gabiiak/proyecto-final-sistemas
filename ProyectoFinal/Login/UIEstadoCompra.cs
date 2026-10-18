@@ -25,26 +25,19 @@ namespace Login
                 System.Drawing.Color.White, 0);
             this.btnAceptada.Click += new System.EventHandler(this.btnAceptada_Click);
 
-            // PAGADA — azul
-            ConfigurarBotonEstado(this.btnPagada, "PAGADA",
-                new System.Drawing.Point(20, 136),
-                System.Drawing.Color.FromArgb(24, 95, 165),
-                System.Drawing.Color.White, 1);
-            this.btnPagada.Click += new System.EventHandler(this.btnPagada_Click);
-
             // ENVIADA — azul
             ConfigurarBotonEstado(this.btnEnviada, "ENVIADA",
-                new System.Drawing.Point(20, 192),
+                new System.Drawing.Point(20, 136),
                 System.Drawing.Color.FromArgb(24, 95, 165),
                 System.Drawing.Color.White, 2);
             this.btnEnviada.Click += new System.EventHandler(this.btnEnviada_Click);
 
-            // ENTREGADA — azul (estado final positivo, suma stock de insumos)
-            ConfigurarBotonEstado(this.btnEntregada, "ENTREGADA",
-                new System.Drawing.Point(20, 248),
+            // RECIBIDA — azul (estado final positivo, suma stock de insumos)
+            ConfigurarBotonEstado(this.btnRecibida, "RECIBIDA",
+                new System.Drawing.Point(20, 192),
                 System.Drawing.Color.FromArgb(24, 95, 165),
                 System.Drawing.Color.White, 3);
-            this.btnEntregada.Click += new System.EventHandler(this.btnEntregada_Click);
+            this.btnRecibida.Click += new System.EventHandler(this.btnRecibida_Click);
 
             // CANCELADA — rojo (estado final negativo, separado visualmente)
             ConfigurarBotonEstado(this.btnCancelada, "CANCELADA",
@@ -56,9 +49,8 @@ namespace Login
 
             // Solo quedan habilitadas las transiciones válidas desde el estado actual
             HabilitarSiEsValido(this.btnAceptada, EstadoCompra.Aceptada);
-            HabilitarSiEsValido(this.btnPagada, EstadoCompra.Pagado);
             HabilitarSiEsValido(this.btnEnviada, EstadoCompra.Enviada);
-            HabilitarSiEsValido(this.btnEntregada, EstadoCompra.Entregada);
+            HabilitarSiEsValido(this.btnRecibida, EstadoCompra.Recibida);
             HabilitarSiEsValido(this.btnCancelada, EstadoCompra.Cancelada);
         }
 
@@ -86,9 +78,8 @@ namespace Login
             {
                 case EstadoCompra.Emitida: return "EMITIDA";
                 case EstadoCompra.Aceptada: return "ACEPTADA";
-                case EstadoCompra.Pagado: return "PAGADA";
                 case EstadoCompra.Enviada: return "ENVIADA";
-                case EstadoCompra.Entregada: return "ENTREGADA";
+                case EstadoCompra.Recibida: return "RECIBIDA";
                 case EstadoCompra.Cancelada: return "CANCELADA";
                 default: return "DESCONOCIDO";
             }
@@ -100,21 +91,15 @@ namespace Login
             this.DialogResult = DialogResult.OK;
         }
 
-        private void btnPagada_Click(object sender, EventArgs e)
-        {
-            estado = EstadoCompra.Pagado;
-            this.DialogResult = DialogResult.OK;
-        }
-
         private void btnEnviada_Click(object sender, EventArgs e)
         {
             estado = EstadoCompra.Enviada;
             this.DialogResult = DialogResult.OK;
         }
 
-        private void btnEntregada_Click(object sender, EventArgs e)
+        private void btnRecibida_Click(object sender, EventArgs e)
         {
-            estado = EstadoCompra.Entregada;
+            estado = EstadoCompra.Recibida;
             this.DialogResult = DialogResult.OK;
         }
 

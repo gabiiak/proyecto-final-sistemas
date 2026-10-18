@@ -73,8 +73,9 @@
             this.numUpDownCantidad.Location = new System.Drawing.Point(16, 168);
             this.numUpDownCantidad.Size = new System.Drawing.Size(80, 32);
             this.numUpDownCantidad.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.numUpDownCantidad.Maximum = 1000000;
-            this.numUpDownCantidad.Minimum = 0;
+            this.numUpDownCantidad.DecimalPlaces = 2;
+            this.numUpDownCantidad.Maximum = 50000;
+            this.numUpDownCantidad.Minimum = new decimal(new int[] { 1, 0, 0, 131072 });
             this.numUpDownCantidad.TabIndex = 2;
             this.numUpDownCantidad.Name = "numUpDownCantidad";
             this.numUpDownCantidad.ValueChanged += new System.EventHandler(this.numUpDownCantidad_ValueChanged);

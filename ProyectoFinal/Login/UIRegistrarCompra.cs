@@ -150,19 +150,12 @@ namespace Login
                 {
                     IdProveedor = proveedorSeleccionado.IdProveedor,
                     Fecha = fecha,
-                    Estado = EstadoCompra.Emitida,
                     TotalCompra = (double)total,
                     montoPagado = (double)montoPagado
                 };
 
-                int idCompra = NCompras.CreateCompra(compraEnMemoria);
+                int idCompra = NCompras.RegistrarCompraManual(compraEnMemoria, detalleCompras);
                 compraEnMemoria.IdCompra = idCompra;
-
-                foreach (DetalleCompra detalle in detalleCompras)
-                {
-                    detalle.IdCompra = idCompra;
-                    NDetalleCompras.CreateDetalleCompra(detalle);
-                }
 
                 this.DialogResult = DialogResult.OK;
             }
@@ -232,7 +225,7 @@ namespace Login
             {
                 decimal deuda = total - pagado;
                 DialogResult resultado = MessageBox.Show(
-                    "Se registrará la compra como EMITIDA con un pago de " + pagado.ToString("C2") +
+                    "Se registrará la compra como ACEPTADA con un pago de " + pagado.ToString("C2") +
                     ". Quedará una deuda de " + deuda.ToString("C2") + " con el proveedor.",
                     "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (resultado == DialogResult.Yes)
@@ -241,8 +234,8 @@ namespace Login
             else
             {
                 DialogResult resultado = MessageBox.Show(
-                    "Se registrará la compra como EMITIDA con el pago completo. " +
-                    "Una vez aceptada por el proveedor podrá pasar a PAGADA.",
+                    "Se registrará la compra como ACEPTADA con el pago completo. " +
+                    "Podrá registrarse la recepción cuando el pedido llegue.",
                     "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (resultado == DialogResult.Yes)
                     RegistrarCompraEnBaseDeDatos(pagado);

@@ -35,13 +35,13 @@ namespace Login
 
             ConfigurarLabelKey(this.lblClienteKey, "Cliente", new System.Drawing.Point(16, 12));
             ConfigurarLabelKey(this.lblFechaKey, "Fecha", new System.Drawing.Point(16, 56));
-            ConfigurarLabelKey(this.lblEstadoPagoKey, "Estado de pago", new System.Drawing.Point(240, 12));
+            ConfigurarLabelKey(this.lblEstadoCobroKey, "Estado de cobro", new System.Drawing.Point(240, 12));
             ConfigurarLabelKey(this.lblEstadoPedidoKey, "Estado del pedido", new System.Drawing.Point(240, 76));
             ConfigurarLabelKey(this.lblMetodoKey, "Método de pago", new System.Drawing.Point(16, 96));
 
             ConfigurarLabelValor(this.labelCliente, new System.Drawing.Point(16, 30));
             ConfigurarLabelValor(this.labelFecha, new System.Drawing.Point(16, 69));
-            ConfigurarLabelValor(this.labelEstadoPago, new System.Drawing.Point(240, 30));
+            ConfigurarLabelValor(this.labelEstadoCobro, new System.Drawing.Point(240, 30));
             ConfigurarLabelValor(this.labelEstadoPedido, new System.Drawing.Point(240, 94));
             ConfigurarLabelValor(this.labelMetodo, new System.Drawing.Point(16, 109));
 
@@ -67,7 +67,7 @@ namespace Login
             labelCliente.Text = venta.Cliente.Nombre;
             labelMetodo.Text = venta.Metodo.Descripcion;
             labelFecha.Text = venta.Fecha.ToString("dd-MM-yyyy");
-            labelEstadoPago.Text = GetDescripcionEstadoPago(venta.Estado_Pago);
+            labelEstadoCobro.Text = GetDescripcionEstadoCobro(venta.Estado_Cobro);
             labelEstadoPedido.Text = GetEstadoPedido(venta.Estado_Pedido);
             labelTotal.Text = venta.Total.ToString("C2");
         }
@@ -97,13 +97,13 @@ namespace Login
                 default: return "DESCONOCIDO";
             }
         }
-        private string GetDescripcionEstadoPago(int estado)
+        private string GetDescripcionEstadoCobro(int estado)
         {
             switch (estado)
             {
-                case EstadoPago.Anulado: return "ANULADO";
-                case EstadoPago.Pendiente: return "PENDIENTE";
-                case EstadoPago.Pagado: return "PAGADO";
+                case EstadoCobro.Anulado: return "ANULADO";
+                case EstadoCobro.Pendiente: return "PENDIENTE";
+                case EstadoCobro.Cobrado: return "COBRADO";
                 default: return "DESCONOCIDO";
             }
         }
@@ -200,7 +200,7 @@ namespace Login
                         .Add(new Text($"FACTURA ELECTRÓNICA\n").SetFontSize(11).SetFontColor(colorPrimario))
                         .Add(new Text($"N° Comprobante: {idVenta.ToString().PadLeft(8, '0')}\n").SetFontSize(10))
                         .Add(new Text($"Fecha: {labelFecha.Text}\n").SetFontSize(10))
-                        .Add(new Text($"Estado del pago: {labelEstadoPago.Text}\n").SetFontSize(10))
+                        .Add(new Text($"Estado del cobro: {labelEstadoCobro.Text}\n").SetFontSize(10))
                         .Add(new Text($"Estado del pedido: {labelEstadoPedido.Text}\n").SetFontSize(10))
                         .SetTextAlignment(TextAlignment.RIGHT)
                         .SetFontColor(colorTextoOscuro);
@@ -339,7 +339,7 @@ namespace Login
 
             doc.Add(new Paragraph($"Método de pago: {labelMetodo.Text}"));
 
-            doc.Add(new Paragraph($"Estado pago: {labelEstadoPago.Text}"));
+            doc.Add(new Paragraph($"Estado de cobro: {labelEstadoCobro.Text}"));
 
             doc.Add(new Paragraph(" ")); // espacio
 
