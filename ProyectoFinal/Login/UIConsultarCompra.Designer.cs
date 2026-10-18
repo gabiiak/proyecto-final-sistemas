@@ -18,10 +18,14 @@
             this.labelProveedor = new System.Windows.Forms.Label();
             this.lblFechaKey = new System.Windows.Forms.Label();
             this.labelFecha = new System.Windows.Forms.Label();
+            this.lblFechaRecepcionKey = new System.Windows.Forms.Label();
+            this.labelFechaRecepcion = new System.Windows.Forms.Label();
             this.lblDeudaKey = new System.Windows.Forms.Label();
             this.labelDeuda = new System.Windows.Forms.Label();
             this.lblEstadoKey = new System.Windows.Forms.Label();
             this.labelEstado = new System.Windows.Forms.Label();
+            this.lblEstadoPagoKey = new System.Windows.Forms.Label();
+            this.labelEstadoPago = new System.Windows.Forms.Label();
             this.lblPagadoKey = new System.Windows.Forms.Label();
             this.labelPagado = new System.Windows.Forms.Label();
             this.lblDetalles = new System.Windows.Forms.Label();
@@ -34,6 +38,7 @@
             this.labelTotal = new System.Windows.Forms.Label();
             this.btnEmitirOrden = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.btnEditarFechas = new System.Windows.Forms.Button();
 
             this.pnlInfo.SuspendLayout();
             this.pnlTotal.SuspendLayout();
@@ -41,7 +46,7 @@
             this.SuspendLayout();
 
             // ── FORM ────────────────────────────────────────────────
-            this.ClientSize = new System.Drawing.Size(480, 590);
+            this.ClientSize = new System.Drawing.Size(480, 650);
             this.Text = "Consultar Compra";
             this.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -62,17 +67,21 @@
             // ── PANEL INFO ──────────────────────────────────────────
             this.pnlInfo.BackColor = System.Drawing.Color.White;
             this.pnlInfo.Location = new System.Drawing.Point(20, 56);
-            this.pnlInfo.Size = new System.Drawing.Size(440, 148);
+            this.pnlInfo.Size = new System.Drawing.Size(440, 188);
             this.pnlInfo.Name = "pnlInfo";
 
             this.pnlInfo.Controls.Add(this.lblProveedorKey);
             this.pnlInfo.Controls.Add(this.labelProveedor);
             this.pnlInfo.Controls.Add(this.lblFechaKey);
             this.pnlInfo.Controls.Add(this.labelFecha);
+            this.pnlInfo.Controls.Add(this.lblFechaRecepcionKey);
+            this.pnlInfo.Controls.Add(this.labelFechaRecepcion);
             this.pnlInfo.Controls.Add(this.lblDeudaKey);
             this.pnlInfo.Controls.Add(this.labelDeuda);
             this.pnlInfo.Controls.Add(this.lblEstadoKey);
             this.pnlInfo.Controls.Add(this.labelEstado);
+            this.pnlInfo.Controls.Add(this.lblEstadoPagoKey);
+            this.pnlInfo.Controls.Add(this.labelEstadoPago);
             this.pnlInfo.Controls.Add(this.lblPagadoKey);
             this.pnlInfo.Controls.Add(this.labelPagado);
 
@@ -80,13 +89,13 @@
             this.lblDetalles.Text = "Insumos";
             this.lblDetalles.ForeColor = System.Drawing.Color.FromArgb(28, 58, 94);
             this.lblDetalles.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblDetalles.Location = new System.Drawing.Point(20, 220);
+            this.lblDetalles.Location = new System.Drawing.Point(20, 260);
             this.lblDetalles.Size = new System.Drawing.Size(200, 24);
             this.lblDetalles.Name = "lblDetalles";
 
             // ── DATAGRIDVIEW ────────────────────────────────────────
-            this.dgvConsultaCompra.Location = new System.Drawing.Point(20, 248);
-            this.dgvConsultaCompra.Size = new System.Drawing.Size(440, 196);
+            this.dgvConsultaCompra.Location = new System.Drawing.Point(20, 288);
+            this.dgvConsultaCompra.Size = new System.Drawing.Size(440, 176);
             this.dgvConsultaCompra.Name = "dgvConsultaCompra";
             this.dgvConsultaCompra.TabIndex = 0;
             this.dgvConsultaCompra.AllowUserToAddRows = false;
@@ -122,7 +131,7 @@
 
             // ── PANEL TOTAL ─────────────────────────────────────────
             this.pnlTotal.BackColor = System.Drawing.Color.FromArgb(230, 241, 251);
-            this.pnlTotal.Location = new System.Drawing.Point(20, 456);
+            this.pnlTotal.Location = new System.Drawing.Point(20, 476);
             this.pnlTotal.Size = new System.Drawing.Size(440, 56);
             this.pnlTotal.Name = "pnlTotal";
 
@@ -150,6 +159,7 @@
             this.Controls.Add(this.pnlTotal);
             this.Controls.Add(this.btnEmitirOrden);
             this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.btnEditarFechas);
 
             this.pnlInfo.ResumeLayout(false);
             this.pnlTotal.ResumeLayout(false);
@@ -165,10 +175,14 @@
         private System.Windows.Forms.Label labelProveedor;
         private System.Windows.Forms.Label lblFechaKey;
         private System.Windows.Forms.Label labelFecha;
+        private System.Windows.Forms.Label lblFechaRecepcionKey;
+        private System.Windows.Forms.Label labelFechaRecepcion;
         private System.Windows.Forms.Label lblDeudaKey;
         private System.Windows.Forms.Label labelDeuda;
         private System.Windows.Forms.Label lblEstadoKey;
         private System.Windows.Forms.Label labelEstado;
+        private System.Windows.Forms.Label lblEstadoPagoKey;
+        private System.Windows.Forms.Label labelEstadoPago;
         private System.Windows.Forms.Label lblPagadoKey;
         private System.Windows.Forms.Label labelPagado;
         private System.Windows.Forms.Label lblDetalles;
@@ -180,5 +194,6 @@
         private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.Button btnEmitirOrden;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnEditarFechas;
     }
 }

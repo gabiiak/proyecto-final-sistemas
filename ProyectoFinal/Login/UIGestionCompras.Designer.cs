@@ -40,6 +40,7 @@
             this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMontoPagado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEstadoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             this.pnlAcciones.SuspendLayout();
             this.pnlFiltros.SuspendLayout();
@@ -200,10 +201,14 @@
             this.colEstado.Name = "Estado";
             this.colEstado.FillWeight = 70;
 
+            this.colEstadoPago.HeaderText = "Pago";
+            this.colEstadoPago.Name = "EstadoPago";
+            this.colEstadoPago.FillWeight = 70;
+
             this.dgvTodasLasCompras.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
             {
                 this.colIdCompra, this.colProveedor, this.colFecha,
-                this.colTotal, this.colMontoPagado, this.colEstado
+                this.colTotal, this.colMontoPagado, this.colEstado, this.colEstadoPago
             });
 
             // ── CONTROLS DEL FORM ───────────────────────────────────
@@ -247,5 +252,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMontoPagado;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEstadoPago;
     }
 }

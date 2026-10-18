@@ -128,7 +128,7 @@ namespace Datos
         {
             using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT idCompra, idProveedor, fecha, estado, totalCompra, montoPagado
+                string sqlQuery = @"SELECT idCompra, idProveedor, idPresupuesto, fecha, fechaRecepcion, estado, estadoPago, totalCompra, montoPagado
                                     FROM Compras
                                     WHERE idCompra = @IdCompra";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
@@ -191,7 +191,7 @@ namespace Datos
             List<Compra> lista = new List<Compra>();
             using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT idCompra, idProveedor, fecha, estado, totalCompra, montoPagado
+                string sqlQuery = @"SELECT idCompra, idProveedor, idPresupuesto, fecha, fechaRecepcion, estado, estadoPago, totalCompra, montoPagado
                                     FROM Compras";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
@@ -206,23 +206,121 @@ namespace Datos
             return lista;
         }
 
-        public static int CreateCompra(Compra compra) // devuelve el id de la compra
+        public static int CrearCompraConDetalle(Compra compra, List<DetalleCompra> detalles) // devuelve el id de la compra
         {
-            string sqlQuery = @"INSERT INTO Compras(idProveedor, fecha, estado, totalCompra, montoPagado)
-                                VALUES (@IdProveedor, @Fecha, @Estado, @Total, @MontoPagado);
-                                SELECT SCOPE_IDENTITY();";
+            string sqlCabecera = @"INSERT INTO Compras(idProveedor, idPresupuesto, fecha, fechaRecepcion, estado, estadoPago, totalCompra, montoPagado)
+                                   VALUES (@IdProveedor, @IdPresupuesto, @Fecha, @FechaRecepcion, @Estado, @EstadoPago, @Total, @MontoPagado);
+                                   SELECT SCOPE_IDENTITY();";
+            string sqlDetalle = @"INSERT INTO DetalleCompras(idCompra, idInsumo, cantidad, subTotal)
+                                  VALUES (@IdCompra, @IdInsumo, @Cantidad, @SubTotal);";
 
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                connection.Open();
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    int idCompra;
+                    using (SqlCommand cmd = new SqlCommand(sqlCabecera, connection, transaction))
+                    {
+                        cmd.Parameters.Add("@IdProveedor", SqlDbType.Int).Value = compra.IdProveedor;
+                        cmd.Parameters.Add("@IdPresupuesto", SqlDbType.Int).Value = (object)compra.IdPresupuesto ?? DBNull.Value;
+                        cmd.Parameters.Add("@Fecha", SqlDbType.Date).Value = compra.Fecha;
+                        cmd.Parameters.Add("@FechaRecepcion", SqlDbType.Date).Value = (object)compra.FechaRecepcion ?? DBNull.Value;
+                        cmd.Parameters.Add("@Estado", SqlDbType.Int).Value = compra.Estado;
+                        cmd.Parameters.Add("@EstadoPago", SqlDbType.Int).Value = compra.EstadoPago;
+                        cmd.Parameters.Add("@Total", SqlDbType.Decimal).Value = (decimal)compra.TotalCompra;
+                        cmd.Parameters.Add("@MontoPagado", SqlDbType.Decimal).Value = (decimal)compra.montoPagado;
+                        idCompra = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+
+                    foreach (DetalleCompra detalle in detalles)
+                    {
+                        using (SqlCommand cmd = new SqlCommand(sqlDetalle, connection, transaction))
+                        {
+                            cmd.Parameters.Add("@IdCompra", SqlDbType.Int).Value = idCompra;
+                            cmd.Parameters.Add("@IdInsumo", SqlDbType.Int).Value = detalle.IdInsumo;
+                            cmd.Parameters.Add("@Cantidad", SqlDbType.Decimal).Value = detalle.Cantidad;
+                            cmd.Parameters.Add("@SubTotal", SqlDbType.Decimal).Value = (decimal)detalle.Subtotal;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    transaction.Commit();
+                    return idCompra;
+                }
+            }
+        }
+
+        public static void ModificarCompraConDetalle(Compra compra, List<DetalleCompra> detalles)
+        {
+            string sqlCabecera = @"UPDATE Compras SET fecha = @Fecha, totalCompra = @Total WHERE idCompra = @IdCompra;";
+            string sqlEliminarDetalle = @"DELETE FROM DetalleCompras WHERE idCompra = @IdCompra;";
+            string sqlDetalle = @"INSERT INTO DetalleCompras(idCompra, idInsumo, cantidad, subTotal)
+                                  VALUES (@IdCompra, @IdInsumo, @Cantidad, @SubTotal);";
+
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                connection.Open();
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    using (SqlCommand cmd = new SqlCommand(sqlCabecera, connection, transaction))
+                    {
+                        cmd.Parameters.Add("@Fecha", SqlDbType.Date).Value = compra.Fecha;
+                        cmd.Parameters.Add("@Total", SqlDbType.Decimal).Value = (decimal)compra.TotalCompra;
+                        cmd.Parameters.Add("@IdCompra", SqlDbType.Int).Value = compra.IdCompra;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(sqlEliminarDetalle, connection, transaction))
+                    {
+                        cmd.Parameters.Add("@IdCompra", SqlDbType.Int).Value = compra.IdCompra;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    foreach (DetalleCompra detalle in detalles)
+                    {
+                        using (SqlCommand cmd = new SqlCommand(sqlDetalle, connection, transaction))
+                        {
+                            cmd.Parameters.Add("@IdCompra", SqlDbType.Int).Value = compra.IdCompra;
+                            cmd.Parameters.Add("@IdInsumo", SqlDbType.Int).Value = detalle.IdInsumo;
+                            cmd.Parameters.Add("@Cantidad", SqlDbType.Decimal).Value = detalle.Cantidad;
+                            cmd.Parameters.Add("@SubTotal", SqlDbType.Decimal).Value = (decimal)detalle.Subtotal;
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public static void CambiarEstadoPago(int idCompra, int estadoPago)
+        {
+            string sqlQuery = @"UPDATE Compras SET estadoPago = @EstadoPago WHERE idCompra = @IdCompra";
             using (SqlConnection connection = Db.GetConnection())
             {
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.Add("@IdProveedor", SqlDbType.Int).Value = compra.IdProveedor;
-                    cmd.Parameters.Add("@Fecha", SqlDbType.Date).Value = compra.Fecha;
-                    cmd.Parameters.Add("@Estado", SqlDbType.Int).Value = compra.Estado;
-                    cmd.Parameters.Add("@Total", SqlDbType.Decimal).Value = (decimal)compra.TotalCompra;
-                    cmd.Parameters.Add("@MontoPagado", SqlDbType.Decimal).Value = (decimal)compra.montoPagado;
-                    return Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.Parameters.Add("@IdCompra", SqlDbType.Int).Value = idCompra;
+                    cmd.Parameters.Add("@EstadoPago", SqlDbType.Int).Value = estadoPago;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void ActualizarFechas(int idCompra, DateTime fecha, DateTime? fechaRecepcion)
+        {
+            string sqlQuery = @"UPDATE Compras SET fecha = @Fecha, fechaRecepcion = @FechaRecepcion WHERE idCompra = @IdCompra";
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.Add("@Fecha", SqlDbType.Date).Value = fecha;
+                    cmd.Parameters.Add("@FechaRecepcion", SqlDbType.Date).Value = (object)fechaRecepcion ?? DBNull.Value;
+                    cmd.Parameters.Add("@IdCompra", SqlDbType.Int).Value = idCompra;
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
@@ -243,18 +341,20 @@ namespace Datos
         }
 
         // Equivalente a "pedido listo con descuento de stock", pero al revés:
-        // al entregarse la compra, el stock de insumos AUMENTA.
-        public static void MarcarCompraEntregadaConIncrementoStock(int idCompra, List<DetalleCompra> detalles)
+        // al recibirse la compra, el stock de insumos AUMENTA.
+        public static void MarcarCompraRecibidaConIncrementoStock(int idCompra, List<DetalleCompra> detalles)
         {
             using (SqlConnection connection = Db.GetConnection())
             {
                 connection.Open();
                 using (SqlTransaction transaction = connection.BeginTransaction())
                 {
-                    string updateEstado = "UPDATE Compras SET estado = @Estado WHERE idCompra = @IdCompra;";
+                    string updateEstado = @"UPDATE Compras SET estado = @Estado, fechaRecepcion = @FechaRecepcion
+                                            WHERE idCompra = @IdCompra;";
                     using (SqlCommand cmd = new SqlCommand(updateEstado, connection, transaction))
                     {
-                        cmd.Parameters.Add("@Estado", SqlDbType.Int).Value = EstadoCompra.Entregada;
+                        cmd.Parameters.Add("@Estado", SqlDbType.Int).Value = EstadoCompra.Recibida;
+                        cmd.Parameters.Add("@FechaRecepcion", SqlDbType.Date).Value = DateTime.Now;
                         cmd.Parameters.Add("@IdCompra", SqlDbType.Int).Value = idCompra;
                         cmd.ExecuteNonQuery();
                     }
@@ -265,7 +365,7 @@ namespace Datos
                     {
                         using (SqlCommand cmd = new SqlCommand(updateStock, connection, transaction))
                         {
-                            cmd.Parameters.Add("@cantidadComprada", SqlDbType.Int).Value = detalle.Cantidad;
+                            cmd.Parameters.Add("@cantidadComprada", SqlDbType.Decimal).Value = detalle.Cantidad;
                             cmd.Parameters.Add("@insumoId", SqlDbType.Int).Value = detalle.IdInsumo;
                             int filas = cmd.ExecuteNonQuery();
 
@@ -285,10 +385,13 @@ namespace Datos
             {
                 IdCompra = reader.GetInt32(0),
                 IdProveedor = reader.GetInt32(1),
-                Fecha = reader.GetDateTime(2),
-                Estado = (int)reader.GetByte(3),
-                TotalCompra = (double)reader.GetDecimal(4),
-                montoPagado = (double)reader.GetDecimal(5)
+                IdPresupuesto = reader.IsDBNull(2) ? (int?)null : reader.GetInt32(2),
+                Fecha = reader.GetDateTime(3),
+                FechaRecepcion = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4),
+                Estado = (int)reader.GetByte(5),
+                EstadoPago = (int)reader.GetByte(6),
+                TotalCompra = (double)reader.GetDecimal(7),
+                montoPagado = (double)reader.GetDecimal(8)
             };
         }
     }

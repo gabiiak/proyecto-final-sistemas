@@ -23,13 +23,13 @@ namespace Datos
                 string sqlQuery = @"SELECT MONTH(fecha) as mes, SUM(totalVenta) as total
                     FROM Ventas
                     WHERE YEAR(fecha) = @Anio
-                      AND estadoPago != @Anulado
+                      AND estadoCobro != @Anulado
                     GROUP BY MONTH(fecha)";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.Add("@Anio", SqlDbType.Int).Value = anio;
-                    cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
+                    cmd.Parameters.AddWithValue("@Anulado", EstadoCobro.Anulado);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -51,13 +51,13 @@ namespace Datos
                 string sqlQuery = @"SELECT TOP (@Top) c.nombre, SUM(v.totalVenta) as totalFacturado
                             FROM Ventas v
                             INNER JOIN Clientes c ON v.idCliente = c.id
-                            WHERE v.estadoPago != @Anulado
+                            WHERE v.estadoCobro != @Anulado
                             GROUP BY c.id, c.nombre
                             ORDER BY totalFacturado DESC";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
-                    cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
+                    cmd.Parameters.AddWithValue("@Anulado", EstadoCobro.Anulado);
                     cmd.Parameters.AddWithValue("@Top", top);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -101,7 +101,7 @@ namespace Datos
                             FROM Ventas
                             WHERE YEAR(fecha) = @Anio
                               AND MONTH(fecha) BETWEEN @MesInicio AND @MesFin
-                              AND estadoPago != @Anulado
+                              AND estadoCobro != @Anulado
                             GROUP BY MONTH(fecha)";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
@@ -109,7 +109,7 @@ namespace Datos
                     cmd.Parameters.Add("@Anio", SqlDbType.Int).Value = anio;
                     cmd.Parameters.Add("@MesInicio", SqlDbType.Int).Value = mesInicio;
                     cmd.Parameters.Add("@MesFin", SqlDbType.Int).Value = mesFin;
-                    cmd.Parameters.AddWithValue("@Anulado", EstadoPago.Anulado);
+                    cmd.Parameters.AddWithValue("@Anulado", EstadoCobro.Anulado);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -127,7 +127,7 @@ namespace Datos
         {
             using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT v.idVenta, v.fecha, v.estadoPago, v.estadoPedido, v.totalVenta,
+                string sqlQuery = @"SELECT v.idVenta, v.fecha, v.estadoCobro, v.estadoPedido, v.totalVenta,
                                    c.id, c.nombre,
                                    mp.idMetodoPago, mp.descripcion
                             FROM Ventas v
@@ -147,7 +147,7 @@ namespace Datos
                                 IdVenta = reader.GetInt32(0),
                                 Fecha = reader.GetDateTime(1),
                                 //Fecha = reader.GetDateTime(1),
-                                Estado_Pago = (int)reader.GetByte(2),
+                                Estado_Cobro = (int)reader.GetByte(2),
                                 Estado_Pedido = (int)reader.GetByte(3),
                                 Total = reader.GetDecimal(4),
                                 Cliente = new Cliente
@@ -211,7 +211,7 @@ namespace Datos
             List<Venta> listaVentas = new List<Venta>();
             using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT v.idVenta, c.id, c.nombre, v.fecha, v.totalVenta, mp.descripcion, v.estadoPago, v.estadoPedido
+                string sqlQuery = @"SELECT v.idVenta, c.id, c.nombre, v.fecha, v.totalVenta, mp.descripcion, v.estadoCobro, v.estadoPedido
                                     FROM Ventas v
                                     INNER JOIN Clientes c ON v.idCliente = c.id
                                     INNER JOIN MetodosPago mp ON v.idMetodoPago = mp.idMetodoPago";
@@ -236,7 +236,7 @@ namespace Datos
                                 {
                                     Descripcion = reader.GetString(5)
                                 },
-                                Estado_Pago = (int)reader.GetByte(6),
+                                Estado_Cobro = (int)reader.GetByte(6),
                                 Estado_Pedido = (int)reader.GetByte(7)
                             };
                             listaVentas.Add(venta);
@@ -248,8 +248,8 @@ namespace Datos
         }
         public static int CreateVenta(Venta venta) // int para devolver el id venta
         {
-            string sqlQuery = @"INSERT INTO Ventas(idCliente, idMetodoPago, fecha, estadoPedido, estadoPago, totalVenta, montoRecibido) 
-                                VALUES (@Id, @IdMetodoPago, @Fecha, @EstadoPedido, @EstadoPago, @Total, @MontoRecibido);
+            string sqlQuery = @"INSERT INTO Ventas(idCliente, idMetodoPago, fecha, estadoPedido, estadoCobro, totalVenta, montoRecibido) 
+                                VALUES (@Id, @IdMetodoPago, @Fecha, @EstadoPedido, @EstadoCobro, @Total, @MontoRecibido);
                                 SELECT SCOPE_IDENTITY();";
 
             using (SqlConnection connection = Db.GetConnection())
@@ -261,7 +261,7 @@ namespace Datos
                     cmd.Parameters.Add("@IdMetodoPago", SqlDbType.Int).Value = venta.Metodo.IdMetodoPago;
                     cmd.Parameters.Add("@Fecha", SqlDbType.Date).Value = venta.Fecha;
                     cmd.Parameters.Add("@EstadoPedido", SqlDbType.Int).Value = venta.Estado_Pedido;
-                    cmd.Parameters.Add("@EstadoPago", SqlDbType.Int).Value = venta.Estado_Pago;
+                    cmd.Parameters.Add("@EstadoCobro", SqlDbType.Int).Value = venta.Estado_Cobro;
                     cmd.Parameters.Add("@Total", SqlDbType.Decimal).Value = (decimal)venta.Total;
                     cmd.Parameters.Add("@MontoRecibido", SqlDbType.Decimal).Value = (decimal)venta.MontoRecibido;
                     //cmd.ExecuteNonQuery(); <- esto llama ejecutar 2 veces. mejor usar execute scalar
@@ -269,16 +269,16 @@ namespace Datos
                 }
             }
         }
-        public static void CambiarEstadoPago(int idVenta, int estadoPago)
+        public static void CambiarEstadoCobro(int idVenta, int estadoCobro)
         {
-            string sqlQuery = @"UPDATE Ventas SET estadoPago = @EstadoPago WHERE idVenta = @IdVenta";
+            string sqlQuery = @"UPDATE Ventas SET estadoCobro = @EstadoCobro WHERE idVenta = @IdVenta";
             using (SqlConnection connection = Db.GetConnection())
             {
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
                 {
                     connection.Open();
                     cmd.Parameters.AddWithValue("@IdVenta", idVenta);
-                    cmd.Parameters.AddWithValue("@EstadoPago", estadoPago);
+                    cmd.Parameters.AddWithValue("@EstadoCobro", estadoCobro);
                     cmd.ExecuteNonQuery();
                 }
             }

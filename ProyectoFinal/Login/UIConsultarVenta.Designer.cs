@@ -20,8 +20,8 @@
             this.labelMetodo = new System.Windows.Forms.Label();
             this.lblFechaKey = new System.Windows.Forms.Label();
             this.labelFecha = new System.Windows.Forms.Label();
-            this.lblEstadoPagoKey = new System.Windows.Forms.Label();
-            this.labelEstadoPago = new System.Windows.Forms.Label();
+            this.lblEstadoCobroKey = new System.Windows.Forms.Label();
+            this.labelEstadoCobro = new System.Windows.Forms.Label();
             this.lblEstadoPedidoKey = new System.Windows.Forms.Label();
             this.labelEstadoPedido = new System.Windows.Forms.Label();
             this.lblDetalles = new System.Windows.Forms.Label();
@@ -74,8 +74,8 @@
             this.pnlInfo.Controls.Add(this.labelCliente);
             this.pnlInfo.Controls.Add(this.lblFechaKey);
             this.pnlInfo.Controls.Add(this.labelFecha);
-            this.pnlInfo.Controls.Add(this.lblEstadoPagoKey);
-            this.pnlInfo.Controls.Add(this.labelEstadoPago);
+            this.pnlInfo.Controls.Add(this.lblEstadoCobroKey);
+            this.pnlInfo.Controls.Add(this.labelEstadoCobro);
             this.pnlInfo.Controls.Add(this.lblEstadoPedidoKey);
             this.pnlInfo.Controls.Add(this.labelEstadoPedido);
             this.pnlInfo.Controls.Add(this.lblMetodoKey);
@@ -184,8 +184,8 @@
         private System.Windows.Forms.Label labelMetodo;
         private System.Windows.Forms.Label lblFechaKey;
         private System.Windows.Forms.Label labelFecha;
-        private System.Windows.Forms.Label lblEstadoPagoKey;
-        private System.Windows.Forms.Label labelEstadoPago;
+        private System.Windows.Forms.Label lblEstadoCobroKey;
+        private System.Windows.Forms.Label labelEstadoCobro;
         private System.Windows.Forms.Label lblEstadoPedidoKey;
         private System.Windows.Forms.Label labelEstadoPedido;
         private System.Windows.Forms.Label lblDetalles;

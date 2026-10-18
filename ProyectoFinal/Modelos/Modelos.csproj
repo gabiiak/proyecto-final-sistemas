@@ -220,6 +220,7 @@
     <Compile Include="Transporte.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="DetalleVenta.cs" />
+    <Compile Include="EstadoCobro.cs" />
     <Compile Include="EstadoPago.cs" />
     <Compile Include="EstadoPedido.cs" />
     <Compile Include="MetodoPago.cs" />

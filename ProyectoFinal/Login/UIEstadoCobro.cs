@@ -12,40 +12,40 @@ using System.Windows.Forms;
 
 namespace Login
 {
-    public partial class UIEstadoPago : Form
+    public partial class UIEstadoCobro : Form
     {
         public int estado;
         private int idVenta;
-        public UIEstadoPago(int idVenta)
+        public UIEstadoCobro(int idVenta)
         {
             InitializeComponent();
             this.idVenta = idVenta;
             Venta venta = NVentas.GetVentaById(idVenta);
-            int estadoVenta = venta.Estado_Pago;
+            int estadoVenta = venta.Estado_Cobro;
             decimal deuda = NVentas.CalcularDeuda(idVenta);
             labelDeuda.Text = deuda.ToString("C2");
-            labelEstado.Text = GetDescripcionEstadoPago(estadoVenta);
-            if (labelEstado.Text.Equals("PAGADO", StringComparison.OrdinalIgnoreCase))
+            labelEstado.Text = GetDescripcionEstadoCobro(estadoVenta);
+            if (labelEstado.Text.Equals("COBRADO", StringComparison.OrdinalIgnoreCase))
             {
                 txtDeuda.ReadOnly = true;
-                labelDeuda.Text = "DEUDA PAGADA";
+                labelDeuda.Text = "DEUDA COBRADA";
             }
             if (labelEstado.Text.Equals("ANULADO", StringComparison.OrdinalIgnoreCase))
             {
-                labelDeuda.Text = "PAGO ANULADO";
+                labelDeuda.Text = "COBRO ANULADO";
                 txtDeuda.ReadOnly = true;
             }
         }
-        private void UIPaymentState_Load(object sender, EventArgs e)
+        private void UIEstadoCobro_Load(object sender, EventArgs e)
         {
             
         }
 
         private void bntPagarDeuda_Click(object sender, EventArgs e)
         {
-            if (labelEstado.Text.Equals("PAGADO", StringComparison.OrdinalIgnoreCase))
+            if (labelEstado.Text.Equals("COBRADO", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("La deuda ya fue pagada y no puede cambiarse su estado.");
+                MessageBox.Show("La deuda ya fue cobrada y no puede cambiarse su estado.");
                 return;
             }
             if (labelEstado.Text.Equals("ANULADO", StringComparison.OrdinalIgnoreCase))
@@ -66,16 +66,16 @@ namespace Login
             {
                 decimal vuelto = ingresado - deuda;
                 NVentas.CambiarMontoRecibido(idVenta, deuda); // acumula solo lo que faltaba
-                estado = EstadoPago.Pagado;
+                estado = EstadoCobro.Cobrado;
                 //if (vuelto > 0)MessageBox.Show($"Vuelto: {vuelto:C2}");
             }
             else
             {
-                DialogResult resultado = MessageBox.Show($"Con el monto está cancelando parte de la deuda. El monto final a pagar será {aux.ToString("C2")}", "Alerta",MessageBoxButtons.YesNo);
+                DialogResult resultado = MessageBox.Show($"Con el monto está cancelando parte de la deuda. El monto final a cobrar será {aux.ToString("C2")}", "Alerta",MessageBoxButtons.YesNo);
                 if (resultado == DialogResult.Yes)
                 {
-                    NVentas.CambiarMontoRecibido(idVenta, ingresado); // pago parcial
-                    estado = EstadoPago.Pendiente;
+                    NVentas.CambiarMontoRecibido(idVenta, ingresado); // cobro parcial
+                    estado = EstadoCobro.Pendiente;
                 } else { return; }
                 
             }
@@ -84,9 +84,9 @@ namespace Login
 
         private void btnAnularPago_Click(object sender, EventArgs e)
         {
-            if (labelEstado.Text.Equals("PAGADO", StringComparison.OrdinalIgnoreCase))
+            if (labelEstado.Text.Equals("COBRADO", StringComparison.OrdinalIgnoreCase))
             {
-                MessageBox.Show("La deuda ya fue pagada y no puede cambiarse su estado.");
+                MessageBox.Show("La deuda ya fue cobrada y no puede cambiarse su estado.");
                 return;
             }
             if (labelEstado.Text.Equals("ANULADO", StringComparison.OrdinalIgnoreCase))
@@ -94,11 +94,11 @@ namespace Login
                 MessageBox.Show("La deuda ya fue anulada y no puede cambiarse su estado. Intente registrando otra venta.");
                 return;
             }
-            DialogResult result = MessageBox.Show("Seguro que quiere anular el pago?","Alerta",MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("Seguro que quiere anular el cobro?","Alerta",MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                estado = EstadoPago.Anulado;
-                MessageBox.Show("Se anuló el pago.");
+                estado = EstadoCobro.Anulado;
+                MessageBox.Show("Se anuló el cobro.");
             }
             this.DialogResult = DialogResult.OK;
         }
@@ -108,13 +108,13 @@ namespace Login
             decimal deuda = NVentas.CalcularDeuda(idVenta);
             txtDeuda.Text = deuda.ToString();
         }
-        private string GetDescripcionEstadoPago(int estado)
+        private string GetDescripcionEstadoCobro(int estado)
         {
             switch (estado)
             {
-                case EstadoPago.Anulado: return "ANULADO";
-                case EstadoPago.Pendiente: return "PENDIENTE";
-                case EstadoPago.Pagado: return "PAGADO";
+                case EstadoCobro.Anulado: return "ANULADO";
+                case EstadoCobro.Pendiente: return "PENDIENTE";
+                case EstadoCobro.Cobrado: return "COBRADO";
                 default: return "DESCONOCIDO";
             }
         }

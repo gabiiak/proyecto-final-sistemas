@@ -9,7 +9,7 @@ namespace Negocio
     {
         /* SOLO USAR TRY - CATCH PARA MÉTODOS ROBUSTOS. MEJOR USARLOS EN LA CAPA DE PRESENTACIÓN */
 
-        public static List<(string Nombre, int Cantidad)> GetInsumosMasComprados()
+        public static List<(string Nombre, decimal Cantidad)> GetInsumosMasComprados()
         {
             return DataDetalleCompras.GetInsumosMasComprados();
         }
@@ -25,7 +25,7 @@ namespace Negocio
         }
 
         // DetalleCompra no tiene objeto Insumo con precio, por eso el precio unitario se recibe por parámetro
-        public static decimal CalcularSubTotal(decimal precioUnitario, int cantidad)
+        public static decimal CalcularSubTotal(decimal precioUnitario, decimal cantidad)
         {
             if (precioUnitario < 0)
                 throw new ArgumentException("El precio unitario no puede ser negativo.", nameof(precioUnitario));
@@ -39,12 +39,16 @@ namespace Negocio
         // se validan los datos de cada línea.
         public static void ValidarDetalle(DetalleCompra detalle)
         {
+            const decimal CantidadMaxima = 50000m;
+
             if (detalle == null)
                 throw new ArgumentException("El detalle no puede ser nulo.");
             if (detalle.IdInsumo <= 0)
                 throw new ArgumentException("Debe indicar un insumo válido.");
             if (detalle.Cantidad <= 0)
                 throw new ArgumentException($"La cantidad del insumo {detalle.IdInsumo} debe ser mayor a cero.");
+            if (detalle.Cantidad > CantidadMaxima)
+                throw new ArgumentException("La cantidad no puede superar las 50.000 unidades.");
             if (detalle.Subtotal < 0)
                 throw new ArgumentException($"El subtotal del insumo {detalle.IdInsumo} no puede ser negativo.");
         }

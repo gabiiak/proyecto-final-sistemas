@@ -23,7 +23,7 @@ namespace Login
             dgvTodasLasCompras.AllowUserToAddRows = false;
             CargarFiltroProveedores();
 
-            ConfigurarBotonPrimario(this.btnRegistrarCompra, "Registrar Compra",
+            ConfigurarBotonPrimario(this.btnRegistrarCompra, "Pedidos de Compra",
                 new System.Drawing.Point(16, 16), 0);
             this.btnRegistrarCompra.Size = new System.Drawing.Size(288, 40);
             this.btnRegistrarCompra.Click += new System.EventHandler(this.btnRegistrarCompra_Click);
@@ -109,10 +109,19 @@ namespace Login
             {
                 case EstadoCompra.Emitida: return "EMITIDA";
                 case EstadoCompra.Aceptada: return "ACEPTADA";
-                case EstadoCompra.Pagado: return "PAGADA";
                 case EstadoCompra.Enviada: return "ENVIADA";
-                case EstadoCompra.Entregada: return "ENTREGADA";
+                case EstadoCompra.Recibida: return "RECIBIDA";
                 case EstadoCompra.Cancelada: return "CANCELADA";
+                default: return "DESCONOCIDO";
+            }
+        }
+
+        private string GetDescripcionEstadoPago(int estadoPago)
+        {
+            switch (estadoPago)
+            {
+                case EstadoPago.Pendiente: return "PENDIENTE";
+                case EstadoPago.Pagado: return "PAGADA";
                 default: return "DESCONOCIDO";
             }
         }
@@ -137,7 +146,8 @@ namespace Login
                     compra.Fecha,
                     compra.TotalCompra,
                     compra.montoPagado,
-                    GetDescripcionEstado(compra.Estado)
+                    GetDescripcionEstado(compra.Estado),
+                    GetDescripcionEstadoPago(compra.EstadoPago)
                 );
             }
             dgvTodasLasCompras.Refresh();
@@ -165,8 +175,8 @@ namespace Login
         // ---------- Acciones ----------
         private void btnRegistrarCompra_Click(object sender, EventArgs e)
         {
-            UIRegistrarCompra registrar = new UIRegistrarCompra();
-            registrar.ShowDialog();
+            UIGestionPedidosCompra gestion = new UIGestionPedidosCompra();
+            gestion.ShowDialog();
             ActualizarDataGridView();
         }
 
@@ -200,10 +210,10 @@ namespace Login
 
             try
             {
-                if (nuevoEstado == EstadoCompra.Entregada)
+                if (nuevoEstado == EstadoCompra.Recibida)
                 {
-                    NCompras.MarcarCompraEntregada(id);
-                    MessageBox.Show("Compra marcada como entregada. Stock de insumos actualizado.", "Éxito",
+                    NCompras.MarcarCompraRecibida(id);
+                    MessageBox.Show("Compra marcada como recibida. Stock de insumos actualizado.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -240,8 +250,18 @@ namespace Login
                 if (monto == null) return;
 
                 NCompras.RegistrarPago(id, monto.Value);
-                MessageBox.Show("Pago registrado correctamente.", "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                decimal deudaRestante = NCompras.CalcularDeuda(id);
+                if (deudaRestante > 0.01m)
+                {
+                    MessageBox.Show("Pago registrado. Deuda restante: " + deudaRestante.ToString("C2") + ".", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Compra pagada.", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex) when (ex is ArgumentException || ex is InvalidOperationException)
             {

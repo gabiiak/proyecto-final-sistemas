@@ -30,10 +30,10 @@ namespace Login
             this.btnRegistrarVenta.Click += new System.EventHandler(this.btnRegistrarVenta_Click);
 
             // Botones de estado — lado a lado
-            ConfigurarBotonSecundario(this.btnEstadoPago, "Estado de Pago",
+            ConfigurarBotonSecundario(this.btnEstadoCobro, "Estado de Cobro",
                 new System.Drawing.Point(16, 72), 1);
-            this.btnEstadoPago.Size = new System.Drawing.Size(138, 36);
-            this.btnEstadoPago.Click += new System.EventHandler(this.btnEstadoPago_Click);
+            this.btnEstadoCobro.Size = new System.Drawing.Size(138, 36);
+            this.btnEstadoCobro.Click += new System.EventHandler(this.btnEstadoCobro_Click);
 
             ConfigurarBotonSecundario(this.btnEstadoPedido, "Estado de Pedido",
                 new System.Drawing.Point(166, 72), 2);
@@ -99,7 +99,7 @@ namespace Login
                     venta.Fecha.ToString("dd-MM-yyyy"),
                     venta.Total.ToString("C2"),
                     venta.Metodo.Descripcion,
-                    GetDescripcionEstadoPago(venta.Estado_Pago),
+                    GetDescripcionEstadoCobro(venta.Estado_Cobro),
                     GetEstadoPedido(venta.Estado_Pedido)
                     
                     );
@@ -127,13 +127,13 @@ namespace Login
                 default: return "DESCONOCIDO";
             }
         }
-        private string GetDescripcionEstadoPago(int estado)
+        private string GetDescripcionEstadoCobro(int estado)
         {
             switch (estado)
             {
-                case EstadoPago.Anulado: return "ANULADO";
-                case EstadoPago.Pendiente: return "PENDIENTE";
-                case EstadoPago.Pagado: return "PAGADO";
+                case EstadoCobro.Anulado: return "ANULADO";
+                case EstadoCobro.Pendiente: return "PENDIENTE";
+                case EstadoCobro.Cobrado: return "COBRADO";
                 default: return "DESCONOCIDO";
             }
         }
@@ -145,7 +145,7 @@ namespace Login
             idVenta = int.Parse(labelId.Text);
         }
 
-        private void btnEstadoPago_Click(object sender, EventArgs e) //me la mandé // solucionado
+        private void btnEstadoCobro_Click(object sender, EventArgs e) //me la mandé // solucionado
         {
             if (string.IsNullOrEmpty(labelId.Text))
             {
@@ -153,11 +153,11 @@ namespace Login
                 return;
             }
             int idVenta = int.Parse(labelId.Text);
-            UIEstadoPago estado = new UIEstadoPago(idVenta);
+            UIEstadoCobro estado = new UIEstadoCobro(idVenta);
             if (estado.ShowDialog() == DialogResult.OK)
             {
                 int nuevoEstado = estado.estado;
-                NVentas.CambiarEstadoPago(idVenta, estado.estado);
+                NVentas.CambiarEstadoCobro(idVenta, estado.estado);
             }
             ActualizarDataGridView();
         }
@@ -238,7 +238,7 @@ namespace Login
                     venta.Fecha.ToString("dd-MM-yyyy"),
                     venta.Total.ToString("C2"),
                     venta.Metodo.Descripcion,
-                    GetDescripcionEstadoPago(venta.Estado_Pago),
+                    GetDescripcionEstadoCobro(venta.Estado_Cobro),
                     GetEstadoPedido(venta.Estado_Pedido)
                     );
             }
@@ -279,7 +279,7 @@ namespace Login
                     venta.Fecha.ToString("dd-MM-yyyy"),
                     venta.Total.ToString("C2"),
                     venta.Metodo.Descripcion,
-                    GetDescripcionEstadoPago(venta.Estado_Pago),
+                    GetDescripcionEstadoCobro(venta.Estado_Cobro),
                     GetEstadoPedido(venta.Estado_Pedido)
                     );
             }

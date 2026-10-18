@@ -106,7 +106,7 @@ namespace Negocio
             Venta venta = DataVentas.GetVentaById(detalle.Venta.IdVenta);
             if (venta == null)
                 throw new InvalidOperationException("No se encontró la venta asociada a este detalle.");
-            if (venta.Estado_Pago != EstadoPedido.Preparacion)
+            if (venta.Estado_Cobro != EstadoPedido.Preparacion)
                 throw new InvalidOperationException("Solo se puede modificar la cantidad si la venta está pendiente.");
 
             decimal precioUnitarioOriginal = detalle.SubTotal / detalle.Cantidad;
@@ -136,14 +136,14 @@ namespace Negocio
             }
             return Math.Round(total, 2);
         }
-        public static int DeterminarEstadoPago(decimal total, decimal recibido)
+        public static int DeterminarEstadoCobro(decimal total, decimal recibido)
         {
-            if (recibido >= total) return EstadoPago.Pagado;
-            return EstadoPago.Pendiente;
+            if (recibido >= total) return EstadoCobro.Cobrado;
+            return EstadoCobro.Pendiente;
         }
-        public static void CambiarEstadoPago(int idVenta, int estadoPago) 
+        public static void CambiarEstadoCobro(int idVenta, int estadoCobro) 
         {
-            DataVentas.CambiarEstadoPago(idVenta, estadoPago); 
+            DataVentas.CambiarEstadoCobro(idVenta, estadoCobro); 
         }
         public static void CambiarEstadoPedido(int idVenta, int estadoPedido) { DataVentas.CambiarEstadoPedido(idVenta, estadoPedido); }
         public static Venta GetVentaById(int idVenta) { return DataVentas.GetVentaById(idVenta); }
@@ -171,17 +171,17 @@ namespace Negocio
 
             foreach (Venta v in ventas)
             {
-                if (v.Estado_Pago == EstadoPago.Anulado)
+                if (v.Estado_Cobro == EstadoCobro.Anulado)
                     continue; // no cuenta para nada del resumen
 
                 cantidadVentas++;
                 totalVentas += v.Total;
 
-                if (v.Estado_Pago == EstadoPago.Pagado)
+                if (v.Estado_Cobro == EstadoCobro.Cobrado)
                 {
                     totalCobrado += v.Total;
                 }
-                else if (v.Estado_Pago == EstadoPago.Pendiente)
+                else if (v.Estado_Cobro == EstadoCobro.Pendiente)
                 {
                     totalCobrado += v.MontoRecibido;
                 }

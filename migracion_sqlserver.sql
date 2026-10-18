@@ -19,7 +19,7 @@
     * TEXT  ->  NVARCHAR(...)   (acentos y enye preservados; se usa prefijo N en los literales)
     * REAL  ->  DECIMAL(18,4)   (se evita el error de redondeo del tipo float)
     * activo / Activo  ->  BIT NOT NULL DEFAULT 1     (solo usan 0 y 1)
-    * estado, estadoPedido, estadoPago  ->  TINYINT
+    * estado, estadoPedido, estadoCobro  ->  TINYINT
       (OJO: NO pueden ser BIT. Van de 0 a 4 - ver Modelos/Estado*.cs)
     * DATE / TEXT con fecha -> DATE ; hora -> TIME
     * DEFAULT 1 de SQLite pasa a DEFAULT 1 explicito.
@@ -81,13 +81,14 @@ GO
 --------------------------------------------------------------------------------
 -- 0) DROP de tablas e indices (orden inverso por dependencias) - hace el script idempotente
 --------------------------------------------------------------------------------
+-- Compras referencia Presupuesto (FK_Compras_Presupuesto), por eso se dropea antes.
+IF OBJECT_ID(N'dbo.DetalleCompras', N'U') IS NOT NULL DROP TABLE dbo.DetalleCompras;
+IF OBJECT_ID(N'dbo.Compras', N'U') IS NOT NULL DROP TABLE dbo.Compras;
 IF OBJECT_ID(N'dbo.DetallePresupuesto', N'U') IS NOT NULL DROP TABLE dbo.DetallePresupuesto;
 IF OBJECT_ID(N'dbo.Presupuesto', N'U')        IS NOT NULL DROP TABLE dbo.Presupuesto;
 IF OBJECT_ID(N'dbo.PrecioProveedor', N'U')    IS NOT NULL DROP TABLE dbo.PrecioProveedor;
 IF OBJECT_ID(N'dbo.DetalleSolicitudCotizacion', N'U') IS NOT NULL DROP TABLE dbo.DetalleSolicitudCotizacion;
 IF OBJECT_ID(N'dbo.SolicitudCotizacion', N'U') IS NOT NULL DROP TABLE dbo.SolicitudCotizacion;
-IF OBJECT_ID(N'dbo.DetalleCompras', N'U') IS NOT NULL DROP TABLE dbo.DetalleCompras;
-IF OBJECT_ID(N'dbo.Compras', N'U') IS NOT NULL DROP TABLE dbo.Compras;
 IF OBJECT_ID(N'dbo.Proveedores', N'U') IS NOT NULL DROP TABLE dbo.Proveedores;
 IF OBJECT_ID(N'dbo.DetalleVentas', N'U') IS NOT NULL DROP TABLE dbo.DetalleVentas;
 IF OBJECT_ID(N'dbo.Transportes', N'U')    IS NOT NULL DROP TABLE dbo.Transportes;
@@ -240,7 +241,7 @@ CREATE TABLE dbo.Ventas (
     [idMetodoPago]  INT           NOT NULL,
     [fecha]         DATE          NOT NULL,
     [estadoPedido]  TINYINT       NOT NULL DEFAULT 1,   -- 0..4 (Modelos/EstadoPedido.cs)
-    [estadoPago]    TINYINT       NOT NULL DEFAULT 1,   -- 0..2 (Modelos/EstadoPago.cs)
+    [estadoCobro]    TINYINT       NOT NULL DEFAULT 1,   -- 0..2 (Modelos/EstadoCobro.cs)
     [totalVenta]    DECIMAL(18,4) NULL,
     [montoRecibido] DECIMAL(18,4) NULL,
     CONSTRAINT [PK_Ventas] PRIMARY KEY CLUSTERED ([idVenta] ASC),
@@ -279,12 +280,15 @@ CREATE TABLE dbo.Transportes (
 GO
 
 CREATE TABLE dbo.Compras (
-    [idCompra]     INT IDENTITY(1,1) NOT NULL,
-    [idProveedor]  INT           NOT NULL,
-    [fecha]        DATE          NOT NULL,
-    [estado]       TINYINT       NOT NULL DEFAULT 0,   -- 0..5 (Modelos/EstadoCompra.cs)
-    [totalCompra]  DECIMAL(18,4) NULL,
-    [montoPagado]  DECIMAL(18,4) NULL,
+    [idCompra]       INT IDENTITY(1,1) NOT NULL,
+    [idProveedor]    INT           NOT NULL,
+    [idPresupuesto]  INT           NULL,     -- origen (pedido); NULL = carga manual (KAN-84)
+    [fecha]          DATE          NOT NULL,
+    [fechaRecepcion] DATE          NULL,     -- se setea al pasar a RECIBIDA (KAN-84)
+    [estado]         TINYINT       NOT NULL DEFAULT 0,   -- 0..4 (Modelos/EstadoCompra.cs)
+    [estadoPago]     TINYINT       NOT NULL DEFAULT 1,   -- 1..2 (Modelos/EstadoPago.cs)
+    [totalCompra]    DECIMAL(18,4) NULL,
+    [montoPagado]    DECIMAL(18,4) NULL,
     CONSTRAINT [PK_Compras] PRIMARY KEY CLUSTERED ([idCompra] ASC),
     CONSTRAINT [FK_Compras_Proveedor] FOREIGN KEY ([idProveedor])
         REFERENCES dbo.Proveedores ([IdProveedor]) ON UPDATE CASCADE ON DELETE NO ACTION
@@ -295,7 +299,7 @@ CREATE TABLE dbo.DetalleCompras (
     [idDetalleCompra]    INT IDENTITY(1,1) NOT NULL,
     [idCompra]           INT           NOT NULL,
     [idInsumo]           INT           NOT NULL,
-    [cantidad]           INT           NOT NULL,
+    [cantidad]           DECIMAL(18,4) NOT NULL,   -- antes INT (KAN-84: insumos con fracciones)
     [subTotal]           DECIMAL(18,4) NULL,
     [motivoModificacion] NVARCHAR(200) NULL,
     CONSTRAINT [PK_DetalleCompras] PRIMARY KEY CLUSTERED ([idDetalleCompra] ASC),
@@ -371,6 +375,16 @@ CREATE TABLE dbo.DetallePresupuesto (
     CONSTRAINT [FK_DetallePresupuesto_Insumo] FOREIGN KEY ([idInsumo])
         REFERENCES dbo.Insumos ([id]) ON UPDATE CASCADE ON DELETE NO ACTION
 );
+GO
+
+-- FK de Compras hacia Presupuesto (KAN-84). Va aca (y no dentro del CREATE de Compras)
+-- porque Presupuesto se crea despues que Compras en este script.
+-- ON UPDATE NO ACTION (y no CASCADE): Compras ya cascadea desde Proveedores directo y, por
+-- Presupuesto -> SolicitudCotizacion -> Proveedores, un CASCADE aca seria un segundo camino
+-- de cascada (SQL Server lo rechaza con el error 1785).
+ALTER TABLE dbo.Compras ADD CONSTRAINT [FK_Compras_Presupuesto]
+    FOREIGN KEY ([idPresupuesto]) REFERENCES dbo.Presupuesto ([idPresupuesto])
+    ON UPDATE NO ACTION ON DELETE NO ACTION;
 GO
 
 --------------------------------------------------------------------------------
@@ -475,7 +489,7 @@ SET IDENTITY_INSERT dbo.TandaProduccion OFF;
 -- Ventas (2 filas)
 -- Se preservan los IDs originales, asi que hay que habilitar IDENTITY_INSERT para esta tabla.
 SET IDENTITY_INSERT dbo.Ventas ON;
-INSERT INTO [Ventas] (idVenta, idCliente, idMetodoPago, fecha, estadoPedido, estadoPago, totalVenta, montoRecibido) VALUES
+INSERT INTO [Ventas] (idVenta, idCliente, idMetodoPago, fecha, estadoPedido, estadoCobro, totalVenta, montoRecibido) VALUES
   (1, 1, 1, N'2026-05-01', 1, 1, 10000, 100),
   (2, 2, 1, N'2026-05-23', 1, 1, 10000, 100);
 SET IDENTITY_INSERT dbo.Ventas OFF;

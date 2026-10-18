@@ -13,7 +13,7 @@ namespace Modelos
         public MetodoPago Metodo { get; set; }
         public DateTime Fecha { get; set; } 
         public int Estado_Pedido { get; set; } //= EstadoPedido.Preparacion;
-        public int Estado_Pago { get; set; } //= EstadoPago.Pendiente;
+        public int Estado_Cobro { get; set; } //= EstadoCobro.Pendiente;
         public decimal Total { get; set; }
 
         public decimal MontoRecibido { get; set; } //atributo soporte. acordarse de meterlo en UML

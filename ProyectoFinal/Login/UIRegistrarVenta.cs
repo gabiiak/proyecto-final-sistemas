@@ -40,12 +40,12 @@ namespace Login
             this.btnQuitarDetalle.ForeColor = System.Drawing.Color.FromArgb(150, 30, 30);
             this.btnQuitarDetalle.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(220, 180, 180);
             this.btnQuitarDetalle.Click += new System.EventHandler(this.btnQuitarDetalle_Click);
-            ConfigurarLabel(this.lblPagoRecibido, "Pago recibido ($)",
+            ConfigurarLabel(this.lblPagoRecibido, "Cobro recibido ($)",
                 new System.Drawing.Point(260, 10));
             ConfigurarTextBox(this.txtPagoRecibido,
                 new System.Drawing.Point(260, 28), new System.Drawing.Size(120, 32), 6);
 
-            ConfigurarBotonSecundario(this.btnPagoJusto, "Pago justo",
+            ConfigurarBotonSecundario(this.btnPagoJusto, "Cobro justo",
                 new System.Drawing.Point(392, 28), 7);
             this.btnPagoJusto.Size = new System.Drawing.Size(72, 32);
             this.btnPagoJusto.Font = new System.Drawing.Font("Segoe UI", 8F);
@@ -140,7 +140,7 @@ namespace Login
                 Fecha = fecha,
                 Total = total,
                 Metodo = metodoSeleccionado,
-                Estado_Pago = estado,
+                Estado_Cobro = estado,
                 Estado_Pedido = EstadoPedido.Preparacion,
                 MontoRecibido = (total - recibido <= 0.01m) ? total : recibido
             };
@@ -201,7 +201,7 @@ namespace Login
                 MessageBox.Show(avisoStock, "Stock insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 // seguís adelante igual, es solo informativo — no hay return acá
             }
-            int estado = NVentas.DeterminarEstadoPago(total, recibido);
+            int estado = NVentas.DeterminarEstadoCobro(total, recibido);
             if (total - recibido > 0.01m)
             {
                 decimal deudaACobrar = total - recibido;
@@ -240,7 +240,7 @@ namespace Login
                 }
                 else
                 {
-                    DialogResult result = MessageBox.Show("Se concretará una venta con el monto justo pagado y la venta estará PAGADA.", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MessageBox.Show("Se concretará una venta con el monto justo pagado y la venta estará COBRADA.", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
                         RegistrarVentaEnBaseDeDatos(estado, recibido);
