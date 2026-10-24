@@ -57,10 +57,11 @@ namespace Login
             this.lblTituloApp = new System.Windows.Forms.Label();
             this.pnlContenedor = new System.Windows.Forms.Panel();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lblUsuario = new System.Windows.Forms.Label();
             this.lblModuloActivo = new System.Windows.Forms.Label();
+            this.lblUsuario = new System.Windows.Forms.Label();
             this.pnlSeparador = new System.Windows.Forms.Panel();
             this.lblFecha = new System.Windows.Forms.Label();
+            this.btnAsistenteIA = new System.Windows.Forms.Button();
             this.pnlSidebar.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
@@ -68,6 +69,7 @@ namespace Login
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(58)))), ((int)(((byte)(94)))));
+            this.pnlSidebar.Controls.Add(this.btnAsistenteIA);
             this.pnlSidebar.Controls.Add(this.btnCerrarSesion);
             this.pnlSidebar.Controls.Add(this.btnTema);
             this.pnlSidebar.Controls.Add(this.btnCompras);
@@ -200,17 +202,6 @@ namespace Login
             this.pnlHeader.Size = new System.Drawing.Size(808, 50);
             this.pnlHeader.TabIndex = 1;
             // 
-            // lblUsuario
-            // 
-            this.lblUsuario.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(135)))), ((int)(((byte)(128)))));
-            this.lblUsuario.Location = new System.Drawing.Point(20, 0);
-            this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(220, 50);
-            this.lblUsuario.TabIndex = 0;
-            this.lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // lblModuloActivo
             // 
             this.lblModuloActivo.Dock = System.Windows.Forms.DockStyle.Right;
@@ -221,6 +212,17 @@ namespace Login
             this.lblModuloActivo.Size = new System.Drawing.Size(200, 50);
             this.lblModuloActivo.TabIndex = 1;
             this.lblModuloActivo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(135)))), ((int)(((byte)(128)))));
+            this.lblUsuario.Location = new System.Drawing.Point(20, 0);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(220, 50);
+            this.lblUsuario.TabIndex = 0;
+            this.lblUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlSeparador
             // 
@@ -242,6 +244,19 @@ namespace Login
             this.lblFecha.TabIndex = 3;
             this.lblFecha.Text = "martes, 6 de octubre de 2026";
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnAsistenteIA
+            // 
+            this.btnAsistenteIA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(59)))), ((int)(((byte)(91)))));
+            this.btnAsistenteIA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAsistenteIA.ForeColor = System.Drawing.Color.White;
+            this.btnAsistenteIA.Location = new System.Drawing.Point(93, 412);
+            this.btnAsistenteIA.Name = "btnAsistenteIA";
+            this.btnAsistenteIA.Size = new System.Drawing.Size(190, 42);
+            this.btnAsistenteIA.TabIndex = 12;
+            this.btnAsistenteIA.Text = "Asistente IA";
+            this.btnAsistenteIA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAsistenteIA.UseVisualStyleBackColor = false;
             // 
             // UIMenu2
             // 
@@ -269,5 +284,7 @@ namespace Login
         /// </summary>
 
         #endregion
+
+        private Button btnAsistenteIA;
     }
 }

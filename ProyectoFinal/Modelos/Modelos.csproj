@@ -207,11 +207,13 @@
     <Compile Include="EstadoTransporte.cs" />
     <Compile Include="EstadoCompra.cs" />
     <Compile Include="EstadoSolicitudCotizacion.cs" />
+    <Compile Include="EvaluacionProveedor.cs" />
     <Compile Include="Insumo.cs" />
     <Compile Include="PrecioProveedor.cs" />
     <Compile Include="Presupuesto.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="RecetaProducto.cs" />
+    <Compile Include="ResumenProveedor.cs" />
     <Compile Include="SolicitudCotizacion.cs" />
     <Compile Include="ResumenCompras.cs" />
     <Compile Include="StockInsumo.cs" />

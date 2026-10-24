@@ -218,6 +218,7 @@
     <Compile Include="DataDetalleCompras.cs" />
     <Compile Include="DataDetalleTandaProduccion.cs" />
     <Compile Include="DataDetalleVentas.cs" />
+    <Compile Include="DataEvaluacionProveedor.cs" />
     <Compile Include="DataInsumos.cs" />
     <Compile Include="DataMetodosPago.cs" />
     <Compile Include="DataPrecioProveedor.cs" />

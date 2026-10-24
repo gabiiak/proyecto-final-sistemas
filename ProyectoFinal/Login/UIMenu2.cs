@@ -35,9 +35,12 @@ namespace Login
             ConfigurarBotonSidebar(btnMetodosPago, "  💳  Métodos de Pago", 6);
             ConfigurarBotonSidebar(btnVentas, "  🛒  Ventas", 7);
             ConfigurarBotonSidebar(btnCompras, "  🧾  Compras", 8);
-            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 9);
+            ConfigurarBotonSidebar(btnAsistenteIA, "  ✨  Asistente IA", 9);
+            ConfigurarBotonSidebar(btnCerrarSesion, "  🚪  Cerrar Sesión", 10);
+            
 
             ConfigurarBotonTema();
+            pnlSidebar.Controls.SetChildIndex(btnAsistenteIA, 1);
 
             // Conectamos cada botón a su handler
             btnInicio.Click += (s, e) => AbrirModulo(btnInicio, () => new UIInicio1());
@@ -51,6 +54,9 @@ namespace Login
             btnMetodosPago.Click += (s, e) => AbrirModulo(btnMetodosPago, () => new UIGestionMetodosPago());
             btnVentas.Click += (s, e) => AbrirModulo(btnVentas, () => new UIGestionVentas());
             btnCompras.Click += (s, e) => AbrirModulo(btnCompras, () => new UIGestionCompras());
+            btnAsistenteIA.Click += (s, e) =>
+                AbrirModulo(btnAsistenteIA, () => new UIEvaluacionProveedor());
+
             btnCerrarSesion.Click += BtnCerrarSesion_Click;
 
             btnTema.Click += BtnTema_Click;

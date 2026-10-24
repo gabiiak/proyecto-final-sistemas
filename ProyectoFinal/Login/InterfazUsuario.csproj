@@ -221,8 +221,8 @@
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Collections.Immutable, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.8.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="System.Collections.Immutable, Version=9.0.0.4, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.9.0.4\lib\net462\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -290,11 +290,23 @@
     <Compile Include="UIEditarFechasCompra.Designer.cs">
       <DependentUpon>UIEditarFechasCompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIEvaluacionProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIEvaluacionProveedor.Designer.cs">
+      <DependentUpon>UIEvaluacionProveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIInsumoPedidoCompra.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UIInsumoPedidoCompra.Designer.cs">
       <DependentUpon>UIInsumoPedidoCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIRecomendacionIA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIRecomendacionIA.Designer.cs">
+      <DependentUpon>UIRecomendacionIA.cs</DependentUpon>
     </Compile>
     <Compile Include="UIRegistrarPedidoCompra.cs">
       <SubType>Form</SubType>
@@ -379,6 +391,12 @@
     </Compile>
     <Compile Include="UIRegistrarSolicitudCotizacion.Designer.cs">
       <DependentUpon>UIRegistrarSolicitudCotizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIResultadosIA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIResultadosIA.Designer.cs">
+      <DependentUpon>UIResultadosIA.cs</DependentUpon>
     </Compile>
     <Compile Include="UIStyles.cs" />
     <Compile Include="UIConsultarVenta.cs">
@@ -551,6 +569,9 @@
     <Compile Include="UIEstadoTransporte.Designer.cs">
       <DependentUpon>UIEstadoTransporte.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UIEvaluacionProveedor.resx">
+      <DependentUpon>UIEvaluacionProveedor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIGestionProveedores.resx">
       <DependentUpon>UIGestionProveedores.cs</DependentUpon>
     </EmbeddedResource>
@@ -618,6 +639,9 @@
     <EmbeddedResource Include="UIInsumoPedidoCompra.resx">
       <DependentUpon>UIInsumoPedidoCompra.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIRecomendacionIA.resx">
+      <DependentUpon>UIRecomendacionIA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIRegistrarPedidoCompra.resx">
       <DependentUpon>UIRegistrarPedidoCompra.cs</DependentUpon>
     </EmbeddedResource>
@@ -647,6 +671,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIGestionVentas.resx">
       <DependentUpon>UIGestionVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIResultadosIA.resx">
+      <DependentUpon>UIResultadosIA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIStockInsumos.resx">
       <DependentUpon>UIStockInsumos.cs</DependentUpon>
@@ -713,11 +740,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-  <Content Include="..\Assets\logoEmpresa.png">
-    <Link>Assets\logoEmpresa.png</Link>
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  </Content>
-</ItemGroup>
+    <Content Include="..\Assets\logoEmpresa.png">
+      <Link>Assets\logoEmpresa.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SkiaSharp.NativeAssets.macOS.3.119.0\build\net462\SkiaSharp.NativeAssets.macOS.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.macOS.3.119.0\build\net462\SkiaSharp.NativeAssets.macOS.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
