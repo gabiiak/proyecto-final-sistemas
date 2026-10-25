@@ -2,6 +2,7 @@ using Modelos;
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Login
@@ -39,6 +40,7 @@ namespace Login
                 new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvDetalle_CellValidating);
             this.dgvDetalle.DataError +=
                 new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvDetalle_DataError);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         public UIRegistrarPresupuesto(int idPresupuesto) : this()
@@ -179,6 +181,8 @@ namespace Login
         {
             List<DetalleSolicitudCotizacion> detalles = NSolicitudCotizacion.GetDetalles(solicitud.IdSolicitud);
             Dictionary<int, decimal> precios = NPresupuesto.GetPreciosProveedor(solicitud.IdProveedor);
+            Dictionary<int, decimal> preciosBase = NInsumos.GetAllInsumos()
+                .ToDictionary(i => i.Id, i => i.Precio);
 
             cargando = true;
             filasBase = new List<DetallePresupuesto>();
@@ -186,7 +190,13 @@ namespace Login
             foreach (DetalleSolicitudCotizacion detalle in detalles)
             {
                 decimal precio;
-                if (!precios.TryGetValue(detalle.IdInsumo, out precio)) precio = 100m;
+                if (!precios.TryGetValue(detalle.IdInsumo, out precio))
+                {
+                    decimal baseInsumo;
+                    precio = preciosBase.TryGetValue(detalle.IdInsumo, out baseInsumo) && baseInsumo > 0
+                        ? baseInsumo
+                        : 100m;
+                }
 
                 decimal subtotal = Math.Round(precio * detalle.Cantidad, 2);
                 filasBase.Add(new DetallePresupuesto
@@ -244,7 +254,7 @@ namespace Login
                     total += subtotal;
             }
 
-            lblTotal.Text = "$" + total;
+            lblTotal.Text = "$" + total.ToString("N2");
         }
 
         private void dgvDetalle_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)

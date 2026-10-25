@@ -61,6 +61,7 @@ namespace Login
                 new System.Drawing.Point(20, 596), 3);
             this.btnEditarFechas.Size = new System.Drawing.Size(200, 36);
             this.btnEditarFechas.Click += new System.EventHandler(this.btnEditarFechas_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIConsultarCompra_Load(object sender, EventArgs e)
@@ -105,7 +106,7 @@ namespace Login
                 dgvConsultaCompra.Rows.Add(
                     nombre,
                     detalle.Cantidad,
-                    detalle.Subtotal.ToString("C2")
+                    detalle.Subtotal
                 );
             }
         }
@@ -245,7 +246,7 @@ namespace Login
 
                         Cell cInsumo = new Cell().Add(new Paragraph(fila.Cells[0].Value.ToString()).SetFontSize(10));
                         Cell cCantidad = new Cell().Add(new Paragraph(fila.Cells[1].Value.ToString()).SetFontSize(10).SetTextAlignment(TextAlignment.CENTER));
-                        Cell cSubtotal = new Cell().Add(new Paragraph(fila.Cells[2].Value.ToString()).SetFontSize(10).SetTextAlignment(TextAlignment.RIGHT));
+                        Cell cSubtotal = new Cell().Add(new Paragraph(fila.Cells[2].FormattedValue.ToString()).SetFontSize(10).SetTextAlignment(TextAlignment.RIGHT));
 
                         Cell[] celdas = { cInsumo, cCantidad, cSubtotal };
                         foreach (var celda in celdas)

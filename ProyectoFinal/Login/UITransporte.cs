@@ -38,6 +38,7 @@ namespace Login
                 new System.Drawing.Point(272, 384), 4);
             this.btnSalirTransporte.Size = new System.Drawing.Size(128, 40);
             this.btnSalirTransporte.Click += new System.EventHandler(this.btnSalirTransporte_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UITransporte_Load(object sender, EventArgs e)

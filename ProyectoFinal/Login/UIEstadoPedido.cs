@@ -55,6 +55,7 @@ namespace Login
                 System.Drawing.Color.White, 4);
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(220, 180, 180);
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
         public int retornarEstado() { return estado; }
 

@@ -25,6 +25,7 @@ namespace Login
                 new System.Drawing.Point(240, 444), 1);
             this.btnCerrar.Size = new System.Drawing.Size(150, 40);
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIPresupuestosEliminados_Load(object sender, EventArgs e)
@@ -63,7 +64,7 @@ namespace Login
             if (dgvPresupuestosEliminados.Columns[e.ColumnIndex].Name != "Total") return;
             if (e.Value == null) return;
 
-            e.Value = "$" + e.Value;
+            e.Value = "$" + Convert.ToDecimal(e.Value).ToString("N2");
             e.FormattingApplied = true;
         }
 

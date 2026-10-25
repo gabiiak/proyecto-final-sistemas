@@ -19,6 +19,7 @@ namespace Login
         public UIRecetaProducto()
         {
             InitializeComponent();
+            UIStyles.AplicarTemaAForm(this);
         }
 
         

@@ -19,6 +19,7 @@ namespace Login
         public UIProductosEliminados()
         {
             InitializeComponent();
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void button1_Click(object sender, EventArgs e)

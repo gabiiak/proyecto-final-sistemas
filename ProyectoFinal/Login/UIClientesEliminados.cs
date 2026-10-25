@@ -18,6 +18,7 @@ namespace Login
         public UIClientesEliminados()
         {
             InitializeComponent();
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIDeletedClients_Load(object sender, EventArgs e)

@@ -33,6 +33,7 @@
             this.cbProveedorFiltro = new System.Windows.Forms.ComboBox();
             this.btnFiltroProveedor = new System.Windows.Forms.Button();
             this.btnDesfiltrar = new System.Windows.Forms.Button();
+            this.btnVerCanceladas = new System.Windows.Forms.Button();
             this.dgvTodasLasCompras = new System.Windows.Forms.DataGridView();
             this.colIdCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -138,6 +139,7 @@
             this.pnlFiltros.Controls.Add(this.cbProveedorFiltro);
             this.pnlFiltros.Controls.Add(this.btnFiltroProveedor);
             this.pnlFiltros.Controls.Add(this.btnDesfiltrar);
+            this.pnlFiltros.Controls.Add(this.btnVerCanceladas);
 
             // ── DATAGRIDVIEW ────────────────────────────────────────
             this.dgvTodasLasCompras.Location = new System.Drawing.Point(20, 372);
@@ -245,6 +247,7 @@
         private System.Windows.Forms.ComboBox cbProveedorFiltro;
         private System.Windows.Forms.Button btnFiltroProveedor;
         private System.Windows.Forms.Button btnDesfiltrar;
+        private System.Windows.Forms.Button btnVerCanceladas;
         private System.Windows.Forms.DataGridView dgvTodasLasCompras;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn colProveedor;

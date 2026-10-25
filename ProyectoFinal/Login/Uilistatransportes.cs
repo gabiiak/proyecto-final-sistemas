@@ -47,6 +47,7 @@ namespace Login
             // de ordenar por columna), así que ahí es donde hay que pintar las filas para
             // que el color no se pierda al hacer clic en un encabezado para ordenar.
             dgvTransportes.CellFormatting += DgvTransportes_CellFormatting;
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIListaTransportes_Load(object sender, EventArgs e)

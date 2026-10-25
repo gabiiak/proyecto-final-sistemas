@@ -121,8 +121,14 @@
             this.colInsumo.Name = "Insumo";
             this.colCantidad.HeaderText = "Cantidad";
             this.colCantidad.Name = "Cantidad";
+            this.colCantidad.ValueType = typeof(decimal);
+            this.colCantidad.DefaultCellStyle.Format = "N2";
+            this.colCantidad.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.colSubTotal.HeaderText = "Subtotal";
             this.colSubTotal.Name = "SubTotal";
+            this.colSubTotal.ValueType = typeof(double);
+            this.colSubTotal.DefaultCellStyle.Format = "$#,##0.00";
+            this.colSubTotal.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 
             this.dgvConsultaCompra.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
             {

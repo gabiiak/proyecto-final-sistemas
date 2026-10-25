@@ -19,6 +19,7 @@ namespace Login
         {
             InitializeComponent();
             UpdateDeletedMetodosDataGrid();
+            UIStyles.AplicarTemaAForm(this);
 
 
         }

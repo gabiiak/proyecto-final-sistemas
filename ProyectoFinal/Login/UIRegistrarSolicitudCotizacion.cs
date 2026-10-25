@@ -69,6 +69,7 @@ namespace Login
                 new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvDetalle_CellValidating);
             this.dgvDetalle.DataError +=
                 new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvDetalle_DataError);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         public UIRegistrarSolicitudCotizacion(int idProducto, int cantidadProducida) : this()

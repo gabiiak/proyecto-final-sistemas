@@ -30,6 +30,7 @@ namespace Login
 
             ConfigurarLabelHeader(this.lblHoraLabel, "Hora:", new System.Drawing.Point(340, 40));
             ConfigurarLabelHeaderValor(this.lblValorHora, "-", new System.Drawing.Point(400, 40));
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIEstadoTanda_Load(object sender, EventArgs e)

@@ -98,6 +98,7 @@ namespace Login
             this.colTotal.Name = "Total";
             this.colTotal.DataPropertyName = "Total";
             this.colTotal.FillWeight = 60;
+            this.colTotal.DefaultCellStyle.Format = "$#,##0.00";
             this.colTotal.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 
             this.dgvPresupuestosEliminados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]

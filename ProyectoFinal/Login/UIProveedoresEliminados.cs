@@ -13,6 +13,7 @@ namespace Login
         public UIProveedoresEliminados()
         {
             InitializeComponent();
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIProveedoresEliminados_Load(object sender, EventArgs e)

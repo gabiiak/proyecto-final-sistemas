@@ -49,6 +49,7 @@ namespace Login
             ConfigurarBotonSecundario(this.btnLimpiar, "Limpiar",
                 new System.Drawing.Point(488, 272), 6);
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIInsumoManagement_Load(object sender, EventArgs e)

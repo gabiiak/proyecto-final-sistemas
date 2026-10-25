@@ -53,6 +53,7 @@ namespace Login
                 new System.Drawing.Point(720, 524), 6);
             this.btnCerrar.Size = new System.Drawing.Size(160, 36);
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIGestionPedidosCompra_Load(object sender, EventArgs e)
@@ -122,17 +123,12 @@ namespace Login
                 e.CellStyle.BackColor = System.Drawing.Color.FromArgb(198, 239, 206);
                 e.CellStyle.ForeColor = System.Drawing.Color.FromArgb(30, 70, 32);
             }
-            else
+            else if (compra.Estado == EstadoCompra.Cancelada)
             {
                 e.CellStyle.BackColor = System.Drawing.Color.FromArgb(255, 199, 206);
                 e.CellStyle.ForeColor = System.Drawing.Color.FromArgb(155, 0, 0);
             }
-
-            if (dgvPedidos.Columns[e.ColumnIndex].Name == "Total" && e.Value != null)
-            {
-                e.Value = "$" + e.Value;
-                e.FormattingApplied = true;
-            }
+            // Emitida: se usa el estilo normal de la grilla (sin color semántico).
         }
 
         private bool TryGetSeleccion(out int id)

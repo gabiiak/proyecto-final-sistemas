@@ -45,6 +45,7 @@ namespace Login
                 System.Drawing.Color.White, 3);
             this.btnCancelado.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(220, 180, 180);
             this.btnCancelado.Click += new System.EventHandler(this.btnCancelado_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         public int retornarEstado() { return estado; }

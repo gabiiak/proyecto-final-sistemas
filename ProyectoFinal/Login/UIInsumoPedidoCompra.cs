@@ -44,6 +44,7 @@ namespace Login
                 new System.Drawing.Point(232, 248), 4);
             this.btnCancelar.Size = new System.Drawing.Size(150, 40);
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIInsumoPedidoCompra_Load(object sender, EventArgs e)

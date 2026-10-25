@@ -30,6 +30,7 @@ namespace Login
         {
             InitializeComponent();
             ConfigurarPantalla("Emitir Pedido de Compra");
+            UIStyles.AplicarTemaAForm(this);
         }
 
         // Modificación de un pedido emitido.
@@ -39,6 +40,7 @@ namespace Login
             this.esModificacion = true;
             this.idCompra = idCompra;
             ConfigurarPantalla("Modificar Pedido de Compra");
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void ConfigurarPantalla(string titulo)
@@ -311,7 +313,7 @@ namespace Login
                 if (row.Cells["Subtotal"].Value != null)
                     total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
             }
-            labelTotal.Text = "$" + total;
+            labelTotal.Text = "$" + total.ToString("N2");
         }
 
         // ---------- Guardar ----------
@@ -339,7 +341,6 @@ namespace Login
                     NCompras.ModificarPedidoCompra(idCompra, detalles);
                     MessageBox.Show("Pedido modificado correctamente.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    OfrecerPdf(NCompras.GetCompraById(idCompra), detalles);
                 }
                 else
                 {
@@ -349,11 +350,9 @@ namespace Login
                         IdPresupuesto = presupuestoSeleccionado.IdPresupuesto,
                         Fecha = DateTime.Now.Date
                     };
-                    int id = NCompras.RegistrarPedidoCompra(compra, detalles);
-                    compra.IdCompra = id;
+                    NCompras.RegistrarPedidoCompra(compra, detalles);
                     MessageBox.Show("Pedido registrado correctamente.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    OfrecerPdf(compra, detalles);
                 }
 
                 this.DialogResult = DialogResult.OK;
@@ -386,19 +385,6 @@ namespace Login
                 });
             }
             return lista;
-        }
-
-        private void OfrecerPdf(Compra compra, List<DetalleCompra> detalles)
-        {
-            if (compra == null) return;
-            string nombreProveedor = presupuestoSeleccionado != null
-                ? presupuestoSeleccionado.NombreProveedor : "Desconocido";
-
-            if (MessageBox.Show("¿Desea descargar el PDF del pedido?", "PDF",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                GenerarPdfPedidoCompra(compra, detalles, nombreProveedor, nombresInsumos);
-            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
