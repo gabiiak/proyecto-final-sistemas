@@ -35,8 +35,8 @@
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaCaducidad = new System.Windows.Forms.DataGridViewTextBoxColumn();            
-
+            this.FechaCaducidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnReporteMensual = new System.Windows.Forms.Button();
             this.pnlAcciones.SuspendLayout();
             this.pnlFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTodasLasTandas)).BeginInit();
@@ -81,6 +81,7 @@
             this.pnlAcciones.Controls.Add(this.btnConsultarTanda);
             this.pnlAcciones.Controls.Add(this.lblIdTandaLabel);
             this.pnlAcciones.Controls.Add(this.labelId);
+            this.pnlAcciones.Controls.Add(this.btnReporteMensual);
 
             // ── PANEL FILTROS ───────────────────────────────────────
             this.pnlFiltros.BackColor = System.Drawing.Color.White;
@@ -194,5 +195,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaCaducidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.Button btnReporteMensual;
     }
 }

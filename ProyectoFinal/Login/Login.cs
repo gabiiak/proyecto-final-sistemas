@@ -36,7 +36,7 @@ namespace Login
         private void btnLogin_Click(object sender, EventArgs e)
         {
             lblError.Visible = true;
-            string usuario = "administrador";
+            string usuario = "1";
             string contraseña = "1"; //cambiar
             //string usuario = "1";
             //string contraseña = "1";

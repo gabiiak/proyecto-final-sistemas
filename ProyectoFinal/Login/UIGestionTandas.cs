@@ -50,6 +50,12 @@ namespace Login
 
             ConfigurarBotonFantasma(this.btnDesfiltrar, "Quitar filtros", new System.Drawing.Point(246, 124), 5);
             this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
+
+
+            ConfigurarBotonSecundario(this.btnReporteMensual, "Reporte mensual (PDF)",
+    new System.Drawing.Point(16, 156), 6);
+            this.btnReporteMensual.Size = new System.Drawing.Size(288, 32);
+            this.btnReporteMensual.Click += (s, ev) => new UIReporteTandas().ShowDialog();
         }
 
         private void UIGestionTandas_Load(object sender, EventArgs e)

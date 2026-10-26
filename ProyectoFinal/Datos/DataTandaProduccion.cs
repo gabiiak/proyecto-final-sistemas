@@ -8,6 +8,51 @@ namespace Datos
 {
     public class DataTandaProduccion
     {
+        public static List<TandaProduccion> GetTandasPorPeriodo(int anio, int mes)
+        {
+            List<TandaProduccion> lista = new List<TandaProduccion>();
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT t.idTanda, t.fecha, t.estado, t.cantidadProducida, t.fechaCaducidad,
+                                   p.idProducto, p.nombre, p.descripcion, p.precio, p.activo, p.vidaUtilDias
+                            FROM TandaProduccion t
+                            INNER JOIN Productos p ON t.idProducto = p.idProducto
+                            WHERE YEAR(t.fecha) = @Anio AND MONTH(t.fecha) = @Mes
+                            ORDER BY t.fecha, t.idTanda";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.Add("@Anio", SqlDbType.Int).Value = anio;
+                    cmd.Parameters.Add("@Mes", SqlDbType.Int).Value = mes;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lista.Add(new TandaProduccion
+                            {
+                                IdTanda = reader.GetInt32(0),
+                                Fecha = reader.GetDateTime(1),
+                                Hora = reader.GetDateTime(1),
+                                EstadoTanda = (int)reader.GetByte(2),
+                                CantidadProducida = reader.GetInt32(3),
+                                FechaCaducidad = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4),
+                                Producto = new Producto
+                                {
+                                    IdProducto = reader.GetInt32(5),
+                                    Nombre = reader.GetString(6),
+                                    Descripcion = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                                    Precio = reader.GetDecimal(8),
+                                    Activo = reader.IsDBNull(9) ? 1 : (reader.GetBoolean(9) ? 1 : 0),
+                                    VidaUtilDias = reader.IsDBNull(10) ? 0 : reader.GetInt32(10)
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            return lista;
+        }
         public static int CreateTanda(TandaProduccion tanda)
         {
             string sqlQuery = @"INSERT INTO TandaProduccion(idProducto, fecha, estado, cantidadProducida)

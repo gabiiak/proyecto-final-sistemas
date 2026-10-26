@@ -77,6 +77,11 @@ namespace Login
             ConfigurarBotonFantasma(this.btnDesfiltrar, "Quitar filtros",
                 new System.Drawing.Point(246, 124), 9);
             this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
+
+            ConfigurarBotonSecundario(this.btnReporteMensual, "Reporte mensual (PDF)",
+    new System.Drawing.Point(246, 180), 10);
+            this.btnReporteMensual.Size = new System.Drawing.Size(196, 32);
+            this.btnReporteMensual.Click += (s, ev) => new UIReporteCompras().ShowDialog();
         }
 
         private void UIGestionCompras_Load(object sender, EventArgs e)
@@ -273,6 +278,7 @@ namespace Login
             }
             ActualizarDataGridView();
         }
+
 
         private void btnConsultarCompra_Click(object sender, EventArgs e)
         {
