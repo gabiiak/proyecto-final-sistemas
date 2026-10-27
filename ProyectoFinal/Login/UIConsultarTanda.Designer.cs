@@ -75,7 +75,7 @@
             this.pnlCabecera.Controls.Add(this.lblValorHora);
 
             // Subtítulo Grilla
-            this.lblDetalles.Text = "Insumos y Personal Utilizado";
+            this.lblDetalles.Text = "Insumos utilizados";
             this.lblDetalles.ForeColor = System.Drawing.Color.FromArgb(28, 58, 94);
             this.lblDetalles.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblDetalles.Location = new System.Drawing.Point(20, 175);
@@ -100,7 +100,7 @@
             this.Insumo.Name = "Insumo";
             this.Insumo.FillWeight = 80;
 
-            this.Empleado.HeaderText = "UnidadMedida";
+            this.Empleado.HeaderText = "Unidad de medida";
             this.Empleado.Name = "Empleado";
             this.Empleado.FillWeight = 90;
             /*

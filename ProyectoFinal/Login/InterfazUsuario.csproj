@@ -411,6 +411,12 @@
     <Compile Include="UIConsultarTanda.Designer.cs">
       <DependentUpon>UIConsultarTanda.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIJornadaLaboral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIJornadaLaboral.Designer.cs">
+      <DependentUpon>UIJornadaLaboral.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIEstadoTanda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -580,6 +586,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIConsultarTanda.resx">
       <DependentUpon>UIConsultarTanda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIJornadaLaboral.resx">
+      <DependentUpon>UIJornadaLaboral.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIEstadoTanda.resx">
       <DependentUpon>UIEstadoTanda.cs</DependentUpon>

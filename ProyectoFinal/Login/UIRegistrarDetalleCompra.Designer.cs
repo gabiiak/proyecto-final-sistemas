@@ -17,7 +17,7 @@
             this.lblInsumo = new System.Windows.Forms.Label();
             this.cbInsumo = new System.Windows.Forms.ComboBox();
             this.lblPrecio = new System.Windows.Forms.Label();
-            this.numUpDownPrecio = new System.Windows.Forms.NumericUpDown();
+            this.txtPrecio = new System.Windows.Forms.TextBox();
             this.lblCantidad = new System.Windows.Forms.Label();
             this.numUpDownCantidad = new System.Windows.Forms.NumericUpDown();
             this.lblUnidades = new System.Windows.Forms.Label();
@@ -29,7 +29,6 @@
 
             this.pnlFormulario.SuspendLayout();
             this.pnlSubtotal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDownPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownCantidad)).BeginInit();
             this.SuspendLayout();
 
@@ -59,15 +58,14 @@
             this.pnlFormulario.Name = "pnlFormulario";
 
             // Precio unitario
-            this.numUpDownPrecio.DecimalPlaces = 2;
-            this.numUpDownPrecio.Maximum = 100000000;
-            this.numUpDownPrecio.Minimum = 0;
-            this.numUpDownPrecio.Location = new System.Drawing.Point(16, 100);
-            this.numUpDownPrecio.Size = new System.Drawing.Size(160, 32);
-            this.numUpDownPrecio.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.numUpDownPrecio.TabIndex = 1;
-            this.numUpDownPrecio.Name = "numUpDownPrecio";
-            this.numUpDownPrecio.ValueChanged += new System.EventHandler(this.numUpDownPrecio_ValueChanged);
+            this.txtPrecio.Location = new System.Drawing.Point(16, 100);
+            this.txtPrecio.Size = new System.Drawing.Size(160, 32);
+            this.txtPrecio.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtPrecio.TabIndex = 1;
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
 
             // Cantidad
             this.numUpDownCantidad.Location = new System.Drawing.Point(16, 168);
@@ -90,7 +88,7 @@
             this.pnlFormulario.Controls.Add(this.lblInsumo);
             this.pnlFormulario.Controls.Add(this.cbInsumo);
             this.pnlFormulario.Controls.Add(this.lblPrecio);
-            this.pnlFormulario.Controls.Add(this.numUpDownPrecio);
+            this.pnlFormulario.Controls.Add(this.txtPrecio);
             this.pnlFormulario.Controls.Add(this.lblCantidad);
             this.pnlFormulario.Controls.Add(this.numUpDownCantidad);
             this.pnlFormulario.Controls.Add(this.lblUnidades);
@@ -126,7 +124,6 @@
 
             this.pnlFormulario.ResumeLayout(false);
             this.pnlSubtotal.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numUpDownPrecio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownCantidad)).EndInit();
             this.ResumeLayout(false);
         }
@@ -138,7 +135,7 @@
         private System.Windows.Forms.Label lblInsumo;
         private System.Windows.Forms.ComboBox cbInsumo;
         private System.Windows.Forms.Label lblPrecio;
-        private System.Windows.Forms.NumericUpDown numUpDownPrecio;
+        private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.NumericUpDown numUpDownCantidad;
         private System.Windows.Forms.Label lblUnidades;

@@ -106,16 +106,19 @@ namespace Login
             this.colCantidad.HeaderText = "Cantidad";
             this.colCantidad.Name = "Cantidad";
             this.colCantidad.FillWeight = 15;
+            this.colCantidad.DefaultCellStyle.Format = "N2";
             this.colCantidad.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 
             this.colPrecio.HeaderText = "Precio";
             this.colPrecio.Name = "Precio";
             this.colPrecio.FillWeight = 15;
+            this.colPrecio.DefaultCellStyle.Format = "$#,##0.00";
             this.colPrecio.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 
             this.colSubtotal.HeaderText = "Subtotal";
             this.colSubtotal.Name = "Subtotal";
             this.colSubtotal.FillWeight = 15;
+            this.colSubtotal.DefaultCellStyle.Format = "$#,##0.00";
             this.colSubtotal.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 
             this.dgvDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]

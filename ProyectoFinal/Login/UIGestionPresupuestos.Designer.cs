@@ -139,6 +139,8 @@ namespace Login
             this.colTotal.HeaderText = "Total";
             this.colTotal.Name = "Total";
             this.colTotal.FillWeight = 70;
+            this.colTotal.ValueType = typeof(decimal);
+            this.colTotal.DefaultCellStyle.Format = "$#,##0.00";
             this.colTotal.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 
             this.colEstado.HeaderText = "Estado";

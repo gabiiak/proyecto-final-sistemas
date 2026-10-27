@@ -60,7 +60,7 @@ namespace Login
 
             ConfigurarBotonSecundario(this.btnGestionRecetas, "Gestionar Recetas de productos", new System.Drawing.Point(488, 284),6);
 
-
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIProductManagement_Load(object sender, EventArgs e)

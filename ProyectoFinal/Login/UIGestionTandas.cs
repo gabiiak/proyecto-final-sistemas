@@ -33,6 +33,10 @@ namespace Login
             this.btnConsultarTanda.Size = new System.Drawing.Size(138, 36);
             this.btnConsultarTanda.Click += new System.EventHandler(this.btnConsultarTanda_Click);
 
+            ConfigurarBotonSecundario(this.btnJornadaLaboral, "Informe diario", new System.Drawing.Point(16, 156), 6);
+            this.btnJornadaLaboral.Size = new System.Drawing.Size(288, 36);
+            this.btnJornadaLaboral.Click += new System.EventHandler(this.btnJornadaLaboral_Click);
+
             ConfigurarLabel(this.lblDesde, "Desde", new System.Drawing.Point(16, 16));
             ConfigurarLabel(this.lblHasta, "Hasta", new System.Drawing.Point(16, 68));
 
@@ -208,6 +212,12 @@ namespace Login
 
             UIConsultarTanda consulta = new UIConsultarTanda(idTandaSeleccionada);
             consulta.ShowDialog();
+        }
+
+        private void btnJornadaLaboral_Click(object sender, EventArgs e)
+        {
+            UIJornadaLaboral jornada = new UIJornadaLaboral();
+            jornada.ShowDialog();
         }
 
         private void btnFiltroProducto_Click(object sender, EventArgs e)

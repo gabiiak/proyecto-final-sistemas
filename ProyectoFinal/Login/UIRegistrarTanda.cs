@@ -29,6 +29,7 @@ namespace Login
             //ConfigurarBotonSecundario(this.btnQuitarDetalle, "Quitar detalle", new System.Drawing.Point(176, 460), 5);
             ConfigurarBotonPrimario(this.btnAgregarDetalle, "Calcular Insumos", new System.Drawing.Point(20, 460), 4);
             ConfigurarBotonPrimario(this.btnRegistrarTanda, "Registrar Tanda", new System.Drawing.Point(20, 624), 6);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void CalcularDetalleReceta()

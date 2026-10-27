@@ -20,6 +20,7 @@
             this.btnRegistrarTanda = new System.Windows.Forms.Button();
             this.btnCambiarEstado = new System.Windows.Forms.Button();
             this.btnConsultarTanda = new System.Windows.Forms.Button();
+            this.btnJornadaLaboral = new System.Windows.Forms.Button();
             this.lblDesde = new System.Windows.Forms.Label();
             this.lblHasta = new System.Windows.Forms.Label();
             this.dtpDesde = new System.Windows.Forms.DateTimePicker();
@@ -79,6 +80,7 @@
             this.pnlAcciones.Controls.Add(this.btnRegistrarTanda);
             this.pnlAcciones.Controls.Add(this.btnCambiarEstado);
             this.pnlAcciones.Controls.Add(this.btnConsultarTanda);
+            this.pnlAcciones.Controls.Add(this.btnJornadaLaboral);
             this.pnlAcciones.Controls.Add(this.lblIdTandaLabel);
             this.pnlAcciones.Controls.Add(this.labelId);
 
@@ -178,6 +180,7 @@
         private System.Windows.Forms.Button btnRegistrarTanda;
         private System.Windows.Forms.Button btnCambiarEstado;
         private System.Windows.Forms.Button btnConsultarTanda;
+        private System.Windows.Forms.Button btnJornadaLaboral;
         private System.Windows.Forms.Label lblDesde;
         private System.Windows.Forms.Label lblHasta;
         private System.Windows.Forms.DateTimePicker dtpDesde;

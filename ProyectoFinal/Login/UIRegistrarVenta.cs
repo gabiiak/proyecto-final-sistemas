@@ -55,6 +55,7 @@ namespace Login
             this.btnRegistrarVenta.Size = new System.Drawing.Size(480, 44);
             this.btnRegistrarVenta.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.btnRegistrarVenta.Click += new System.EventHandler(this.btnRegistrarVenta_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIRegisterSale_Load(object sender, EventArgs e)

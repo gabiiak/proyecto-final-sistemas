@@ -52,6 +52,7 @@ namespace Login
             HabilitarSiEsValido(this.btnEnviada, EstadoCompra.Enviada);
             HabilitarSiEsValido(this.btnRecibida, EstadoCompra.Recibida);
             HabilitarSiEsValido(this.btnCancelada, EstadoCompra.Cancelada);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         public int retornarEstado() { return estado; }

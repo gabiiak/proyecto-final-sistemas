@@ -371,6 +371,19 @@ namespace Login
                 return;
             }
 
+            // Los botones primarios (fondo azul) tienen texto blanco: si se tradujera como
+            // el resto de los controles, quedaría negro sobre azul en el tema claro.
+            if (c is Button btn)
+            {
+                c.BackColor = Traducir(back, Superficie, FondoCampo);
+                c.ForeColor = c.ForeColor == Blanco
+                    ? Blanco
+                    : Traducir(c.ForeColor, TextoCampo, TextoSobreSeleccion);
+                btn.FlatAppearance.BorderColor =
+                    Traducir(btn.FlatAppearance.BorderColor, BordeBoton, HoverSidebar);
+                return;
+            }
+
             c.BackColor = Traducir(back, Superficie, FondoCampo);
 
             // Los Labels con fondo transparente heredan el del form, así que sólo se
@@ -382,10 +395,6 @@ namespace Login
             }
 
             c.ForeColor = Traducir(c.ForeColor, TextoCampo, TextoSobreSeleccion);
-
-            if (c is Button btn)
-                btn.FlatAppearance.BorderColor =
-                    Traducir(btn.FlatAppearance.BorderColor, BordeBoton, HoverSidebar);
         }
 
         private static Color Traducir(Color origen, Color nuevo, Color porDefecto)

@@ -37,6 +37,7 @@ namespace Login
             ConfigurarBotonSecundario(this.btnSalirDetalle, "Cancelar", new System.Drawing.Point(272, 340), 5);
             this.btnSalirDetalle.Size = new System.Drawing.Size(128, 40);
             this.btnSalirDetalle.Click += new System.EventHandler(this.btnSalirDetalle_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIRegistrarDetalleTanda_Load(object sender, EventArgs e)

@@ -35,6 +35,7 @@ namespace Login
                 labelDeuda.Text = "COBRO ANULADO";
                 txtDeuda.ReadOnly = true;
             }
+            UIStyles.AplicarTemaAForm(this);
         }
         private void UIEstadoCobro_Load(object sender, EventArgs e)
         {

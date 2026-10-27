@@ -38,6 +38,7 @@
             this.btnClean = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
             this.btnMostrarContraseña = new System.Windows.Forms.Button();
+            this.btnTemaLogin = new System.Windows.Forms.Button();
 
             this.pnlIzquierdo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -194,6 +195,18 @@
             this.btnMostrarContraseña.TabIndex = 3;
             this.btnMostrarContraseña.Click += new System.EventHandler(this.btnMostrarConstraseña_Click);
 
+            // Botón para alternar el tema (los colores se aplican en AplicarTemaLogin)
+            this.btnTemaLogin.Text = "🌙  Tema oscuro";
+            this.btnTemaLogin.Location = new System.Drawing.Point(40, 340);
+            this.btnTemaLogin.Size = new System.Drawing.Size(315, 30);
+            this.btnTemaLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTemaLogin.FlatAppearance.BorderSize = 1;
+            this.btnTemaLogin.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.btnTemaLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTemaLogin.Name = "btnTemaLogin";
+            this.btnTemaLogin.TabIndex = 4;
+            this.btnTemaLogin.Click += new System.EventHandler(this.btnTemaLogin_Click);
+
             this.pnlDerecho.Controls.Add(this.lblTitulo);
             this.pnlDerecho.Controls.Add(this.lblUsuario);
             this.pnlDerecho.Controls.Add(this.txtUser);
@@ -203,6 +216,7 @@
             this.pnlDerecho.Controls.Add(this.btnLogin);
             this.pnlDerecho.Controls.Add(this.btnClean);
             this.pnlDerecho.Controls.Add(this.btnMostrarContraseña);
+            this.pnlDerecho.Controls.Add(this.btnTemaLogin);
 
             // Orden de agregado al form
             this.Controls.Add(this.pnlDerecho);
@@ -350,6 +364,7 @@
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnClean;
+        private System.Windows.Forms.Button btnTemaLogin;
 
         //---
         //private System.Windows.Forms.Button btnLogin;

@@ -33,6 +33,7 @@ namespace Login
                 new System.Drawing.Point(20, 468), 1);
             this.btnCerrar.Size = new System.Drawing.Size(150, 40);
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIConsultarPresupuesto_Load(object sender, EventArgs e)
@@ -51,7 +52,7 @@ namespace Login
                 labelProveedor.Text = presupuesto.NombreProveedor;
                 labelFecha.Text = presupuesto.Fecha.ToString("dd-MM-yyyy");
                 labelEstado.Text = UIRegistrarSolicitudCotizacion.GetDescripcionEstado(presupuesto.EstadoSolicitud);
-                labelTotal.Text = "$" + presupuesto.Total;
+                labelTotal.Text = "$" + presupuesto.Total.ToString("N2");
 
                 List<DetallePresupuesto> detalles = NPresupuesto.GetDetalles(idPresupuesto);
 
@@ -62,8 +63,8 @@ namespace Login
                         detalle.NombreInsumo,
                         detalle.UnidadMedidaInsumo,
                         Math.Round(detalle.Cantidad, 4),
-                        "$" + detalle.PrecioUnitario,
-                        "$" + detalle.Subtotal);
+                        "$" + detalle.PrecioUnitario.ToString("N2"),
+                        "$" + detalle.Subtotal.ToString("N2"));
                 }
                 dgvDetalle.Refresh();
             }

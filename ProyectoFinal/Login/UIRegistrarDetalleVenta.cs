@@ -49,6 +49,7 @@ namespace Login
                 new System.Drawing.Point(272, 344), 4);
             this.btnSalirDetalle.Size = new System.Drawing.Size(128, 40);
             this.btnSalirDetalle.Click += new System.EventHandler(this.btnSalirDetalle_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
         
         private void UIRegisterSaleDetail_Load(object sender, EventArgs e)

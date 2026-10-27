@@ -15,6 +15,10 @@ namespace Login
         private List<Compra> listadoComprasTotales = new List<Compra>();
         private List<Compra> listadoComprasFiltradas = new List<Compra>();
         private Dictionary<int, string> nombresProveedores = new Dictionary<int, string>();
+        private bool mostrarCanceladas = false;
+        private DateTime? filtroDesde = null;
+        private DateTime? filtroHasta = null;
+        private int filtroProveedor = 0;
         public int idCompra;
 
         public UIGestionCompras()
@@ -77,6 +81,11 @@ namespace Login
             ConfigurarBotonFantasma(this.btnDesfiltrar, "Quitar filtros",
                 new System.Drawing.Point(246, 124), 9);
             this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
+
+            ConfigurarBotonSecundario(this.btnVerCanceladas, "Ver canceladas",
+                new System.Drawing.Point(16, 186), 11);
+            this.btnVerCanceladas.Size = new System.Drawing.Size(180, 32);
+            this.btnVerCanceladas.Click += new System.EventHandler(this.btnVerCanceladas_Click);
         }
 
         private void UIGestionCompras_Load(object sender, EventArgs e)
@@ -129,8 +138,38 @@ namespace Login
         private void ActualizarDataGridView()
         {
             listadoComprasTotales = NCompras.GetAllCompras();
-            listadoComprasFiltradas = listadoComprasTotales;
-            MostrarEnGrilla(listadoComprasTotales);
+            AplicarFiltros();
+        }
+
+        // Compras que corresponden a la vista activa (activas o canceladas).
+        private List<Compra> ObtenerComprasVista()
+        {
+            return listadoComprasTotales
+                .Where(c => mostrarCanceladas
+                    ? c.Estado == EstadoCompra.Cancelada
+                    : (c.Estado == EstadoCompra.Aceptada ||
+                       c.Estado == EstadoCompra.Enviada ||
+                       c.Estado == EstadoCompra.Recibida))
+                .ToList();
+        }
+
+        private void AplicarFiltros()
+        {
+            IEnumerable<Compra> compras = ObtenerComprasVista();
+
+            if (filtroDesde.HasValue && filtroHasta.HasValue)
+            {
+                compras = compras.Where(c => c.Fecha.Date >= filtroDesde.Value.Date &&
+                                             c.Fecha.Date <= filtroHasta.Value.Date);
+            }
+
+            if (filtroProveedor != 0)
+            {
+                compras = compras.Where(c => c.IdProveedor == filtroProveedor);
+            }
+
+            listadoComprasFiltradas = compras.ToList();
+            MostrarEnGrilla(listadoComprasFiltradas);
         }
 
         // CAMBIO: se cargan valores reales (DateTime / número) en lugar de texto,
@@ -332,6 +371,7 @@ namespace Login
                 dlg.AcceptButton = ok;
                 dlg.CancelButton = cancelar;
                 dlg.Controls.AddRange(new Control[] { lbl, num, ok, cancelar });
+                UIStyles.AplicarTemaAForm(dlg);
 
                 if (dlg.ShowDialog(this) == DialogResult.OK)
                     return num.Value;
@@ -351,31 +391,48 @@ namespace Login
                 return;
             }
 
-            var listaFiltrada = listadoComprasTotales.Where(c => c.Fecha.Date >= desde && c.Fecha.Date <= hasta).ToList();
-            if (listaFiltrada.Count == 0)
+            filtroDesde = desde;
+            filtroHasta = hasta;
+            AplicarFiltros();
+
+            if (listadoComprasFiltradas.Count == 0)
             {
                 MessageBox.Show("No se encontraron compras por esas fechas...", "Alerta", MessageBoxButtons.OK);
-                return;
             }
-            listadoComprasFiltradas = listaFiltrada;
-            MostrarEnGrilla(listaFiltrada);
         }
 
         private void btnFiltroProveedor_Click(object sender, EventArgs e)
         {
-            int idProveedorSeleccionado = ((Proveedor)cbProveedorFiltro.SelectedItem).IdProveedor;
-            var listaFiltrada = listadoComprasTotales
-                .Where(c => idProveedorSeleccionado == 0 || c.IdProveedor == idProveedorSeleccionado)
-                .ToList();
-            listadoComprasFiltradas = listaFiltrada;
-            MostrarEnGrilla(listaFiltrada);
+            Proveedor proveedor = cbProveedorFiltro.SelectedItem as Proveedor;
+            if (proveedor == null)
+            {
+                MessageBox.Show("Debe seleccionar un proveedor.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
+
+            filtroProveedor = proveedor.IdProveedor;
+            AplicarFiltros();
+        }
+
+        private void btnVerCanceladas_Click(object sender, EventArgs e)
+        {
+            mostrarCanceladas = !mostrarCanceladas;
+            btnVerCanceladas.Text = mostrarCanceladas ? "Ver activas" : "Ver canceladas";
+            AplicarFiltros();
         }
 
         private void btnDesfiltrar_Click(object sender, EventArgs e)
         {
-            ActualizarDataGridView();
+            mostrarCanceladas = false;
+            btnVerCanceladas.Text = "Ver canceladas";
             dtpDesde.Value = DateTime.Today;
             dtpHasta.Value = DateTime.Today;
+            filtroDesde = null;
+            filtroHasta = null;
+            filtroProveedor = 0;
+            if (cbProveedorFiltro.Items.Count > 0)
+                cbProveedorFiltro.SelectedIndex = 0;
+            ActualizarDataGridView();
         }
 
         // ---------- Excel ----------

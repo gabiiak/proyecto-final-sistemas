@@ -73,6 +73,7 @@ namespace Login
                 new System.Drawing.Point(490, 80), 11);
             this.btnDesfiltrar.Size = new System.Drawing.Size(120, 28);
             this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIGestionPresupuestos_Load(object sender, EventArgs e)
@@ -121,7 +122,7 @@ namespace Login
                     presupuesto.IdSolicitud,
                     presupuesto.NombreProveedor,
                     presupuesto.Fecha,
-                    "$" + presupuesto.Total,
+                    presupuesto.Total,
                     UIRegistrarSolicitudCotizacion.GetDescripcionEstado(presupuesto.EstadoSolicitud)
                 );
             }

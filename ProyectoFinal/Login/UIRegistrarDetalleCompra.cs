@@ -2,6 +2,7 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace Login
@@ -19,6 +20,8 @@ namespace Login
                 new System.Drawing.Point(16, 16));
             ConfigurarCombo(this.cbInsumo,
                 new System.Drawing.Point(16, 36), new System.Drawing.Size(348, 32), 0);
+            this.cbInsumo.SelectedIndexChanged +=
+                new System.EventHandler(this.cbInsumo_SelectedIndexChanged);
 
             ConfigurarLabel(this.lblPrecio, "Precio unitario ($)",
                 new System.Drawing.Point(16, 80));
@@ -35,6 +38,7 @@ namespace Login
                 new System.Drawing.Point(272, 344), 4);
             this.btnSalirDetalle.Size = new System.Drawing.Size(128, 40);
             this.btnSalirDetalle.Click += new System.EventHandler(this.btnSalirDetalle_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIRegistrarDetalleCompra_Load(object sender, EventArgs e)
@@ -54,10 +58,33 @@ namespace Login
             }
         }
 
-        // En una compra el precio lo define el proveedor, por eso se ingresa a mano
+        private bool TryObtenerPrecio(out decimal precio)
+        {
+            return decimal.TryParse(txtPrecio.Text, NumberStyles.Number,
+                CultureInfo.CurrentCulture, out precio) && precio > 0;
+        }
+
+        private void PrecargarPrecioInsumo()
+        {
+            Insumo insumo = cbInsumo.SelectedItem as Insumo;
+            txtPrecio.Text = (insumo != null && insumo.Precio > 0)
+                ? insumo.Precio.ToString("0.####", CultureInfo.CurrentCulture)
+                : string.Empty;
+        }
+
+        private void cbInsumo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PrecargarPrecioInsumo();
+            ActualizarSubTotal();
+        }
+
+        // En una compra el precio lo define el proveedor, por eso se ingresa a mano.
+        // Se precarga el precio del insumo y sigue siendo editable.
         private void ActualizarSubTotal()
         {
-            decimal precio = numUpDownPrecio.Value;
+            decimal precio;
+            if (!TryObtenerPrecio(out precio)) precio = 0;
+
             decimal cantidad = numUpDownCantidad.Value;
 
             subTotal = (cantidad > 0)
@@ -66,7 +93,7 @@ namespace Login
             labelSubtotal.Text = subTotal.ToString("C2");
         }
 
-        private void numUpDownPrecio_ValueChanged(object sender, EventArgs e)
+        private void txtPrecio_TextChanged(object sender, EventArgs e)
         {
             ActualizarSubTotal();
         }
@@ -83,7 +110,7 @@ namespace Login
                 MessageBox.Show("Debe seleccionar un insumo registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (numUpDownPrecio.Value <= 0)
+            if (!TryObtenerPrecio(out _))
             {
                 MessageBox.Show("Debe ingresar un precio unitario mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -111,10 +138,10 @@ namespace Login
 
         private void Clean()
         {
-            numUpDownPrecio.Value = 0;
             numUpDownCantidad.Value = numUpDownCantidad.Minimum;
             subTotal = 0;
             labelSubtotal.Text = subTotal.ToString("C2");
+            PrecargarPrecioInsumo();
         }
 
         private void btnSalirDetalle_Click(object sender, EventArgs e)

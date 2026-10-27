@@ -18,6 +18,7 @@ namespace Login
         {
             InitializeComponent();
             dgvCompra_DetalleCompra.AllowUserToAddRows = false;
+            UIStyles.ConfigurarDataGrid(dgvCompra_DetalleCompra);
 
             ConfigurarLabel(this.lblProveedor, "Proveedor", new System.Drawing.Point(16, 16));
             ConfigurarCombo(this.cbProveedor, new System.Drawing.Point(16, 36), new System.Drawing.Size(448, 32), 0);
@@ -51,6 +52,7 @@ namespace Login
             this.btnRegistrarCompra.Size = new System.Drawing.Size(480, 44);
             this.btnRegistrarCompra.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.btnRegistrarCompra.Click += new System.EventHandler(this.btnRegistrarCompra_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIRegistrarCompra_Load(object sender, EventArgs e)
@@ -90,7 +92,7 @@ namespace Login
                 dgvCompra_DetalleCompra.Rows.Add(
                     GetNombreInsumo(detalle.IdInsumo),
                     detalle.Cantidad,
-                    detalle.Subtotal.ToString("C2")
+                    detalle.Subtotal
                 );
             }
         }

@@ -23,6 +23,7 @@ namespace Login
 
             ConfigurarBotonEstado(this.btnCancelada, "CANCELADA", new System.Drawing.Point(20, 260), System.Drawing.Color.FromArgb(150, 30, 30), System.Drawing.Color.White, 3);
             this.btnCancelada.Click += new System.EventHandler(this.btnCancelada_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         public UIEstadoTanda(int estadoActual) : this()

@@ -20,12 +20,62 @@ namespace Login
         public Login()
         {
             InitializeComponent();
+            this.VisibleChanged += Login_VisibleChanged;
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
+            AplicarTemaLogin();
             txtUser.Clear();
             txtPassword.Clear();
+        }
+
+        private void Login_VisibleChanged(object sender, EventArgs e)
+        {
+            // Al cerrar sesión el form se vuelve a mostrar y el tema pudo cambiar en el menú.
+            if (this.Visible) AplicarTemaLogin();
+        }
+
+        private void AplicarTemaLogin()
+        {
+            this.BackColor = UIStyles.FondoCampo;
+            pnlDerecho.BackColor = UIStyles.Superficie;
+            pnlIzquierdo.BackColor = UIStyles.AzulOscuro;
+
+            lblTitulo.ForeColor = UIStyles.TextoPrincipal;
+            lblUsuario.ForeColor = UIStyles.GrisTexto;
+            lblPassword.ForeColor = UIStyles.GrisTexto;
+            lblBienvenida.ForeColor = UIStyles.Blanco;
+            lblSubtitulo.ForeColor = UIStyles.BordeClaro;
+
+            txtUser.BackColor = UIStyles.FondoCampo;
+            txtUser.ForeColor = UIStyles.TextoCampo;
+            txtPassword.BackColor = UIStyles.FondoCampo;
+            txtPassword.ForeColor = UIStyles.TextoCampo;
+
+            btnLogin.BackColor = UIStyles.Primario;
+            btnLogin.ForeColor = UIStyles.Blanco;
+
+            btnClean.BackColor = UIStyles.Superficie;
+            btnClean.ForeColor = UIStyles.PrimarioClaro;
+            btnClean.FlatAppearance.BorderColor = UIStyles.BordeClaro;
+
+            btnMostrarContraseña.BackColor = UIStyles.Superficie;
+            btnMostrarContraseña.ForeColor = UIStyles.PrimarioClaro;
+            btnMostrarContraseña.FlatAppearance.BorderColor = UIStyles.BordeClaro;
+
+            btnTemaLogin.BackColor = UIStyles.Superficie;
+            btnTemaLogin.ForeColor = UIStyles.PrimarioClaro;
+            btnTemaLogin.FlatAppearance.BorderColor = UIStyles.BordeClaro;
+            btnTemaLogin.Text = UIStyles.TemaActual == Tema.Oscuro
+                ? "☀  Tema claro"
+                : "🌙  Tema oscuro";
+        }
+
+        private void btnTemaLogin_Click(object sender, EventArgs e)
+        {
+            UIStyles.AlternarTema();
+            AplicarTemaLogin();
         }
 
         private bool ValidateLogin(string user, string password)

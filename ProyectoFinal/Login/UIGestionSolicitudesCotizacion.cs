@@ -32,6 +32,7 @@ namespace Login
                 new System.Drawing.Point(166, 92), 2);
             this.btnCerrar.Size = new System.Drawing.Size(138, 36);
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIGestionSolicitudesCotizacion_Load(object sender, EventArgs e)

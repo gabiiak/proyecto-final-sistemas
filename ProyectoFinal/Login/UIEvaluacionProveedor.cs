@@ -345,7 +345,7 @@ namespace Login
                 // Obtenemos los registros reales de SQL Server.
                 var datosReales = NDatosEntrenamientoReal.Obtener();
 
-                if (datosReales.Count < 30)
+                if (datosReales.Count < 10)
                 {
                     MessageBox.Show(
                         "Hay " + datosReales.Count +

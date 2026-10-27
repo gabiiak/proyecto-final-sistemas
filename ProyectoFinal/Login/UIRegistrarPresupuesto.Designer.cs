@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace Login
 {
     partial class UIRegistrarPresupuesto
@@ -102,12 +104,15 @@ namespace Login
             this.colCantidad.FillWeight = 15;
             this.colCantidad.ReadOnly = true;
             this.colCantidad.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCantidad.DefaultCellStyle.Format = "N2";
 
             this.colPrecioUnitario.HeaderText = "Precio unitario";
             this.colPrecioUnitario.Name = "PrecioUnitario";
             this.colPrecioUnitario.FillWeight = 15;
             this.colPrecioUnitario.ValueType = typeof(decimal);
             this.colPrecioUnitario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colPrecioUnitario.DefaultCellStyle.Format = "#,##0.00";
+            this.colPrecioUnitario.DefaultCellStyle.BackColor = Color.LightGreen;
             this.colPrecioUnitario.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 
             this.colSubtotal.HeaderText = "Subtotal";
@@ -115,6 +120,7 @@ namespace Login
             this.colSubtotal.FillWeight = 15;
             this.colSubtotal.ReadOnly = true;
             this.colSubtotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colSubtotal.DefaultCellStyle.Format = "$#,##0.00";
             this.colSubtotal.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 
             this.dgvDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]

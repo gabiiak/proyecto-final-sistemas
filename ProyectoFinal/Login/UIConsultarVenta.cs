@@ -54,6 +54,7 @@ namespace Login
                 new System.Drawing.Point(312, 528), 2);
             this.btnSalir.Size = new System.Drawing.Size(148, 40);
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            UIStyles.AplicarTemaAForm(this);
         }
 
         private void UIConsultSale_Load(object sender, EventArgs e)

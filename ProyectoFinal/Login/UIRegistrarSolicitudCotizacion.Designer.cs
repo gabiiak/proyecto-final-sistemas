@@ -70,6 +70,7 @@ namespace Login
             this.colCantidad.Name = "colCantidad";
             this.colCantidad.ValueType = typeof(decimal);
             this.colCantidad.FillWeight = 25;
+            this.colCantidad.DefaultCellStyle.Format = "N2";
 
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.AllowUserToAddRows = true;
