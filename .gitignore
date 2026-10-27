@@ -22,7 +22,7 @@ packages/
 publish*/
 
 #carpeta de scripts de pwsh
-scripts*/
+scripts/.fix
 
 #
 ProyectoFinal/Consola/mvp.db
