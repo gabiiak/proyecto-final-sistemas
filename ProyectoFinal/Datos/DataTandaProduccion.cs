@@ -73,6 +73,57 @@ namespace Datos
             return lista;
         }
 
+        public static List<TandaProduccion> GetTandasTerminadasPorFecha(DateTime fecha)
+        {
+            List<TandaProduccion> lista = new List<TandaProduccion>();
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT t.idTanda, t.fecha, t.estado, t.cantidadProducida, t.fechaCaducidad,
+                                           p.idProducto, p.nombre, p.descripcion, p.precio, p.activo, p.vidaUtilDias
+                                    FROM TandaProduccion t
+                                    INNER JOIN Productos p ON t.idProducto = p.idProducto
+                                    WHERE t.estado = @Estado
+                                      AND t.fecha >= @FechaInicio
+                                      AND t.fecha < @FechaFin
+                                    ORDER BY t.fecha ASC, t.idTanda ASC";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.Add("@Estado", SqlDbType.Int).Value = EstadoTanda.Terminada;
+                    cmd.Parameters.Add("@FechaInicio", SqlDbType.DateTime).Value = fecha.Date;
+                    cmd.Parameters.Add("@FechaFin", SqlDbType.DateTime).Value = fecha.Date.AddDays(1);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            TandaProduccion tanda = new TandaProduccion
+                            {
+                                IdTanda = reader.GetInt32(0),
+                                Fecha = reader.GetDateTime(1),
+                                Hora = reader.GetDateTime(1), // la hora se lee del mismo DATETIME2
+                                EstadoTanda = (int)reader.GetByte(2),
+                                CantidadProducida = reader.GetInt32(3),
+                                FechaCaducidad = reader.IsDBNull(4) ? DateTime.MinValue : reader.GetDateTime(4),
+                                Producto = new Producto
+                                {
+                                    IdProducto = reader.GetInt32(5),
+                                    Nombre = reader.GetString(6),
+                                    Descripcion = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                                    Precio = reader.GetDecimal(8),
+                                    Activo = reader.IsDBNull(9) ? 1 : (reader.GetBoolean(9) ? 1 : 0),
+                                    VidaUtilDias = reader.IsDBNull(10) ? 0 : reader.GetInt32(10)
+                                }
+                            };
+                            lista.Add(tanda);
+                        }
+                    }
+                }
+            }
+            return lista;
+        }
+
         public static TandaProduccion GetTandaById(int idTanda)
         {
             using (SqlConnection connection = Db.GetConnection())

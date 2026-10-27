@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace Login
 {
     partial class UIRegistrarPresupuesto
@@ -109,7 +111,8 @@ namespace Login
             this.colPrecioUnitario.FillWeight = 15;
             this.colPrecioUnitario.ValueType = typeof(decimal);
             this.colPrecioUnitario.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colPrecioUnitario.DefaultCellStyle.Format = "$#,##0.00";
+            this.colPrecioUnitario.DefaultCellStyle.Format = "#,##0.00";
+            this.colPrecioUnitario.DefaultCellStyle.BackColor = Color.LightGreen;
             this.colPrecioUnitario.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
 
             this.colSubtotal.HeaderText = "Subtotal";

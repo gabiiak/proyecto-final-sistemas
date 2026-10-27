@@ -54,6 +54,24 @@ namespace Negocio
             return DataTandaProduccion.GetAllTandas();
         }
 
+        public static List<TandaProduccion> ObtenerTandasTerminadasPorFecha(DateTime fecha)
+        {
+            ValidarFechaJornada(fecha);
+            return DataTandaProduccion.GetTandasTerminadasPorFecha(fecha.Date);
+        }
+
+        public static List<ResumenInsumoJornada> ObtenerInsumosAgregadosPorFecha(DateTime fecha)
+        {
+            ValidarFechaJornada(fecha);
+            return DataDetalleTandaProduccion.GetInsumosAgregadosPorFecha(fecha.Date);
+        }
+
+        private static void ValidarFechaJornada(DateTime fecha)
+        {
+            if (fecha.Date > DateTime.Today)
+                throw new ArgumentException("No se puede consultar una fecha futura.");
+        }
+
         public static TandaProduccion ObtenerPorId(int idTanda)
         {
             if (idTanda <= 0)

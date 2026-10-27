@@ -1,3 +1,4 @@
+using System.Data;
 using System.Data.SqlClient;
 using Modelos;
 using System;
@@ -88,6 +89,46 @@ namespace Datos
                                 
                             };
                             lista.Add(detalle);
+                        }
+                    }
+                }
+            }
+            return lista;
+        }
+
+        public static List<ResumenInsumoJornada> GetInsumosAgregadosPorFecha(DateTime fecha)
+        {
+            List<ResumenInsumoJornada> lista = new List<ResumenInsumoJornada>();
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT i.id, i.nombre, i.unidadMedida, SUM(dt.cantidadUtilizada) AS cantidadTotal
+                                    FROM DetalleTanda dt
+                                    INNER JOIN TandaProduccion t ON dt.idTandaProd = t.idTanda
+                                    INNER JOIN Insumos i ON dt.idInsumo = i.id
+                                    WHERE t.estado = @Estado
+                                      AND t.fecha >= @FechaInicio
+                                      AND t.fecha < @FechaFin
+                                    GROUP BY i.id, i.nombre, i.unidadMedida
+                                    ORDER BY i.nombre ASC";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.Add("@Estado", SqlDbType.Int).Value = EstadoTanda.Terminada;
+                    cmd.Parameters.Add("@FechaInicio", SqlDbType.DateTime).Value = fecha.Date;
+                    cmd.Parameters.Add("@FechaFin", SqlDbType.DateTime).Value = fecha.Date.AddDays(1);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lista.Add(new ResumenInsumoJornada
+                            {
+                                IdInsumo = reader.GetInt32(0),
+                                NombreInsumo = reader.IsDBNull(1) ? string.Empty : reader.GetString(1),
+                                UnidadMedida = reader.IsDBNull(2) ? string.Empty : reader.GetString(2),
+                                CantidadTotal = reader.IsDBNull(3) ? 0m : reader.GetDecimal(3)
+                            });
                         }
                     }
                 }

@@ -254,7 +254,7 @@ namespace Login
                     total += subtotal;
             }
 
-            lblTotal.Text = "$" + total.ToString("N2");
+            lblTotal.Text = "$" + total.ToString();
         }
 
         private void dgvDetalle_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)

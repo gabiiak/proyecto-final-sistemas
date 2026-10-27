@@ -213,6 +213,7 @@
     <Compile Include="Presupuesto.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="RecetaProducto.cs" />
+    <Compile Include="ResumenInsumoJornada.cs" />
     <Compile Include="ResumenProveedor.cs" />
     <Compile Include="SolicitudCotizacion.cs" />
     <Compile Include="ResumenCompras.cs" />
