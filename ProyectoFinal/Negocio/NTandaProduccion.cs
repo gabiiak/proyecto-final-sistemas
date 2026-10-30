@@ -7,6 +7,15 @@ namespace Negocio
 {
     public class NTandaProduccion
     {
+        public static List<TandaProduccion> GetTandasPorPeriodo(int anio, int mes)
+        {
+            if (mes < 1 || mes > 12)
+                throw new ArgumentException("El mes debe estar entre 1 y 12.");
+            if (anio < 2000 || anio > DateTime.Now.Year + 1)
+                throw new ArgumentException("El año seleccionado no es válido.");
+            return DataTandaProduccion.GetTandasPorPeriodo(anio, mes);
+        }
+
         public static int RegistrarTanda(TandaProduccion tanda)
         {
             if (tanda == null)

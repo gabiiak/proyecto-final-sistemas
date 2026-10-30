@@ -76,6 +76,7 @@ namespace Login
             ConfigurarBotonFantasma(this.btnDesfiltrar, "Quitar filtros",
                 new System.Drawing.Point(246, 124), 9);
             this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
+
         }
 
         private void UISalesManagement_Load(object sender, EventArgs e)

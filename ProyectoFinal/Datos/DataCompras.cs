@@ -394,5 +394,29 @@ namespace Datos
                 montoPagado = (double)reader.GetDecimal(8)
             };
         }
+        // Compras del mes/año seleccionado (incluye canceladas; el resumen las excluye después)
+        public static List<Compra> GetComprasPorPeriodo(int anio, int mes)
+        {
+            List<Compra> lista = new List<Compra>();
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT idCompra, idProveedor, idPresupuesto, fecha, fechaRecepcion, estado, estadoPago, totalCompra, montoPagado
+                            FROM Compras
+                            WHERE YEAR(fecha) = @Anio AND MONTH(fecha) = @Mes
+                            ORDER BY fecha, idCompra";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.Add("@Anio", SqlDbType.Int).Value = anio;
+                    cmd.Parameters.Add("@Mes", SqlDbType.Int).Value = mes;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            lista.Add(MapCompra(reader));
+                    }
+                }
+            }
+            return lista;
+        }
     }
 }

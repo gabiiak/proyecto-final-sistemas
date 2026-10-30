@@ -86,6 +86,11 @@ namespace Login
                 new System.Drawing.Point(16, 186), 11);
             this.btnVerCanceladas.Size = new System.Drawing.Size(180, 32);
             this.btnVerCanceladas.Click += new System.EventHandler(this.btnVerCanceladas_Click);
+
+            ConfigurarBotonSecundario(this.btnReporteMensual, "Reporte mensual (PDF)",
+                new System.Drawing.Point(246, 180), 10);
+            this.btnReporteMensual.Size = new System.Drawing.Size(196, 32);
+            this.btnReporteMensual.Click += (s, ev) => new UIReporteCompras().ShowDialog();
         }
 
         private void UIGestionCompras_Load(object sender, EventArgs e)
@@ -312,6 +317,7 @@ namespace Login
             }
             ActualizarDataGridView();
         }
+
 
         private void btnConsultarCompra_Click(object sender, EventArgs e)
         {
