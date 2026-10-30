@@ -152,7 +152,8 @@ namespace Login
 
             if (!DateTime.TryParse(txtHora.Text, out DateTime hora))
             {
-                hora = DateTime.Now;
+                MessageBox.Show("Formato de hora inválido. Usa HH:MM:SS.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             if (listaDetalles.Count == 0)
