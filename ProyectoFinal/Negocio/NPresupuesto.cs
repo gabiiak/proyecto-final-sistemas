@@ -122,6 +122,17 @@ namespace Negocio
             return DataPresupuesto.GetDeleted();
         }
 
+        public static List<Presupuesto> GetReporteMensual(int anio, int mes)
+        {
+            if (anio < 2000 || anio > 2100)
+                throw new ArgumentException("El año debe estar entre 2000 y 2100.");
+
+            if (mes < 1 || mes > 12)
+                throw new ArgumentException("El mes debe estar entre 1 y 12.");
+
+            return DataPresupuesto.GetByMes(anio, mes);
+        }
+
         public static Presupuesto GetById(int idPresupuesto)
         {
             if (idPresupuesto <= 0)

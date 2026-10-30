@@ -169,6 +169,77 @@ namespace Datos
             return null;
         }
 
+        public static List<Presupuesto> GetByMes(int anio, int mes)
+        {
+            DateTime desde = new DateTime(anio, mes, 1);
+            DateTime hasta = desde.AddMonths(1);
+            List<Presupuesto> lista = new List<Presupuesto>();
+
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                connection.Open();
+
+                string sqlCabeceras = @"SELECT p.idPresupuesto, p.idSolicitud, p.fecha, p.total, p.activo,
+                                               s.idProveedor, s.estado, pr.Nombre
+                                        FROM Presupuesto p
+                                        INNER JOIN SolicitudCotizacion s ON s.idSolicitud = p.idSolicitud
+                                        INNER JOIN Proveedores pr ON pr.IdProveedor = s.idProveedor
+                                        WHERE p.activo = 1
+                                          AND p.fecha >= @Desde
+                                          AND p.fecha < @Hasta
+                                        ORDER BY p.fecha ASC, p.idPresupuesto ASC;";
+
+                using (SqlCommand cmd = new SqlCommand(sqlCabeceras, connection))
+                {
+                    cmd.Parameters.Add("@Desde", SqlDbType.DateTime).Value = desde;
+                    cmd.Parameters.Add("@Hasta", SqlDbType.DateTime).Value = hasta;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            lista.Add(MapearPresupuesto(reader));
+                        }
+                    }
+                }
+
+                Dictionary<int, Presupuesto> presupuestosPorId = new Dictionary<int, Presupuesto>();
+                foreach (Presupuesto presupuesto in lista)
+                {
+                    presupuestosPorId[presupuesto.IdPresupuesto] = presupuesto;
+                }
+
+                string sqlDetalles = @"SELECT d.idDetallePresupuesto, d.idPresupuesto, d.idInsumo, d.cantidad,
+                                              d.precioUnitario, d.subtotal, i.nombre, i.unidadMedida
+                                       FROM DetallePresupuesto d
+                                       INNER JOIN Presupuesto p ON p.idPresupuesto = d.idPresupuesto
+                                       INNER JOIN Insumos i ON i.id = d.idInsumo
+                                       WHERE p.activo = 1
+                                         AND p.fecha >= @Desde
+                                         AND p.fecha < @Hasta
+                                       ORDER BY d.idPresupuesto ASC, d.idDetallePresupuesto ASC;";
+
+                using (SqlCommand cmd = new SqlCommand(sqlDetalles, connection))
+                {
+                    cmd.Parameters.Add("@Desde", SqlDbType.DateTime).Value = desde;
+                    cmd.Parameters.Add("@Hasta", SqlDbType.DateTime).Value = hasta;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DetallePresupuesto detalle = MapearDetallePresupuesto(reader);
+                            Presupuesto presupuesto;
+                            if (presupuestosPorId.TryGetValue(detalle.IdPresupuesto, out presupuesto))
+                            {
+                                presupuesto.Detalles.Add(detalle);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return lista;
+        }
+
         private static Presupuesto MapearPresupuesto(SqlDataReader reader)
         {
             return new Presupuesto
@@ -204,22 +275,27 @@ namespace Datos
                     {
                         while (reader.Read())
                         {
-                            lista.Add(new DetallePresupuesto
-                            {
-                                IdDetallePresupuesto = reader.GetInt32(0),
-                                IdPresupuesto = reader.GetInt32(1),
-                                IdInsumo = reader.GetInt32(2),
-                                Cantidad = reader.GetDecimal(3),
-                                PrecioUnitario = reader.GetDecimal(4),
-                                Subtotal = reader.GetDecimal(5),
-                                NombreInsumo = reader.GetString(6),
-                                UnidadMedidaInsumo = reader.GetString(7)
-                            });
+                            lista.Add(MapearDetallePresupuesto(reader));
                         }
                     }
                 }
             }
             return lista;
+        }
+
+        private static DetallePresupuesto MapearDetallePresupuesto(SqlDataReader reader)
+        {
+            return new DetallePresupuesto
+            {
+                IdDetallePresupuesto = reader.GetInt32(0),
+                IdPresupuesto = reader.GetInt32(1),
+                IdInsumo = reader.GetInt32(2),
+                Cantidad = reader.GetDecimal(3),
+                PrecioUnitario = reader.GetDecimal(4),
+                Subtotal = reader.GetDecimal(5),
+                NombreInsumo = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
+                UnidadMedidaInsumo = reader.IsDBNull(7) ? string.Empty : reader.GetString(7)
+            };
         }
 
         public static void Eliminar(int idPresupuesto)
