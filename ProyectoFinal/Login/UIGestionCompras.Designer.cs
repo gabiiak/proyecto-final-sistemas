@@ -42,6 +42,7 @@
             this.colMontoPagado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEstadoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnReporteMensual = new System.Windows.Forms.Button();
 
             this.pnlAcciones.SuspendLayout();
             this.pnlFiltros.SuspendLayout();
@@ -138,6 +139,7 @@
             this.pnlFiltros.Controls.Add(this.lblFiltroProveedor);
             this.pnlFiltros.Controls.Add(this.cbProveedorFiltro);
             this.pnlFiltros.Controls.Add(this.btnFiltroProveedor);
+            this.pnlFiltros.Controls.Add(this.btnReporteMensual);
             this.pnlFiltros.Controls.Add(this.btnDesfiltrar);
             this.pnlFiltros.Controls.Add(this.btnVerCanceladas);
 
@@ -226,6 +228,7 @@
         }
 
         // ── DECLARACIÓN ─────────────────────────────────────────
+        private System.Windows.Forms.Button btnReporteMensual;
         private System.Windows.Forms.Panel pnlAcciones;
         private System.Windows.Forms.Panel pnlFiltros;
         private System.Windows.Forms.Label lblTitulo;

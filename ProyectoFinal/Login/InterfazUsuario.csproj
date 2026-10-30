@@ -392,6 +392,18 @@
     <Compile Include="UIRegistrarSolicitudCotizacion.Designer.cs">
       <DependentUpon>UIRegistrarSolicitudCotizacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIReporteCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIReporteCompras.Designer.cs">
+      <DependentUpon>UIReporteCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIReporteTandas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIReporteTandas.Designer.cs">
+      <DependentUpon>UIReporteTandas.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIResultadosIA.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -680,6 +692,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIGestionVentas.resx">
       <DependentUpon>UIGestionVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIReporteCompras.resx">
+      <DependentUpon>UIReporteCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIReporteTandas.resx">
+      <DependentUpon>UIReporteTandas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIResultadosIA.resx">
       <DependentUpon>UIResultadosIA.cs</DependentUpon>

@@ -28,6 +28,7 @@ namespace Negocio
             return DataCompras.GetComprasPorMesSemestre(anio, semestre);
         }
 
+
         public static List<(string Nombre, double Total)> GetTopProveedoresPorMonto()
         {
             return DataCompras.GetTopProveedoresPorMonto();
@@ -37,6 +38,14 @@ namespace Negocio
         public static List<Compra> GetAllCompras() { return DataCompras.GetAllCompras(); }
         public static Compra GetCompraById(int idCompra) { return DataCompras.GetCompraById(idCompra); }
         public static Compra GetMontoPagado(int idCompra) { return DataCompras.GetMontoPagado(idCompra); }
+        public static List<Compra> GetComprasPorPeriodo(int anio, int mes)
+        {
+            if (mes < 1 || mes > 12)
+                throw new ArgumentException("El mes debe estar entre 1 y 12.");
+            if (anio < 2000 || anio > DateTime.Now.Year + 1)
+                throw new ArgumentException("El año seleccionado no es válido.");
+            return DataCompras.GetComprasPorPeriodo(anio, mes);
+        }
 
         // ---------- Alta ----------
         public static int RegistrarPedidoCompra(Compra compra, List<DetalleCompra> detalles)

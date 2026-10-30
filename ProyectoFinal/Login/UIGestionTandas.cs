@@ -34,8 +34,12 @@ namespace Login
             this.btnConsultarTanda.Click += new System.EventHandler(this.btnConsultarTanda_Click);
 
             ConfigurarBotonSecundario(this.btnJornadaLaboral, "Informe diario", new System.Drawing.Point(16, 156), 6);
-            this.btnJornadaLaboral.Size = new System.Drawing.Size(288, 36);
+            this.btnJornadaLaboral.Size = new System.Drawing.Size(138, 36);
             this.btnJornadaLaboral.Click += new System.EventHandler(this.btnJornadaLaboral_Click);
+
+            ConfigurarBotonSecundario(this.btnReporteMensual, "Reporte mensual (PDF)", new System.Drawing.Point(166, 156), 7);
+            this.btnReporteMensual.Size = new System.Drawing.Size(138, 36);
+            this.btnReporteMensual.Click += (s, ev) => new UIReporteTandas().ShowDialog();
 
             ConfigurarLabel(this.lblDesde, "Desde", new System.Drawing.Point(16, 16));
             ConfigurarLabel(this.lblHasta, "Hasta", new System.Drawing.Point(16, 68));

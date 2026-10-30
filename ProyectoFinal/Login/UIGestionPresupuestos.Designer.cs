@@ -31,6 +31,10 @@ namespace Login
             this.txtNumeroCotizacion = new System.Windows.Forms.TextBox();
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.btnDesfiltrar = new System.Windows.Forms.Button();
+            this.lblPeriodo = new System.Windows.Forms.Label();
+            this.cbMes = new System.Windows.Forms.ComboBox();
+            this.numAnio = new System.Windows.Forms.NumericUpDown();
+            this.btnGenerarReporte = new System.Windows.Forms.Button();
             this.dgvPresupuestos = new System.Windows.Forms.DataGridView();
             this.colIdPresupuesto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIdSolicitud = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,7 +97,7 @@ namespace Login
             // ── PANEL FILTROS ───────────────────────────────────────
             this.pnlFiltros.BackColor = System.Drawing.Color.White;
             this.pnlFiltros.Location = new System.Drawing.Point(356, 56);
-            this.pnlFiltros.Size = new System.Drawing.Size(624, 140);
+            this.pnlFiltros.Size = new System.Drawing.Size(624, 160);
             this.pnlFiltros.Name = "pnlFiltros";
 
             this.pnlFiltros.Controls.Add(this.lblFiltroProveedor);
@@ -102,6 +106,10 @@ namespace Login
             this.pnlFiltros.Controls.Add(this.txtNumeroCotizacion);
             this.pnlFiltros.Controls.Add(this.btnFiltrar);
             this.pnlFiltros.Controls.Add(this.btnDesfiltrar);
+            this.pnlFiltros.Controls.Add(this.lblPeriodo);
+            this.pnlFiltros.Controls.Add(this.cbMes);
+            this.pnlFiltros.Controls.Add(this.numAnio);
+            this.pnlFiltros.Controls.Add(this.btnGenerarReporte);
 
             // ── DATAGRIDVIEW ────────────────────────────────────────
             this.dgvPresupuestos.Location = new System.Drawing.Point(20, 372);
@@ -185,6 +193,10 @@ namespace Login
         private System.Windows.Forms.TextBox txtNumeroCotizacion;
         private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.Button btnDesfiltrar;
+        private System.Windows.Forms.Label lblPeriodo;
+        private System.Windows.Forms.ComboBox cbMes;
+        private System.Windows.Forms.NumericUpDown numAnio;
+        private System.Windows.Forms.Button btnGenerarReporte;
         private System.Windows.Forms.DataGridView dgvPresupuestos;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdPresupuesto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdSolicitud;
