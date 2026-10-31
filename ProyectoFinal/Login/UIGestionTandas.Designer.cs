@@ -14,6 +14,7 @@
         {
             this.pnlAcciones = new System.Windows.Forms.Panel();
             this.pnlFiltros = new System.Windows.Forms.Panel();
+            this.pnlSepVertical = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblIdTandaLabel = new System.Windows.Forms.Label();
             this.labelId = new System.Windows.Forms.Label();
@@ -102,12 +103,10 @@
 
             
 
-            var pnlSepVertical = new System.Windows.Forms.Panel
-            {
-                BackColor = System.Drawing.Color.FromArgb(211, 209, 199),
-                Location = new System.Drawing.Point(226, 16),
-                Size = new System.Drawing.Size(1, 168)
-            };
+            this.pnlSepVertical.BackColor = System.Drawing.Color.FromArgb(211, 209, 199);
+            this.pnlSepVertical.Location = new System.Drawing.Point(226, 16);
+            this.pnlSepVertical.Size = new System.Drawing.Size(1, 168);
+            this.pnlSepVertical.Name = "pnlSepVertical";
 
             
 
@@ -116,7 +115,7 @@
             this.pnlFiltros.Controls.Add(this.lblHasta);
             this.pnlFiltros.Controls.Add(this.dtpHasta);
             this.pnlFiltros.Controls.Add(this.btnFiltrarPorFecha);
-            this.pnlFiltros.Controls.Add(pnlSepVertical);
+            this.pnlFiltros.Controls.Add(this.pnlSepVertical);
             this.pnlFiltros.Controls.Add(this.lblFiltroProducto);
             this.pnlFiltros.Controls.Add(this.cbProductoFiltro);
             this.pnlFiltros.Controls.Add(this.btnFiltroProducto);
@@ -175,6 +174,7 @@
 
         private System.Windows.Forms.Panel pnlAcciones;
         private System.Windows.Forms.Panel pnlFiltros;
+        private System.Windows.Forms.Panel pnlSepVertical;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label lblIdTandaLabel;
         private System.Windows.Forms.Label labelId;

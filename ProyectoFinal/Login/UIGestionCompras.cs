@@ -91,6 +91,8 @@ namespace Login
                 new System.Drawing.Point(246, 180), 10);
             this.btnReporteMensual.Size = new System.Drawing.Size(196, 32);
             this.btnReporteMensual.Click += (s, ev) => new UIReporteCompras().ShowDialog();
+
+
         }
 
         private void UIGestionCompras_Load(object sender, EventArgs e)
