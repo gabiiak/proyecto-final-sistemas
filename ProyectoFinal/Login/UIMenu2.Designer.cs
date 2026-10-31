@@ -43,6 +43,7 @@ namespace Login
         private void InitializeComponent()
         {
             this.pnlSidebar = new System.Windows.Forms.Panel();
+            this.btnAsistenteIA = new System.Windows.Forms.Button();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnTema = new System.Windows.Forms.Button();
             this.btnCompras = new System.Windows.Forms.Button();
@@ -61,7 +62,6 @@ namespace Login
             this.lblUsuario = new System.Windows.Forms.Label();
             this.pnlSeparador = new System.Windows.Forms.Panel();
             this.lblFecha = new System.Windows.Forms.Label();
-            this.btnAsistenteIA = new System.Windows.Forms.Button();
             this.pnlSidebar.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.SuspendLayout();
@@ -86,8 +86,21 @@ namespace Login
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Padding = new System.Windows.Forms.Padding(0, 12, 0, 12);
-            this.pnlSidebar.Size = new System.Drawing.Size(220, 749);
+            this.pnlSidebar.Size = new System.Drawing.Size(189, 749);
             this.pnlSidebar.TabIndex = 2;
+            // 
+            // btnAsistenteIA
+            // 
+            this.btnAsistenteIA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(59)))), ((int)(((byte)(91)))));
+            this.btnAsistenteIA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAsistenteIA.ForeColor = System.Drawing.Color.White;
+            this.btnAsistenteIA.Location = new System.Drawing.Point(93, 412);
+            this.btnAsistenteIA.Name = "btnAsistenteIA";
+            this.btnAsistenteIA.Size = new System.Drawing.Size(190, 42);
+            this.btnAsistenteIA.TabIndex = 12;
+            this.btnAsistenteIA.Text = "Asistente IA";
+            this.btnAsistenteIA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAsistenteIA.UseVisualStyleBackColor = false;
             // 
             // btnCerrarSesion
             // 
@@ -174,7 +187,7 @@ namespace Login
             this.lblTituloApp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(212)))), ((int)(((byte)(244)))));
             this.lblTituloApp.Location = new System.Drawing.Point(0, 12);
             this.lblTituloApp.Name = "lblTituloApp";
-            this.lblTituloApp.Size = new System.Drawing.Size(220, 60);
+            this.lblTituloApp.Size = new System.Drawing.Size(189, 60);
             this.lblTituloApp.TabIndex = 9;
             this.lblTituloApp.Text = "T&&G System";
             this.lblTituloApp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -183,9 +196,9 @@ namespace Login
             // 
             this.pnlContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
             this.pnlContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContenedor.Location = new System.Drawing.Point(220, 50);
+            this.pnlContenedor.Location = new System.Drawing.Point(189, 50);
             this.pnlContenedor.Name = "pnlContenedor";
-            this.pnlContenedor.Size = new System.Drawing.Size(808, 699);
+            this.pnlContenedor.Size = new System.Drawing.Size(839, 699);
             this.pnlContenedor.TabIndex = 0;
             // 
             // pnlHeader
@@ -196,10 +209,10 @@ namespace Login
             this.pnlHeader.Controls.Add(this.pnlSeparador);
             this.pnlHeader.Controls.Add(this.lblFecha);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(220, 0);
+            this.pnlHeader.Location = new System.Drawing.Point(189, 0);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
-            this.pnlHeader.Size = new System.Drawing.Size(808, 50);
+            this.pnlHeader.Size = new System.Drawing.Size(839, 50);
             this.pnlHeader.TabIndex = 1;
             // 
             // lblModuloActivo
@@ -207,7 +220,7 @@ namespace Login
             this.lblModuloActivo.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblModuloActivo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblModuloActivo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(58)))), ((int)(((byte)(94)))));
-            this.lblModuloActivo.Location = new System.Drawing.Point(327, 0);
+            this.lblModuloActivo.Location = new System.Drawing.Point(358, 0);
             this.lblModuloActivo.Name = "lblModuloActivo";
             this.lblModuloActivo.Size = new System.Drawing.Size(200, 50);
             this.lblModuloActivo.TabIndex = 1;
@@ -228,7 +241,7 @@ namespace Login
             // 
             this.pnlSeparador.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(209)))), ((int)(((byte)(199)))));
             this.pnlSeparador.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlSeparador.Location = new System.Drawing.Point(527, 0);
+            this.pnlSeparador.Location = new System.Drawing.Point(558, 0);
             this.pnlSeparador.Name = "pnlSeparador";
             this.pnlSeparador.Size = new System.Drawing.Size(1, 50);
             this.pnlSeparador.TabIndex = 2;
@@ -238,25 +251,12 @@ namespace Login
             this.lblFecha.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblFecha.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblFecha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(135)))), ((int)(((byte)(128)))));
-            this.lblFecha.Location = new System.Drawing.Point(528, 0);
+            this.lblFecha.Location = new System.Drawing.Point(559, 0);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.Size = new System.Drawing.Size(260, 50);
             this.lblFecha.TabIndex = 3;
             this.lblFecha.Text = "martes, 6 de octubre de 2026";
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnAsistenteIA
-            // 
-            this.btnAsistenteIA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(59)))), ((int)(((byte)(91)))));
-            this.btnAsistenteIA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAsistenteIA.ForeColor = System.Drawing.Color.White;
-            this.btnAsistenteIA.Location = new System.Drawing.Point(93, 412);
-            this.btnAsistenteIA.Name = "btnAsistenteIA";
-            this.btnAsistenteIA.Size = new System.Drawing.Size(190, 42);
-            this.btnAsistenteIA.TabIndex = 12;
-            this.btnAsistenteIA.Text = "Asistente IA";
-            this.btnAsistenteIA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAsistenteIA.UseVisualStyleBackColor = false;
             // 
             // UIMenu2
             // 

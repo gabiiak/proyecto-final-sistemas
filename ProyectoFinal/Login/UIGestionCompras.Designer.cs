@@ -15,6 +15,7 @@
             this.btnExportarExcel = new System.Windows.Forms.Button();
             this.pnlAcciones = new System.Windows.Forms.Panel();
             this.pnlFiltros = new System.Windows.Forms.Panel();
+            this.pnlSepVertical = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblIdCompraLabel = new System.Windows.Forms.Label();
             this.labelId = new System.Windows.Forms.Label();
@@ -43,14 +44,17 @@
             this.colEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEstadoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnReporteMensual = new System.Windows.Forms.Button();
+            this.pnlDerecha = new System.Windows.Forms.Panel();
 
+            this.pnlDerecha.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
             this.pnlFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTodasLasCompras)).BeginInit();
             this.SuspendLayout();
 
             // ── FORM ────────────────────────────────────────────────
-            this.ClientSize = new System.Drawing.Size(1000, 680);
+            this.ClientSize = new System.Drawing.Size(1300, 680);
+            //this.ClientSize = new System.Drawing.Size(1000, 680); en el size original. estamos experimentando
             this.Text = "Gestión de Compras";
             this.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -101,6 +105,12 @@
             this.pnlFiltros.Size = new System.Drawing.Size(624, 240);
             this.pnlFiltros.Name = "pnlFiltros";
 
+            // ── PANEL DERECHA ───────────────────────────────────
+            this.pnlDerecha.BackColor = System.Drawing.Color.Magenta;
+            this.pnlDerecha.Location = new System.Drawing.Point(900, 56);
+            this.pnlDerecha.Size = new System.Drawing.Size(720, 240);
+            this.pnlDerecha.Name = "pnlDerecha";
+
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDesde.Location = new System.Drawing.Point(16, 36);
             this.dtpDesde.Size = new System.Drawing.Size(180, 28);
@@ -115,13 +125,10 @@
             this.dtpHasta.TabIndex = 5;
             this.dtpHasta.Name = "dtpHasta";
 
-            var pnlSepVertical = new System.Windows.Forms.Panel
-            {
-                BackColor = System.Drawing.Color.FromArgb(211, 209, 199),
-                Location = new System.Drawing.Point(226, 16),
-                Size = new System.Drawing.Size(1, 168),
-                Name = "pnlSepVertical"
-            };
+            this.pnlSepVertical.BackColor = System.Drawing.Color.FromArgb(211, 209, 199);
+            this.pnlSepVertical.Location = new System.Drawing.Point(226, 16);
+            this.pnlSepVertical.Size = new System.Drawing.Size(1, 168);
+            this.pnlSepVertical.Name = "pnlSepVertical";
 
             this.cbProveedorFiltro.Location = new System.Drawing.Point(246, 36);
             this.cbProveedorFiltro.Size = new System.Drawing.Size(196, 28);
@@ -135,7 +142,7 @@
             this.pnlFiltros.Controls.Add(this.lblHasta);
             this.pnlFiltros.Controls.Add(this.dtpHasta);
             this.pnlFiltros.Controls.Add(this.btnFiltrarPorFecha);
-            this.pnlFiltros.Controls.Add(pnlSepVertical);
+            this.pnlFiltros.Controls.Add(this.pnlSepVertical);
             this.pnlFiltros.Controls.Add(this.lblFiltroProveedor);
             this.pnlFiltros.Controls.Add(this.cbProveedorFiltro);
             this.pnlFiltros.Controls.Add(this.btnFiltroProveedor);
@@ -219,6 +226,7 @@
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pnlAcciones);
             this.Controls.Add(this.pnlFiltros);
+            this.Controls.Add(this.pnlDerecha);
             this.Controls.Add(this.dgvTodasLasCompras);
 
             this.pnlAcciones.ResumeLayout(false);
@@ -231,6 +239,7 @@
         private System.Windows.Forms.Button btnReporteMensual;
         private System.Windows.Forms.Panel pnlAcciones;
         private System.Windows.Forms.Panel pnlFiltros;
+        private System.Windows.Forms.Panel pnlSepVertical;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label lblIdCompraLabel;
         private System.Windows.Forms.Label labelId;
@@ -259,5 +268,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMontoPagado;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEstado;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEstadoPago;
+        private System.Windows.Forms.Panel pnlDerecha;
     }
 }
