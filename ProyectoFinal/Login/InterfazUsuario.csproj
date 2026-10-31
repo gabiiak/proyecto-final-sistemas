@@ -278,12 +278,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="prueba.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="prueba.Designer.cs">
-      <DependentUpon>prueba.cs</DependentUpon>
-    </Compile>
     <Compile Include="UIConsultarCompra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -593,9 +587,6 @@
     <Compile Include="UIEstadoTransporte.Designer.cs">
       <DependentUpon>UIEstadoTransporte.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="prueba.resx">
-      <DependentUpon>prueba.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UIEvaluacionProveedor.resx">
       <DependentUpon>UIEvaluacionProveedor.cs</DependentUpon>
     </EmbeddedResource>

@@ -102,13 +102,13 @@
             // ── PANEL FILTROS ───────────────────────────────────────
             this.pnlFiltros.BackColor = System.Drawing.Color.White;
             this.pnlFiltros.Location = new System.Drawing.Point(356, 56);
-            this.pnlFiltros.Size = new System.Drawing.Size(624, 240);
+            this.pnlFiltros.Size = new System.Drawing.Size(624, 300);
             this.pnlFiltros.Name = "pnlFiltros";
 
             // ── PANEL DERECHA ───────────────────────────────────
-            this.pnlDerecha.BackColor = System.Drawing.Color.Magenta;
-            this.pnlDerecha.Location = new System.Drawing.Point(900, 56);
-            this.pnlDerecha.Size = new System.Drawing.Size(720, 240);
+            this.pnlDerecha.BackColor = System.Drawing.Color.White;
+            this.pnlDerecha.Location = new System.Drawing.Point(1000, 56);
+            this.pnlDerecha.Size = new System.Drawing.Size(704, 874);
             this.pnlDerecha.Name = "pnlDerecha";
 
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -152,7 +152,7 @@
 
             // ── DATAGRIDVIEW ────────────────────────────────────────
             this.dgvTodasLasCompras.Location = new System.Drawing.Point(20, 372);
-            this.dgvTodasLasCompras.Size = new System.Drawing.Size(960, 292);
+            this.dgvTodasLasCompras.Size = new System.Drawing.Size(960, 557);
             this.dgvTodasLasCompras.Name = "dgvTodasLasCompras";
             this.dgvTodasLasCompras.TabIndex = 10;
             this.dgvTodasLasCompras.AllowUserToAddRows = false;

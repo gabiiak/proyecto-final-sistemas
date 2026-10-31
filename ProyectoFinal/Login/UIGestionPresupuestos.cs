@@ -53,11 +53,13 @@ namespace Login
                 new System.Drawing.Point(166, 176), 5);
             this.btnAceptar.Size = new System.Drawing.Size(138, 32);
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.btnAceptar.BackColor = System.Drawing.Color.LightGreen;
 
             ConfigurarBotonSecundario(this.btnRechazar, "Rechazar",
                 new System.Drawing.Point(16, 216), 6);
             this.btnRechazar.Size = new System.Drawing.Size(138, 32);
             this.btnRechazar.Click += new System.EventHandler(this.btnRechazar_Click);
+            this.btnRechazar.BackColor = System.Drawing.Color.PaleVioletRed;
 
             ConfigurarBotonFantasma(this.btnPresupuestosEliminados, "Ver presupuestos eliminados",
                 new System.Drawing.Point(16, 264), 7);
@@ -68,27 +70,27 @@ namespace Login
             ConfigurarCombo(this.cbProveedorFiltro, new System.Drawing.Point(16, 38),
                 new System.Drawing.Size(250, 28), 8);
 
-            ConfigurarLabel(this.lblNumeroCotizacion, "N° de cotización", new System.Drawing.Point(300, 16));
-            ConfigurarTextBox(this.txtNumeroCotizacion, new System.Drawing.Point(300, 38),
-                new System.Drawing.Size(160, 28), 9);
+            ConfigurarLabel(this.lblNumeroCotizacion, "N° de cotización", new System.Drawing.Point(16, 82));
+            ConfigurarTextBox(this.txtNumeroCotizacion, new System.Drawing.Point(16, 104),
+                new System.Drawing.Size(120, 28), 9);
 
             ConfigurarBotonPrimario(this.btnFiltrar, "Filtrar",
-                new System.Drawing.Point(490, 36), 10);
-            this.btnFiltrar.Size = new System.Drawing.Size(120, 32);
+                new System.Drawing.Point(150, 104), 10);
+            this.btnFiltrar.Size = new System.Drawing.Size(120, 26);
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
 
             ConfigurarBotonFantasma(this.btnDesfiltrar, "Quitar filtros",
-                new System.Drawing.Point(490, 80), 11);
-            this.btnDesfiltrar.Size = new System.Drawing.Size(120, 28);
+                new System.Drawing.Point(16, 142), 11);
+            this.btnDesfiltrar.Size = new System.Drawing.Size(255, 28);
             this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
 
-            ConfigurarLabel(this.lblPeriodo, "Mes / año", new System.Drawing.Point(300, 72));
+            ConfigurarLabel(this.lblPeriodo, "Reportes por Mes / año", new System.Drawing.Point(16, 176));
             this.lblPeriodo.Size = new System.Drawing.Size(180, 18);
 
-            ConfigurarCombo(this.cbMes, new System.Drawing.Point(300, 94),
+            ConfigurarCombo(this.cbMes, new System.Drawing.Point(16, 204),
                 new System.Drawing.Size(110, 28), 12, ComboBoxStyle.DropDownList);
 
-            this.numAnio.Location = new System.Drawing.Point(420, 94);
+            this.numAnio.Location = new System.Drawing.Point(140, 204);
             this.numAnio.Size = new System.Drawing.Size(70, 28);
             this.numAnio.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.numAnio.Minimum = 2000;
@@ -97,8 +99,8 @@ namespace Login
             this.numAnio.TabIndex = 13;
 
             ConfigurarBotonPrimario(this.btnGenerarReporte, "Generar reporte",
-                new System.Drawing.Point(490, 112), 14);
-            this.btnGenerarReporte.Size = new System.Drawing.Size(120, 28);
+                new System.Drawing.Point(16, 236), 14);
+            this.btnGenerarReporte.Size = new System.Drawing.Size(196, 28);
             this.btnGenerarReporte.Click += new System.EventHandler(this.btnGenerarReporte_Click);
             UIStyles.AplicarTemaAForm(this);
         }

@@ -49,7 +49,7 @@ namespace Login
             this.SuspendLayout();
 
             // ── FORM ────────────────────────────────────────────────
-            this.ClientSize = new System.Drawing.Size(1000, 680);
+            this.ClientSize = new System.Drawing.Size(1326, 680);
             this.Text = "Gestión de Presupuestos";
             this.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -96,8 +96,9 @@ namespace Login
 
             // ── PANEL FILTROS ───────────────────────────────────────
             this.pnlFiltros.BackColor = System.Drawing.Color.White;
-            this.pnlFiltros.Location = new System.Drawing.Point(356, 56);
-            this.pnlFiltros.Size = new System.Drawing.Size(624, 160);
+            //this.pnlFiltros.Location = new System.Drawing.Point(356, 56);
+            this.pnlFiltros.Location = new System.Drawing.Point(20, 372);
+            this.pnlFiltros.Size = new System.Drawing.Size(320, 280);
             this.pnlFiltros.Name = "pnlFiltros";
 
             this.pnlFiltros.Controls.Add(this.lblFiltroProveedor);
@@ -112,8 +113,8 @@ namespace Login
             this.pnlFiltros.Controls.Add(this.btnGenerarReporte);
 
             // ── DATAGRIDVIEW ────────────────────────────────────────
-            this.dgvPresupuestos.Location = new System.Drawing.Point(20, 372);
-            this.dgvPresupuestos.Size = new System.Drawing.Size(960, 292);
+            this.dgvPresupuestos.Location = new System.Drawing.Point(356, 56);
+            this.dgvPresupuestos.Size = new System.Drawing.Size(960, 594);
             this.dgvPresupuestos.Name = "dgvPresupuestos";
             this.dgvPresupuestos.TabIndex = 11;
             this.dgvPresupuestos.AllowUserToAddRows = false;
