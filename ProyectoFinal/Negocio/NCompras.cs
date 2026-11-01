@@ -16,6 +16,12 @@ namespace Negocio
             return DataCompras.GetComprasPorMesAnio(anio);
         }
 
+        public static Dictionary<int, double> GetGastoPorMesAnio()
+        {
+            int anio = DateTime.Today.Year;
+            return DataCompras.GetGastoPorMesAnio(anio);
+        }
+
         public static Dictionary<int, double> GetComprasPorMesSemestre(int anio, int semestre)
         {
             return DataCompras.GetComprasPorMesSemestre(anio, semestre);

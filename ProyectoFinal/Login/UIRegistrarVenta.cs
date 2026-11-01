@@ -22,6 +22,7 @@ namespace Login
         public UIRegistrarVenta()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
             dgvVenta_DetalleVenta.AllowUserToAddRows = false;
             ConfigurarLabel(this.lblCliente, "Cliente", new System.Drawing.Point(16, 16));
             ConfigurarLabel(this.lblMetodo, "Método de pago", new System.Drawing.Point(256, 16));

@@ -24,6 +24,7 @@ namespace Login
         public UIJornadaLaboral()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
 
             ConfigurarLabel(this.lblTitulo, "Informe diario de producción", new Point(20, 16), new Size(500, 32));
             this.lblTitulo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);

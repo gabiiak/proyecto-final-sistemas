@@ -1,6 +1,11 @@
 ﻿using ClosedXML.Excel;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.WinForms;
 using Modelos;
 using Negocio;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Login
 {
-    public partial class UIGestionCompras : Form
+    public partial class UIGestionCompras : Form, IRecargable
     {
         private List<Compra> listadoComprasTotales = new List<Compra>();
         private List<Compra> listadoComprasFiltradas = new List<Compra>();
@@ -21,9 +26,15 @@ namespace Login
         private int filtroProveedor = 0;
         public int idCompra;
 
+        public void Recargar()
+        {
+            this.AutoScrollPosition = new System.Drawing.Point(0, 0); // reset de scroll al volver de sub-forms para no quedar en scroll raro
+            ActualizarDataGridView();
+        }
         public UIGestionCompras()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
             dgvTodasLasCompras.AllowUserToAddRows = false;
             CargarFiltroProveedores();
 
@@ -92,13 +103,175 @@ namespace Login
             this.btnReporteMensual.Size = new System.Drawing.Size(196, 32);
             this.btnReporteMensual.Click += (s, ev) => new UIReporteCompras().ShowDialog();
 
-
+            try
+            {
+                ConstruirPanelReportes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudieron cargar los reportes gráficos: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void UIGestionCompras_Load(object sender, EventArgs e)
         {
             labelId.Text = "";
             ActualizarDataGridView();
+        }
+
+        // ---------- Reportes gráficos ----------
+        private void ConstruirPanelReportes()
+        {
+            int anchoChart = this.pnlDerecha.Width - 32;
+            int altoChart1 = 250;
+            int altoChart2 = this.pnlDerecha.Height - 318 - 16;
+            if (altoChart2 < 100)
+                altoChart2 = 100;
+
+            Label lblGasto = new Label();
+            lblGasto.Text = "Gasto por mes";
+            lblGasto.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblGasto.ForeColor = UIStyles.TextoPrincipal;
+            lblGasto.AutoSize = true;
+            lblGasto.Location = new Point(16, 10);
+            this.pnlDerecha.Controls.Add(lblGasto);
+
+            CartesianChart chartGasto = CrearChartGastoPorMes();
+            chartGasto.Location = new Point(16, 32);
+            chartGasto.Size = new Size(anchoChart, altoChart1);
+            this.pnlDerecha.Controls.Add(chartGasto);
+
+            Label lblStock = new Label();
+            lblStock.Text = "Stock de insumos";
+            lblStock.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblStock.ForeColor = UIStyles.TextoPrincipal;
+            lblStock.AutoSize = true;
+            lblStock.Location = new Point(16, 296);
+            this.pnlDerecha.Controls.Add(lblStock);
+
+            CartesianChart chartStock = CrearChartStockInsumos();
+            chartStock.Location = new Point(16, 318);
+            chartStock.Size = new Size(anchoChart, altoChart2);
+            this.pnlDerecha.Controls.Add(chartStock);
+        }
+
+        private CartesianChart CrearChartGastoPorMes()
+        {
+            Dictionary<int, double> datos = NCompras.GetGastoPorMesAnio();
+            string[] nombresMeses = { "", "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                                      "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
+            string[] meses = datos.Keys.OrderBy(m => m).Select(m => nombresMeses[m]).ToArray();
+            double[] valores = datos.Keys.OrderBy(m => m).Select(m => datos[m]).ToArray();
+
+            SKColor colorLinea = new SKColor(UIStyles.HoverSidebar.R, UIStyles.HoverSidebar.G, UIStyles.HoverSidebar.B);
+            SKColor colorTexto = new SKColor(UIStyles.GrisTexto.R, UIStyles.GrisTexto.G, UIStyles.GrisTexto.B);
+            SKColor colorBorde = new SKColor(UIStyles.BordePanel.R, UIStyles.BordePanel.G, UIStyles.BordePanel.B);
+
+            CartesianChart chart = new CartesianChart
+            {
+                BackColor = this.pnlDerecha.BackColor,
+                Series = new ISeries[]
+                {
+                    new LineSeries<double>
+                    {
+                        Values = valores,
+                        Name = "Gasto",
+                        Stroke = new SolidColorPaint(colorLinea, 3),
+                        Fill = new SolidColorPaint(new SKColor(colorLinea.Red, colorLinea.Green, colorLinea.Blue, 40)),
+                        GeometrySize = 8,
+                        GeometryStroke = new SolidColorPaint(colorLinea, 2),
+                        GeometryFill = new SolidColorPaint(SKColors.White)
+                    }
+                },
+                XAxes = new[]
+                {
+                    new Axis
+                    {
+                        Labels = meses,
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        TicksPaint = new SolidColorPaint(colorBorde)
+                    }
+                },
+                YAxes = new[]
+                {
+                    new Axis
+                    {
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        Labeler = val => "$" + val.ToString("N0"),
+                        TicksPaint = new SolidColorPaint(colorBorde)
+                    }
+                }
+            };
+
+            return chart;
+        }
+
+        private CartesianChart CrearChartStockInsumos()
+        {
+            List<(string NombreInsumo, decimal Cantidad)> pares = ObtenerStockOrdenado();
+            string[] nombres;
+            double[] valores;
+            if (pares.Count > 0)
+            {
+                nombres = pares.Select(p => p.NombreInsumo).ToArray();
+                valores = pares.Select(p => (double)p.Cantidad).ToArray();
+            }
+            else
+            {
+                nombres = new string[] { "Sin datos" };
+                valores = new double[] { 0 };
+            }
+
+            SKColor colorColumna = new SKColor(UIStyles.Primario.R, UIStyles.Primario.G, UIStyles.Primario.B);
+            SKColor colorTexto = new SKColor(UIStyles.GrisTexto.R, UIStyles.GrisTexto.G, UIStyles.GrisTexto.B);
+            SKColor colorBorde = new SKColor(UIStyles.BordePanel.R, UIStyles.BordePanel.G, UIStyles.BordePanel.B);
+
+            CartesianChart chart = new CartesianChart
+            {
+                BackColor = this.pnlDerecha.BackColor,
+                Series = new ISeries[]
+                {
+                    new ColumnSeries<double>
+                    {
+                        Values = valores,
+                        Name = "Cantidad",
+                        Fill = new SolidColorPaint(colorColumna),
+                        Rx = 4,
+                        Ry = 4
+                    }
+                },
+                XAxes = new[]
+                {
+                    new Axis
+                    {
+                        Labels = nombres,
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        TicksPaint = new SolidColorPaint(colorBorde)
+                    }
+                },
+                YAxes = new[]
+                {
+                    new Axis
+                    {
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        Labeler = val => val.ToString("N0"),
+                        TicksPaint = new SolidColorPaint(colorBorde)
+                    }
+                }
+            };
+
+            return chart;
+        }
+
+        // Helper: devuelve los pares (insumo, cantidad) ordenados descendente, listo para reemplazar el gráfico por una tabla.
+        private List<(string NombreInsumo, decimal Cantidad)> ObtenerStockOrdenado()
+        {
+            List<StockInsumo> stock = NStockInsumo.GetAllStock();
+            return stock
+                .OrderByDescending(s => s.CantidadDisponible)
+                .Select(s => (s.NombreInsumo, s.CantidadDisponible))
+                .ToList();
         }
 
         // ---------- Carga de datos ----------
@@ -338,7 +511,11 @@ namespace Login
         private void btnPresupuestos_Click(object sender, EventArgs e)
         {
             UIGestionPresupuestos gestion = new UIGestionPresupuestos();
-            gestion.ShowDialog();
+            UIMenu2 menu = this.TopLevelControl as UIMenu2;
+            if (menu != null)
+                menu.AbrirSubFormulario(gestion);
+            else
+                gestion.ShowDialog();
         }
 
         // ---------- Diálogos simples armados por código ----------

@@ -24,6 +24,7 @@ namespace Login
         public UIConsultarCompra(int idCompra)
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
             dgvConsultaCompra.AllowUserToAddRows = false;
             this.idCompra = idCompra; // recibe el id de la compra seleccionada en Gestión
 

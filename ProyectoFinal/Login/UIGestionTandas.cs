@@ -17,6 +17,7 @@ namespace Login
         public UIGestionTandas()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
             dgvTodasLasTandas.AllowUserToAddRows = false;
             CargarFiltroProductos();
 
