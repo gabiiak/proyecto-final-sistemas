@@ -27,6 +27,7 @@ namespace Login
         public UIEvaluacionProveedor()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
             CrearGraficoPuntualidad();
             UIStyles.TemaCambiado += UIStyles_TemaCambiado;
 

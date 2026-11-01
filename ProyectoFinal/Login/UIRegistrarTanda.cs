@@ -14,6 +14,7 @@ namespace Login
         public UIRegistrarTanda()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
             dgvTanda_Detalles.AllowUserToAddRows = false;
             ConfigurarLabel(this.lblProducto, "Producto a elaborar", new System.Drawing.Point(16, 16));
             ConfigurarCombo(this.cbProducto, new System.Drawing.Point(16, 36), new System.Drawing.Size(228, 32), 0);

@@ -23,6 +23,7 @@ namespace Login
         public UIRegistrarSolicitudCotizacion()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
 
             ConfigurarLabel(this.lblProducto, "Producto", new System.Drawing.Point(20, 20));
             ConfigurarCombo(this.cbProducto, new System.Drawing.Point(20, 40),

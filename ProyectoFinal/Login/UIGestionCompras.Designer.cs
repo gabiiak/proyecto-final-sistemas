@@ -53,7 +53,7 @@
             this.SuspendLayout();
 
             // ── FORM ────────────────────────────────────────────────
-            this.ClientSize = new System.Drawing.Size(1300, 680);
+            this.ClientSize = new System.Drawing.Size(1724, 680);
             //this.ClientSize = new System.Drawing.Size(1000, 680); en el size original. estamos experimentando
             this.Text = "Gestión de Compras";
             this.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
@@ -108,7 +108,7 @@
             // ── PANEL DERECHA ───────────────────────────────────
             this.pnlDerecha.BackColor = System.Drawing.Color.White;
             this.pnlDerecha.Location = new System.Drawing.Point(1000, 56);
-            this.pnlDerecha.Size = new System.Drawing.Size(704, 874);
+            this.pnlDerecha.Size = new System.Drawing.Size(704, 608);
             this.pnlDerecha.Name = "pnlDerecha";
 
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;

@@ -41,6 +41,39 @@ namespace Datos
             return resultado;
         }
 
+        // Alias del gráfico anterior para el reporte de gastos (mismo cálculo, nombre a demanda del front).
+        public static Dictionary<int, double> GetGastoPorMesAnio(int anio)
+        {
+            var resultado = new Dictionary<int, double>();
+            for (int m = 1; m <= 12; m++)
+                resultado[m] = 0;
+
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                string sqlQuery = @"SELECT MONTH(fecha) as mes, SUM(totalCompra) as total
+                                    FROM Compras
+                                    WHERE YEAR(fecha) = @Anio
+                                      AND estado != @Cancelada
+                                    GROUP BY MONTH(fecha)";
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
+                {
+                    connection.Open();
+                    cmd.Parameters.Add("@Anio", SqlDbType.Int).Value = anio;
+                    cmd.Parameters.AddWithValue("@Cancelada", EstadoCompra.Cancelada);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int mes = reader.GetInt32(0);
+                            double total = (double)reader.GetDecimal(1);
+                            resultado[mes] = total;
+                        }
+                    }
+                }
+            }
+            return resultado;
+        }
+
         // Gráfico de línea, por semestre
         public static Dictionary<int, double> GetComprasPorMesSemestre(int anio, int semestre)
         {

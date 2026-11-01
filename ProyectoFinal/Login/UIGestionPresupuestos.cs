@@ -17,12 +17,25 @@ namespace Login
         };
 
         private List<Presupuesto> listadoPresupuestosTotales = new List<Presupuesto>();
+        private System.Windows.Forms.Button btnVolver;
 
         public UIGestionPresupuestos()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
             dgvPresupuestos.AllowUserToAddRows = false;
             UIStyles.ConfigurarDataGrid(dgvPresupuestos);
+
+            this.btnVolver = new System.Windows.Forms.Button();
+            ConfigurarBotonFantasma(this.btnVolver, "← Volver",
+                new System.Drawing.Point(16, 16), 15);
+            this.btnVolver.Size = new System.Drawing.Size(120, 32);
+            this.btnVolver.FlatAppearance.BorderSize = 1;
+            this.btnVolver.FlatAppearance.BorderColor = UIStyles.BordeBoton;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            this.Controls.Add(this.btnVolver);
+
+            this.lblTitulo.Location = new System.Drawing.Point(150, 16);
 
             ConfigurarBotonPrimario(this.btnRegistrarSolicitud, "Registrar solicitud",
                 new System.Drawing.Point(16, 36), 0);
@@ -324,6 +337,15 @@ namespace Login
         {
             UIPresupuestosEliminados eliminados = new UIPresupuestosEliminados();
             eliminados.Show();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            UIMenu2 menu = this.TopLevelControl as UIMenu2;
+            if (menu != null)
+                menu.Volver();
+            else
+                this.Close();
         }
 
         private void btnGenerarReporte_Click(object sender, EventArgs e)

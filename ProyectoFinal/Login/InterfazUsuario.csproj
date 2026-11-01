@@ -411,6 +411,7 @@
       <DependentUpon>UIResultadosIA.cs</DependentUpon>
     </Compile>
     <Compile Include="UIStyles.cs" />
+    <Compile Include="IRecargable.cs" />
     <Compile Include="UIConsultarVenta.cs">
       <SubType>Form</SubType>
     </Compile>

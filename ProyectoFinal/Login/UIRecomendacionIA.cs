@@ -22,6 +22,7 @@ namespace Login
         public UIRecomendacionIA()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
 
             this.Load += UIRecomendacionIA_Load;
         }
