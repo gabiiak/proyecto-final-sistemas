@@ -1,4 +1,4 @@
-﻿using ClosedXML.Excel;
+using ClosedXML.Excel;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
@@ -247,7 +247,11 @@ namespace Login
                     {
                         Labels = nombres,
                         LabelsPaint = new SolidColorPaint(colorTexto),
-                        TicksPaint = new SolidColorPaint(colorBorde)
+                        TicksPaint = new SolidColorPaint(colorBorde),
+                        MinStep = 1,
+                        ForceStepToMin = true,
+                        LabelsRotation = -35,
+                        TextSize = 11
                     }
                 },
                 YAxes = new[]

@@ -74,7 +74,7 @@ namespace Login
                 var productoSeleccionado = (Producto)cmbProducto.SelectedItem;
                 List<RecetaProducto> receta = GetInsumosGrid(productoSeleccionado.IdProducto);
                 NRecetaProducto.ReemplazarReceta(productoSeleccionado.IdProducto, receta);
-                MessageBox.Show("todo debió salir bien, creo...");
+                MessageBox.Show("Registro exitoso");
 
             }
             catch (Exception ex)

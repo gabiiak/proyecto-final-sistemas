@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +35,7 @@ namespace Negocio
             // 1. recuperamos los datos reales de SQL Server.
             var datosReales = NDatosEntrenamientoReal.Obtener();
 
-            if (datosReales.Count < 30)
+            if (datosReales.Count < 10)
                 throw new InvalidOperationException(
                     "Todavía no hay suficientes entregas " +
                     "históricas para generar predicciones.");
