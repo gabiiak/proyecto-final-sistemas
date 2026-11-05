@@ -1,5 +1,10 @@
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.WinForms;
 using Modelos;
 using Negocio; // Asegúrate de tener este using para llamar a NProductos
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,7 +65,92 @@ namespace Login
 
             ConfigurarBotonSecundario(this.btnGestionRecetas, "Gestionar Recetas de productos", new System.Drawing.Point(488, 284),6);
 
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
+            try
+            {
+                ConstruirPanelReportes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudieron cargar los reportes gráficos: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             UIStyles.AplicarTemaAForm(this);
+        }
+
+        // ---------- Reportes gráficos ----------
+        private void ConstruirPanelReportes()
+        {
+            int anchoChart = this.pnlDerecha.Width - 32;
+            int altoChart = this.pnlDerecha.Height - 64;
+            if (altoChart < 200)
+                altoChart = 200;
+
+            Label lblTituloPanel = new Label();
+            lblTituloPanel.Text = "Productos más vendidos";
+            lblTituloPanel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblTituloPanel.ForeColor = UIStyles.TextoPrincipal;
+            lblTituloPanel.AutoSize = true;
+            lblTituloPanel.Location = new Point(16, 10);
+            this.pnlDerecha.Controls.Add(lblTituloPanel);
+
+            PieChart chartProductos = CrearChartProductosMasVendidos();
+            chartProductos.Location = new Point(16, 32);
+            chartProductos.Size = new Size(anchoChart, altoChart);
+            this.pnlDerecha.Controls.Add(chartProductos);
+        }
+
+        private PieChart CrearChartProductosMasVendidos()
+        {
+            List<(string Nombre, int Cantidad)> datos = NVentas.GetProductosMasVendidos();
+
+            SKColor colorTexto = new SKColor(UIStyles.GrisTexto.R, UIStyles.GrisTexto.G, UIStyles.GrisTexto.B);
+            SKColor[] colores = new SKColor[]
+            {
+                new SKColor(UIStyles.Primario.R, UIStyles.Primario.G, UIStyles.Primario.B),
+                new SKColor(UIStyles.HoverSidebar.R, UIStyles.HoverSidebar.G, UIStyles.HoverSidebar.B),
+                new SKColor(UIStyles.AzulOscuro.R, UIStyles.AzulOscuro.G, UIStyles.AzulOscuro.B),
+                new SKColor(UIStyles.BordeClaro.R, UIStyles.BordeClaro.G, UIStyles.BordeClaro.B),
+                new SKColor(UIStyles.SeleccionDataGrid.R, UIStyles.SeleccionDataGrid.G, UIStyles.SeleccionDataGrid.B),
+                new SKColor(UIStyles.BordePanel.R, UIStyles.BordePanel.G, UIStyles.BordePanel.B)
+            };
+
+            List<ISeries> series = new List<ISeries>();
+            for (int i = 0; i < datos.Count; i++)
+            {
+                string nombreProducto = datos[i].Nombre;
+                series.Add(new PieSeries<int>
+                {
+                    Values = new int[] { datos[i].Cantidad },
+                    Name = nombreProducto,
+                    Fill = new SolidColorPaint(colores[i % colores.Length]),
+                    DataLabelsPaint = new SolidColorPaint(colorTexto),
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Outer,
+                    DataLabelsFormatter = point => nombreProducto + ": " + point.Coordinate.PrimaryValue.ToString("N0")
+                });
+            }
+
+            if (series.Count == 0)
+            {
+                series.Add(new PieSeries<int>
+                {
+                    Values = new int[] { 1 },
+                    Name = "Sin datos",
+                    Fill = new SolidColorPaint(new SKColor(UIStyles.BordePanel.R, UIStyles.BordePanel.G, UIStyles.BordePanel.B)),
+                    DataLabelsPaint = new SolidColorPaint(colorTexto)
+                });
+            }
+
+            PieChart chart = new PieChart
+            {
+                BackColor = this.pnlDerecha.BackColor,
+                Series = series,
+                LegendPosition = LiveChartsCore.Measure.LegendPosition.Right,
+                LegendTextPaint = new SolidColorPaint(colorTexto)
+            };
+
+            return chart;
         }
 
         private void UIProductManagement_Load(object sender, EventArgs e)

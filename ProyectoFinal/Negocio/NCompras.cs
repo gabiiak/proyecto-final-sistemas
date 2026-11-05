@@ -2,6 +2,7 @@
 using Modelos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Negocio
 {
@@ -193,6 +194,18 @@ namespace Negocio
                 throw new ArgumentException("La compra no tiene detalle de insumos.");
 
             NDetalleCompras.ValidarDetalles(detalles);
+
+            // Convertir las cantidades a la unidad de stock antes de incrementar.
+            // Se busca cada insumo por ID sin filtrar activos para no saltear
+            // silenciosamente la conversión de un insumo dado de baja.
+            foreach (DetalleCompra detalle in detalles)
+            {
+                Insumo insumo = NInsumos.GetInsumoById(detalle.IdInsumo);
+                if (insumo == null || string.IsNullOrWhiteSpace(insumo.UnidadMedida))
+                    throw new InvalidOperationException($"No se puede recibir la compra: el insumo {detalle.IdInsumo} no tiene unidad de medida definida.");
+
+                detalle.Cantidad = NInsumos.CantidadAStock(insumo.UnidadMedida, detalle.Cantidad);
+            }
 
             DataCompras.MarcarCompraRecibidaConIncrementoStock(idCompra, detalles);
         }

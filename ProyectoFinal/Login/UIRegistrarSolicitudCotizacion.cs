@@ -172,7 +172,7 @@ namespace Login
                 {
                     dgvDetalle.Rows.Add(
                         faltante.IdInsumo,
-                        faltante.UnidadMedidaInsumo,
+                        NInsumos.UnidadStock(faltante.UnidadMedidaInsumo),
                         Math.Round(faltante.Cantidad, 4));
                 }
 
@@ -432,10 +432,12 @@ namespace Login
                         {
                             if (detalle == null) continue;
 
+                            string unidadStock = NInsumos.UnidadStock(detalle.UnidadMedidaInsumo);
+
                             Cell cInsumo = new Cell().Add(new Paragraph(
                                 detalle.NombreInsumo ?? string.Empty).SetFontSize(10));
                             Cell cUnidad = new Cell().Add(new Paragraph(
-                                detalle.UnidadMedidaInsumo ?? string.Empty).SetFontSize(10)
+                                unidadStock ?? string.Empty).SetFontSize(10)
                                 .SetTextAlignment(TextAlignment.CENTER));
                             Cell cCantidad = new Cell().Add(new Paragraph(
                                 detalle.Cantidad.ToString("0.####")).SetFontSize(10)

@@ -157,7 +157,7 @@ namespace Login
             {
                 this.dgvInsumos.Rows.Add(
                     insumo.NombreInsumo,
-                    insumo.UnidadMedida,
+                    NInsumos.UnidadStock(insumo.UnidadMedida),
                     insumo.CantidadTotal.ToString("N2"));
             }
         }
@@ -318,7 +318,7 @@ namespace Login
                         foreach (ResumenInsumoJornada insumo in this.insumosJornada)
                         {
                             AgregarCelda(tablaInsumos, insumo.NombreInsumo);
-                            AgregarCelda(tablaInsumos, insumo.UnidadMedida);
+                            AgregarCelda(tablaInsumos, NInsumos.UnidadStock(insumo.UnidadMedida));
                             AgregarCelda(tablaInsumos, insumo.CantidadTotal.ToString("N2"));
                         }
 

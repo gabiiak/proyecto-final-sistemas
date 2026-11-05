@@ -1,4 +1,4 @@
-﻿using Modelos;
+using Modelos;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -351,7 +351,7 @@ namespace Login
                     MessageBox.Show(
                         "Hay " + datosReales.Count +
                         " entregas evaluables.\n\n" +
-                        "Se necesitan al menos 30 para comenzar " +
+                        "Se necesitan al menos 10 para comenzar " +
                         "la evaluación experimental.",
                         "Datos insuficientes",
                         MessageBoxButtons.OK,

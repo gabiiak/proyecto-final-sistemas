@@ -98,7 +98,7 @@ namespace Datos
         {
             using (SqlConnection connection = Db.GetConnection())
             {
-                string sqlQuery = @"SELECT i.id, i.nombre, i.descripcion, i.precio, i.activo
+                string sqlQuery = @"SELECT i.id, i.nombre, i.descripcion, i.precio, i.activo, i.unidadMedida
                                     FROM Insumos i
                                     WHERE i.id = @id";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, connection))
@@ -112,10 +112,11 @@ namespace Datos
                             Insumo insumo = new Insumo
                             {
                                 Id = reader.GetInt32(0),
-                                Nombre = reader.GetString(1),
-                                Descripcion = reader.GetString(2),
-                                Precio = reader.GetDecimal(3),
-                                Activo = reader.IsDBNull(4) ? 1 : (reader.GetBoolean(4) ? 1 : 0)
+                                Nombre = reader.IsDBNull(1) ? string.Empty : reader.GetString(1),
+                                Descripcion = reader.IsDBNull(2) ? string.Empty : reader.GetString(2),
+                                Precio = reader.IsDBNull(3) ? 0m : reader.GetDecimal(3),
+                                Activo = reader.IsDBNull(4) ? 0 : (reader.GetBoolean(4) ? 1 : 0),
+                                UnidadMedida = reader.IsDBNull(5) ? string.Empty : reader.GetString(5)
                             };
                             return insumo;
                         }

@@ -1,15 +1,16 @@
-﻿using Modelos;
+﻿using ClosedXML.Excel;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.WinForms;
+using Modelos;
 using Negocio;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ClosedXML.Excel;
 
 namespace Login
 {
@@ -78,12 +79,94 @@ namespace Login
                 new System.Drawing.Point(246, 124), 9);
             this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
 
+            try
+            {
+                ConstruirPanelReportes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudieron cargar los reportes gráficos: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void UISalesManagement_Load(object sender, EventArgs e)
         {
             labelId.Text = "";
             ActualizarDataGridView();
+        }
+
+        // ---------- Reportes gráficos ----------
+        private void ConstruirPanelReportes()
+        {
+            int anchoChart = this.pnlDerecha.Width - 32;
+            int altoChart = this.pnlDerecha.Height - 64;
+            if (altoChart < 200)
+                altoChart = 200;
+
+            Label lblVentas = new Label();
+            lblVentas.Text = "Ventas por mes";
+            lblVentas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblVentas.ForeColor = UIStyles.TextoPrincipal;
+            lblVentas.AutoSize = true;
+            lblVentas.Location = new Point(16, 10);
+            this.pnlDerecha.Controls.Add(lblVentas);
+
+            CartesianChart chartVentas = CrearChartVentasPorMes();
+            chartVentas.Location = new Point(16, 32);
+            chartVentas.Size = new Size(anchoChart, altoChart);
+            this.pnlDerecha.Controls.Add(chartVentas);
+        }
+
+        private CartesianChart CrearChartVentasPorMes()
+        {
+            Dictionary<int, double> datos = NVentas.GetVentasPorMesAnio();
+            string[] nombresMeses = { "", "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                                      "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
+            string[] meses = datos.Keys.OrderBy(m => m).Select(m => nombresMeses[m]).ToArray();
+            double[] valores = datos.Keys.OrderBy(m => m).Select(m => datos[m]).ToArray();
+
+            SKColor colorLinea = new SKColor(UIStyles.HoverSidebar.R, UIStyles.HoverSidebar.G, UIStyles.HoverSidebar.B);
+            SKColor colorTexto = new SKColor(UIStyles.GrisTexto.R, UIStyles.GrisTexto.G, UIStyles.GrisTexto.B);
+            SKColor colorBorde = new SKColor(UIStyles.BordePanel.R, UIStyles.BordePanel.G, UIStyles.BordePanel.B);
+
+            CartesianChart chart = new CartesianChart
+            {
+                BackColor = this.pnlDerecha.BackColor,
+                Series = new ISeries[]
+                {
+                    new LineSeries<double>
+                    {
+                        Values = valores,
+                        Name = "Ventas",
+                        Stroke = new SolidColorPaint(colorLinea, 3),
+                        Fill = new SolidColorPaint(new SKColor(colorLinea.Red, colorLinea.Green, colorLinea.Blue, 40)),
+                        GeometrySize = 8,
+                        GeometryStroke = new SolidColorPaint(colorLinea, 2),
+                        GeometryFill = new SolidColorPaint(SKColors.White)
+                    }
+                },
+                XAxes = new[]
+                {
+                    new Axis
+                    {
+                        Labels = meses,
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        TicksPaint = new SolidColorPaint(colorBorde)
+                    }
+                },
+                YAxes = new[]
+                {
+                    new Axis
+                    {
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        Labeler = val => "$" + val.ToString("N0"),
+                        TicksPaint = new SolidColorPaint(colorBorde)
+                    }
+                }
+            };
+
+            return chart;
         }
 
         private void ActualizarDataGridView()

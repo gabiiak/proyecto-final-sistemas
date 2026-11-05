@@ -57,7 +57,7 @@ namespace Login
                         det.IdDetalleTanda,
                         det.Insumo?.Nombre ?? "N/A",
                         det.CantidadUtilizada,
-                        det.Insumo.UnidadMedida
+                        NInsumos.UnidadStock(det.Insumo?.UnidadMedida)
                         //$"{det.Empleado?.Nombre} {det.Empleado?.Apellido}" ?? "N/A",
                         //det.Empleado?.Cargo ?? "N/A"
                     );

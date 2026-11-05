@@ -15,6 +15,7 @@ namespace Login
         public UIGestionProveedores()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
 
             // Fila 1: Nombre + Email
             ConfigurarLabel(this.lblNombre, "Nombre", new System.Drawing.Point(16, 48));
@@ -164,7 +165,6 @@ namespace Login
                     MessageBox.Show("El email no tiene un formato válido.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
                 int id = int.Parse(labelId.Text);
 
                 // Nombre duplicado en OTRO proveedor (el propio no cuenta)

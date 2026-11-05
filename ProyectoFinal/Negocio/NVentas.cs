@@ -32,6 +32,14 @@ namespace Negocio
         {
             return DataVentas.GetTopClientesPorMonto();
         }
+        public static List<(string Nombre, int Cantidad)> GetProductosMasVendidos()
+        {
+            return DataVentas.GetProductosMasVendidos();
+        }
+        public static List<(string Nombre, double Total)> GetClientesQueMasCompran()
+        {
+            return DataVentas.GetClientesQueMasCompran();
+        }
         public static Dictionary<int, double> GetVentasPorMesSemestre(int anio, int semestre)
         {
             return DataVentas.GetVentasPorMesSemestre(anio, semestre);

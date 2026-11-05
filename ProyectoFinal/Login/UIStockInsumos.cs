@@ -22,6 +22,7 @@ namespace Login
         {
             InitializeComponent();
             StyleHelper();
+            dgvStock.CellFormatting += dgvStock_CellFormatting;
         }
 
         private void StyleHelper()
@@ -30,6 +31,7 @@ namespace Login
             ConfigurarLabel(this.lblCantidad, "Cantidad", new System.Drawing.Point(336, 48));
 
             ConfigurarComboBox(this.cmbInsumos, new System.Drawing.Point(16, 68), new System.Drawing.Size(300, 32), 0);
+            this.cmbInsumos.SelectedIndexChanged += new System.EventHandler(this.cmbInsumos_SelectedIndexChanged);
             ConfigurarTextBox(this.txtCantidad, new System.Drawing.Point(336, 68), new System.Drawing.Size(300, 32), 1);
 
             ConfigurarBotonPrimario(this.btnRegistrar, "Registrar", new System.Drawing.Point(20, 272), 2);
@@ -64,7 +66,14 @@ namespace Login
         {
             listaStock = NStockInsumo.GetAllStock();
             dgvStock.DataSource = null;
-            dgvStock.DataSource = listaStock;
+            dgvStock.DataSource = listaStock.Select(st => new
+            {
+                st.Id,
+                st.InsumoId,
+                st.NombreInsumo,
+                CantidadDisponible = FormatearNumero(st.CantidadDisponible),
+                UnidadMedidaInsumo = NInsumos.UnidadStock(st.UnidadMedidaInsumo)
+            }).ToList();
             if (dgvStock.Columns.Contains("InsumoId"))
             {
                 dgvStock.Columns["InsumoId"].Visible = false;
@@ -76,6 +85,14 @@ namespace Login
             if (dgvStock.Columns.Contains("CantidadDisponible"))
             {
                 dgvStock.Columns["CantidadDisponible"].HeaderText = "Cantidad disponible";
+                // "0.####": hasta 4 decimales, sin ceros sobrantes (123,5600 -> 123,56 | 123,0000 -> 123)
+                // El separador que se muestra (coma/punto) lo define la cultura. Solo afecta la vista.
+                dgvStock.Columns["CantidadDisponible"].DefaultCellStyle.Format = "0.####";
+                dgvStock.Columns["CantidadDisponible"].DefaultCellStyle.FormatProvider = new CultureInfo("es-AR");
+            }
+            if (dgvStock.Columns.Contains("UnidadMedidaInsumo"))
+            {
+                dgvStock.Columns["UnidadMedidaInsumo"].HeaderText = "Unidad";
             }
             if (dgvStock.Columns.Contains("UnidadMedida"))
             {
@@ -86,6 +103,19 @@ namespace Login
                 dgvStock.ClearSelection();
                 dgvStock.Rows[0].Selected = true;
             }
+            
+        }
+
+        private static readonly CultureInfo CulturaAR = new CultureInfo("es-AR");
+
+        // 2940,0000 -> 2940 | 104,2300 -> 104,23 | 123,0500 -> 123,05  (solo texto para la vista)
+        private static string FormatearNumero(object valor)
+        {
+            if (valor == null) return "";
+            if (valor is decimal d) return d.ToString("0.####", CulturaAR);
+            if (decimal.TryParse(valor.ToString(), NumberStyles.Number, CulturaAR, out decimal parsed))
+                return parsed.ToString("0.####", CulturaAR);
+            return valor.ToString();
         }
 
         private void Clean()
@@ -93,6 +123,22 @@ namespace Login
             labelId.Text = "";
             cmbInsumos.SelectedIndex = -1;
             txtCantidad.Clear();
+            ActualizarLabelCantidad(null);
+        }
+
+        private void ActualizarLabelCantidad(Insumo insumo)
+        {
+            if (insumo == null || string.IsNullOrWhiteSpace(insumo.UnidadMedida))
+            {
+                lblCantidad.Text = "Cantidad";
+                return;
+            }
+            lblCantidad.Text = "Cantidad (" + NInsumos.UnidadStock(insumo.UnidadMedida) + ")";
+        }
+
+        private void cmbInsumos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActualizarLabelCantidad(cmbInsumos.SelectedItem as Insumo);
         }
 
         private bool ValidarCampos(out decimal cantidad)
@@ -108,8 +154,8 @@ namespace Login
                 MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                 return false;
             }
-            if (!decimal.TryParse(txtCantidad.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out cantidad)
-                && !decimal.TryParse(txtCantidad.Text.Trim(), out cantidad))
+            // Se parsea con la cultura actual (es-AR: coma decimal) para que "123,5" no se lea como 1235.
+            if (!decimal.TryParse(txtCantidad.Text.Trim(), NumberStyles.Number, CultureInfo.CurrentCulture, out cantidad))
             {
                 MessageBox.Show("La cantidad ingresada no es válida.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -211,11 +257,41 @@ namespace Login
             if (dgvStock.CurrentRow == null) return;
             labelId.Text = dgvStock.CurrentRow.Cells["Id"].Value?.ToString();
             object insumoIdValor = dgvStock.CurrentRow.Cells["InsumoId"].Value;
+            Insumo insumo = null;
             if (insumoIdValor != null)
             {
-                cmbInsumos.SelectedValue = (int)insumoIdValor;
+                int idInsumo = (int)insumoIdValor;
+                cmbInsumos.SelectedValue = idInsumo;
+                insumo = listaInsumos.FirstOrDefault(i => i.Id == idInsumo);
             }
-            txtCantidad.Text = dgvStock.CurrentRow.Cells["CantidadDisponible"].Value?.ToString();
+            ActualizarLabelCantidad(insumo);
+            object cantValor = dgvStock.CurrentRow.Cells["CantidadDisponible"].Value;
+            if (cantValor is decimal cant)
+                txtCantidad.Text = cant.ToString("0.####", CultureInfo.CurrentCulture);
+            else if (cantValor != null &&
+                     decimal.TryParse(cantValor.ToString(), NumberStyles.Number, CulturaAR, out decimal cant2))
+                txtCantidad.Text = cant2.ToString("0.####", CulturaAR);
+            else
+                txtCantidad.Text = cantValor?.ToString();
+        }
+
+        // Quita los ceros sobrantes solo en la vista, aunque el valor llegue como string o decimal.
+        private void dgvStock_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.Value == null) return;
+            if (dgvStock.Columns[e.ColumnIndex].Name != "CantidadDisponible") return;
+
+            if (e.Value is decimal dec)
+            {
+                e.Value = dec.ToString("0.####", CultureInfo.CurrentCulture);
+                e.FormattingApplied = true;
+            }
+            else if (e.Value is string str &&
+                     decimal.TryParse(str, NumberStyles.Number, CultureInfo.CurrentCulture, out decimal d))
+            {
+                e.Value = d.ToString("0.####", CultureInfo.CurrentCulture);
+                e.FormattingApplied = true;
+            }
         }
 
         private void btnInsumos_Click(object sender, EventArgs e)

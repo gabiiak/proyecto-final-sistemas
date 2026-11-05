@@ -1,5 +1,10 @@
-﻿using Modelos;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.WinForms;
+using Modelos;
 using Negocio;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,6 +58,103 @@ namespace Login
             ConfigurarBotonFantasma(this.btnListarBorrados, "Ver clientes eliminados",
                 new System.Drawing.Point(20, 300), 8);
             this.btnListarBorrados.Click += new System.EventHandler(this.btnListarBorrados_Click);
+
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
+            try
+            {
+                ConstruirPanelReportes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudieron cargar los reportes gráficos: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            UIStyles.AplicarTemaAForm(this);
+        }
+
+        // ---------- Reportes gráficos ----------
+        private void ConstruirPanelReportes()
+        {
+            int anchoChart = this.pnlDerecha.Width - 32;
+            int altoChart = this.pnlDerecha.Height - 64;
+            if (altoChart < 200)
+                altoChart = 200;
+
+            Label lblTituloPanel = new Label();
+            lblTituloPanel.Text = "Clientes que más compran";
+            lblTituloPanel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblTituloPanel.ForeColor = UIStyles.TextoPrincipal;
+            lblTituloPanel.AutoSize = true;
+            lblTituloPanel.Location = new Point(16, 10);
+            this.pnlDerecha.Controls.Add(lblTituloPanel);
+
+            CartesianChart chartClientes = CrearChartClientesQueMasCompran();
+            chartClientes.Location = new Point(16, 32);
+            chartClientes.Size = new Size(anchoChart, altoChart);
+            this.pnlDerecha.Controls.Add(chartClientes);
+        }
+
+        private CartesianChart CrearChartClientesQueMasCompran()
+        {
+            List<(string Nombre, double Total)> datos = NVentas.GetClientesQueMasCompran();
+
+            string[] nombres;
+            double[] valores;
+            if (datos.Count > 0)
+            {
+                nombres = datos.Select(d => d.Nombre).ToArray();
+                valores = datos.Select(d => d.Total).ToArray();
+            }
+            else
+            {
+                nombres = new string[] { "Sin datos" };
+                valores = new double[] { 0 };
+            }
+
+            SKColor colorColumna = new SKColor(UIStyles.Primario.R, UIStyles.Primario.G, UIStyles.Primario.B);
+            SKColor colorTexto = new SKColor(UIStyles.GrisTexto.R, UIStyles.GrisTexto.G, UIStyles.GrisTexto.B);
+            SKColor colorBorde = new SKColor(UIStyles.BordePanel.R, UIStyles.BordePanel.G, UIStyles.BordePanel.B);
+
+            CartesianChart chart = new CartesianChart
+            {
+                BackColor = this.pnlDerecha.BackColor,
+                Series = new ISeries[]
+                {
+                    new ColumnSeries<double>
+                    {
+                        Values = valores,
+                        Name = "Facturado",
+                        Fill = new SolidColorPaint(colorColumna),
+                        Rx = 4,
+                        Ry = 4
+                    }
+                },
+                XAxes = new[]
+                {
+                    new Axis
+                    {
+                        Labels = nombres,
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        TicksPaint = new SolidColorPaint(colorBorde),
+                        MinStep = 1,
+                        ForceStepToMin = true,
+                        LabelsRotation = -35,
+                        TextSize = 11
+                    }
+                },
+                YAxes = new[]
+                {
+                    new Axis
+                    {
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        Labeler = val => "$" + val.ToString("N0"),
+                        TicksPaint = new SolidColorPaint(colorBorde)
+                    }
+                }
+            };
+
+            return chart;
         }
 
         private void UIClientManagement_Load(object sender, EventArgs e)

@@ -32,6 +32,7 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnListarBorrados = new System.Windows.Forms.Button();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.pnlDerecha = new System.Windows.Forms.Panel();
 
             this.pnlFormulario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
@@ -91,6 +92,13 @@
             // Primario: Registrar
             
 
+            // ── PANEL DERECHA ───────────────────────────────────────
+            this.pnlDerecha.BackColor = System.Drawing.Color.White;
+            this.pnlDerecha.Location = new System.Drawing.Point(1000, 56);
+            this.pnlDerecha.Name = "pnlDerecha";
+            this.pnlDerecha.Size = new System.Drawing.Size(704, 608);
+            this.pnlDerecha.TabIndex = 10;
+
             // ── DATAGRIDVIEW ────────────────────────────────────────
             this.dgvClientes.Location = new System.Drawing.Point(20, 344);
             this.dgvClientes.Size = new System.Drawing.Size(860, 452);
@@ -128,6 +136,7 @@
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnListarBorrados);
             this.Controls.Add(this.dgvClientes);
+            this.Controls.Add(this.pnlDerecha);
 
             this.pnlFormulario.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
@@ -153,5 +162,6 @@
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnListarBorrados;
         private System.Windows.Forms.DataGridView dgvClientes;
+        private System.Windows.Forms.Panel pnlDerecha;
     }
 }

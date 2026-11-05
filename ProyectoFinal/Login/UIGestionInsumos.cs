@@ -23,7 +23,7 @@ namespace Login
             this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
             // Fila 1: Nombre + Precio
             ConfigurarLabel(this.lblNombre, "Nombre", new System.Drawing.Point(16, 48));
-            ConfigurarLabel(this.lblPrecio, "Precio", new System.Drawing.Point(336, 48));
+            ConfigurarLabel(this.lblPrecio, "Precio por unidad de compra", new System.Drawing.Point(336, 48));
             ConfigurarTextBox(this.txtNombre, new System.Drawing.Point(16, 68), new System.Drawing.Size(300, 32), 0);
             ConfigurarTextBox(this.txtPrecio, new System.Drawing.Point(336, 68), new System.Drawing.Size(300, 32), 1);
 
@@ -51,6 +51,7 @@ namespace Login
                 new System.Drawing.Point(488, 272), 6);
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             UIStyles.AplicarTemaAForm(this);
+            dgvInsumos.CellFormatting += dgvInsumos_CellFormatting;
         }
 
         private void UIInsumoManagement_Load(object sender, EventArgs e)
@@ -61,12 +62,29 @@ namespace Login
 
         private void UpdateDataGrid()
         {
+
             listaInsumos = NInsumos.GetAllInsumos();
+
+            var insumosSinDuplicados = listaInsumos
+                .Where(i => !string.IsNullOrWhiteSpace(i.Nombre))
+                .GroupBy(i => i.Nombre.Trim(), StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.OrderBy(i => i.Id).First())
+                .OrderBy(i => i.Nombre)
+                .ToList();
+
             dgvInsumos.DataSource = null;
-            dgvInsumos.DataSource = listaInsumos;
+            dgvInsumos.DataSource = insumosSinDuplicados;
+
             if (dgvInsumos.Columns.Contains("Activo"))
             {
                 dgvInsumos.Columns["Activo"].Visible = false;
+            }
+            if (dgvInsumos.Columns.Contains("Precio"))
+            {
+                // "0.####": hasta 4 decimales, sin ceros sobrantes (123,5600 -> 123,56 | 123,0000 -> 123)
+                // El separador que se muestra (coma/punto) lo define la cultura. Solo afecta la vista.
+                dgvInsumos.Columns["Precio"].DefaultCellStyle.Format = "0.####";
+                dgvInsumos.Columns["Precio"].DefaultCellStyle.FormatProvider = new CultureInfo("es-AR");
             }
             if (dgvInsumos.Rows.Count > 0)
             {
@@ -97,8 +115,8 @@ namespace Login
                 MessageBox.Show("Hay campos vacíos.", "Alerta", MessageBoxButtons.OK);
                 return false;
             }
-            if (!decimal.TryParse(txtPrecio.Text.Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out precio)
-                && !decimal.TryParse(txtPrecio.Text.Trim(), out precio))
+            // Se parsea con la cultura actual (es-AR: coma decimal) para que "123,5" no se lea como 1235.
+            if (!decimal.TryParse(txtPrecio.Text.Trim(), NumberStyles.Number, CultureInfo.CurrentCulture, out precio))
             {
                 MessageBox.Show("El precio ingresado no es válido.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -116,28 +134,65 @@ namespace Login
             return true;
         }
 
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!ValidarCampos(out decimal precio)) return;
-                string unidadSeleccionada = rbGr.Checked ? "Gr" : rbKg.Checked ? "Kg" : rbLts.Checked ? "Lts" : rbUnidad.Checked ? "Unidad" : null; 
+
+                // Verificamos que el insumo no exista
+                string nombreNuevo = txtNombre.Text.Trim();
+
+                var insumosRegistrados = NInsumos.GetAllInsumos();
+
+                bool existe = insumosRegistrados.Any(i =>
+                    string.Equals(
+                        i.Nombre?.Trim(),
+                        nombreNuevo,
+                        StringComparison.OrdinalIgnoreCase));
+
+                if (existe)
+                {
+                    MessageBox.Show(
+                        "Ya existe un insumo registrado con ese nombre.",
+                        "Insumo duplicado",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string unidadSeleccionada = rbGr.Checked ? "Gr" : rbKg.Checked ? "Kg" : rbLts.Checked ? "Lts" : rbUnidad.Checked ? "Unidad" : null;
+
                 Insumo insumo = new Insumo
                 {
-                    Nombre = txtNombre.Text.Trim(),
+                    Nombre = nombreNuevo,
                     Descripcion = txtDescripcion.Text.Trim(),
                     Precio = precio,
                     UnidadMedida = unidadSeleccionada
                 };
+
                 NInsumos.Create(insumo);
+
+                MessageBox.Show(
+                    "Insumo registrado correctamente.",
+                    "Registro exitoso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
                 Clean();
                 UpdateDataGrid();
             }
             catch (Exception err)
             {
-                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    err.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
+
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -211,10 +266,37 @@ namespace Login
             labelId.Text = dgvInsumos.CurrentRow.Cells["Id"].Value?.ToString();
             txtNombre.Text = dgvInsumos.CurrentRow.Cells["Nombre"].Value?.ToString();
             txtDescripcion.Text = dgvInsumos.CurrentRow.Cells["Descripcion"].Value?.ToString();
-            txtPrecio.Text = dgvInsumos.CurrentRow.Cells["Precio"].Value?.ToString();
+            object precioValor = dgvInsumos.CurrentRow.Cells["Precio"].Value;
+            if (precioValor is decimal precio)
+                txtPrecio.Text = precio.ToString("0.####", CultureInfo.CurrentCulture);
+            else if (precioValor != null &&
+                     decimal.TryParse(precioValor.ToString(), NumberStyles.Number, CultureInfo.CurrentCulture, out decimal precio2))
+                txtPrecio.Text = precio2.ToString("0.####", CultureInfo.CurrentCulture);
+            else
+                txtPrecio.Text = precioValor?.ToString();
             string unidadSeleccionada = dgvInsumos.CurrentRow.Cells["UnidadMedida"].Value?.ToString();
             SeleccionarUnidadMedida(unidadSeleccionada);
         }
+
+        // Quita los ceros sobrantes solo en la vista, aunque el valor llegue como string o decimal.
+        private void dgvInsumos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.Value == null) return;
+            if (dgvInsumos.Columns[e.ColumnIndex].Name != "Precio") return;
+
+            if (e.Value is decimal dec)
+            {
+                e.Value = dec.ToString("0.####", CultureInfo.CurrentCulture);
+                e.FormattingApplied = true;
+            }
+            else if (e.Value is string str &&
+                     decimal.TryParse(str, NumberStyles.Number, CultureInfo.CurrentCulture, out decimal d))
+            {
+                e.Value = d.ToString("0.####", CultureInfo.CurrentCulture);
+                e.FormattingApplied = true;
+            }
+        }
+
         private void SeleccionarUnidadMedida(string unidadMedida)
         {
             rbKg.Checked = unidadMedida == "Kg";

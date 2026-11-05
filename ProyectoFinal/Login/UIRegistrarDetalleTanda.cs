@@ -89,7 +89,7 @@ namespace Login
             {
                 detalles.Add(new DetalleTandaProduccion
                 {
-                    Insumo = new Insumo { Id = item.IdInsumo, Nombre = item.NombreInsumo },
+                    Insumo = new Insumo { Id = item.IdInsumo, Nombre = item.NombreInsumo, UnidadMedida = item.UnidadMedidaInsumo },
                     CantidadUtilizada = (item.CantidadPorUnidad * cantidadProducida),
                     Empleado = null // diferido
                 });

@@ -35,6 +35,7 @@
             this.btnProductosEliminados = new System.Windows.Forms.Button();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.btnGestionRecetas = new System.Windows.Forms.Button();
+            this.pnlDerecha = new System.Windows.Forms.Panel();
             this.IdProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -239,6 +240,14 @@
             this.btnGestionRecetas.UseVisualStyleBackColor = true;
             this.btnGestionRecetas.Click += new System.EventHandler(this.btnGestionRecetas_Click);
             // 
+            // pnlDerecha
+            // 
+            this.pnlDerecha.BackColor = System.Drawing.Color.White;
+            this.pnlDerecha.Location = new System.Drawing.Point(1000, 56);
+            this.pnlDerecha.Name = "pnlDerecha";
+            this.pnlDerecha.Size = new System.Drawing.Size(704, 608);
+            this.pnlDerecha.TabIndex = 11;
+            // 
             // IdProducto
             // 
             this.IdProducto.FillWeight = 66.7186F;
@@ -294,6 +303,7 @@
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnProductosEliminados);
             this.Controls.Add(this.dgvProductos);
+            this.Controls.Add(this.pnlDerecha);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UIGestionProductos";
@@ -329,6 +339,7 @@
         private System.Windows.Forms.Label lblFechaCaducidad;
         private System.Windows.Forms.TextBox txtFechaCaducidad;
         private System.Windows.Forms.Button btnGestionRecetas;
+        private System.Windows.Forms.Panel pnlDerecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
