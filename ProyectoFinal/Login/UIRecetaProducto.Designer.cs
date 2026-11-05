@@ -101,7 +101,7 @@
             // 
             this.cantidad.HeaderText = "Cantidad";
             this.cantidad.Name = "cantidad";
-            this.cantidad.ToolTipText = "Si la unidad es Kg, empieza por 0.xxx ";
+            this.cantidad.ToolTipText = "Cantidad en la unidad de stock: gramos para pesados, mililitros para líquidos.";
             this.cantidad.Width = 130;
             // 
             // colUnidadMedida

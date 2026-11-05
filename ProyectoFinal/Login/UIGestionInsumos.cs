@@ -23,7 +23,7 @@ namespace Login
             this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
             // Fila 1: Nombre + Precio
             ConfigurarLabel(this.lblNombre, "Nombre", new System.Drawing.Point(16, 48));
-            ConfigurarLabel(this.lblPrecio, "Precio", new System.Drawing.Point(336, 48));
+            ConfigurarLabel(this.lblPrecio, "Precio por unidad de compra", new System.Drawing.Point(336, 48));
             ConfigurarTextBox(this.txtNombre, new System.Drawing.Point(16, 68), new System.Drawing.Size(300, 32), 0);
             ConfigurarTextBox(this.txtPrecio, new System.Drawing.Point(336, 68), new System.Drawing.Size(300, 32), 1);
 

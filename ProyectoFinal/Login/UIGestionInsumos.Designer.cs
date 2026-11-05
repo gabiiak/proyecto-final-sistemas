@@ -205,7 +205,7 @@ namespace Login
             this.grpUnidadMedida.Size = new System.Drawing.Size(200, 153);
             this.grpUnidadMedida.TabIndex = 8;
             this.grpUnidadMedida.TabStop = false;
-            this.grpUnidadMedida.Text = "Unidad de medida";
+            this.grpUnidadMedida.Text = "Unidad de compra";
             // 
             // rbKg
             // 

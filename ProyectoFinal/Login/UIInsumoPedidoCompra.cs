@@ -89,6 +89,7 @@ namespace Login
             {
                 precioSeleccionado = precio;
                 txtPrecio.Text = precio.ToString("N2");
+                lblCantidad.Text = "Cantidad (" + insumo.UnidadMedida + ")";
                 lblAviso.Visible = false;
                 numUpDownCantidad.Enabled = true;
                 btnAceptar.Enabled = true;
@@ -103,6 +104,7 @@ namespace Login
         {
             precioSeleccionado = 0;
             txtPrecio.Text = "";
+            lblCantidad.Text = "Cantidad";
             lblAviso.Text = mensaje;
             lblAviso.Visible = true;
             numUpDownCantidad.Enabled = false;

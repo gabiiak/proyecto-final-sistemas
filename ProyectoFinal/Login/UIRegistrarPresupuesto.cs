@@ -181,8 +181,9 @@ namespace Login
         {
             List<DetalleSolicitudCotizacion> detalles = NSolicitudCotizacion.GetDetalles(solicitud.IdSolicitud);
             Dictionary<int, decimal> precios = NPresupuesto.GetPreciosProveedor(solicitud.IdProveedor);
-            Dictionary<int, decimal> preciosBase = NInsumos.GetAllInsumos()
-                .ToDictionary(i => i.Id, i => i.Precio);
+            List<Insumo> insumosLista = NInsumos.GetAllInsumos();
+            Dictionary<int, decimal> preciosBase = insumosLista.ToDictionary(i => i.Id, i => i.Precio);
+            List<string> insumosSinUnidad = new List<string>();
 
             cargando = true;
             filasBase = new List<DetallePresupuesto>();
@@ -198,23 +199,42 @@ namespace Login
                         : 100m;
                 }
 
-                decimal subtotal = Math.Round(precio * detalle.Cantidad, 2);
+                string unidadCompra = detalle.UnidadMedidaInsumo ?? string.Empty;
+                decimal cantidadCompra;
+                if (string.IsNullOrWhiteSpace(unidadCompra))
+                {
+                    cantidadCompra = detalle.Cantidad;
+                    insumosSinUnidad.Add(detalle.NombreInsumo ?? "Insumo " + detalle.IdInsumo);
+                }
+                else
+                {
+                    cantidadCompra = NInsumos.CantidadDesdeStock(unidadCompra, detalle.Cantidad);
+                }
+
+                decimal subtotal = Math.Round(precio * cantidadCompra, 2);
                 filasBase.Add(new DetallePresupuesto
                 {
                     IdInsumo = detalle.IdInsumo,
-                    Cantidad = detalle.Cantidad,
+                    Cantidad = cantidadCompra,
                     NombreInsumo = detalle.NombreInsumo,
-                    UnidadMedidaInsumo = detalle.UnidadMedidaInsumo
+                    UnidadMedidaInsumo = unidadCompra
                 });
                 int indiceFila = dgvDetalle.Rows.Add(
                     detalle.NombreInsumo,
-                    detalle.UnidadMedidaInsumo,
-                    Math.Round(detalle.Cantidad, 4),
+                    unidadCompra,
+                    Math.Round(cantidadCompra, 4),
                     precio,
                     subtotal);
                 dgvDetalle.Rows[indiceFila].Tag = detalle.IdInsumo;
             }
             cargando = false;
+
+            if (insumosSinUnidad.Count > 0)
+            {
+                MessageBox.Show("Los siguientes insumos no tienen unidad de medida; se dejó la cantidad sin convertir:\n" +
+                    string.Join("\n", insumosSinUnidad.ToArray()),
+                    "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
             RecalcularTotal();
         }

@@ -105,6 +105,11 @@ namespace Login
 
                 fila.Cells["cmbInsumo"].Value = item.IdInsumo;
                 fila.Cells["cantidad"].Value = item.CantidadPorUnidad;
+
+                Insumo insumo = listaInsumos.FirstOrDefault(i => i.Id == item.IdInsumo);
+                fila.Cells["colUnidadMedida"].Value = insumo != null
+                    ? NInsumos.UnidadStock(insumo.UnidadMedida)
+                    : string.Empty;
             }
         }
 
@@ -120,7 +125,7 @@ namespace Login
                     Insumo insumo = listaInsumos.FirstOrDefault(i => i.Id == idInsumo);
 
                     dgvRecetaProducto.Rows[e.RowIndex].Cells["colUnidadMedida"].Value =
-                        insumo != null ? insumo.UnidadMedida : string.Empty;
+                        insumo != null ? NInsumos.UnidadStock(insumo.UnidadMedida) : string.Empty;
                 }
             }
         }

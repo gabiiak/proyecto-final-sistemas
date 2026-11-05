@@ -89,6 +89,17 @@ namespace Login
 
         private void cbInsumo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Insumo insumo = cbInsumo.SelectedItem as Insumo;
+            if (insumo != null && !string.IsNullOrWhiteSpace(insumo.UnidadMedida))
+            {
+                lblCantidad.Text = "Cantidad (" + insumo.UnidadMedida + ")";
+                lblPrecio.Text = "Precio unitario ($ por " + insumo.UnidadMedida + ")";
+            }
+            else
+            {
+                lblCantidad.Text = "Cantidad";
+                lblPrecio.Text = "Precio unitario ($)";
+            }
             PrecargarPrecioInsumo();
             ActualizarSubTotal();
         }

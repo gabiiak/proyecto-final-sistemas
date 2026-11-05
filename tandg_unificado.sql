@@ -1,7 +1,7 @@
 ﻿/******************************************************************************************************
   T&GSystem  -  Script UNICO de base de datos (SQL Server)
   ----------------------------------------------------------------------------------------------------
-  Destino : base SQL Server "TandGSystem"  (o la de prueba "TandGSystemTest", ver uso abajo)
+  Destino : base SQL Server "TandGSystem"  (hardcodeado; para bases de prueba usar copias manuales)
 
   Este script reemplaza a los 4 anteriores:
       migracion_sqlserver.sql         -> esquema completo + datos iniciales (viene de mvp.db)
@@ -18,10 +18,10 @@
 
   Como usarlo:
     * SSMS: activar "Modo SQLCMD" (menu Consulta) y ejecutar el script completo.
-    * sqlcmd (apuntando a la base local, auth Windows):
-        sqlcmd -S localhost -E -v BaseNombre="TandGSystem" -i tandg_unificado.sql -b
-      Para una base de PRUEBA separada:
-        sqlcmd -S localhost -E -v BaseNombre="TandGSystemTest" -i tandg_unificado.sql -b
+    * sqlcmd (apuntando a la instancia local, auth Windows):
+        sqlcmd -S localhost -E -i tandg_unificado.sql -b
+      Para una base de PRUEBA separada se recomienda crear una copia manual de la base
+      (BACKUP/RESTORE con otro nombre) y ejecutar el script apuntando a esa copia.
     * NO usar IF DB_ID(...) con CREATE DATABASE en Azure SQL Database (no lo permite). En ese caso
       crear la base desde el portal y ejecutar solo desde la linea USE hacia abajo.
     * Para BORRAR todo y recrear desde cero (solo desarrollo/pruebas) ver el bloque comentado
@@ -42,6 +42,7 @@
     * KAN-84: Ventas.estadoPago -> estadoCobro; Compras.idPresupuesto / fechaRecepcion / estadoPago;
               FK_Compras_Presupuesto; DetalleCompras.cantidad INT -> DECIMAL(18,4).
     * IA:     EvaluacionProveedor (una evaluacion por compra: fecha prometida, calidad 1..5).
+    * Bugs#2: normalizacion de unidades (stock Gr/Ml/Unidad, compra Kg/Lts/Gr/Unidad) con bloque 2.5.
 
   ----------------------------------------------------------------------------------------------------
   Decisiones de mapeo (SQLite -> SQL Server), heredadas de la migracion original:
@@ -72,24 +73,17 @@ SET QUOTED_IDENTIFIER ON;
 GO
 
 -- Crear la base si no existe (omitir este bloque si la base ya existe).
--- $(BaseNombre) permite apuntar a una base de prueba; sqlcmd lo reemplaza por el valor de -v.
 IF DB_ID(N'TandGSystem') IS NULL
-
 BEGIN
-
     EXEC('CREATE DATABASE [TandGSystem]');
-
+    PRINT N'Base TandGSystem creada.';
 END
-
+ELSE
+    PRINT N'Base TandGSystem ya existia.';
 GO
-
-
 
 USE [TandGSystem];
-
 GO
-
-
 
 SET DATEFORMAT dmy;  -- red de seguridad contra literales ambiguos (los del script son ISO)
 GO
@@ -121,6 +115,7 @@ IF OBJECT_ID(N'dbo.Productos', N'U')     IS NOT NULL DROP TABLE dbo.Productos;
 IF OBJECT_ID(N'dbo.Insumos', N'U')       IS NOT NULL DROP TABLE dbo.Insumos;
 IF OBJECT_ID(N'dbo.MetodosPago', N'U')  IS NOT NULL DROP TABLE dbo.MetodosPago;
 IF OBJECT_ID(N'dbo.Clientes', N'U')      IS NOT NULL DROP TABLE dbo.Clientes;
+IF OBJECT_ID(N'dbo.RegistroMigraciones', N'U') IS NOT NULL DROP TABLE dbo.RegistroMigraciones;
 GO
 */
 
@@ -179,7 +174,7 @@ BEGIN
         [descripcion]   NVARCHAR(500) NULL,   -- <-- corregido: era INTEGER en mvp.db
         [precio]        DECIMAL(18,4) NULL,
         [activo]        BIT           NULL,
-        [unidadMedida]  NVARCHAR(20)  NULL,
+        [unidadMedida]  NVARCHAR(20)  NULL,   -- unidad de compra (Kg/Lts/Gr/Unidad)
         CONSTRAINT [PK_Insumos] PRIMARY KEY CLUSTERED ([id] ASC)
     );
 END
@@ -199,6 +194,18 @@ BEGIN
 END
 GO
 
+-- Tabla de control de migraciones incrementales (Bugs#2)
+IF OBJECT_ID(N'dbo.RegistroMigraciones', N'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.RegistroMigraciones (
+        [bloque]   NVARCHAR(50) NOT NULL,
+        [aplicado] DATETIME     NOT NULL DEFAULT GETDATE(),
+        CONSTRAINT [PK_RegistroMigraciones] PRIMARY KEY CLUSTERED ([bloque] ASC)
+    );
+    PRINT N'RegistroMigraciones creada.';
+END
+GO
+
 -- ---------- Tablas con dependencias ----------
 
 IF OBJECT_ID(N'dbo.RecetaProducto', N'U') IS NULL
@@ -207,7 +214,7 @@ BEGIN
         [idReceta]          INT IDENTITY(1,1) NOT NULL,
         [idProducto]        INT           NOT NULL,
         [idInsumo]          INT           NOT NULL,
-        [cantidadPorUnidad] DECIMAL(18,4) NOT NULL,
+        [cantidadPorUnidad] DECIMAL(18,4) NOT NULL, -- en la unidad de stock del insumo
         CONSTRAINT [PK_RecetaProducto] PRIMARY KEY CLUSTERED ([idReceta] ASC),
         CONSTRAINT [FK_RecetaProducto_Producto] FOREIGN KEY ([idProducto])
             REFERENCES dbo.Productos ([IdProducto]) ON UPDATE CASCADE ON DELETE NO ACTION,
@@ -237,7 +244,7 @@ BEGIN
     CREATE TABLE dbo.StockInsumo (
         [id]        INT IDENTITY(1,1) NOT NULL,
         [insumo_id] INT           NOT NULL,
-        -- DECIMAL porque los insumos se miden en Kg/Gr y admiten fracciones
+        -- cantidad en la unidad de stock: Gr (pesados), Ml (líquidos), Unidad
         [cantidad]  DECIMAL(18,4) NULL,
         CONSTRAINT [PK_StockInsumo] PRIMARY KEY CLUSTERED ([id] ASC),
         CONSTRAINT [FK_StockInsumo_Insumo] FOREIGN KEY ([insumo_id])
@@ -275,7 +282,7 @@ BEGIN
         [idTandaProd]        INT           NOT NULL,
         [idInsumo]           INT           NOT NULL,
         [idEmpleado]         INT           NULL,   -- sin FK: la tabla Empleados no existe
-        [cantidadUtilizada]  DECIMAL(18,4) NULL,
+        [cantidadUtilizada]  DECIMAL(18,4) NULL,   -- en la unidad de stock del insumo
         CONSTRAINT [PK_DetalleTanda] PRIMARY KEY CLUSTERED ([idDetalleTanda] ASC),
         CONSTRAINT [FK_DetalleTanda_Tanda] FOREIGN KEY ([idTandaProd])
             REFERENCES dbo.TandaProduccion ([idTanda]) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -586,6 +593,133 @@ ELSE
     PRINT N'DetalleCompras: cantidad ya era decimal.';
 GO
 
+-- 2.5) Unidades: la compra se carga en Insumos.unidadMedida (Kg/Lts/Gr/Unidad);
+--      el stock, las recetas, el faltante y las tandas van en la unidad de stock
+--      (Gr para pesados, Ml para liquidos). Migracion: los datos viejos cargados
+--      bajo la unidad 'Kg'/'Lts' pasan a la unidad de stock (x1000); los insumos
+--      marcados 'Gr' pasan a compra por 'Kg' (los historicos de compra/presupuesto
+--      se ajustan /1000 en cantidad y subtotal, restando el delta de los totales).
+IF NOT EXISTS (SELECT 1 FROM dbo.RegistroMigraciones WHERE bloque = N'2.5_unidades')
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        -- (a) Stock: x1000 para lo cargado en Kg o Lts (pasan a Gr/Ml)
+        UPDATE s SET s.cantidad = s.cantidad * 1000
+        FROM dbo.StockInsumo s JOIN dbo.Insumos i ON i.id = s.insumo_id
+        WHERE i.unidadMedida IN (N'Kg', N'Lts');
+        PRINT N'2.5a) StockInsumo normalizado a unidad de stock (x1000). Filas afectadas: ' + CAST(@@ROWCOUNT AS NVARCHAR(20));
+
+        -- (b) Recetas: x1000 para pesados/liquidos (pasan a Gr/Ml)
+        UPDATE r SET r.cantidadPorUnidad = r.cantidadPorUnidad * 1000
+        FROM dbo.RecetaProducto r JOIN dbo.Insumos i ON i.id = r.idInsumo
+        WHERE i.unidadMedida IN (N'Kg', N'Lts');
+        PRINT N'2.5b) RecetaProducto normalizada a unidad de stock (x1000). Filas afectadas: ' + CAST(@@ROWCOUNT AS NVARCHAR(20));
+
+        -- (c) Faltantes historicos de solicitudes: x1000 (pasan a stock)
+        UPDATE d SET d.cantidad = d.cantidad * 1000
+        FROM dbo.DetalleSolicitudCotizacion d JOIN dbo.Insumos i ON i.id = d.idInsumo
+        WHERE i.unidadMedida IN (N'Kg', N'Lts');
+        PRINT N'2.5c) DetalleSolicitudCotizacion normalizado a unidad de stock (x1000). Filas afectadas: ' + CAST(@@ROWCOUNT AS NVARCHAR(20));
+
+        -- (d) Consumos historicos de tandas: x1000 (pasan a stock)
+        UPDATE d SET d.cantidadUtilizada = d.cantidadUtilizada * 1000
+        FROM dbo.DetalleTanda d JOIN dbo.Insumos i ON i.id = d.idInsumo
+        WHERE i.unidadMedida IN (N'Kg', N'Lts');
+        PRINT N'2.5d) DetalleTanda normalizado a unidad de stock (x1000). Filas afectadas: ' + CAST(@@ROWCOUNT AS NVARCHAR(20));
+
+        -- (e) Historicos de compra y presupuesto cargados como 'Gr' (insumos que ahora
+        --     compran por Kg): pasan a Kg (/1000) en cantidad y subtotal, y se ajustan
+        --     los totales restando el delta exacto guardado antes de la division.
+        IF EXISTS (SELECT 1 FROM dbo.Insumos WHERE unidadMedida = N'Gr')
+        BEGIN
+            CREATE TABLE #DeltasCompra (
+                idCompra INT PRIMARY KEY,
+                delta    DECIMAL(18,4) NOT NULL
+            );
+
+            INSERT INTO #DeltasCompra (idCompra, delta)
+            SELECT d.idCompra, SUM(d.subTotal - d.subTotal / 1000)
+            FROM dbo.DetalleCompras d
+            JOIN dbo.Insumos i ON i.id = d.idInsumo
+            WHERE i.unidadMedida = N'Gr'
+              AND d.subTotal IS NOT NULL
+            GROUP BY d.idCompra;
+
+            CREATE TABLE #DeltasPresupuesto (
+                idPresupuesto INT PRIMARY KEY,
+                delta         DECIMAL(18,4) NOT NULL
+            );
+
+            INSERT INTO #DeltasPresupuesto (idPresupuesto, delta)
+            SELECT d.idPresupuesto, SUM(d.subtotal - d.subtotal / 1000)
+            FROM dbo.DetallePresupuesto d
+            JOIN dbo.Insumos i ON i.id = d.idInsumo
+            WHERE i.unidadMedida = N'Gr'
+              AND d.subtotal IS NOT NULL
+            GROUP BY d.idPresupuesto;
+
+            UPDATE d SET d.cantidad = d.cantidad / 1000, d.subTotal = d.subTotal / 1000
+            FROM dbo.DetalleCompras d JOIN dbo.Insumos i ON i.id = d.idInsumo
+            WHERE i.unidadMedida = N'Gr';
+            PRINT N'2.5e.1) DetalleCompras ajustado a compra por Kg (/1000). Filas afectadas: ' + CAST(@@ROWCOUNT AS NVARCHAR(20));
+
+            UPDATE d SET d.cantidad = d.cantidad / 1000, d.subtotal = d.subtotal / 1000
+            FROM dbo.DetallePresupuesto d JOIN dbo.Insumos i ON i.id = d.idInsumo
+            WHERE i.unidadMedida = N'Gr';
+            PRINT N'2.5e.2) DetallePresupuesto ajustado a compra por Kg (/1000). Filas afectadas: ' + CAST(@@ROWCOUNT AS NVARCHAR(20));
+
+            -- Los CHECKs residuales CK_Compras_total y CK_Compras_pagado no forman parte del
+            -- esquema actual del script; si existen, se eliminan para que el ajuste de totales
+            -- (que reduce totalCompra restando el delta) pueda aplicarse sin conflictos.
+            IF EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = N'CK_Compras_total' AND parent_object_id = OBJECT_ID(N'dbo.Compras'))
+            BEGIN
+                ALTER TABLE dbo.Compras DROP CONSTRAINT [CK_Compras_total];
+                PRINT N'2.5e.3) CHECK residual CK_Compras_total eliminado.';
+            END
+
+            IF EXISTS (SELECT 1 FROM sys.check_constraints WHERE name = N'CK_Compras_pagado' AND parent_object_id = OBJECT_ID(N'dbo.Compras'))
+            BEGIN
+                ALTER TABLE dbo.Compras DROP CONSTRAINT [CK_Compras_pagado];
+                PRINT N'2.5e.4) CHECK residual CK_Compras_pagado eliminado.';
+            END
+
+            -- Chequeo de seguridad: el delta no puede superar el total actual.
+            IF EXISTS (SELECT 1 FROM #DeltasCompra t JOIN dbo.Compras c ON c.idCompra = t.idCompra WHERE t.delta > c.totalCompra)
+                THROW 50001, N'El delta de ajuste supera el total de una o mas compras. La migracion no se aplico.', 1;
+
+            IF EXISTS (SELECT 1 FROM #DeltasPresupuesto t JOIN dbo.Presupuesto p ON p.idPresupuesto = t.idPresupuesto WHERE t.delta > p.total)
+                THROW 50002, N'El delta de ajuste supera el total de uno o mas presupuestos. La migracion no se aplico.', 1;
+
+            UPDATE c SET c.totalCompra = c.totalCompra - t.delta
+            FROM dbo.Compras c JOIN #DeltasCompra t ON t.idCompra = c.idCompra;
+            PRINT N'2.5e.5) Compras.totalCompra ajustado por delta. Filas afectadas: ' + CAST(@@ROWCOUNT AS NVARCHAR(20));
+
+            UPDATE p SET p.total = p.total - t.delta
+            FROM dbo.Presupuesto p JOIN #DeltasPresupuesto t ON t.idPresupuesto = p.idPresupuesto;
+            PRINT N'2.5e.6) Presupuesto.total ajustado por delta. Filas afectadas: ' + CAST(@@ROWCOUNT AS NVARCHAR(20));
+        END
+        ELSE
+            PRINT N'2.5e) No hay insumos en Gr: se omite ajuste de historicos de compra/presupuesto.';
+
+        -- (f) Insumos 'Gr' pasan a compra por 'Kg' (el precio ya era por Kg legacy)
+        UPDATE dbo.Insumos SET unidadMedida = N'Kg' WHERE unidadMedida = N'Gr';
+        PRINT N'2.5f) Insumos Gr renombrados a Kg. Filas afectadas: ' + CAST(@@ROWCOUNT AS NVARCHAR(20));
+
+        INSERT INTO dbo.RegistroMigraciones (bloque) VALUES (N'2.5_unidades');
+        PRINT N'2.5) Migracion de unidades aplicada y registrada.';
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH;
+END
+ELSE
+    PRINT N'2.5) Migracion de unidades ya aplicada (marca 2.5_unidades existe).';
+GO
+
 -- 2.x) (agregar aca los proximos cambios incrementales, uno por bloque protegido, con su ticket)
 
 --------------------------------------------------------------------------------
@@ -643,25 +777,26 @@ BEGIN
 
     -- Insumos (8 filas)
     -- Se preservan los IDs originales, asi que hay que habilitar IDENTITY_INSERT para esta tabla.
+    -- unidadMedida es la unidad de compra; los insumos 5/6/8 (sal/pimienta/mostaza) pasan a Kg.
     SET IDENTITY_INSERT dbo.Insumos ON;
     INSERT INTO [Insumos] (id, nombre, descripcion, precio, activo, unidadMedida) VALUES
       (N'1', N'carne_vaca', N'Kg', 13900, 1, N'Kg'),
       (N'2', N'pollo', N'Kg', 7900, 1, N'Kg'),
       (N'3', N'pescado', N'Kg', 12000, 1, N'Kg'),
       (N'4', N'chorizo', N'Kg', 8000, 1, N'Kg'),
-      (N'5', N'sal', N'Kg', 6900, 1, N'Gr'),
-      (N'6', N'pimienta', N'Kg', 6900, 1, N'Gr'),
+      (N'5', N'sal', N'Kg', 6900, 1, N'Kg'),
+      (N'6', N'pimienta', N'Kg', 6900, 1, N'Kg'),
       (N'7', N'soja', N'Kg', 1700, 1, N'Kg'),
-      (N'8', N'semillas_mostaza', N'Kg', 3000, 1, N'Gr');
+      (N'8', N'semillas_mostaza', N'Kg', 3000, 1, N'Kg');
     SET IDENTITY_INSERT dbo.Insumos OFF;
 
     -- RecetaProducto (3 filas)
     -- Se preservan los IDs originales, asi que hay que habilitar IDENTITY_INSERT para esta tabla.
     SET IDENTITY_INSERT dbo.RecetaProducto ON;
     INSERT INTO [RecetaProducto] (idReceta, idProducto, idInsumo, cantidadPorUnidad) VALUES
-      (1, 1, 1, 0.15),
-      (2, 1, 5, 5),
-      (3, 3, 2, 0.15);
+      (1, 1, 1, 150),   -- en gramos (unidad de stock)
+      (2, 1, 5, 5),     -- en gramos (unidad de stock)
+      (3, 3, 2, 150);   -- en gramos (unidad de stock)
     SET IDENTITY_INSERT dbo.RecetaProducto OFF;
 
     -- StockProducto (4 filas)
@@ -676,13 +811,14 @@ BEGIN
 
     -- StockInsumo (5 filas)
     -- Se preservan los IDs originales, asi que hay que habilitar IDENTITY_INSERT para esta tabla.
+    -- Las cantidades estan en la unidad de stock: Gr (pesados), Ml (liquidos), Unidad.
     SET IDENTITY_INSERT dbo.StockInsumo ON;
     INSERT INTO [StockInsumo] (id, insumo_id, cantidad) VALUES
-      (1, 1, 100),
-      (2, 2, 100),
-      (3, 3, 30),
-      (4, 4, 30),
-      (5, 5, 3000);
+      (1, 1, 100000),  -- carne (Gr)
+      (2, 2, 100000),  -- pollo (Gr)
+      (3, 3, 30000),   -- pescado (Gr)
+      (4, 4, 30000),   -- chorizo (Gr)
+      (5, 5, 3000);    -- sal (Gr)
     SET IDENTITY_INSERT dbo.StockInsumo OFF;
 
     -- TandaProduccion (1 filas)
@@ -720,6 +856,11 @@ BEGIN
     SET IDENTITY_INSERT dbo.DetalleVentas OFF;
 
     -- Transportes (0 filas: la tabla queda creada y vacia, como en mvp.db)
+
+    -- Marca de migracion 2.5 para bases nuevas (nace ya con unidades corregidas)
+    IF NOT EXISTS (SELECT 1 FROM dbo.RegistroMigraciones WHERE bloque = N'2.5_unidades')
+        INSERT INTO dbo.RegistroMigraciones (bloque) VALUES (N'2.5_unidades');
+
     COMMIT TRANSACTION;
 
     DBCC CHECKIDENT ('dbo.Clientes', RESEED, 7) WITH NO_INFOMSGS;
@@ -763,7 +904,8 @@ SELECT * FROM (
     SELECT 'Presupuesto',                COUNT_BIG(*) FROM dbo.Presupuesto                UNION ALL
     SELECT 'DetallePresupuesto',         COUNT_BIG(*) FROM dbo.DetallePresupuesto         UNION ALL
     SELECT 'PrecioProveedor',            COUNT_BIG(*) FROM dbo.PrecioProveedor            UNION ALL
-    SELECT 'EvaluacionProveedor',        COUNT_BIG(*) FROM dbo.EvaluacionProveedor
+    SELECT 'EvaluacionProveedor',        COUNT_BIG(*) FROM dbo.EvaluacionProveedor        UNION ALL
+    SELECT 'RegistroMigraciones',        COUNT_BIG(*) FROM dbo.RegistroMigraciones
 ) AS Conteo ORDER BY Tabla;
 GO
 

@@ -31,6 +31,7 @@ namespace Login
             ConfigurarLabel(this.lblCantidad, "Cantidad", new System.Drawing.Point(336, 48));
 
             ConfigurarComboBox(this.cmbInsumos, new System.Drawing.Point(16, 68), new System.Drawing.Size(300, 32), 0);
+            this.cmbInsumos.SelectedIndexChanged += new System.EventHandler(this.cmbInsumos_SelectedIndexChanged);
             ConfigurarTextBox(this.txtCantidad, new System.Drawing.Point(336, 68), new System.Drawing.Size(300, 32), 1);
 
             ConfigurarBotonPrimario(this.btnRegistrar, "Registrar", new System.Drawing.Point(20, 272), 2);
@@ -71,7 +72,7 @@ namespace Login
                 st.InsumoId,
                 st.NombreInsumo,
                 CantidadDisponible = FormatearNumero(st.CantidadDisponible),
-                st.UnidadMedidaInsumo
+                UnidadMedidaInsumo = NInsumos.UnidadStock(st.UnidadMedidaInsumo)
             }).ToList();
             if (dgvStock.Columns.Contains("InsumoId"))
             {
@@ -122,6 +123,22 @@ namespace Login
             labelId.Text = "";
             cmbInsumos.SelectedIndex = -1;
             txtCantidad.Clear();
+            ActualizarLabelCantidad(null);
+        }
+
+        private void ActualizarLabelCantidad(Insumo insumo)
+        {
+            if (insumo == null || string.IsNullOrWhiteSpace(insumo.UnidadMedida))
+            {
+                lblCantidad.Text = "Cantidad";
+                return;
+            }
+            lblCantidad.Text = "Cantidad (" + NInsumos.UnidadStock(insumo.UnidadMedida) + ")";
+        }
+
+        private void cmbInsumos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActualizarLabelCantidad(cmbInsumos.SelectedItem as Insumo);
         }
 
         private bool ValidarCampos(out decimal cantidad)
@@ -240,10 +257,14 @@ namespace Login
             if (dgvStock.CurrentRow == null) return;
             labelId.Text = dgvStock.CurrentRow.Cells["Id"].Value?.ToString();
             object insumoIdValor = dgvStock.CurrentRow.Cells["InsumoId"].Value;
+            Insumo insumo = null;
             if (insumoIdValor != null)
             {
-                cmbInsumos.SelectedValue = (int)insumoIdValor;
+                int idInsumo = (int)insumoIdValor;
+                cmbInsumos.SelectedValue = idInsumo;
+                insumo = listaInsumos.FirstOrDefault(i => i.Id == idInsumo);
             }
+            ActualizarLabelCantidad(insumo);
             object cantValor = dgvStock.CurrentRow.Cells["CantidadDisponible"].Value;
             if (cantValor is decimal cant)
                 txtCantidad.Text = cant.ToString("0.####", CultureInfo.CurrentCulture);

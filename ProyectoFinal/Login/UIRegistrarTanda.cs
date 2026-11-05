@@ -100,9 +100,9 @@ namespace Login
                 dgvTanda_Detalles.Rows.Add(
                     det.Insumo.Nombre,
                     det.CantidadUtilizada,
-                    det.Insumo.UnidadMedida
+                    NInsumos.UnidadStock(det.Insumo.UnidadMedida)
                     //det.Empleado.Nombre + " " + det.Empleado.Apellido,
-                    
+
                 );
             }    
         }

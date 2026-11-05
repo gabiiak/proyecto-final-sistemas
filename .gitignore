@@ -27,6 +27,9 @@ scripts/.fix
 #
 ProyectoFinal/Consola/mvp.db
 
+# Backups de base de datos reales (no subir .bak con datos)
+*.bak
+
 #Recursos de opencode
 opencode.json
 .opencode/

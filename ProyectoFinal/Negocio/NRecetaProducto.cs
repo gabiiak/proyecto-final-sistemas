@@ -60,14 +60,18 @@ namespace Negocio
 
             return DataRecetaProducto.ObtenerPorProducto(idProducto);
         }
-        private static bool CantidadRazonable(decimal cantidad, string unidadMedida)
+        private static bool CantidadRazonable(decimal cantidad, string unidadStock)
         {
-            switch (unidadMedida?.ToLower())
+            switch (unidadStock?.ToLowerInvariant())
             {
-                case "kg":
-                    return cantidad <= 10; // más de 10 Kg por unidad de producto es sospechoso
                 case "gr":
-                    return cantidad <= 1000; // más de 1000 gr (=1kg) por unidad de producto es sospechoso
+                    return cantidad <= 1000; // más de 1000 gr por unidad de producto es sospechoso
+                case "kg":
+                    return cantidad <= 10; // legacy, por robustez
+                case "ml":
+                    return cantidad <= 1000; // más de 1000 ml por unidad de producto es sospechoso
+                case "lts":
+                    return cantidad <= 10; // legacy, por robustez
                 case "unidad":
                     return cantidad <= 50; // más de 50 unidades (ej. huevos) por producto es sospechoso
                 default:
@@ -95,10 +99,11 @@ namespace Negocio
                 if (item.CantidadPorUnidad <= 0)
                     throw new ArgumentException("Todas las cantidades deben ser mayores a cero.");
 
-                if (!CantidadRazonable(item.CantidadPorUnidad, item.UnidadMedidaInsumo))
+                string unidadStock = NInsumos.UnidadStock(item.UnidadMedidaInsumo);
+                if (!CantidadRazonable(item.CantidadPorUnidad, unidadStock))
                     throw new ArgumentException(
                         $"La cantidad '{item.CantidadPorUnidad}' parece muy alta para el insumo '{item.NombreInsumo}' " +
-                        $"(medido en {item.UnidadMedidaInsumo}). Verifique que esté expresada correctamente.");
+                        $"(medido en {unidadStock}). Verifique que esté expresada correctamente.");
             }
 
             DataRecetaProducto.ReemplazarReceta(idProducto, receta);
