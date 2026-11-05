@@ -70,6 +70,94 @@ namespace Datos
             }
             return resultado;
         }
+        public static List<(string Nombre, int Cantidad)> GetProductosMasVendidos(int top = 5)
+        {
+            var resultado = new List<(string, int)>();
+            int totalCantidad = 0;
+            int topCantidad = 0;
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                connection.Open();
+                string sqlTotal = @"SELECT ISNULL(SUM(dv.cantidad), 0)
+                                    FROM DetalleVentas dv
+                                    INNER JOIN Ventas v ON dv.idVenta = v.idVenta
+                                    WHERE v.estadoCobro != @Anulado";
+                using (SqlCommand cmdTotal = new SqlCommand(sqlTotal, connection))
+                {
+                    cmdTotal.Parameters.AddWithValue("@Anulado", EstadoCobro.Anulado);
+                    totalCantidad = Convert.ToInt32(cmdTotal.ExecuteScalar());
+                }
+
+                string sqlTop = @"SELECT TOP (@Top) p.Nombre, SUM(dv.cantidad) as totalCantidad
+                            FROM DetalleVentas dv
+                            INNER JOIN Productos p ON dv.idProducto = p.idProducto
+                            INNER JOIN Ventas v ON dv.idVenta = v.idVenta
+                            WHERE v.estadoCobro != @Anulado
+                            GROUP BY p.idProducto, p.Nombre
+                            ORDER BY totalCantidad DESC";
+                using (SqlCommand cmdTop = new SqlCommand(sqlTop, connection))
+                {
+                    cmdTop.Parameters.AddWithValue("@Anulado", EstadoCobro.Anulado);
+                    cmdTop.Parameters.AddWithValue("@Top", top);
+                    using (SqlDataReader reader = cmdTop.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int cantidad = reader.GetInt32(1);
+                            resultado.Add((reader.GetString(0), cantidad));
+                            topCantidad += cantidad;
+                        }
+                    }
+                }
+            }
+            int otros = totalCantidad - topCantidad;
+            if (otros > 0)
+                resultado.Add(("Otros", otros));
+            return resultado;
+        }
+        public static List<(string Nombre, double Total)> GetClientesQueMasCompran(int top = 5)
+        {
+            var resultado = new List<(string, double)>();
+            double totalMonto = 0;
+            double topMonto = 0;
+            using (SqlConnection connection = Db.GetConnection())
+            {
+                connection.Open();
+                string sqlTotal = @"SELECT ISNULL(SUM(v.totalVenta), 0)
+                                    FROM Ventas v
+                                    WHERE v.estadoCobro != @Anulado";
+                using (SqlCommand cmdTotal = new SqlCommand(sqlTotal, connection))
+                {
+                    cmdTotal.Parameters.AddWithValue("@Anulado", EstadoCobro.Anulado);
+                    totalMonto = Convert.ToDouble(cmdTotal.ExecuteScalar());
+                }
+
+                string sqlTop = @"SELECT TOP (@Top) c.nombre, SUM(v.totalVenta) as totalFacturado
+                            FROM Ventas v
+                            INNER JOIN Clientes c ON v.idCliente = c.id
+                            WHERE v.estadoCobro != @Anulado
+                            GROUP BY c.id, c.nombre
+                            ORDER BY totalFacturado DESC";
+                using (SqlCommand cmdTop = new SqlCommand(sqlTop, connection))
+                {
+                    cmdTop.Parameters.AddWithValue("@Anulado", EstadoCobro.Anulado);
+                    cmdTop.Parameters.AddWithValue("@Top", top);
+                    using (SqlDataReader reader = cmdTop.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            double monto = (double)reader.GetDecimal(1);
+                            resultado.Add((reader.GetString(0), monto));
+                            topMonto += monto;
+                        }
+                    }
+                }
+            }
+            double otros = totalMonto - topMonto;
+            if (otros > 0.01)
+                resultado.Add(("Otros", otros));
+            return resultado;
+        }
         public static int UpdateTotal(int idVenta, decimal total)
         {
             using (SqlConnection connection = Db.GetConnection())

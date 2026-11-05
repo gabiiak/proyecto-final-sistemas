@@ -13,6 +13,7 @@
         private void InitializeComponent()
         {
             this.pnlFormulario = new System.Windows.Forms.Panel();
+            this.pnlDerecha = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.labelId = new System.Windows.Forms.Label();
@@ -84,6 +85,13 @@
             this.pnlFormulario.Controls.Add(this.lblTelefono);
             this.pnlFormulario.Controls.Add(this.txtTelefono);
 
+            // ── PANEL DERECHA ───────────────────────────────────────
+            this.pnlDerecha.BackColor = System.Drawing.Color.White;
+            this.pnlDerecha.Location = new System.Drawing.Point(1000, 56);
+            this.pnlDerecha.Name = "pnlDerecha";
+            this.pnlDerecha.Size = new System.Drawing.Size(704, 608);
+            this.pnlDerecha.TabIndex = 10;
+
             // ── DATAGRIDVIEW ────────────────────────────────────────
             this.dgvProveedores.Location = new System.Drawing.Point(20, 344);
             this.dgvProveedores.Size = new System.Drawing.Size(860, 256);
@@ -121,6 +129,7 @@
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnListarBorrados);
             this.Controls.Add(this.dgvProveedores);
+            this.Controls.Add(this.pnlDerecha);
 
             this.pnlFormulario.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).EndInit();
@@ -146,5 +155,6 @@
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnListarBorrados;
         private System.Windows.Forms.DataGridView dgvProveedores;
+        private System.Windows.Forms.Panel pnlDerecha;
     }
 }

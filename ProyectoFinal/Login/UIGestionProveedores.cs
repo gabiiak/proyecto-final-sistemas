@@ -15,6 +15,7 @@ namespace Login
         public UIGestionProveedores()
         {
             InitializeComponent();
+            this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
 
             // Fila 1: Nombre + Email
             ConfigurarLabel(this.lblNombre, "Nombre", new System.Drawing.Point(16, 48));

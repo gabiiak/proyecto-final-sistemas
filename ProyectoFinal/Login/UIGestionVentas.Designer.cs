@@ -41,6 +41,7 @@
             this.MetodoPago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstadoDeCobro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstadoDePedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlDerecha = new System.Windows.Forms.Panel();
 
             this.pnlAcciones.SuspendLayout();
             this.pnlFiltros.SuspendLayout();
@@ -48,7 +49,7 @@
             this.SuspendLayout();
 
             // ── FORM ────────────────────────────────────────────────
-            this.ClientSize = new System.Drawing.Size(1000, 680);
+            this.ClientSize = new System.Drawing.Size(1724, 680);
             this.Text = "Gestión de Ventas";
             this.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -106,6 +107,12 @@
             this.pnlFiltros.Location = new System.Drawing.Point(356, 56);
             this.pnlFiltros.Size = new System.Drawing.Size(624, 240);
             this.pnlFiltros.Name = "pnlFiltros";
+
+            // ── PANEL DERECHA ───────────────────────────────────────
+            this.pnlDerecha.BackColor = System.Drawing.Color.White;
+            this.pnlDerecha.Location = new System.Drawing.Point(1000, 56);
+            this.pnlDerecha.Size = new System.Drawing.Size(704, 608);
+            this.pnlDerecha.Name = "pnlDerecha";
             //this.pnlFiltros.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPanel_Paint);
 
             // Sección filtro por fecha
@@ -222,6 +229,7 @@
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pnlAcciones);
             this.Controls.Add(this.pnlFiltros);
+            this.Controls.Add(this.pnlDerecha);
             this.Controls.Add(this.dgvTodasLasVentas);
 
             this.pnlAcciones.ResumeLayout(false);
@@ -260,5 +268,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoDePedido;
         private System.Windows.Forms.Button btnExportarExcel;
         private System.Windows.Forms.Button btnTransporte;
+        private System.Windows.Forms.Panel pnlDerecha;
     }
 }

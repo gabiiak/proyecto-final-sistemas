@@ -15,6 +15,7 @@ namespace Login
             this.lblTitulo = new System.Windows.Forms.Label();
             this.pnlAcciones = new System.Windows.Forms.Panel();
             this.pnlFiltros = new System.Windows.Forms.Panel();
+            this.pnlDerecha = new System.Windows.Forms.Panel();
             this.btnRegistrarSolicitud = new System.Windows.Forms.Button();
             this.btnRegistrarPresupuesto = new System.Windows.Forms.Button();
             this.btnVerDetalle = new System.Windows.Forms.Button();
@@ -162,11 +163,19 @@ namespace Login
                 this.colFecha, this.colTotal, this.colEstado
             });
 
+            // ── PANEL DERECHA ───────────────────────────────────────
+            this.pnlDerecha.BackColor = System.Drawing.Color.White;
+            this.pnlDerecha.Location = new System.Drawing.Point(1326, 56);
+            this.pnlDerecha.Size = new System.Drawing.Size(400, 608);
+            this.pnlDerecha.Name = "pnlDerecha";
+            this.pnlDerecha.TabIndex = 12;
+
             // ── CONTROLS DEL FORM ───────────────────────────────────
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pnlAcciones);
             this.Controls.Add(this.pnlFiltros);
             this.Controls.Add(this.dgvPresupuestos);
+            this.Controls.Add(this.pnlDerecha);
 
             this.pnlAcciones.ResumeLayout(false);
             this.pnlFiltros.ResumeLayout(false);
@@ -205,5 +214,6 @@ namespace Login
         private System.Windows.Forms.DataGridViewTextBoxColumn colFecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEstado;
+        private System.Windows.Forms.Panel pnlDerecha;
     }
 }

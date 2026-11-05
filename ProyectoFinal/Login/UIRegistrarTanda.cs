@@ -200,6 +200,7 @@ namespace Login
                             solicitud.ShowDialog();
                             return;
                         }
+                        if (respuesta == DialogResult.No) return;
                     }
                 }
 

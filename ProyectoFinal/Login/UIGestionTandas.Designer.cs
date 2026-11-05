@@ -39,13 +39,14 @@
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaCaducidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnReporteMensual = new System.Windows.Forms.Button();
+            this.pnlDerecha = new System.Windows.Forms.Panel();
             this.pnlAcciones.SuspendLayout();
             this.pnlFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTodasLasTandas)).BeginInit();
             this.SuspendLayout();
 
             // ── FORM ────────────────────────────────────────────────
-            this.ClientSize = new System.Drawing.Size(1000, 680);
+            this.ClientSize = new System.Drawing.Size(1724, 680);
             this.Text = "Gestión de Tandas de Producción";
             this.BackColor = System.Drawing.Color.FromArgb(244, 247, 251);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -89,9 +90,13 @@
             // ── PANEL FILTROS ───────────────────────────────────────
             this.pnlFiltros.BackColor = System.Drawing.Color.White;
             this.pnlFiltros.Location = new System.Drawing.Point(356, 56);
-            this.pnlFiltros.Size = new System.Drawing.Size(724, 240);
+            this.pnlFiltros.Size = new System.Drawing.Size(624, 240);
 
-            
+            // ── PANEL DERECHA ───────────────────────────────────────
+            this.pnlDerecha.BackColor = System.Drawing.Color.White;
+            this.pnlDerecha.Location = new System.Drawing.Point(1000, 56);
+            this.pnlDerecha.Size = new System.Drawing.Size(688, 608);
+            this.pnlDerecha.Name = "pnlDerecha";
 
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDesde.Location = new System.Drawing.Point(16, 36);
@@ -123,7 +128,7 @@
 
             // ── DATAGRIDVIEW PRINCIPAL ──────────────────────────────
             this.dgvTodasLasTandas.Location = new System.Drawing.Point(20, 302);
-            this.dgvTodasLasTandas.Size = new System.Drawing.Size(1060, 360);
+            this.dgvTodasLasTandas.Size = new System.Drawing.Size(960, 360);
             this.dgvTodasLasTandas.ReadOnly = true;
             this.dgvTodasLasTandas.RowTemplate.Height = 35;
             this.dgvTodasLasTandas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -164,6 +169,7 @@
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pnlAcciones);
             this.Controls.Add(this.pnlFiltros);
+            this.Controls.Add(this.pnlDerecha);
             this.Controls.Add(this.dgvTodasLasTandas);
 
             this.pnlAcciones.ResumeLayout(false);
@@ -199,5 +205,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaCaducidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.Button btnReporteMensual;
+        private System.Windows.Forms.Panel pnlDerecha;
     }
 }

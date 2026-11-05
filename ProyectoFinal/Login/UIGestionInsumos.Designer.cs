@@ -16,6 +16,7 @@ namespace Login
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFormulario = new System.Windows.Forms.Panel();
+            this.pnlDerecha = new System.Windows.Forms.Panel();
             this.lblId = new System.Windows.Forms.Label();
             this.labelId = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
@@ -251,6 +252,14 @@ namespace Login
             this.rbLts.Text = "Litros";
             this.rbLts.UseVisualStyleBackColor = true;
             // 
+            // pnlDerecha
+            // 
+            this.pnlDerecha.BackColor = System.Drawing.Color.White;
+            this.pnlDerecha.Location = new System.Drawing.Point(1000, 56);
+            this.pnlDerecha.Name = "pnlDerecha";
+            this.pnlDerecha.Size = new System.Drawing.Size(704, 608);
+            this.pnlDerecha.TabIndex = 12;
+            // 
             // UIGestionInsumos
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(247)))), ((int)(((byte)(251)))));
@@ -262,6 +271,7 @@ namespace Login
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.dgvInsumos);
+            this.Controls.Add(this.pnlDerecha);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.Name = "UIGestionInsumos";
             this.Text = "Gestión de Insumos";
@@ -296,5 +306,6 @@ namespace Login
         private System.Windows.Forms.RadioButton rbGr;
         private System.Windows.Forms.RadioButton rbKg;
         private System.Windows.Forms.RadioButton rbLts;
+        private System.Windows.Forms.Panel pnlDerecha;
     }
 }

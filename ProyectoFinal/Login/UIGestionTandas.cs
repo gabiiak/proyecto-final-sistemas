@@ -1,9 +1,14 @@
-﻿using Modelos;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.WinForms;
+using Modelos;
 using Negocio;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace Login
@@ -59,12 +64,186 @@ namespace Login
 
             ConfigurarBotonFantasma(this.btnDesfiltrar, "Quitar filtros", new System.Drawing.Point(246, 124), 5);
             this.btnDesfiltrar.Click += new System.EventHandler(this.btnDesfiltrar_Click);
+
+            try
+            {
+                ConstruirPanelReportes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudieron cargar los reportes gráficos: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void UIGestionTandas_Load(object sender, EventArgs e)
         {
             labelId.Text = "";
             ActualizarDataGridView();
+        }
+
+        // ---------- Reportes gráficos ----------
+        private void ConstruirPanelReportes()
+        {
+            int anchoChart = this.pnlDerecha.Width - 32;
+            int altoChart1 = 250;
+            int altoChart2 = this.pnlDerecha.Height - 318 - 16;
+            if (altoChart2 < 100)
+                altoChart2 = 100;
+
+            Label lblProductos = new Label();
+            lblProductos.Text = "Stock de productos";
+            lblProductos.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblProductos.ForeColor = UIStyles.TextoPrincipal;
+            lblProductos.AutoSize = true;
+            lblProductos.Location = new Point(16, 10);
+            this.pnlDerecha.Controls.Add(lblProductos);
+
+            CartesianChart chartProductos = CrearChartStockProductos();
+            chartProductos.Location = new Point(16, 32);
+            chartProductos.Size = new Size(anchoChart, altoChart1);
+            this.pnlDerecha.Controls.Add(chartProductos);
+
+            Label lblInsumos = new Label();
+            lblInsumos.Text = "Stock de insumos";
+            lblInsumos.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblInsumos.ForeColor = UIStyles.TextoPrincipal;
+            lblInsumos.AutoSize = true;
+            lblInsumos.Location = new Point(16, 296);
+            this.pnlDerecha.Controls.Add(lblInsumos);
+
+            CartesianChart chartInsumos = CrearChartStockInsumos();
+            chartInsumos.Location = new Point(16, 318);
+            chartInsumos.Size = new Size(anchoChart, altoChart2);
+            this.pnlDerecha.Controls.Add(chartInsumos);
+        }
+
+        private CartesianChart CrearChartStockProductos()
+        {
+            List<StockProducto> stock = NStockProducto.GetAll()
+                .OrderByDescending(s => s.CantidadDisponible)
+                .ToList();
+
+            string[] nombres;
+            double[] valores;
+            if (stock.Count > 0)
+            {
+                nombres = stock.Select(s => s.NombreProducto).ToArray();
+                valores = stock.Select(s => (double)s.CantidadDisponible).ToArray();
+            }
+            else
+            {
+                nombres = new string[] { "Sin datos" };
+                valores = new double[] { 0 };
+            }
+
+            SKColor colorColumna = new SKColor(UIStyles.Primario.R, UIStyles.Primario.G, UIStyles.Primario.B);
+            SKColor colorTexto = new SKColor(UIStyles.GrisTexto.R, UIStyles.GrisTexto.G, UIStyles.GrisTexto.B);
+            SKColor colorBorde = new SKColor(UIStyles.BordePanel.R, UIStyles.BordePanel.G, UIStyles.BordePanel.B);
+
+            CartesianChart chart = new CartesianChart
+            {
+                BackColor = this.pnlDerecha.BackColor,
+                Series = new ISeries[]
+                {
+                    new ColumnSeries<double>
+                    {
+                        Values = valores,
+                        Name = "Cantidad",
+                        Fill = new SolidColorPaint(colorColumna),
+                        Rx = 4,
+                        Ry = 4
+                    }
+                },
+                XAxes = new[]
+                {
+                    new Axis
+                    {
+                        Labels = nombres,
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        TicksPaint = new SolidColorPaint(colorBorde),
+                        MinStep = 1,
+                        ForceStepToMin = true,
+                        LabelsRotation = -35,
+                        TextSize = 11
+                    }
+                },
+                YAxes = new[]
+                {
+                    new Axis
+                    {
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        Labeler = val => val.ToString("N0"),
+                        TicksPaint = new SolidColorPaint(colorBorde)
+                    }
+                }
+            };
+
+            return chart;
+        }
+
+        private CartesianChart CrearChartStockInsumos()
+        {
+            List<StockInsumo> stock = NStockInsumo.GetAllStock()
+                .OrderByDescending(s => s.CantidadDisponible)
+                .ToList();
+
+            string[] nombres;
+            double[] valores;
+            if (stock.Count > 0)
+            {
+                nombres = stock.Select(s => s.NombreInsumo).ToArray();
+                valores = stock.Select(s => (double)s.CantidadDisponible).ToArray();
+            }
+            else
+            {
+                nombres = new string[] { "Sin datos" };
+                valores = new double[] { 0 };
+            }
+
+            SKColor colorColumna = new SKColor(UIStyles.HoverSidebar.R, UIStyles.HoverSidebar.G, UIStyles.HoverSidebar.B);
+            SKColor colorTexto = new SKColor(UIStyles.GrisTexto.R, UIStyles.GrisTexto.G, UIStyles.GrisTexto.B);
+            SKColor colorBorde = new SKColor(UIStyles.BordePanel.R, UIStyles.BordePanel.G, UIStyles.BordePanel.B);
+
+            CartesianChart chart = new CartesianChart
+            {
+                BackColor = this.pnlDerecha.BackColor,
+                Series = new ISeries[]
+                {
+                    new ColumnSeries<double>
+                    {
+                        Values = valores,
+                        Name = "Cantidad",
+                        Fill = new SolidColorPaint(colorColumna),
+                        Rx = 4,
+                        Ry = 4
+                    }
+                },
+                XAxes = new[]
+                {
+                    new Axis
+                    {
+                        Labels = nombres,
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        TicksPaint = new SolidColorPaint(colorBorde),
+                        MinStep = 1,
+                        ForceStepToMin = true,
+                        LabelsRotation = -35,
+                        TextSize = 11
+                    }
+                },
+                YAxes = new[]
+                {
+                    new Axis
+                    {
+                        LabelsPaint = new SolidColorPaint(colorTexto),
+                        Labeler = val => val.ToString("N0"),
+                        TicksPaint = new SolidColorPaint(colorBorde)
+                    }
+                }
+            };
+
+            return chart;
         }
 
         private void ActualizarDataGridView()
