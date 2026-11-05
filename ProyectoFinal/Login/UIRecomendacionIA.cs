@@ -19,9 +19,44 @@ namespace Login
     public partial class UIRecomendacionIA : Form
     {
         private CartesianChart graficoRecomendacionIA;
+        private NumericUpDown nudDiasPlazo;
+        private bool cargandoIA = false;
         public UIRecomendacionIA()
         {
             InitializeComponent();
+
+            Label lblDiasPlazo = new Label
+            {
+                Text = "Plazo de entrega (días):",
+                AutoSize = true,
+                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                Location = new Point(this.ClientSize.Width - 325, 110),
+                ForeColor = UIStyles.TemaActual == Tema.Oscuro
+         ? Color.White
+         : Color.Black,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
+            };
+
+            nudDiasPlazo = new NumericUpDown
+            {
+                Minimum = 1,
+                Maximum = 7,
+                Value = 1,
+                Width = 65,
+                Location = new Point(this.ClientSize.Width - 95, 107),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
+            };
+
+            this.Controls.Add(lblDiasPlazo);
+            this.Controls.Add(nudDiasPlazo);
+            lblDiasPlazo.BringToFront();
+            nudDiasPlazo.BringToFront();
+
+            nudDiasPlazo.ValueChanged += (s, e) =>
+            {
+                UIRecomendacionIA_Load(s, e);
+            };
+
             this.AutoScroll = true; // scrollbars H/V cuando la pantalla (ej. 1366x768) no alcanza
 
             this.Load += UIRecomendacionIA_Load;
@@ -183,17 +218,30 @@ namespace Login
 
 
 
-        private void UIRecomendacionIA_Load(
-            object sender, EventArgs e)
+        private async void UIRecomendacionIA_Load(object sender, EventArgs e)
         {
+            if (cargandoIA)
+                return;
+
+            cargandoIA = true;
+            nudDiasPlazo.Enabled = false;
             try
             {
 
-                
-                // consultamos SQL Server y ejecutamos ML.NET
-                //el numero indica los dias de plazo que se quieren evaluar, en este caso 5 dias
-                var resultados =
-                    NRecomendacionIA.RecomendarProveedores(5);
+
+
+                lblProveedorSugerido.Text = "Generando recomendacion...";
+                lblAvisoIA.Text = "Consultando datos y entrenando el modelo.";
+
+
+                int diasSeleccionados = (int)nudDiasPlazo.Value;
+
+                var resultados = await Task.Run(() =>
+                    NRecomendacionIA.RecomendarProveedores(diasSeleccionados));
+
+                if (IsDisposed || Disposing)
+                    return;
+
 
 
                 if (resultados.Count == 0)
@@ -275,6 +323,13 @@ namespace Login
                     "Recomendación IA",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                cargandoIA = false;
+
+                if (!IsDisposed)
+                    nudDiasPlazo.Enabled = true;
             }
         }
     }

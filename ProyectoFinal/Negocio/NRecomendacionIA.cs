@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Modelos;
 
 namespace Negocio
@@ -35,10 +30,54 @@ namespace Negocio
             // 1. recuperamos los datos reales de SQL Server.
             var datosReales = NDatosEntrenamientoReal.Obtener();
 
-            if (datosReales.Count < 30)
+            if (datosReales.Count > 0)
+            {
+                System.Diagnostics.Debug.WriteLine(
+                    "=== DIAGNOSTICO IA ===");
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Registros: " + datosReales.Count);
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Puntuales: " +
+                    datosReales.Count(x => x.EntregaPuntual));
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Tardias: " +
+                    datosReales.Count(x => !x.EntregaPuntual));
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Plazo minimo: " +
+                    datosReales.Min(x => x.DiasPlazoEntrega));
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Plazo maximo: " +
+                    datosReales.Max(x => x.DiasPlazoEntrega));
+
+                System.Diagnostics.Debug.WriteLine(
+                    "Plazo promedio: " +
+                    datosReales.Average(x => x.DiasPlazoEntrega));
+
+                foreach (var grupo in datosReales
+                    .GroupBy(x => x.DiasPlazoEntrega)
+                    .OrderBy(g => g.Key))
+                {
+                    int puntuales = grupo.Count(x => x.EntregaPuntual);
+                    int tardias = grupo.Count() - puntuales;
+
+                    System.Diagnostics.Debug.WriteLine(
+                        "Plazo " + grupo.Key + " dias: " +
+                        grupo.Count() + " entregas | " +
+                        puntuales + " puntuales | " +
+                        tardias + " tardias");
+                }
+
+            }
+
+            if (datosReales.Count < 10)
                 throw new InvalidOperationException(
-                    "Todavía no hay suficientes entregas " +
-                    "históricas para generar predicciones.");
+                    "Se necesitan al menos 10 entregas historicas " +
+                    "para generar predicciones.");
 
             if (!datosReales.Any(d => d.EntregaPuntual) ||
                 !datosReales.Any(d => !d.EntregaPuntual))

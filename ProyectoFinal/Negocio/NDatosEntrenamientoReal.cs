@@ -102,14 +102,14 @@ namespace Negocio
 
             int tardias = datos.Count - puntuales;
 
-            if (datos.Count < 30)
+            if (datos.Count < 10)
             {
                 return "Todavía no hay suficientes datos " +
                     "para entrenar y evaluar la IA real.\n\n" +
                     "Entregas evaluables: " + datos.Count +
                     "\nPuntuales: " + puntuales +
                     "\nTardías: " + tardias +
-                    "\n\nSe necesitan al menos 30 registros " +
+                    "\n\nSe necesitan al menos 10 registros " +
                     "como mínimo inicial de prueba.";
             }
 
