@@ -18,7 +18,7 @@ namespace Negocio
 
         public ITransformer Entrenar(
             List<DatosEntrenamientoProveedor> datos,
-            int minimoRegistros = 30)
+            int minimoRegistros = 10)
         {
             if (datos == null || datos.Count < minimoRegistros)
                 throw new InvalidOperationException(
@@ -113,9 +113,9 @@ namespace Negocio
         public ResultadoPruebaIA EvaluarDatosReales(
             List<DatosEntrenamientoProveedor> datos)
         {
-            if (datos == null || datos.Count < 30)
+            if (datos == null || datos.Count < 10)
                 throw new InvalidOperationException(
-                    "Se necesitan al menos 30 entregas históricas.");
+                    "Se necesitan al menos 10 entregas históricas.");
 
             // Los datos llegan ordenados cronológicamente
             // desde NDatosEntrenamientoReal.
@@ -150,7 +150,7 @@ namespace Negocio
             }
 
             // entrenamos solo con los registros anteriores
-            ITransformer modelo = Entrenar(entrenamiento, 20);
+            ITransformer modelo = Entrenar(entrenamiento, 8);
 
             var datosPrueba =
                 mlContext.Data.LoadFromEnumerable(prueba);

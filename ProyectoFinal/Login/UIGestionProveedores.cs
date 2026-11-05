@@ -106,6 +106,26 @@ namespace Login
             }
         }
 
+        private bool TelefonoValido()
+        {
+            string telefono = txtTelefono.Text.Trim();
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(telefono, @"^351[0-9]{7}$"))
+            {
+                MessageBox.Show(
+                    "El telefono debe comenzar con 351 y contener exactamente 10 numeros.",
+                    "Telefono invalido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtTelefono.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             try
@@ -120,6 +140,8 @@ namespace Login
                     MessageBox.Show("El email no tiene un formato válido.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                if (!TelefonoValido())
+                    return;
                 if (NProveedores.ExisteProveedorNombre(txtNombre.Text.Trim()))
                 {
                     MessageBox.Show("Ya existe un proveedor con ese nombre.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -164,7 +186,8 @@ namespace Login
                     MessageBox.Show("El email no tiene un formato válido.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
+                if (!TelefonoValido())
+                    return;
                 int id = int.Parse(labelId.Text);
 
                 // Nombre duplicado en OTRO proveedor (el propio no cuenta)
