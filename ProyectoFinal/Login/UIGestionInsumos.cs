@@ -62,9 +62,19 @@ namespace Login
 
         private void UpdateDataGrid()
         {
+
             listaInsumos = NInsumos.GetAllInsumos();
+
+            var insumosSinDuplicados = listaInsumos
+                .Where(i => !string.IsNullOrWhiteSpace(i.Nombre))
+                .GroupBy(i => i.Nombre.Trim(), StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.OrderBy(i => i.Id).First())
+                .OrderBy(i => i.Nombre)
+                .ToList();
+
             dgvInsumos.DataSource = null;
-            dgvInsumos.DataSource = listaInsumos;
+            dgvInsumos.DataSource = insumosSinDuplicados;
+
             if (dgvInsumos.Columns.Contains("Activo"))
             {
                 dgvInsumos.Columns["Activo"].Visible = false;
@@ -124,28 +134,65 @@ namespace Login
             return true;
         }
 
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!ValidarCampos(out decimal precio)) return;
+
+                // Verificamos que el insumo no exista
+                string nombreNuevo = txtNombre.Text.Trim();
+
+                var insumosRegistrados = NInsumos.GetAllInsumos();
+
+                bool existe = insumosRegistrados.Any(i =>
+                    string.Equals(
+                        i.Nombre?.Trim(),
+                        nombreNuevo,
+                        StringComparison.OrdinalIgnoreCase));
+
+                if (existe)
+                {
+                    MessageBox.Show(
+                        "Ya existe un insumo registrado con ese nombre.",
+                        "Insumo duplicado",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string unidadSeleccionada = rbGr.Checked ? "Gr" : rbKg.Checked ? "Kg" : rbLts.Checked ? "Lts" : rbUnidad.Checked ? "Unidad" : null;
+
                 Insumo insumo = new Insumo
                 {
-                    Nombre = txtNombre.Text.Trim(),
+                    Nombre = nombreNuevo,
                     Descripcion = txtDescripcion.Text.Trim(),
                     Precio = precio,
                     UnidadMedida = unidadSeleccionada
                 };
+
                 NInsumos.Create(insumo);
+
+                MessageBox.Show(
+                    "Insumo registrado correctamente.",
+                    "Registro exitoso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
                 Clean();
                 UpdateDataGrid();
             }
             catch (Exception err)
             {
-                MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    err.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
+
 
         private void btnModificar_Click(object sender, EventArgs e)
         {

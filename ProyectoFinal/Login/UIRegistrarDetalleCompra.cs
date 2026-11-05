@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Login
 {
@@ -41,15 +42,28 @@ namespace Login
             UIStyles.AplicarTemaAForm(this);
         }
 
+
         private void UIRegistrarDetalleCompra_Load(object sender, EventArgs e)
         {
             try
             {
+                
                 var insumos = NInsumos.GetAllInsumos();
+
+                
+                var insumosSinDuplicados = insumos
+                    .Where(i => !string.IsNullOrWhiteSpace(i.Nombre))
+                    .GroupBy(i => i.Nombre.Trim(), StringComparer.OrdinalIgnoreCase)
+                    .Select(g => g.OrderBy(i => i.Id).First())
+                    .OrderBy(i => i.Nombre)
+                    .ToList();
+
+                
                 cbInsumo.DataSource = null;
-                cbInsumo.DataSource = insumos;
                 cbInsumo.DisplayMember = "Nombre";
                 cbInsumo.ValueMember = "Id";
+                cbInsumo.DataSource = insumosSinDuplicados;
+
                 Clean();
             }
             catch (Exception error)
@@ -57,6 +71,7 @@ namespace Login
                 MessageBox.Show(error.ToString());
             }
         }
+
 
         private bool TryObtenerPrecio(out decimal precio)
         {

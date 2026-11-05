@@ -31,9 +31,7 @@ namespace Negocio
                 evaluacion.Calidad.HasValue)
                 throw new Exception("Solo se puede calificar la calidad de una compra recibida");
 
-            if (compra.Estado == EstadoCompra.Recibida)
-                throw new InvalidOperationException(
-                    "La fecha prometida debe registrarse antes de recibir la compra");
+            
 
             if (evaluacion.FechaPrometida.Date < compra.Fecha.Date)
                 throw new ArgumentException(

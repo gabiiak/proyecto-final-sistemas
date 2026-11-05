@@ -164,7 +164,6 @@ namespace Login
                     MessageBox.Show("El email no tiene un formato válido.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
                 int id = int.Parse(labelId.Text);
 
                 // Nombre duplicado en OTRO proveedor (el propio no cuenta)
